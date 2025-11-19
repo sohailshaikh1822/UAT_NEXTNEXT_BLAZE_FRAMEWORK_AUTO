@@ -1,0 +1,299 @@
+18:23:53.068 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.068 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.068 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.068 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.068 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.084 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.084 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.084 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.084 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.084 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.084 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 15 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.099 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.107 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:23:53.115 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:23:53.322 [main] INFO  org.testng.internal.Utils - [Utils] DynamicGraphHelper.createDynamicGraph() took 0 ms.
+18:24:00.223 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - ****** Starting Test Case: verify the search feature *****************
+18:24:13.656 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Logged in successfully
+18:24:13.816 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Clicked on the Execute Test Case tab
+18:24:14.853 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Project: STG- PulseCodeOnAzureCloud
+18:24:15.246 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Release: New Release 12-09-2025
+18:24:15.704 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Cycle: New TestCycle 13-09-2025
+18:24:15.919 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Clicked on Suite: New TestSuite 13-09-2025
+18:24:18.497 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Searched for Test Case ID: TR-49
+18:24:18.497 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - ************ Test Case Finished *************************
+18:24:27.124 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ****** Starting Test Case: verify user can select a testcase by clicking on test run ID *****************
+18:24:42.406 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Logged in successfully
+18:24:42.522 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on the Execute Test Case tab
+18:24:43.762 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Project: STG- PulseCodeOnAzureCloud
+18:24:44.147 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Release: New Release 12-09-2025
+18:24:44.532 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Cycle: New TestCycle 13-09-2025
+18:24:44.734 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on Suite: New TestSuite 13-09-2025
+18:24:45.056 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on Test Run ID: TR-129
+18:24:45.056 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ************ Test Case Finished *************************
+18:24:47.572 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.jq.Main@6cbbb9c4: 46 ms
+18:24:47.572 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.FailedReporter@63f9b562: 0 ms
+18:24:47.594 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.XMLReporter@ef718de: 22 ms
+18:24:47.599 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.EmailableReporter2@77d4ac52: 5 ms
+18:24:47.605 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.JUnitReportReporter@1e7f19b4: 6 ms
+18:24:47.605 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.internal.ExitCodeListener@235b4cb8: 0 ms
+18:25:13.618 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.635 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 6 ms.
+18:25:13.637 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.637 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.639 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.639 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.639 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.639 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.641 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.641 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.660 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 17 ms.
+18:25:13.670 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 10 ms.
+18:25:13.672 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.672 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.673 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.673 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.676 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.678 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.678 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.678 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.680 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.686 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.686 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.686 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.688 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 1 ms.
+18:25:13.688 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.688 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.688 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.688 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.690 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.690 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.690 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.690 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.692 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.694 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.694 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.694 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.694 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.694 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.694 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.702 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.702 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+18:25:13.702 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+18:25:13.966 [main] INFO  org.testng.internal.Utils - [Utils] DynamicGraphHelper.createDynamicGraph() took 8 ms.
+18:25:37.745 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - ****** Starting Test Case: verify the search feature *****************
+18:25:55.111 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Logged in successfully
+18:25:55.840 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Clicked on the Execute Test Case tab
+18:26:01.699 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Project: STG- PulseCodeOnAzureCloud
+18:26:02.091 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Release: New Release 12-09-2025
+18:26:02.476 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Cycle: New TestCycle 13-09-2025
+18:26:03.132 [main] ERROR testCases.ExecuteTestCaseTab.TC006 - Exception occurred: element not interactable: element has zero size
+  (Session info: chrome=141.0.7390.76)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c641d88d30cac92097d8e74839324289, clickElement {id=f.FDA2E6D06FF5FE098416AF6686B98E49.d.CB907EAB844717900DD9236F394A9A28.e.121}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62827}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62827/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (c641d88d30cac92097d8e74839324289)] -> xpath: //div[contains(@class,'test-suite-row') and contains(normalize-space(.),'New TestSuite 13-09-2025')]]
+Session ID: c641d88d30cac92097d8e74839324289
+18:26:07.988 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - ****** Starting Test Case: verify the search feature *****************
+18:26:21.168 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Logged in successfully
+18:26:22.285 [main] ERROR testCases.ExecuteTestCaseTab.TC006 - Exception occurred: element click intercepted: Element <span id="execute" class="text-6" style="cursor:pointer;">...</span> is not clickable at point (67, 111). Other element would receive the click: <div class="input">...</div>
+  (Session info: chrome=141.0.7390.76)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [fb7b02a65f50e1f45c0ee30bb7ddd248, clickElement {id=f.0103D769336F04A9BD65AF05DA9C0416.d.EDB4CFDC0A0868D8453A8383FA320039.e.6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57733}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57733/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (fb7b02a65f50e1f45c0ee30bb7ddd248)] -> id: execute]
+Session ID: fb7b02a65f50e1f45c0ee30bb7ddd248
+18:26:33.645 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - ****** Starting Test Case: verify the search feature *****************
+18:26:50.779 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Logged in successfully
+18:26:50.912 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Clicked on the Execute Test Case tab
+18:26:51.571 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Project: STG- PulseCodeOnAzureCloud
+18:26:51.884 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Release: New Release 12-09-2025
+18:26:52.261 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Expanded Cycle: New TestCycle 13-09-2025
+18:26:52.421 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Clicked on Suite: New TestSuite 13-09-2025
+18:26:55.051 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - Searched for Test Case ID: TR-49
+18:26:55.051 [main] INFO  testCases.ExecuteTestCaseTab.TC006 - ************ Test Case Finished *************************
+18:27:01.869 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ****** Starting Test Case: verify user can select a testcase by clicking on test run ID *****************
+18:27:17.867 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Logged in successfully
+18:27:18.024 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on the Execute Test Case tab
+18:27:28.033 [main] ERROR testCases.ExecuteTestCaseTab.TC011 - Exception occurred: no such element: Unable to locate element: {"method":"xpath","selector":"//div[contains(@class,'project')][contains(normalize-space(.),'STG- PulseCodeOnAzureCloud')]//i[contains(@class,'fa-caret-right') and contains(@class,'toggle-icon')]"}
+  (Session info: chrome=141.0.7390.76)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [ae6e39e4e3189e4d16bac34cd8b0389d, findElement {using=xpath, value=//div[contains(@class,'project')][contains(normalize-space(.),'STG- PulseCodeOnAzureCloud')]//i[contains(@class,'fa-caret-right') and contains(@class,'toggle-icon')]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:49686}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49686/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: ae6e39e4e3189e4d16bac34cd8b0389d
+18:27:34.111 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ****** Starting Test Case: verify user can select a testcase by clicking on test run ID *****************
+18:27:47.821 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Logged in successfully
+18:27:49.582 [main] ERROR testCases.ExecuteTestCaseTab.TC011 - Exception occurred: element click intercepted: Element <span id="execute" class="text-6" style="cursor:pointer;">...</span> is not clickable at point (67, 111). Other element would receive the click: <span class="div">...</span>
+  (Session info: chrome=141.0.7390.76)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a0ff1148d5d42489dd84c2505ed1f73d, clickElement {id=f.E0C893C077DDB14DCEF7756210C7DA85.d.4708CE4E9F42A09E43FF054DE384D732.e.4}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51363}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51363/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a0ff1148d5d42489dd84c2505ed1f73d)] -> id: execute]
+Session ID: a0ff1148d5d42489dd84c2505ed1f73d
+18:27:54.073 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ****** Starting Test Case: verify user can select a testcase by clicking on test run ID *****************
+18:28:07.133 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Logged in successfully
+18:28:07.278 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on the Execute Test Case tab
+18:28:07.949 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Project: STG- PulseCodeOnAzureCloud
+18:28:08.284 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Release: New Release 12-09-2025
+18:28:08.773 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Cycle: New TestCycle 13-09-2025
+18:28:09.012 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on Suite: New TestSuite 13-09-2025
+18:28:09.140 [main] ERROR testCases.ExecuteTestCaseTab.TC011 - Exception occurred: Failed to click on Test Run ID: TR-129 | stale element reference: stale element not found in the current frame
+  (Session info: chrome=141.0.7390.76)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [605fd8cd9a4e80b89991624462a2a9fb, getElementText {id=f.F504A54E5582AE703C7CA373D25035C0.d.BE872FBA869CBD5B4455712DF44278C3.e.145}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55502}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55502/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (605fd8cd9a4e80b89991624462a2a9fb)] -> xpath: //a[contains(@class,'runButton')]]
+Session ID: 605fd8cd9a4e80b89991624462a2a9fb
+18:28:14.465 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ****** Starting Test Case: verify user can select a testcase by clicking on test run ID *****************
+18:28:28.862 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Logged in successfully
+18:28:29.019 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on the Execute Test Case tab
+18:28:29.641 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Project: STG- PulseCodeOnAzureCloud
+18:28:29.985 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Release: New Release 12-09-2025
+18:28:30.368 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Expanded Cycle: New TestCycle 13-09-2025
+18:28:30.602 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on Suite: New TestSuite 13-09-2025
+18:28:30.966 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - Clicked on Test Run ID: TR-129
+18:28:30.966 [main] INFO  testCases.ExecuteTestCaseTab.TC011 - ************ Test Case Finished *************************
+18:28:33.600 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.jq.Main@3f0ce0d1: 63 ms
+18:28:33.600 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.FailedReporter@6bcdd6e4: 0 ms
+18:28:33.616 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.XMLReporter@b01cb8d: 16 ms
+18:28:33.632 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.EmailableReporter2@48ccbb32: 16 ms
+18:28:33.650 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.reporters.JUnitReportReporter@4ae280da: 18 ms
+18:28:33.650 [main] INFO  org.testng.internal.Utils - [TestNG] Time taken by org.testng.internal.ExitCodeListener@76d0ecd7: 0 ms
+21:55:29.611 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 1 ms.
+21:55:29.621 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 4 ms.
+21:55:29.625 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.626 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 1 ms.
+21:55:29.626 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.627 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.628 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 1 ms.
+21:55:29.628 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.629 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.629 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.636 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 6 ms.
+21:55:29.651 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 15 ms.
+21:55:29.653 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.653 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.655 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.655 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.659 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.660 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 1 ms.
+21:55:29.661 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.661 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.663 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.663 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.663 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.663 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.664 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.665 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.666 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.666 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.666 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.collectMethodsByGroup() took 0 ms.
+21:55:29.667 [main] INFO  org.testng.internal.Utils - [Utils] MethodGroupsHelper.sortMethods() took 0 ms.
+21:55:29.919 [main] INFO  org.testng.internal.Utils - [Utils] DynamicGraphHelper.createDynamicGraph() took 3 ms.
+21:55:41.403 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - ****** Starting Test Case 013: verify upadate actual result feature *****************
+21:55:56.335 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Logged in successfully
+21:55:56.496 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on the Execute Test Case tab
+21:55:57.053 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Project: STG- PulseCodeOnAzureCloud
+21:55:57.491 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Release: New Release 12-09-2025
+21:55:58.125 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Cycle: New TestCycle 13-09-2025
+21:56:01.234 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on Suite: New TestSuite 13-09-2025
+21:56:01.341 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on Test Run ID: TR-129
+21:56:14.419 [main] ERROR testCases.ExecuteTestCaseTab.TC013 - Exception occurred: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown']"}
+  (Session info: chrome=141.0.7390.76)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a61ed221ae9be92a0a0eb5d89b027473, findElement {value=//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56308}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56308/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a61ed221ae9be92a0a0eb5d89b027473
+21:56:21.030 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - ****** Starting Test Case 013: verify upadate actual result feature *****************
+21:56:34.485 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Logged in successfully
+21:56:34.648 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on the Execute Test Case tab
+21:56:35.344 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Project: STG- PulseCodeOnAzureCloud
+21:56:35.714 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Release: New Release 12-09-2025
+21:56:36.175 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Cycle: New TestCycle 13-09-2025
+21:56:39.310 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on Suite: New TestSuite 13-09-2025
+21:56:39.517 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on Test Run ID: TR-129
+21:56:52.597 [main] ERROR testCases.ExecuteTestCaseTab.TC013 - Exception occurred: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown']"}
+  (Session info: chrome=141.0.7390.76)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [023dfd97b48f5744ea08b9ec9b6760b0, findElement {value=//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50190}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50190/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 023dfd97b48f5744ea08b9ec9b6760b0
+21:56:58.543 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - ****** Starting Test Case 013: verify upadate actual result feature *****************
+21:57:12.548 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Logged in successfully
+21:57:12.707 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on the Execute Test Case tab
+21:57:13.900 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Project: STG- PulseCodeOnAzureCloud
+21:57:14.563 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Release: New Release 12-09-2025
+21:57:15.126 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Expanded Cycle: New TestCycle 13-09-2025
+21:57:18.239 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on Suite: New TestSuite 13-09-2025
+21:57:18.359 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - Clicked on Test Run ID: TR-129
+21:57:31.435 [main] ERROR testCases.ExecuteTestCaseTab.TC013 - Exception occurred: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown']"}
+  (Session info: chrome=141.0.7390.76)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [d78004d5bddad5f83dc18b1836308681, findElement {value=//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 141.0.7390.76, chrome: {chromedriverVersion: 141.0.7390.76 (d6fcfbb51aac..., userDataDir: C:\Users\MOHITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:59981}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:59981/devtoo..., se:cdpVersion: 141.0.7390.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d78004d5bddad5f83dc18b1836308681
+21:57:36.595 [main] INFO  testCases.ExecuteTestCaseTab.TC013 - ****** Starting Test Case 013: verify upadate actual result feature *****************
