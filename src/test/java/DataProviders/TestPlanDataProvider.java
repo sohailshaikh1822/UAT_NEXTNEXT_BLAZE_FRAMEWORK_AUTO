@@ -6,17 +6,17 @@ import utils.ExcelDataProviders;
 import java.io.IOException;
 
 public class TestPlanDataProvider {
-    @DataProvider(name="tc001")
+    @DataProvider(name = "tc001")
     public static Object[][] getDataTC001() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc001");
     }
-    
-    @DataProvider(name="tc002")
+
+    @DataProvider(name = "tc002")
     public static Object[][] getDataTC002() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc002");
     }
-    
-    @DataProvider(name="tc003")
+
+    @DataProvider(name = "tc003")
     public static Object[][] getDataTC003() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc003");
     }
@@ -30,10 +30,12 @@ public class TestPlanDataProvider {
     public static Object[][] getDataTC005() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc005");
     }
+
     @DataProvider(name = "tc006")
     public static Object[][] getDataTC006() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc006");
     }
+
     @DataProvider(name = "tc007")
     public static Object[][] getDataTC007() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc007");

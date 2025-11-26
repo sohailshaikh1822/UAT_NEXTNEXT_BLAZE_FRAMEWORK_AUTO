@@ -5,14 +5,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
 import java.time.Duration;
@@ -21,7 +19,7 @@ import java.util.List;
 
 public class LinkDefectPage extends BasePage {
 
-    //Constructor
+    // Constructor
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -60,17 +58,17 @@ public class LinkDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement notificationPopUp;
 
-    public WebElement radioButtonForDefectId(String defectId){
-        return driver.findElement(By.xpath("//div[contains(text(),'"+defectId+"')]/../..//input"));
+    public WebElement radioButtonForDefectId(String defectId) {
+        return driver.findElement(By.xpath("//div[contains(text(),'" + defectId + "')]/../..//input"));
     }
 
-    public WebElement imageUnlink(String defectId){
-        return driver.findElement(By.xpath("//div[normalize-space()='"+defectId+"']/..//img"));
+    public WebElement imageUnlink(String defectId) {
+        return driver.findElement(By.xpath("//div[normalize-space()='" + defectId + "']/..//img"));
     }
 
     @FindBy(xpath = "//div[@class='modal-div']//div[contains(text(),'DF-')]")
     List<WebElement> allDefectId;
-// locators for creating a new bug
+    // locators for creating a new bug
 
     @FindBy(xpath = "//textarea[@id='DefSummary']")
     WebElement summaryInput;
@@ -117,7 +115,6 @@ public class LinkDefectPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa fa-download defect-download-symbol']")
     List<WebElement> allDownloadIcons;
 
-
     // Actions
 
     public void clickDownloadIcon(int index) {
@@ -129,8 +126,10 @@ public class LinkDefectPage extends BasePage {
             System.out.println("Invalid index: " + index);
         }
     }
+
     public void enterDefectSearch(String defectIdOrSummary) {
-        wait.until(ExpectedConditions.visibilityOf(inputSearchDefect)).sendKeys(defectIdOrSummary.replaceAll("[^0-9]", ""));
+        wait.until(ExpectedConditions.visibilityOf(inputSearchDefect))
+                .sendKeys(defectIdOrSummary.replaceAll("[^0-9]", ""));
     }
 
     public void clickSearchButton() {
@@ -141,12 +140,12 @@ public class LinkDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(checkBoxOnlyForSearchedDefect)).click();
     }
 
-    public void clickRadioButtonBesideDefectId(String defectId){
+    public void clickRadioButtonBesideDefectId(String defectId) {
         new Actions(driver).moveToElement(radioButtonForDefectId(defectId)).perform();
         radioButtonForDefectId(defectId).click();
     }
 
-    public void clickUnlinkButtonByDefectId(String defectId){
+    public void clickUnlinkButtonByDefectId(String defectId) {
         new Actions(driver).moveToElement(imageUnlink(defectId)).perform();
         imageUnlink(defectId).click();
         wait.until(ExpectedConditions.visibilityOf(confirmationYes));
@@ -173,8 +172,9 @@ public class LinkDefectPage extends BasePage {
     public void enterSummary(String summary) {
         wait.until(ExpectedConditions.visibilityOf(summaryInput)).sendKeys(summary);
     }
+
     public String getNotificationPopUpText() {
-       return wait.until(ExpectedConditions.elementToBeClickable(notificationPopUp)).getText();
+        return wait.until(ExpectedConditions.elementToBeClickable(notificationPopUp)).getText();
     }
 
     public void selectSeverity(String value) {
@@ -220,8 +220,7 @@ public class LinkDefectPage extends BasePage {
     public boolean isErrorMessageVisibleForSizeExceed() {
         try {
             WebElement popup = wait.until(
-                    ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='notification']"))
-            );
+                    ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='notification']")));
             return true;
 
         } catch (Exception e) {
@@ -262,8 +261,6 @@ public class LinkDefectPage extends BasePage {
         return defectIds;
     }
 
-
-
     public void uploadFile(String fileName) {
         String filePath = System.getProperty("user.dir")
                 + File.separator + "media"
@@ -275,22 +272,17 @@ public class LinkDefectPage extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(browseFileBtn));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", browseFileBtn);
 
-
             Thread.sleep(2000);
-
 
             StringSelection selection = new StringSelection(filePath);
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
 
-
             Robot robot = new Robot();
-
 
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_CONTROL);
-
 
             robot.delay(1000);
             robot.keyPress(KeyEvent.VK_ENTER);
@@ -302,7 +294,6 @@ public class LinkDefectPage extends BasePage {
             System.out.println("File upload failed: " + e.getMessage());
         }
     }
-
 
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(saveBtn)).click();
@@ -319,14 +310,15 @@ public class LinkDefectPage extends BasePage {
     public void enterDescription(String description) {
         wait.until(ExpectedConditions.visibilityOf(descriptionInputArea)).sendKeys(description);
     }
-    public boolean isSearchButtonVisible(){
+
+    public boolean isSearchButtonVisible() {
         try {
-            WebDriverWait wait1= new WebDriverWait(driver,Duration.ofSeconds(15));
+            WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(15));
             wait1.until(ExpectedConditions.visibilityOf(searchBtn));
-            return true;  // element became visible
+            return true; // element became visible
         } catch (TimeoutException e) {
             return false; // element not visible within wait time
-            }
+        }
     }
 
     public void clickDefectId(String defectId) {
@@ -342,13 +334,11 @@ public class LinkDefectPage extends BasePage {
         }
     }
 
-
     public void clickDefectById(String defectId) {
         for (WebElement defect : allDefectId) {
             String id = defect.getText().trim();
             if (id.equals(defectId)) {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", defect);
-
 
                 defect.click();
                 break;

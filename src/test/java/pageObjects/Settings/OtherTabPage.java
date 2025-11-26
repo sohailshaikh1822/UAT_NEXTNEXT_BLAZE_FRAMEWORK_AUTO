@@ -3,7 +3,6 @@ package pageObjects.Settings;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -51,8 +50,6 @@ public class OtherTabPage extends BasePage {
     @FindBy(xpath = "(//button[@id='confirmBtn'])[1]")
     WebElement confirmationOnDefaultFieldDelete;
 
-     
-
     // ----------------------------- Diff Tab actions
     // ---------------------------------------------
     public void clickGlobalFieldSetting() {
@@ -60,8 +57,7 @@ public class OtherTabPage extends BasePage {
                 .until(ExpectedConditions.elementToBeClickable(globalFieldSetting)).click();
     }
 
-    public void clickYesDefaultValueDelete()
-    {
+    public void clickYesDefaultValueDelete() {
         confirmationOnDefaultFieldDelete.click();
     }
 
@@ -138,7 +134,7 @@ public class OtherTabPage extends BasePage {
     WebElement editCloseButton;
 
     @FindBy(xpath = "//div[@id='addFieldValueModal']//button[1]")
-    WebElement DefaultSaveButton ;
+    WebElement DefaultSaveButton;
 
     @FindBy(xpath = "//input[@placeholder='Enter default value']")
     WebElement editFillDefaultValue;
@@ -148,7 +144,6 @@ public class OtherTabPage extends BasePage {
 
     @FindBy(xpath = "//button[@id='confirmBtn']")
     WebElement confirmYesButton;
-
 
     // ----------------------------- Common tab actions
     // -------------------------------------------
@@ -217,8 +212,7 @@ public class OtherTabPage extends BasePage {
                 .until(ExpectedConditions.elementToBeClickable(selectAllButton)).click();
     }
 
-    public void clickEdit(String rowName)
-    {
+    public void clickEdit(String rowName) {
         editCloseButton.click();
     }
 
@@ -232,7 +226,8 @@ public class OtherTabPage extends BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
             WebElement selectAllBtn = wait.until(ExpectedConditions.elementToBeClickable(selectAllButton));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", selectAllBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});",
+                    selectAllBtn);
             new Actions(driver).moveToElement(selectAllBtn).perform();
 
             WebElement clearAllBtn = wait.until(ExpectedConditions.elementToBeClickable(clearAllButton));
@@ -247,7 +242,6 @@ public class OtherTabPage extends BasePage {
         }
     }
 
-
     public void clickOnReset() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(resetButton)).click();
@@ -261,27 +255,33 @@ public class OtherTabPage extends BasePage {
         }
     }
 
-//    public void clickOnEdit(String rowName) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement editBtn = wait.until(ExpectedConditions.visibilityOf(editButtonForRow(rowName)));
-//
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(editBtn).perform();
-//
-//        try {
-//            wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
-//        } catch (Exception firstAttempt) {
-//            try {
-//                Thread.sleep(1000);
-//                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
-//                actions.moveToElement(editBtn).perform();
-//                wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
-//            } catch (Exception retryAttempt) {
-//                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", editBtn);
-//            }
-//        }
-//    }
+    // public void clickOnEdit(String rowName) {
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    // WebElement editBtn =
+    // wait.until(ExpectedConditions.visibilityOf(editButtonForRow(rowName)));
+    //
+    // ((JavascriptExecutor)
+    // driver).executeScript("arguments[0].scrollIntoView({block: 'center'});",
+    // editBtn);
+    // Actions actions = new Actions(driver);
+    // actions.moveToElement(editBtn).perform();
+    //
+    // try {
+    // wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
+    // } catch (Exception firstAttempt) {
+    // try {
+    // Thread.sleep(1000);
+    // ((JavascriptExecutor)
+    // driver).executeScript("arguments[0].scrollIntoView({block: 'center'});",
+    // editBtn);
+    // actions.moveToElement(editBtn).perform();
+    // wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
+    // } catch (Exception retryAttempt) {
+    // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+    // editBtn);
+    // }
+    // }
+    // }
 
     public void clickOnEdit(String rowName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -296,7 +296,8 @@ public class OtherTabPage extends BasePage {
                     "var rect = arguments[0].getBoundingClientRect();" +
                             "return (rect.top >= 0 && rect.left >= 0 && " +
                             "rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && " +
-                            "rect.right <= (window.innerWidth || document.documentElement.clientWidth));", editBtn);
+                            "rect.right <= (window.innerWidth || document.documentElement.clientWidth));",
+                    editBtn);
 
             if (inView) {
                 actions.moveToElement(editBtn).perform();
@@ -315,13 +316,12 @@ public class OtherTabPage extends BasePage {
         }
     }
 
-
-
     public void clickOnDelete(String rowName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement deleteBtn = wait.until(ExpectedConditions.elementToBeClickable(deleteButtonForRow(rowName)));
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", deleteBtn);
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", deleteBtn);
         Actions actions = new Actions(driver);
         actions.moveToElement(deleteBtn).perform();
         try {
@@ -340,17 +340,12 @@ public class OtherTabPage extends BasePage {
         confirmBtn.click();
     }
 
-
     public void clickDefaultAddValue() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(editDefaultValueButton));
         WebElement addValueBtn = wait.until(ExpectedConditions.elementToBeClickable(editDefaultValueButton));
         addValueBtn.click();
     }
-
-
-
-
 
     public void clickDefaultCloseButton() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -384,7 +379,6 @@ public class OtherTabPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(confirmYesButton));
         confirmYesButton.click();
     }
-
 
     // ----------------------------- Add Custom Field locators
     // ------------------------------------
@@ -458,7 +452,6 @@ public class OtherTabPage extends BasePage {
             return false;
         }
 
-
     }
 
     public void deleteCustomFieldAndVerify(String fieldName) throws InterruptedException {
@@ -481,8 +474,5 @@ public class OtherTabPage extends BasePage {
         }
         return false;
     }
-
-
-
 
 }

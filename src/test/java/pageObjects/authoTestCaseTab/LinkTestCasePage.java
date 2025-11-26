@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import pageObjects.BasePage;
 import org.openqa.selenium.*;
 
-
 public class LinkTestCasePage extends BasePage {
 
     public LinkTestCasePage(WebDriver driver) {
@@ -41,11 +40,9 @@ public class LinkTestCasePage extends BasePage {
         clickSearch();
     }
 
-
     public void clickPid(String pidFromExcel) {
         WebElement pidElement = driver.findElement(
-                By.xpath("//div[@class='defect-modal-text-wrapper-3' and text()='" + pidFromExcel + "']")
-        );
+                By.xpath("//div[@class='defect-modal-text-wrapper-3' and text()='" + pidFromExcel + "']"));
         pidElement.click();
     }
 
@@ -59,4 +56,3 @@ public class LinkTestCasePage extends BasePage {
         return message.contains("This test case is already linked to the requirement.");
     }
 }
-

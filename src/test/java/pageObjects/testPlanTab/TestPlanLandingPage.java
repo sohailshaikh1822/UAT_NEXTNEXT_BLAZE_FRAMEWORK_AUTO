@@ -1,15 +1,12 @@
 package pageObjects.testPlanTab;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
-import java.security.PrivateKey;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +50,8 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     private WebElement notification;
 
-    public WebElement expandArrow(String name){
-        return driver.findElement(By.xpath("//div[text()='"+name+"']/span/i"));
+    public WebElement expandArrow(String name) {
+        return driver.findElement(By.xpath("//div[text()='" + name + "']/span/i"));
     }
 
     @FindBy(xpath = "//div[@class='dashboard-card']//div[text()='Total Releases']/following-sibling::div[@class='card-value']")
@@ -99,8 +96,8 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//div[@class='project-dropdown-menu']")
     private WebElement projectDropdownMenu;
 
-    public WebElement releaseTestCycleTestSuite(String releaseOrTestCycleOrTestSuite){
-        return driver.findElement(By.xpath("//div[text()='"+releaseOrTestCycleOrTestSuite+"']"));
+    public WebElement releaseTestCycleTestSuite(String releaseOrTestCycleOrTestSuite) {
+        return driver.findElement(By.xpath("//div[text()='" + releaseOrTestCycleOrTestSuite + "']"));
     }
 
     @FindBy(xpath = "//body/div[@class='requirements']/div[@class='frame']" +
@@ -115,9 +112,10 @@ public class TestPlanLandingPage extends BasePage {
 
     }
 
-    public void expandOnReleaseOrTestCycleOrTestSuite(String releaseOrTestCycleOrTestSuite){
+    public void expandOnReleaseOrTestCycleOrTestSuite(String releaseOrTestCycleOrTestSuite) {
         expandArrow(releaseOrTestCycleOrTestSuite).click();
     }
+
     public void selectTestPlanTab() throws InterruptedException {
         driver.manage().window().setSize(new Dimension(1920, 1080));
         Thread.sleep(2000);
@@ -154,8 +152,8 @@ public class TestPlanLandingPage extends BasePage {
     public void expandRelease(String releaseName) {
         expandArrow(releaseName).click();
     }
-    public void expandTestCycle(String testcycle)
-    {
+
+    public void expandTestCycle(String testcycle) {
         expandArrow(testcycle).click();
     }
 
@@ -182,10 +180,11 @@ public class TestPlanLandingPage extends BasePage {
         btnDelete.click();
         Thread.sleep(1500);
     }
-    public void clickOnConfirmDeleteYes(String releaseCycleSuiteName){
-        WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(10));
+
+    public void clickOnConfirmDeleteYes(String releaseCycleSuiteName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         buttonConfirmDelete.click();
-//        wait.until(ExpectedConditions.invisibilityOf(releaseTestCycleTestSuite(releaseCycleSuiteName)));
+        // wait.until(ExpectedConditions.invisibilityOf(releaseTestCycleTestSuite(releaseCycleSuiteName)));
     }
 
     public int getTotalReleases() {
@@ -200,7 +199,6 @@ public class TestPlanLandingPage extends BasePage {
         return Integer.parseInt(totalTestSuitesValue.getText().trim());
     }
 
-    
     public void selectProjectByName(String projectName) {
         for (WebElement project : allProjects) {
             if (project.getText().trim().equalsIgnoreCase(projectName)) {
@@ -231,7 +229,6 @@ public class TestPlanLandingPage extends BasePage {
         return projectNames;
     }
 
-    
     private String releaseChildNodesXpath(String releaseName) {
         return "//div[contains(@class,'releases') and contains(normalize-space(.),'" + releaseName + "')]"
                 + "/following-sibling::ul//div[contains(@class,'test-cycle-row')]";
@@ -278,7 +275,8 @@ public class TestPlanLandingPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
         descriptionBeforeClick.click();
 
-        WebElement descriptionAfterClick=driver.findElement(By.xpath("//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']"));
+        WebElement descriptionAfterClick = driver
+                .findElement(By.xpath("//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']"));
         wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
         ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
         descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -294,15 +292,13 @@ public class TestPlanLandingPage extends BasePage {
 
     public void clickSaveRelease() throws InterruptedException {
         btnSaveRelease.click();
-        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOf(notification));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOf(notification));
         Thread.sleep(2000);
     }
 
     public void clickOnTheProjectName() {
         leftPanelProjectName.click();
     }
-
-
 
     public boolean isReleasePresentInList(String releaseName) {
         try {
@@ -315,7 +311,6 @@ public class TestPlanLandingPage extends BasePage {
             return false;
         }
     }
-
 
     public boolean isTestingCycleVisible(String releaseName, String cycleName) {
         try {
@@ -370,23 +365,25 @@ public class TestPlanLandingPage extends BasePage {
     public int getDuplicateReleaseCount(String releaseName) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement sidebarTree = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='sidebar-tree']")));
+            WebElement sidebarTree = wait
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='sidebar-tree']")));
 
             List<WebElement> releases = sidebarTree.findElements(
-                    By.xpath(".//div[contains(@class,'releases') and contains(normalize-space(.),'" + releaseName + "')]")
-            );
+                    By.xpath(".//div[contains(@class,'releases') and contains(normalize-space(.),'" + releaseName
+                            + "')]"));
             return releases.size();
         } catch (Exception e) {
             return 0;
         }
     }
 
-
     public void selectProjectFromDropdown(String projectName) {
 
         projectDropdown.click();
 
-        WebElement projectOption = driver.findElement(By.xpath("//div[@class='project-dropdown-menu']//div[@class='project-dropdown-item' and normalize-space(text())='"+ projectName + "']"));
+        WebElement projectOption = driver.findElement(By.xpath(
+                "//div[@class='project-dropdown-menu']//div[@class='project-dropdown-item' and normalize-space(text())='"
+                        + projectName + "']"));
         projectOption.click();
     }
 
@@ -403,9 +400,9 @@ public class TestPlanLandingPage extends BasePage {
             String text = el.getText().trim();
             expectedProjects.add(text);
         }
-//        if (!text.isEmpty()) {
-//
-//            }
+        // if (!text.isEmpty()) {
+        //
+        // }
         return expectedProjects;
     }
 }

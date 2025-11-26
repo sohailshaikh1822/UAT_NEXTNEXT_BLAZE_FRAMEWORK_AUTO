@@ -12,11 +12,9 @@ import javax.swing.*;
 import java.time.Duration;
 import java.util.List;
 
-public class IndividualModulePage extends BasePage
-{
+public class IndividualModulePage extends BasePage {
 
-    public IndividualModulePage(WebDriver driver)
-    {
+    public IndividualModulePage(WebDriver driver) {
         super(driver);
     }
 
@@ -75,7 +73,6 @@ public class IndividualModulePage extends BasePage
     @FindBy(xpath = "(//p[@id='actionDialog-message'])[1]")
     WebElement alertMessageWhenTryToDeleteModule;
 
-
     @FindBy(xpath = "//button[@id='closeButton']//div[@class='test-execution-clear'][normalize-space()='CLOSE']")
     WebElement closebutton;
 
@@ -102,8 +99,8 @@ public class IndividualModulePage extends BasePage
 
     public WebElement deleteRequirementIcon(String reqID) {
         return driver.findElement(By.xpath(
-                "//a[text()='" + reqID + "']/ancestor::div[@class='testlistrow']//button[@class='deleteRowButton' and @title='Delete Requirement']"
-        ));
+                "//a[text()='" + reqID
+                        + "']/ancestor::div[@class='testlistrow']//button[@class='deleteRowButton' and @title='Delete Requirement']"));
     }
 
     @FindBy(xpath = "(//select[@class='testcase-select value'])[1]")
@@ -117,7 +114,6 @@ public class IndividualModulePage extends BasePage
 
     @FindBy(xpath = "//div[@class='requirements testcase-text-6']")
     WebElement noLinkedRequirement;
-
 
     @FindBy(xpath = "//span[@class='entry-info']")
     WebElement requirementCountFooter;
@@ -147,7 +143,7 @@ public class IndividualModulePage extends BasePage
 
     private By inputTitleLocator = By.xpath("//input[@class='supporting-text']");
 
-    //Actions
+    // Actions
 
     public void clickAddRequirement() {
         buttonAddRequirement.click();
@@ -172,7 +168,7 @@ public class IndividualModulePage extends BasePage
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         // Wait until the description input is clickable
         wait.until(ExpectedConditions.elementToBeClickable(inputTitle));
-        inputName.sendKeys(Keys.chord(Keys.CONTROL,"A"));
+        inputName.sendKeys(Keys.chord(Keys.CONTROL, "A"));
         inputName.sendKeys(name);
     }
 
@@ -181,12 +177,10 @@ public class IndividualModulePage extends BasePage
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
             WebElement notification = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(By.id("notification"))
-            );
+                    ExpectedConditions.visibilityOfElementLocated(By.id("notification")));
         } catch (Exception e) {
             WebElement alertMessage = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(By.id("actionDialogtp-message"))
-            );
+                    ExpectedConditions.visibilityOfElementLocated(By.id("actionDialogtp-message")));
         }
     }
 
@@ -194,7 +188,7 @@ public class IndividualModulePage extends BasePage
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         // Wait until the description input is clickable
         wait.until(ExpectedConditions.elementToBeClickable(inputDescription));
-        inputDescription.sendKeys(Keys.chord(Keys.CONTROL,"A"));
+        inputDescription.sendKeys(Keys.chord(Keys.CONTROL, "A"));
         inputDescription.sendKeys(Keys.BACK_SPACE);
         inputDescription.sendKeys(description);
     }
@@ -213,12 +207,13 @@ public class IndividualModulePage extends BasePage
         descriptionAfterClick.sendKeys(description);
 
     }
+
     public void clearActualDescription() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
         descriptionBeforeClick.click();
-//        Thread.sleep(1000);
+        // Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
         ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
         descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -228,7 +223,7 @@ public class IndividualModulePage extends BasePage
         Thread.sleep(2000);
     }
 
-    public void clickInputTitle(){
+    public void clickInputTitle() {
         inputTitle.click();
     }
 
@@ -306,7 +301,7 @@ public class IndividualModulePage extends BasePage
         arrowBackwardPrevious.click();
     }
 
-    public boolean isClickableNextArrow(){
+    public boolean isClickableNextArrow() {
         new Actions(driver).moveToElement(arrowForwardNextPagination).perform();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
@@ -316,7 +311,6 @@ public class IndividualModulePage extends BasePage
             System.out.println("Cursor style of Previous button: " + cursorStyle);
 
             return "pointer".equals(cursorStyle);
-
 
         } catch (TimeoutException e) {
             System.out.println("Previous button is NOT visible within the timeout.");
@@ -341,14 +335,14 @@ public class IndividualModulePage extends BasePage
             System.out.println("Failed to select priority: " + e.getMessage());
         }
     }
-    public boolean isPriorityFieldVisible()
-    {
+
+    public boolean isPriorityFieldVisible() {
         return priority.isDisplayed();
     }
+
     public boolean isLinkedRequirementTableVisible() {
         return linkedRequirementTable.isDisplayed();
     }
-
 
     public void clickCloseButton() {
         try {
@@ -360,6 +354,7 @@ public class IndividualModulePage extends BasePage
             System.out.println("Failed to click Close button: " + e.getMessage());
         }
     }
+
     public boolean isStatusFieldVisible()
 
     {
@@ -377,6 +372,7 @@ public class IndividualModulePage extends BasePage
             return false;
         }
     }
+
     public boolean isModuleUpdatedSuccessfully() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -389,24 +385,22 @@ public class IndividualModulePage extends BasePage
         }
     }
 
-    public boolean isTypeFieldVisible()
-    {
+    public boolean isTypeFieldVisible() {
         return type.isDisplayed();
     }
 
-    public boolean noLinkedRequirementVisibility()
-    {
+    public boolean noLinkedRequirementVisibility() {
         return noLinkedRequirement.isDisplayed();
     }
-public String getAlertMessage(){
-        return AlertMessageForModuleName.getText();
-}
 
-    public boolean isModuleIdClickable(){
-        String editable =headingModuleId.getAttribute("contenteditable");
-        return "true".equalsIgnoreCase(editable);
+    public String getAlertMessage() {
+        return AlertMessageForModuleName.getText();
     }
 
+    public boolean isModuleIdClickable() {
+        String editable = headingModuleId.getAttribute("contenteditable");
+        return "true".equalsIgnoreCase(editable);
+    }
 
     public int getRequirementCountFromFooter() {
         String footerText = requirementCountFooter.getText(); // e.g. "Total 37 entries"
@@ -414,7 +408,7 @@ public String getAlertMessage(){
     }
 
     public void clickDeleteModuleIcon() {
-        Actions a= new Actions(driver);
+        Actions a = new Actions(driver);
         a.moveToElement(deleteModuleIcon).perform();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(deleteModuleIcon)).click();
@@ -436,7 +430,6 @@ public String getAlertMessage(){
         cancelButton.click();
     }
 
-
     public String getDeleteConfirmationMessage() throws InterruptedException {
         Thread.sleep(1500);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -444,11 +437,11 @@ public String getAlertMessage(){
         return modal.findElement(By.id("actionDialog-message")).getText().trim();
     }
 
-    public String alretMeaasgeForDeletingModule(){
+    public String alretMeaasgeForDeletingModule() {
         return alertMessageWhenTryToDeleteModule.getText();
     }
 
-    public void clickCloseBtnOfALertModuleName(){
+    public void clickCloseBtnOfALertModuleName() {
         alertBoxCloseBtnForModule.click();
     }
 
@@ -486,10 +479,12 @@ public String getAlertMessage(){
             throw new RuntimeException("Failed to get success notification message", e);
         }
     }
-    public void clickButtonConfirmationYesForUnsavedChanges(){
+
+    public void clickButtonConfirmationYesForUnsavedChanges() {
         buttonYesConfirmationUnsavedChanges.click();
     }
-    public void clickButtonConfirmationNoForUnsavedChanges(){
+
+    public void clickButtonConfirmationNoForUnsavedChanges() {
         buttonNoConfirmationUnsavedChanges.click();
     }
 }

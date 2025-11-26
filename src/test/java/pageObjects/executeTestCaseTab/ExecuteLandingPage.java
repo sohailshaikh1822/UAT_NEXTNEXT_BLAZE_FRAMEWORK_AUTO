@@ -10,8 +10,6 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ExecuteLandingPage extends BasePage {
@@ -86,9 +84,9 @@ public class ExecuteLandingPage extends BasePage {
     WebElement buttonClear;
 
     public WebElement buttonActionPlay(String trId) {
-        return driver.findElement(By.xpath("//a[text()='" + trId + "']/ancestor::div[@class='requirement testlistframe-11']//button"));
+        return driver.findElement(
+                By.xpath("//a[text()='" + trId + "']/ancestor::div[@class='requirement testlistframe-11']//button"));
     }
-
 
     // locators for create test run
 
@@ -113,16 +111,14 @@ public class ExecuteLandingPage extends BasePage {
     @FindBy(xpath = "//img[@class='menu-open']")
     WebElement hamburgerMenuBtn;
 
-
     private WebElement suiteByName(String suiteName) {
         return driver.findElement(
-                By.xpath("//div[contains(@class,'test-suite-row') and contains(normalize-space(.),'" + suiteName + "')]"));
+                By.xpath("//div[contains(@class,'test-suite-row') and contains(normalize-space(.),'" + suiteName
+                        + "')]"));
     }
-
 
     @FindBy(xpath = "//div[@id='testRunsWithCaseDetailsTable']")
     WebElement tableTestRunsWithCaseDetails;
-
 
     // ================= ACTIONS =================
 
@@ -147,9 +143,9 @@ public class ExecuteLandingPage extends BasePage {
 
     }
 
-
     private WebElement arrowRightToExpand(String moduleName) {
-        return driver.findElement(By.xpath("//div[text()='" + moduleName + "']/..//i[@class='fa-solid fa-caret-right toggle-icon']"));
+        return driver.findElement(
+                By.xpath("//div[text()='" + moduleName + "']/..//i[@class='fa-solid fa-caret-right toggle-icon']"));
     }
 
     private WebElement arrowDownToCollapse(String moduleName) {
@@ -167,7 +163,6 @@ public class ExecuteLandingPage extends BasePage {
                 "//div[contains(@class,'test-cycle-row') and contains(normalize-space(.),'" + testCycleName + "')]"));
     }
 
-
     // after clicking on the click test run button
 
     private WebElement requirementById(String requirementId) {
@@ -178,6 +173,7 @@ public class ExecuteLandingPage extends BasePage {
         return driver.findElement(By.xpath("//div[contains(@class,'testlistrow1')]//a[normalize-space()='" + testCaseId
                 + "']/ancestor::div[contains(@class,'testlistrow1')]//input[@type='checkbox']"));
     }
+
     private WebElement ClicktestCaseCheckboxById(String testCaseId) {
         return driver.findElement(By.xpath("//div[contains(@class,'testlistrow1')]//a[normalize-space()='" + testCaseId
                 + "']/ancestor::div[contains(@class,'testlistrow1')]//input[@type='checkbox']"));
@@ -220,7 +216,6 @@ public class ExecuteLandingPage extends BasePage {
 
     // ================= METHODS =================
 
-
     public void clickArrowRightPointingForExpandModule(String moduleName) throws InterruptedException {
         arrowRightToExpand(moduleName).click();
         Thread.sleep(1500);
@@ -261,10 +256,10 @@ public class ExecuteLandingPage extends BasePage {
         testCycle.click();
     }
 
-
     private WebElement TestsuiteByName(String suiteName) {
         return driver.findElement(
-                By.xpath("//div[contains(@class,'test-suite-row') and contains(normalize-space(.),'" + suiteName + "')]"));
+                By.xpath("//div[contains(@class,'test-suite-row') and contains(normalize-space(.),'" + suiteName
+                        + "')]"));
     }
 
     public void expandTestSuit(String testSuitName) {
@@ -296,7 +291,6 @@ public class ExecuteLandingPage extends BasePage {
     public void ClickViewAllRadioButton() {
         wait.until(ExpectedConditions.elementToBeClickable(viewAllRadio)).click();
     }
-
 
     public boolean isViewAllSelected() {
         return viewAllRadio.isSelected();
@@ -394,7 +388,7 @@ public class ExecuteLandingPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(searchfield));
         wait.until(ExpectedConditions.elementToBeClickable(searchfield));
-//        searchfield.clear();
+        // searchfield.clear();
         searchfield.sendKeys(testCaseID);
         wait.until(ExpectedConditions.elementToBeClickable(searchButton));
         searchButton.click();
@@ -471,7 +465,6 @@ public class ExecuteLandingPage extends BasePage {
         buttonActionPlay(tcIO).click();
     }
 
-
     @FindBy(xpath = "//button[@class='cell-4 runButton']")
     WebElement playButton;
 
@@ -494,7 +487,6 @@ public class ExecuteLandingPage extends BasePage {
                 By.xpath("//div[normalize-space()='" + suiteName + "']")));
         suiteElement.click();
     }
-
 
     public List<String> getAllDisplayedStatuses() throws InterruptedException {
         List<String> statuses = new ArrayList<>();
@@ -526,24 +518,23 @@ public class ExecuteLandingPage extends BasePage {
                     By.xpath("//p[@class='pagination-text']")));
             new Actions(driver).moveToElement(paginationText).perform();
             Thread.sleep(3000);
-            String text = paginationText.getText().trim();  // e.g. "Showing 1 to 10 of 27 entries"
+            String text = paginationText.getText().trim(); // e.g. "Showing 1 to 10 of 27 entries"
 
             if (text.isEmpty() || text.contains("No entries")) {
                 return 0;
             }
 
             // Split by space and get the 6th word (index 5) which is the total number
-            // "Showing 1 to 10 of 27 entries" → ["Showing","1","to","10","of","27","entries"]
+            // "Showing 1 to 10 of 27 entries" →
+            // ["Showing","1","to","10","of","27","entries"]
             String[] parts = text.split(" ");
-//            return Integer.parseInt(parts[5]);
-            return  Integer.parseInt(text.replaceAll("[^0-9]", ""));
+            // return Integer.parseInt(parts[5]);
+            return Integer.parseInt(text.replaceAll("[^0-9]", ""));
         } catch (Exception e) {
             System.out.println("Error while reading total entries: " + e.getMessage());
             return 0;
         }
     }
-
-
 
     public boolean isTestRunCreatedMessageDisplayed() {
         try {
@@ -569,9 +560,10 @@ public class ExecuteLandingPage extends BasePage {
         }
     }
 
-    public boolean isNoMatchingTabVisible(){
-        try{
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='No matching results found']")));
+    public boolean isNoMatchingTabVisible() {
+        try {
+            wait.until(ExpectedConditions
+                    .visibilityOfElementLocated(By.xpath("//div[text()='No matching results found']")));
             return true;
         } catch (Exception e) {
             return false;
@@ -595,8 +587,5 @@ public class ExecuteLandingPage extends BasePage {
             return false;
         }
     }
-
-
-
 
 }

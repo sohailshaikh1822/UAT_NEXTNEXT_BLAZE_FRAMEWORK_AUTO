@@ -18,13 +18,12 @@ public class GlobalTabPage extends BasePage {
         super(driver);
     }
 
-    //locators
+    // locators
     @FindBy(xpath = "//img[@id='chevron-logout']")
     WebElement dropdowncurrentuser;
 
     @FindBy(xpath = "//a[normalize-space()='Settings']")
     WebElement setting;
-
 
     @FindBy(xpath = "//div[@class='global-fields-add-label']")
     WebElement AddGlobalFieldButton;
@@ -46,28 +45,22 @@ public class GlobalTabPage extends BasePage {
         return driver.findElement(By.xpath(xpath));
     }
 
-
     public WebElement SettingsButtonForRow(String rowName) {
         String xpath = "//p[normalize-space()='" + rowName + "']/../../..//i[@class='fa-solid fa-cog']";
         return driver.findElement(By.xpath(xpath));
     }
-
-
 
     public WebElement EditButtonForRow(String rowName) {
         String xpath = "//p[normalize-space()='" + rowName + "']/../../..//i[@class='fa-solid fa-pencil']";
         return driver.findElement(By.xpath(xpath));
     }
 
-
     public WebElement DeleteButtonForRow(String rowName) {
         String xpath = "//p[normalize-space()='" + rowName + "']/../../..//i[@class='fa-solid fa-trash']";
         return driver.findElement(By.xpath(xpath));
     }
 
-
-    //Actions
-
+    // Actions
 
     public void clickCurrentUserAndGoToSettings() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -79,7 +72,6 @@ public class GlobalTabPage extends BasePage {
         actions.moveToElement(settingsOption).perform();
         wait.until(ExpectedConditions.elementToBeClickable(settingsOption)).click();
     }
-
 
     public void clickonAddGlobalField() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -136,8 +128,6 @@ public class GlobalTabPage extends BasePage {
         }
     }
 
-
-
     public void clickonSettings(String rowName) {
         WebElement settingsBtn = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(SettingsButtonForRow(rowName)));
@@ -155,10 +145,10 @@ public class GlobalTabPage extends BasePage {
                 .until(ExpectedConditions.elementToBeClickable(DeleteButtonForRow(rowName)));
         deleteBtn.click();
     }
-//**********************************************************************************************************************************//
+    // **********************************************************************************************************************************//
 
-                                    // create global field//
-    //Locator
+    // create global field//
+    // Locator
     @FindBy(xpath = "//tbody//tr//td//input[@type='text']")
     WebElement FieldName;
 
@@ -171,13 +161,10 @@ public class GlobalTabPage extends BasePage {
     @FindBy(xpath = "//button[@type='button'][normalize-space()='SAVE']")
     WebElement Savebutton;
 
-
     @FindBy(xpath = "//form[@id='createGlobalFieldForm']//button[@type='button'][normalize-space()='CLOSE']")
     WebElement CloseButton;
 
-
-
-    //Action
+    // Action
 
     public void EnterFieldName(String name) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -199,23 +186,17 @@ public class GlobalTabPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(ObjectTypes));
         String xpath = ".//label[contains(normalize-space(.),'" + checkboxLabel + "')]//input[@type='checkbox']";
         WebElement checkbox = wait.until(ExpectedConditions.elementToBeClickable(
-                ObjectTypes.findElement(By.xpath(xpath))
-        ));
+                ObjectTypes.findElement(By.xpath(xpath))));
         if (!checkbox.isSelected()) {
             checkbox.click();
         }
     }
 
-
-
     public void clickSaveButton() throws InterruptedException {
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         Thread.sleep(3000);
         Savebutton.click();
     }
-
-
-
 
     public void clickCloseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -223,10 +204,10 @@ public class GlobalTabPage extends BasePage {
         CloseButton.click();
     }
 
-//*****************************************************************************************************************************
-                        //Manage Object Types - Description(Settings)
+    // *****************************************************************************************************************************
+    // Manage Object Types - Description(Settings)
 
-    //Locator
+    // Locator
     @FindBy(xpath = "//button[@type='button'][normalize-space()='Add']")
     WebElement AddButton;
 
@@ -236,8 +217,7 @@ public class GlobalTabPage extends BasePage {
     @FindBy(xpath = "//form[@id='manageObjectTypesForm']//button[@type='button'][normalize-space()='CLOSE']")
     WebElement closeButton;
 
-
-    //Action
+    // Action
 
     public void clickAddButtonForObjectType(String objectType) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -246,22 +226,22 @@ public class GlobalTabPage extends BasePage {
         addButton.click();
     }
 
-
     public void clickRemoveButtonForObjectType(String objectType) {
         WebElement removeButton = driver.findElement(By.xpath(
-                "//table//tr[td[normalize-space()='"+objectType+"']]//button[normalize-space()='CLOSE']"
-        ));
+                "//table//tr[td[normalize-space()='" + objectType + "']]//button[normalize-space()='CLOSE']"));
         removeButton.click();
     }
 
-//    public void clickActionForObjectType(String objectType, String actionType) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//
-//        String xpath = "//table//tr[td[normalize-space()='" + objectType + "']]//button[normalize-space()='" + actionType + "']";
-//
-//        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-//        button.click();
-//    }
+    // public void clickActionForObjectType(String objectType, String actionType) {
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    //
+    // String xpath = "//table//tr[td[normalize-space()='" + objectType +
+    // "']]//button[normalize-space()='" + actionType + "']";
+    //
+    // WebElement button =
+    // wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    // button.click();
+    // }
 
     public void ClickCloseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -269,9 +249,9 @@ public class GlobalTabPage extends BasePage {
         closeButton.click();
     }
 
-    //**********************************************************************************************************************************************
-                                      //Add Field
-    //Locator
+    // **********************************************************************************************************************************************
+    // Add Field
+    // Locator
     @FindBy(xpath = "//button[normalize-space()='ADD FIELD VALUE']")
     WebElement addFieldButton;
 
@@ -287,7 +267,7 @@ public class GlobalTabPage extends BasePage {
     @FindBy(xpath = "//div[@class='global-fields-manage-cell-action']//i[@class='fa-solid fa-trash']")
     WebElement deleteIcon;
 
-    //Action
+    // Action
 
     public void clickAddFieldButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -366,21 +346,21 @@ public class GlobalTabPage extends BasePage {
     }
 
     public boolean isShowInGridCheckboxSelected(String fieldName) {
-    try {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String xpath = "//td[contains(text(),'" + fieldName
-         + "')]/following-sibling::td//div[@class='checkbox-wrapper']/input";
-        WebElement checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-        boolean isSelected = checkbox.isSelected();
-        System.out.println("'Show in Grid' checkbox state for field '" + fieldName + "': "
-                + (isSelected ? "Selected" : "Not Selected"));
-        return isSelected;
-    } catch (Exception e) {
-        System.out.println(
-            "Unable to verify 'Show in Grid' checkbox for field: " + fieldName + " - " + e.getMessage());
-        return false;
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            String xpath = "//td[contains(text(),'" + fieldName
+                    + "')]/following-sibling::td//div[@class='checkbox-wrapper']/input";
+            WebElement checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            boolean isSelected = checkbox.isSelected();
+            System.out.println("'Show in Grid' checkbox state for field '" + fieldName + "': "
+                    + (isSelected ? "Selected" : "Not Selected"));
+            return isSelected;
+        } catch (Exception e) {
+            System.out.println(
+                    "Unable to verify 'Show in Grid' checkbox for field: " + fieldName + " - " + e.getMessage());
+            return false;
+        }
     }
-}
 
     public boolean isCustomFieldPresent(String fieldName) {
         try {
@@ -572,9 +552,7 @@ public class GlobalTabPage extends BasePage {
     @FindBy(xpath = "//button[@class='global-fields-delete-confirm-button' and text()='YES, DELETE']")
     WebElement deleteConfirmButton;
 
-
     public void clickDeleteConfirmButton() {
         deleteConfirmButton.click();
     }
 }
-

@@ -16,20 +16,20 @@ public class IndividualTestCyclePage extends BasePage {
         super(driver);
     }
 
-    //Locators
+    // Locators
     @FindBy(xpath = "(//input[@class='test-plan-test-cycles-supporting-text'])[1]")
     WebElement testCycleNameInput;
 
     @FindBy(xpath = "(//div[@class='test-plan-test-cycles-text-3'])[1]")
     WebElement testCycleHeader;
 
-    @FindBy(xpath ="//input[@class='testcase-select']")
+    @FindBy(xpath = "//input[@class='testcase-select']")
     WebElement inputTargetRelease;
 
     @FindBy(xpath = "//div[@class='testPlan-prototype']")
     WebElement descriptionBeforeClick;
 
-    @FindBy(xpath ="//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']" )
+    @FindBy(xpath = "//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']")
     WebElement descriptionAfterClick;
 
     @FindBy(xpath = "(//button[@id='submitButton'])[1]")
@@ -41,27 +41,23 @@ public class IndividualTestCyclePage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'Test Cycle created successfully.')]")
     WebElement testCycleCreatedSuccessMessage;
 
-    //Actions
+    // Actions
 
-    public String getTestCycleHeader()
-    {
+    public String getTestCycleHeader() {
         return testCycleHeader.getText();
     }
 
     public void setTestCycleName(String cycleName) throws InterruptedException {
         Thread.sleep(2000);
-        testCycleNameInput.clear(); //as input not div
+        testCycleNameInput.clear(); // as input not div
         testCycleNameInput.sendKeys(cycleName);
     }
 
-    public String getTargetRelease()
-    {
+    public String getTargetRelease() {
         return inputTargetRelease.getAttribute("value");
     }
 
-
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
         descriptionBeforeClick.click();
@@ -74,11 +70,9 @@ public class IndividualTestCyclePage extends BasePage {
         descriptionAfterClick.sendKeys(description);
     }
 
-
-    public void clickSave()
-    {
+    public void clickSave() {
         saveButton.click();
-        WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(notificationAfterClickSave));
     }
 

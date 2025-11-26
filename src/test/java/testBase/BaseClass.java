@@ -13,7 +13,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
@@ -37,27 +36,26 @@ public class BaseClass {
     }
 
     @BeforeMethod
-    @Parameters({"browser","mode"})
-    public void setUp(String br,String mode) throws IOException, InterruptedException {
+    @Parameters({ "browser", "mode" })
+    public void setUp(String br, String mode) throws IOException, InterruptedException {
         FileReader config = new FileReader(".//src//test//resources//config.properties");
         p = new Properties();
         p.load(config);
 
-        if (p.getProperty("execution_environment").equalsIgnoreCase("remote")){
-            DesiredCapabilities dc= new DesiredCapabilities();
+        if (p.getProperty("execution_environment").equalsIgnoreCase("remote")) {
+            DesiredCapabilities dc = new DesiredCapabilities();
             dc.setBrowserName(br);
             dc.setPlatform(Platform.WIN11);
-            URL url=new URL("http://localhost:4444/wd/hub");
-            RemoteWebDriver remoteDriver= new RemoteWebDriver(url,dc);
+            URL url = new URL("http://localhost:4444/wd/hub");
+            RemoteWebDriver remoteDriver = new RemoteWebDriver(url, dc);
             driver.set(remoteDriver);
-        }
-        else {
+        } else {
             WebDriver wd = null;
             switch (br.toLowerCase()) {
                 case "chrome":
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--incognito");
-                    if (mode.equalsIgnoreCase("headless")){
+                    if (mode.equalsIgnoreCase("headless")) {
                         options.addArguments("--headless=new");
                         options.addArguments("--window-size=1920,1080");
                     }
@@ -81,7 +79,7 @@ public class BaseClass {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().get(p.getProperty("appURL"));
         getDriver().manage().window().maximize();
-        if (mode.equalsIgnoreCase("headless")){
+        if (mode.equalsIgnoreCase("headless")) {
             Thread.sleep(1000);
             getDriver().manage().window().setSize(new Dimension(1920, 1080));
         }
@@ -92,35 +90,33 @@ public class BaseClass {
     public void tearDown() throws InterruptedException {
         if (getDriver() != null) {
             logout();
-           getDriver().quit();
+            getDriver().quit();
             driver.remove();
         }
     }
 
     public void logout() throws InterruptedException {
         Thread.sleep(2000);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
-        WebElement logOut=getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",logOut);
-//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",getDriver().findElement(By.xpath("//div[@data-bind='text: ((session.isSignedIn || session.isSamsungSso) && session.unsafe_fullName) || session.unsafe_displayName']")));
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
+                getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
+        WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
 
     }
-    //log in to site
-    public void login() throws InterruptedException{
+
+    // log in to site
+    public void login() throws InterruptedException {
 
         getDriver().findElement(By.xpath("//input[@type='email']")).sendKeys(p.getProperty("email"));
         getDriver().findElement(By.xpath("//input[@type='submit']")).click();
-
 
         Thread.sleep(3000);
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='password']")));
         getDriver().findElement(By.xpath("//input[@type='password']")).sendKeys(p.getProperty("password"));
 
-
         WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
         submitBtn.click();
-
 
         WebElement clickToYes = wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
         clickToYes.click();
@@ -143,9 +139,8 @@ public class BaseClass {
 
     // Wait for page to fully load (useful for Blazor apps after navigation)
     public void waitForPageLoad() {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(20)).until(
-                webDriver -> ((JavascriptExecutor) webDriver)
-                        .executeScript("return document.readyState").equals("complete")
-        );
+        new WebDriverWait(getDriver(), Duration.ofSeconds(20))
+                .until(webDriver -> ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState").equals("complete"));
     }
 }

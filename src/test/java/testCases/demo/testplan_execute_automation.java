@@ -1,6 +1,5 @@
 package testCases.demo;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;

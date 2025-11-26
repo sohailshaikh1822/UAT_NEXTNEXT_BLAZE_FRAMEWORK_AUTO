@@ -14,11 +14,10 @@ import pageObjects.BasePage;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Arrays;
 
 @Slf4j
 public class IndividualTestSuitePage extends BasePage {
-    public IndividualTestSuitePage(WebDriver driver){
+    public IndividualTestSuitePage(WebDriver driver) {
         super(driver);
     }
 
@@ -93,26 +92,26 @@ public class IndividualTestSuitePage extends BasePage {
 
     public void setPlannedStartDate(String yyyymmdd) {
         try {
-            plannedStartDateInput.sendKeys(new SimpleDateFormat("MM/dd/yyyy").format(DateUtil.getJavaDate(Double.parseDouble(yyyymmdd))));
-        }
-        catch (Exception e){
+            plannedStartDateInput.sendKeys(
+                    new SimpleDateFormat("MM/dd/yyyy").format(DateUtil.getJavaDate(Double.parseDouble(yyyymmdd))));
+        } catch (Exception e) {
             plannedStartDateInput.sendKeys(yyyymmdd);
         }
     }
 
     public void setPlannedEndDate(String yyyymmdd) {
 
-        try{
-            plannedEndDateInput.sendKeys(new SimpleDateFormat("MM/dd/yyyy").format(DateUtil.getJavaDate(Double.parseDouble(yyyymmdd))));
-        }
-        catch (Exception e){
+        try {
+            plannedEndDateInput.sendKeys(
+                    new SimpleDateFormat("MM/dd/yyyy").format(DateUtil.getJavaDate(Double.parseDouble(yyyymmdd))));
+        } catch (Exception e) {
             plannedStartDateInput.sendKeys(yyyymmdd);
         }
     }
 
     public String getTargetRelease() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        Thread.sleep(1000);
+        // Thread.sleep(1000);
         wait.until(ExpectedConditions.attributeToBeNotEmpty(targetReleaseInput, "title"));
         return targetReleaseInput.getAttribute("value");
     }
