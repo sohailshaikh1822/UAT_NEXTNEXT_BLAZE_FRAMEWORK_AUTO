@@ -524,11 +524,8 @@ public class ExecuteLandingPage extends BasePage {
                 return 0;
             }
 
-            // Split by space and get the 6th word (index 5) which is the total number
-            // "Showing 1 to 10 of 27 entries" →
-            // ["Showing","1","to","10","of","27","entries"]
             String[] parts = text.split(" ");
-            // return Integer.parseInt(parts[5]);
+
             return Integer.parseInt(text.replaceAll("[^0-9]", ""));
         } catch (Exception e) {
             System.out.println("Error while reading total entries: " + e.getMessage());

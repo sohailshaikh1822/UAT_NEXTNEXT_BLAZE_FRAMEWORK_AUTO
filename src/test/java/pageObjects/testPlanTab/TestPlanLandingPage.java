@@ -184,7 +184,6 @@ public class TestPlanLandingPage extends BasePage {
     public void clickOnConfirmDeleteYes(String releaseCycleSuiteName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         buttonConfirmDelete.click();
-        // wait.until(ExpectedConditions.invisibilityOf(releaseTestCycleTestSuite(releaseCycleSuiteName)));
     }
 
     public int getTotalReleases() {
