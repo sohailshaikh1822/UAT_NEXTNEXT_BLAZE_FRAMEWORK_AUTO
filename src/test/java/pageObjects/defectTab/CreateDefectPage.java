@@ -47,17 +47,13 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
-    // ======================================================
     // ACTION OBJECTS
-    // ======================================================
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    // ======================================================
     // METHODS
-    // ======================================================
 
     // ---------- Summary Input ----------
     public void enterSummary(String summary) {
