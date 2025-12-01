@@ -333,4 +333,30 @@ public class CreateDefectPage extends BasePage {
 
         return mandatoryStar.isDisplayed();
     }
+    public void verifyStatusIsDefault() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
+        String selectedText = select.getFirstSelectedOption().getText().trim();
+
+        Assert.assertTrue(
+                selectedText.equalsIgnoreCase("-- Select Status --"),
+                "FAILED: Status dropdown is NOT at default value '-- Select Status --'. Actual value: " + selectedText);
+    }
+
+    public void verifyStatusErrorMessage() {
+        try {
+            WebElement msgElement = wait.until(ExpectedConditions.visibilityOf(successNotification));
+            String actualMessage = msgElement.getText().trim();
+
+            String expectedMessage = "Error: Please select a valid Status.";
+
+            Assert.assertEquals(
+                    actualMessage,
+                    expectedMessage,
+                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage +
+                            "' but found: '" + actualMessage + "'");
+
+        } catch (TimeoutException e) {
+            Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
+        }
+    }
 }
