@@ -16,7 +16,7 @@ public class TC009 extends BaseClass {
             String Description
         ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
+        logger.info("****** Starting Test Case: Verify dropdown mandatory validation does not accept placeholder ********");
 
         try {
             login();
@@ -61,6 +61,6 @@ public class TC009 extends BaseClass {
             throw ex;
         }
 
-        logger.info("************ Test Case Finished: Verify Navigation to Defect Page *************");
+        logger.info("************ Test Case Finished: Verify dropdown mandatory validation does not accept placeholder *************");
     }
 }
