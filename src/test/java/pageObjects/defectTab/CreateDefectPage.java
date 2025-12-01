@@ -95,10 +95,11 @@ public class CreateDefectPage extends BasePage {
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
-        actions.moveToElement(element).perform();
+        actions.moveToElement(element).build().perform();
         element.clear();
         element.sendKeys(summary);
     }
+
 
 
 
@@ -108,7 +109,7 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Description ----------
     public void enterDescription(String description) {
-        wait.until(ExpectedConditions.visibilityOf(textAreaDescription)).clear();
+       wait.until(ExpectedConditions.visibilityOf(textAreaDescription)).clear();
         textAreaDescription.sendKeys(description);
     }
 
