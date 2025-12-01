@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC051 extends BaseClass {
+
     @Test(dataProvider = "tc051", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyCreationOfCustomeFieldInsideTestRunTab(
             String fieldName,
@@ -40,12 +41,10 @@ public class TC051 extends BaseClass {
             otherTab.clickcreatefieldButton();
             logger.info("clicked on create field button#");
 
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

@@ -9,9 +9,9 @@ import utils.RetryAnalyzer;
 
 public class TC002 extends BaseClass {
 
-    @Test(dataProvider = "tc002", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc002", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyProjectSelectionFromDropdown(String projectName,
-                                                   String releaseName) throws InterruptedException {
+            String releaseName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Project Selection from Dropdown *****************");
         try {
             login();

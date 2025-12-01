@@ -7,10 +7,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC038 extends BaseClass {
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyNavigationToTestCycleTab(
 
-    ) throws InterruptedException {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyNavigationToTestCycleTab() throws InterruptedException {
 
         logger.info("****** Starting the TC038 ******");
         try {
@@ -25,7 +24,6 @@ public class TC038 extends BaseClass {
 
             otherTab.clickTestCycle();
             logger.info("Navigated to TestCycle Tab");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

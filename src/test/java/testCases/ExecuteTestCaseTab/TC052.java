@@ -9,6 +9,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC052 extends BaseClass {
+
     @Test(dataProvider = "tc050", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_Execution_History_latest_log_entry(
             String projectName,
@@ -50,7 +51,6 @@ public class TC052 extends BaseClass {
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             Thread.sleep(3000);
 
-
             individualTestrun.clickTabExecutionHistory();
             Thread.sleep(2000);
             int initialCount = individualTestrun.getExecutionHistoryCount();
@@ -73,12 +73,10 @@ public class TC052 extends BaseClass {
             individualTestrun.clickSaveButton();
             logger.info("Clicked on Save Button");
 
-
             Thread.sleep(2000);
             boolean notificationDisplayed = individualTestrun.isTestLogCreatedDisplayed();
             Assert.assertTrue(notificationDisplayed, "Test log creation notification was not displayed!");
             logger.info("Verified: 'Test log created successfully' notification displayed");
-
 
             individualTestrun.clickTabExecutionHistory();
             logger.info("Clicked on Execution History tab again");

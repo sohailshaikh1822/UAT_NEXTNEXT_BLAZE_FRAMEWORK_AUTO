@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC005 extends BaseClass {
 
-    @Test(dataProvider = "tc005", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc005", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyProjectNameIsVisible(String ProjectName) throws InterruptedException {
         logger.info("************ Starting Test Case: Verify that the project name is visible *****************");
 

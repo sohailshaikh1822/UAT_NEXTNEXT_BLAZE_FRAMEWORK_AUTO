@@ -10,7 +10,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC008 extends BaseClass {
-    @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementsCreation(String rQid, String description, String priority, String status, String type
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -56,7 +57,7 @@ public class TC008 extends BaseClass {
             logger.info("Clicked Save button");
 
             logger.info("Requirement successfully added");
-              Thread.sleep(4000);
+            Thread.sleep(4000);
             String newRqIdText = addRequirementPage.getRequirementIdName();
             logger.info("Captured new Requirement ID from popup: " + newRqIdText);
             Thread.sleep(1000);

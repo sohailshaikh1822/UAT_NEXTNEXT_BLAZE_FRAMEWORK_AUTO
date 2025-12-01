@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC018 extends BaseClass {
 
-    @Test(dataProvider = "tc018", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc018", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyNavigationToTestPlanBySelectingProject(String projectName) throws InterruptedException {
         logger.info(
                 "****** Starting Test Case: Verify navigation to Test Plan by selecting a project *****************");

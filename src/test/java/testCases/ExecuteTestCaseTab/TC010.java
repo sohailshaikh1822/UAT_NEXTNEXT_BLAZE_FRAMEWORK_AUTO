@@ -9,6 +9,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC010 extends BaseClass {
+
     @Test(dataProvider = "tc010", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verify_the_visibilty_of_test_run_details(
             String projectName,
@@ -56,8 +57,6 @@ public class TC010 extends BaseClass {
             }
 
             Assert.assertTrue(allVisible, "Not all Test Run elements are visible.");
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

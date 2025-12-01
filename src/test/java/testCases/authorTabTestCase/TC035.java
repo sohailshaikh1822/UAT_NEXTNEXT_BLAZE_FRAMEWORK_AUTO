@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC035 extends BaseClass {
-    @Test(dataProvider = "tc035", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc035", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyVisiblityOfAddTestCaseButton(
             String requirementId
     ) throws InterruptedException {
@@ -20,7 +21,7 @@ public class TC035 extends BaseClass {
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
             boolean isButtonVisible = authorTestCasePage.isAddTestCaseButtonVisible1();
-            Assert.assertTrue(isButtonVisible,"Add test case button is visible in the testcases section");
+            Assert.assertTrue(isButtonVisible, "Add test case button is visible in the testcases section");
             logger.info("verified Add test case button is visible .....................");
 
         } catch (AssertionError e) {
@@ -33,4 +34,3 @@ public class TC035 extends BaseClass {
         logger.info("************ Test Case Finished *************************");
     }
 }
-

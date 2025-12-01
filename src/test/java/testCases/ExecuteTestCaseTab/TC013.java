@@ -7,8 +7,8 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-
 public class TC013 extends BaseClass {
+
     @Test(dataProvider = "tc013", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verify_upadate_actual_result_feature(
             String projectName,
@@ -51,8 +51,8 @@ public class TC013 extends BaseClass {
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
-            individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno),actual_result);
-            logger.info("Entered actual desc:"+actual_result+"->in:"+stepno);
+            individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
+            logger.info("Entered actual desc:" + actual_result + "->in:" + stepno);
             Thread.sleep(3000);
             individualTestrun.clickSaveButton();
 

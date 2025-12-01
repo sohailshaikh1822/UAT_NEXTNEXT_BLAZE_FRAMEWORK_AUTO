@@ -11,13 +11,13 @@ import utils.RetryAnalyzer;
 import java.time.Duration;
 
 public class TC063 extends BaseClass {
-    @Test(dataProvider = "tc063",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc063", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDeleteSteps(
-            String requirementId,String TestcaseId
-    )throws InterruptedException {
+            String requirementId, String TestcaseId
+    ) throws InterruptedException {
         logger.info("************ Starting the Test Case *****************");
-        try
-        {
+        try {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -30,23 +30,19 @@ public class TC063 extends BaseClass {
             Thread.sleep(1000);
             int beforeCount = individualTestCasePage.getStepCountInt();
             Thread.sleep(3000);
-            logger.info("before count was "+beforeCount);
+            logger.info("before count was " + beforeCount);
             individualTestCasePage.clickDeleteButton(beforeCount);
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
-            wait.until(webDriver -> individualTestCasePage.getStepCountInt()==beforeCount -1);
+            wait.until(webDriver -> individualTestCasePage.getStepCountInt() == beforeCount - 1);
             int afterCount = individualTestCasePage.getStepCountInt();
-            logger.info("after count is - "+afterCount);
-            assert  afterCount == beforeCount -1 :"Row was not deleted";
+            logger.info("after count is - " + afterCount);
+            assert afterCount == beforeCount - 1 : "Row was not deleted";
             individualTestCasePage.clickSaveButton();
 
-        }
-        catch (AssertionError e)
-        {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC048 extends BaseClass {
+
     @Test(dataProvider = "tc048", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_Create_Test_Log_button_is_working_properly(
             String projectName,
@@ -15,7 +16,6 @@ public class TC048 extends BaseClass {
             String CycleName,
             String SuiteName,
             String TR
-
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case 048: Verify that Create Test Log button is working properly *****************");
@@ -49,8 +49,7 @@ public class TC048 extends BaseClass {
             Thread.sleep(3000);
 
             individualTestrun.clickCreateTestLog();
-            logger.info("Create Test Log button is clickable") ;
-
+            logger.info("Create Test Log button is clickable");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

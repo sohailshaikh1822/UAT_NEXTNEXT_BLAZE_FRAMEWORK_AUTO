@@ -8,17 +8,18 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC053 extends BaseClass {
-    @Test(dataProvider = "tc053", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc053", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyTheDropDownsInLeftPane(String epic,
-                                   String feature,
-                                   String requirementId,
-                                   String expectedPagination
+            String feature,
+            String requirementId,
+            String expectedPagination
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
             logger.info("Logged in successfully");
-            AuthorTestCasePage authorTestCasePage=new AuthorTestCasePage(getDriver());
+            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("clicked on the author test case tab");
             authorTestCasePage.selectEpic(epic);
@@ -29,7 +30,7 @@ public class TC053 extends BaseClass {
             logger.info("Clicked the requirement from the grid");
             authorTestCasePage.clickNextArrow();
             logger.info("Clicked the next arrow");
-            Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(),expectedPagination);
+            Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(), expectedPagination);
             logger.info("Verified successfully");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

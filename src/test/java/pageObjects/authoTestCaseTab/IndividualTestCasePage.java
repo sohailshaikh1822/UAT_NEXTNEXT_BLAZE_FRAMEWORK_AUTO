@@ -1,7 +1,6 @@
 package pageObjects.authoTestCaseTab;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,13 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 
 public class IndividualTestCasePage extends BasePage {
-    public IndividualTestCasePage(WebDriver driver){
+    public IndividualTestCasePage(WebDriver driver) {
         super(driver);
     }
+
     // Locators
     @FindBy(xpath = "//div[normalize-space()='CLOSE']")
     WebElement buttonClose;
@@ -82,29 +81,33 @@ public class IndividualTestCasePage extends BasePage {
     @FindBy(xpath = "//span[@class='step-number']")
     List<WebElement> allSteps;
 
-    public WebElement labelStepNo(String s){
-        return driver.findElement(By.xpath("//span[@class='step-number' and text()='"+s+"']"));
+    public WebElement labelStepNo(String s) {
+        return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + s + "']"));
     }
 
-    public WebElement textStepDescriptionBeforeClick(int stepNo){
-        return driver.findElement(By.xpath("//span[@class='step-number' and text()='"+stepNo+"']/ancestor::div[@class='table-row']//div[@class='table-cell description']"));
+    public WebElement textStepDescriptionBeforeClick(int stepNo) {
+        return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + stepNo
+                + "']/ancestor::div[@class='table-row']//div[@class='table-cell description']"));
     }
 
-    public WebElement textStepDescriptionAfterClick(int stepNo){
-        return driver.findElement(By.xpath("//span[@class='step-number' and text()='"+stepNo+"']/ancestor::div[@class='table-row']//div[@class='table-cell description']//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']"));
+    public WebElement textStepDescriptionAfterClick(int stepNo) {
+        return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + stepNo
+                + "']/ancestor::div[@class='table-row']//div[@class='table-cell description']//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']"));
     }
 
-
-    public WebElement textExpectedResultBeforeClick(int stepNo){
-        return driver.findElement(By.xpath("//span[@class='step-number' and text()='"+stepNo+"']/ancestor::div[@class='table-row']//div[@class='table-cell result']"));
+    public WebElement textExpectedResultBeforeClick(int stepNo) {
+        return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + stepNo
+                + "']/ancestor::div[@class='table-row']//div[@class='table-cell result']"));
     }
 
-    public WebElement textStepResultAfterClick(int stepNo){
-        return driver.findElement(By.xpath("//span[@class='step-number' and text()='"+stepNo+"']/ancestor::div[@class='table-row']//div[@class='table-cell result']//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']"));
+    public WebElement textStepResultAfterClick(int stepNo) {
+        return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + stepNo
+                + "']/ancestor::div[@class='table-row']//div[@class='table-cell result']//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']"));
     }
 
-    public WebElement buttonDeleteAction(int stepNo){
-        return driver.findElement(By.xpath("//span[@class='step-number' and text()='"+stepNo+"']/ancestor::div[@class='table-row']//div[@class='table-cell action']//button"));
+    public WebElement buttonDeleteAction(int stepNo) {
+        return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + stepNo
+                + "']/ancestor::div[@class='table-row']//div[@class='table-cell action']//button"));
     }
 
     @FindBy(xpath = "//i[@class='fa-solid fa-circle-plus']")
@@ -113,39 +116,36 @@ public class IndividualTestCasePage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), 'CANCEL')]")
     WebElement cancelBtn;
 
-    //    Actions
-    public void clickCloseButton()
-    {
+    // Actions
+    public void clickCloseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
     }
-    public boolean isModelDisplayed()
-    {
-        try{
-            WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+
+    public boolean isModelDisplayed() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             return wait.until(ExpectedConditions.visibilityOf(buttonClose)).isDisplayed();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return false;
         }
     }
 
     public void clickAddTestStep() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        Actions a= new Actions(driver);
+        Actions a = new Actions(driver);
         a.moveToElement(buttonAddTestStep).perform();
         Thread.sleep(1000);
         a.click(buttonAddTestStep).perform();
     }
+
     public void clickAddRow() throws InterruptedException {
         Thread.sleep(2000);
-        Actions a=new Actions(driver);
+        Actions a = new Actions(driver);
         a.moveToElement(buttonAddTestStep).perform();
         buttonAddTestStep.click();
     }
-    public String getStepCount(String s)
-    {
+
+    public String getStepCount(String s) {
 
         return labelStepNo(s).getText();
     }
@@ -196,16 +196,15 @@ public class IndividualTestCasePage extends BasePage {
         saveBtn.click();
         wait.until(ExpectedConditions.textToBePresentInElementLocated(
                 By.xpath("//div[@id='notification']"),
-                "Test Case updated successfully."
-        ));
+                "Test Case updated successfully."));
     }
 
+    public void addTestStepsFromExcelForNewTestCase(String description, String expectedResult)
+            throws InterruptedException {
+        String[] descriptionArray = description.split(",");
+        String[] expectedResultArray = expectedResult.split(",");
 
-    public void addTestStepsFromExcelForNewTestCase(String description,String expectedResult) throws InterruptedException {
-        String [] descriptionArray=description.split(",");
-        String [] expectedResultArray=expectedResult.split(",");
-
-        for (int i=0;i<=expectedResultArray.length-1;i++) {
+        for (int i = 0; i <= expectedResultArray.length - 1; i++) {
             clickAddTestStep();
             setStepDescription(descriptionArray[i], i + 1);
             driver.findElement(By.xpath("//div[@class='table-header-cell description']")).click();
@@ -214,43 +213,45 @@ public class IndividualTestCasePage extends BasePage {
         }
     }
 
-    public void addTestStepsAtEndForExistingTestCase(String description,String expectedResult) throws InterruptedException {
-        int currentStep=allSteps.size();
-        String [] descriptionArray=description.split(",");
-        String [] expectedResultArray=expectedResult.split(",");
+    public void addTestStepsAtEndForExistingTestCase(String description, String expectedResult)
+            throws InterruptedException {
+        int currentStep = allSteps.size();
+        String[] descriptionArray = description.split(",");
+        String[] expectedResultArray = expectedResult.split(",");
 
-        for (int i=0;i<=expectedResultArray.length-1;i++) {
+        for (int i = 0; i <= expectedResultArray.length - 1; i++) {
             clickAddTestStep();
             setStepDescription(descriptionArray[i], currentStep + 1);
             Thread.sleep(1000);
             setStepExpectedResult(expectedResultArray[i], currentStep + 1);
-            currentStep=currentStep+1;
+            currentStep = currentStep + 1;
         }
     }
 
-   public void editSpecificTestStep(int stepNo,String description,String expectedResult) throws InterruptedException {
-        if (description!=null){
-            setStepDescription(description,stepNo);
+    public void editSpecificTestStep(int stepNo, String description, String expectedResult)
+            throws InterruptedException {
+        if (description != null) {
+            setStepDescription(description, stepNo);
         }
-        if (expectedResult!=null){
-            setStepExpectedResult(expectedResult,stepNo);
+        if (expectedResult != null) {
+            setStepExpectedResult(expectedResult, stepNo);
         }
-   }
+    }
 
-   public int getCountPriorityOptions() throws InterruptedException {
+    public int getCountPriorityOptions() throws InterruptedException {
         Thread.sleep(2000);
         return OptionsDropDownPriority.size();
-   }
+    }
 
-    public int getCountStatusOptions(){
+    public int getCountStatusOptions() {
         return OptionsDropdownStatus.size();
     }
 
-    public int getCountTypeOptions(){
+    public int getCountTypeOptions() {
         return OptionsDropdownType.size();
     }
 
-    public int getCountTypeAutomationProgress(){
+    public int getCountTypeAutomationProgress() {
         return OptionsDropdownAutomationProgress.size();
     }
 
@@ -264,10 +265,12 @@ public class IndividualTestCasePage extends BasePage {
             return false;
         }
     }
-    public void clickCancelBtn(){
+
+    public void clickCancelBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(cancelBtn)).click();
     }
+
     public void setTestCaseName(String newName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement nameField = wait.until(ExpectedConditions.elementToBeClickable(headingTestCaseName));
@@ -275,13 +278,12 @@ public class IndividualTestCasePage extends BasePage {
         nameField.sendKeys(newName);
     }
 
-
     public String getTestCaseName() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.visibilityOf(headingTestCaseName)).getAttribute("value").trim();
     }
 
-    public void closebutton(){
+    public void closebutton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
     }
@@ -320,9 +322,7 @@ public class IndividualTestCasePage extends BasePage {
         }
     }
 
-
-    public int getStepCountInt()
-    {
+    public int getStepCountInt() {
         return allSteps.size();
     }
 

@@ -9,13 +9,13 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC009 extends BaseClass {
+
     @Test(dataProvider = "tc009", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyTestRunButton(
             String projName,
             String releaseName,
             String testRun
-    ) throws InterruptedException
-    {
+    ) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
         try {

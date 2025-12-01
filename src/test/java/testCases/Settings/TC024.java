@@ -7,14 +7,13 @@ import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC024 extends BaseClass
-{
+public class TC024 extends BaseClass {
+
     @Test(dataProvider = "tc024", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyClickOnCheckboxOfAvailableCustomFieldForRequirementField(
             String fieldName,
             String fieldtype
-    ) throws InterruptedException
-    {
+    ) throws InterruptedException {
         logger.info("****** Starting the TC024 ***************");
 
         try {
@@ -50,13 +49,10 @@ public class TC024 extends BaseClass
             logger.info("Clicked on checkbox");
             Thread.sleep(3000);
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

@@ -12,6 +12,7 @@ public class OtherTabAutomation extends BaseClass {
     public OtherTabAutomation() {
         super();
     }
+
     @Test(dataProvider = "Demo1", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void runOtherTabAutomation(
             String editrow,
@@ -64,13 +65,13 @@ public class OtherTabAutomation extends BaseClass {
             logger.info("clicked on release");
 
             otherTabPage.clickOnEdit(editrow);
-            logger.info("clicked on edit row:"+editrow);
+            logger.info("clicked on edit row:" + editrow);
 
-            otherTabPage.clickDefaultAddValue() ;
+            otherTabPage.clickDefaultAddValue();
             logger.info("clicked on adddefaultvalue");
 
             otherTabPage.enterDefaultValue(value);
-            logger.info("entered default value"+value);
+            logger.info("entered default value" + value);
 
             otherTabPage.clickDefaultDeleteIcon();
             logger.info("clicked on delete icon");
@@ -82,19 +83,15 @@ public class OtherTabAutomation extends BaseClass {
             logger.info("clicked on add custom button");
 
             otherTabPage.createCustomEnterFieldName(fieldname);
-            logger.info("entered custom field value"+fieldname);
+            logger.info("entered custom field value" + fieldname);
 
             otherTabPage.createCustomSelectDataType(fieldtype);
-            logger.info("entered custom field value"+fieldtype);
+            logger.info("entered custom field value" + fieldtype);
 
             otherTabPage.createCustomClickCancelButton();
 
-
-
 //            otherTabPage.deleteButtonForRow(editrow);
 //            logger.info("clicked on delete row:"+editrow);
-
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;

@@ -9,16 +9,11 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import testBase.BaseClass;
-
-import java.awt.*;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class ExtentReportManager implements ITestListener
-{
+public class ExtentReportManager implements ITestListener {
 	public static ExtentReports extent;
 	public static ExtentSparkReporter sparkReporter;
 	public static ExtentTest test;
@@ -65,119 +60,118 @@ public class ExtentReportManager implements ITestListener
 		}
 	}
 
+	// public void onTestSuccess(ITestResult result) {
+	// test = extent.createTest(result.getTestClass().getName());
+	// test.assignCategory(result.getMethod().getGroups());
+	// test.log(Status.PASS, result.getName() + " Got Successfully Executed");
+	//
+	// // Method-only execution time
+	// long methodDuration = result.getEndMillis() - result.getStartMillis();
+	// test.getModel().setStartTime(new Date(result.getStartMillis()));
+	// test.getModel().setEndTime(new Date(result.getEndMillis()));
+	//
+	// System.out.println("Method Execution Time: " + methodDuration + " ms");
+	//
+	// // Full lifecycle (suite start to now)
+	// long fullDuration = System.currentTimeMillis() -
+	// result.getTestContext().getStartDate().getTime();
+	// System.out.println("Total Execution Time (like TestNG panel): " +
+	// fullDuration + " ms");
+	// }
 
+	public void onTestSuccess(ITestResult result) {
+		test = extent.createTest(result.getTestClass().getName());
+		test.assignCategory(result.getMethod().getGroups());
+		test.log(Status.PASS, result.getName() + " Got Successfully Executed");
 
-//		public void onTestSuccess(ITestResult result) {
-//			test = extent.createTest(result.getTestClass().getName());
-//			test.assignCategory(result.getMethod().getGroups());
-//			test.log(Status.PASS, result.getName() + " Got Successfully Executed");
-//
-//			// Method-only execution time
-//			long methodDuration = result.getEndMillis() - result.getStartMillis();
-//			test.getModel().setStartTime(new Date(result.getStartMillis()));
-//			test.getModel().setEndTime(new Date(result.getEndMillis()));
-//
-//			System.out.println("Method Execution Time: " + methodDuration + " ms");
-//
-//			// Full lifecycle (suite start to now)
-//			long fullDuration = System.currentTimeMillis() - result.getTestContext().getStartDate().getTime();
-//			System.out.println("Total Execution Time (like TestNG panel): " + fullDuration + " ms");
-//		}
+		// Exact TestNG duration
+		long duration = result.getEndMillis() - result.getStartMillis();
+		test.getModel().setStartTime(new Date(result.getStartMillis()));
+		test.getModel().setEndTime(new Date(result.getEndMillis()));
 
-		public void onTestSuccess(ITestResult result) {
-			test = extent.createTest(result.getTestClass().getName());
-			test.assignCategory(result.getMethod().getGroups());
-			test.log(Status.PASS, result.getName() + " Got Successfully Executed");
+		// Log timing info in ExtentReports
+		String timeMsg = "Execution Time: " + duration + " ms (" + (duration / 1000.0) + " sec)";
+		test.log(Status.INFO, timeMsg);
 
-			// Exact TestNG duration
-			long duration = result.getEndMillis() - result.getStartMillis();
-			test.getModel().setStartTime(new Date(result.getStartMillis()));
-			test.getModel().setEndTime(new Date(result.getEndMillis()));
-
-			// Log timing info in ExtentReports
-			String timeMsg = "Execution Time: " + duration + " ms (" + (duration / 1000.0) + " sec)";
-			test.log(Status.INFO, timeMsg);
-
-			System.out.println("Execution Time (matching TestNG): " + duration + " ms");
-		}
-
-
-
-		public void onTestFailure(ITestResult result)
-		{
-			test=extent.createTest(result.getTestClass().getName());
-			test.assignCategory(result.getMethod().getGroups());
-
-			test.log(Status.FAIL,result.getName()+ " : Test Failed");
-			test.log(Status.INFO, result.getThrowable().getMessage());
-			
-			try
-			{
-			String screenshotPath=new BaseClass().captureScreen(result.getName());
-			test.addScreenCaptureFromPath(screenshotPath);
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		
-		public void onTestSkipped(ITestResult result)
-		{
-//			test=extent.createTest(result.getTestClass().getName()); //test=extent.createTest(result.getTestContext().getName());
-
-//			test.assignCategory(result.getMethod().getGroups());
-//			test.log(Status.SKIP,result.getName()+ " test Skipped");
-//			test.log(Status.INFO, result.getThrowable().getMessage());
-		}
-		
-//		public synchronized void onFinish(ITestContext context) {
-//			// Class execution time
-//			long classStart = context.getStartDate().getTime();
-//			long classEnd = context.getEndDate().getTime();
-//			long classDuration = classEnd - classStart;
-//
-//			System.out.println("Total execution time for class " + context.getName() + ": " + classDuration + " ms (" + (classDuration / 1000.0) + " sec)");
-//
-//			// Optionally, log in ExtentReports
-//			test = extent.createTest("Class Execution Summary: " + context.getName());
-//			test.log(Status.INFO, "Total execution time: " + classDuration + " ms (" + (classDuration / 1000.0) + " sec)");
-
-//			if (context.getSuite().getAllMethods().size() ==
-//					context.getSuite().getAllInvokedMethods().size()) {
-				// Flush the report
-//				extent.flush();
-
-				// Automatically open report
-//				String pathOfExtentReport = System.getProperty("user.dir") + "\\reports\\" + repName;
-//				File extentReport = new File(pathOfExtentReport);
-//				try {
-//					Desktop.getDesktop().browse(extentReport.toURI());
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			try {
-//			URL url = new URL("file:///"+System.getProperty("user.dir")+"\\reports\\"+repName);
-//
-//
-//
-//			 ImageHtmlEmail email = new ImageHtmlEmail();
-//			  email.setDataSourceResolver(new DataSourceUrlResolver(url));
-//			  email.setHostName("smtp.googlemail.com");
-//			  email.setSmtpPort(465);
-//			  email.setAuthenticator(new DefaultAuthenticator("mayukhjit@gmail.com", "mayukh123A!"));
-//			  email.setSSLOnConnect(true);
-//			  email.setFrom("mayukhjit@gmail.com");   //Sender
-//			  email.setSubject("Test Results");
-//			  email.setMsg("Please find Attached Report....");
-//			  email.addTo("mayukhc55@gmail.com");   //Receiver
-//			  email.attach(url, "extent report", "please check report...");
-//			  email.send();   // send the email
-//			}
-//			catch(Exception e)
-//			{
-//				e.printStackTrace();
-//			}
-//			}
-//		}
+		System.out.println("Execution Time (matching TestNG): " + duration + " ms");
 	}
+
+	public void onTestFailure(ITestResult result) {
+		test = extent.createTest(result.getTestClass().getName());
+		test.assignCategory(result.getMethod().getGroups());
+
+		test.log(Status.FAIL, result.getName() + " : Test Failed");
+		test.log(Status.INFO, result.getThrowable().getMessage());
+
+		try {
+			String screenshotPath = new BaseClass().captureScreen(result.getName());
+			test.addScreenCaptureFromPath(screenshotPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void onTestSkipped(ITestResult result) {
+		// test=extent.createTest(result.getTestClass().getName());
+		// //test=extent.createTest(result.getTestContext().getName());
+
+		// test.assignCategory(result.getMethod().getGroups());
+		// test.log(Status.SKIP,result.getName()+ " test Skipped");
+		// test.log(Status.INFO, result.getThrowable().getMessage());
+	}
+
+	// public synchronized void onFinish(ITestContext context) {
+	// // Class execution time
+	// long classStart = context.getStartDate().getTime();
+	// long classEnd = context.getEndDate().getTime();
+	// long classDuration = classEnd - classStart;
+	//
+	// System.out.println("Total execution time for class " + context.getName() + ":
+	// " + classDuration + " ms (" + (classDuration / 1000.0) + " sec)");
+	//
+	// // Optionally, log in ExtentReports
+	// test = extent.createTest("Class Execution Summary: " + context.getName());
+	// test.log(Status.INFO, "Total execution time: " + classDuration + " ms (" +
+	// (classDuration / 1000.0) + " sec)");
+
+	// if (context.getSuite().getAllMethods().size() ==
+	// context.getSuite().getAllInvokedMethods().size()) {
+	// Flush the report
+	// extent.flush();
+
+	// Automatically open report
+	// String pathOfExtentReport = System.getProperty("user.dir") + "\\reports\\" +
+	// repName;
+	// File extentReport = new File(pathOfExtentReport);
+	// try {
+	// Desktop.getDesktop().browse(extentReport.toURI());
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// try {
+	// URL url = new
+	// URL("file:///"+System.getProperty("user.dir")+"\\reports\\"+repName);
+	//
+	//
+	//
+	// ImageHtmlEmail email = new ImageHtmlEmail();
+	// email.setDataSourceResolver(new DataSourceUrlResolver(url));
+	// email.setHostName("smtp.googlemail.com");
+	// email.setSmtpPort(465);
+	// email.setAuthenticator(new DefaultAuthenticator("mayukhjit@gmail.com",
+	// "mayukh123A!"));
+	// email.setSSLOnConnect(true);
+	// email.setFrom("mayukhjit@gmail.com"); //Sender
+	// email.setSubject("Test Results");
+	// email.setMsg("Please find Attached Report....");
+	// email.addTo("mayukhc55@gmail.com"); //Receiver
+	// email.attach(url, "extent report", "please check report...");
+	// email.send(); // send the email
+	// }
+	// catch(Exception e)
+	// {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+}

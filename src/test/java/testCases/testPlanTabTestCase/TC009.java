@@ -12,13 +12,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TC009 extends BaseClass {
-    @Test(dataProvider = "tc008", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc008", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyDeletionOfCycle(
             String projectName,
             String releaseName,
             String testCycleName,
-            String testDescription
-    )
+            String testDescription)
             throws InterruptedException {
         logger.info(
                 "****** Starting Test Case: Verify deleting a cycle removes it from the hierarchy *****************");
@@ -45,29 +44,27 @@ public class TC009 extends BaseClass {
             logger.info("Clicked on the new testCycle");
 
             String num = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
-            IndividualTestCyclePage individualTestCyclePage=new IndividualTestCyclePage(getDriver());
-            individualTestCyclePage.setTestCycleName(testCycleName+num);
+            IndividualTestCyclePage individualTestCyclePage = new IndividualTestCyclePage(getDriver());
+            individualTestCyclePage.setTestCycleName(testCycleName + num);
             logger.info("added the test cycle name");
 
             individualTestCyclePage.setDescription(testDescription);
             logger.info("added the description for cycle");
 
-            Assert.assertEquals(individualTestCyclePage.getTargetRelease(),releaseName);
+            Assert.assertEquals(individualTestCyclePage.getTargetRelease(), releaseName);
             logger.info("verified the targeted release ");
 
             individualTestCyclePage.clickSave();
             logger.info("Clicked on the save button");
 
-            testPlanPage.clickOnReleaseOrTestCycleOrTestSuite(testCycleName+num);
+            testPlanPage.clickOnReleaseOrTestCycleOrTestSuite(testCycleName + num);
             logger.info("navigated to the created cycle");
 
             testPlanPage.clickDelete();
             logger.info("Clicked on the delete button");
 
-            testPlanPage.clickOnConfirmDeleteYes(testCycleName+num);
+            testPlanPage.clickOnConfirmDeleteYes(testCycleName + num);
             logger.info("Deleted the module successfully");
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

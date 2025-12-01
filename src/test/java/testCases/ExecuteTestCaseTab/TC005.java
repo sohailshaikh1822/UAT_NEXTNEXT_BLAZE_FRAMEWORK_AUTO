@@ -3,11 +3,12 @@ package testCases.ExecuteTestCaseTab;
 import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
-@Test
-public class TC005 extends BaseClass {
-    public void verifyExpandAndCollapseLeftPenal(
+import utils.RetryAnalyzer;
 
-    ) throws InterruptedException {
+public class TC005 extends BaseClass {
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void verifyExpandAndCollapseLeftPenal() throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
         try {

@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC015 extends BaseClass {
-    @Test(dataProvider = "tc015", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc015", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyNewTestCycleCreationMessage(
             String projectName,
             String releaseName,
@@ -40,14 +41,14 @@ public class TC015 extends BaseClass {
             testPlanPage.clickNewTestCycle();
             logger.info("Clicked on the new testCycle");
 
-            IndividualTestCyclePage individualTestCyclePage=new IndividualTestCyclePage(getDriver());
+            IndividualTestCyclePage individualTestCyclePage = new IndividualTestCyclePage(getDriver());
             individualTestCyclePage.setTestCycleName(testCycleName);
             logger.info("added the test cycle name");
 
             individualTestCyclePage.setDescription(testDescription);
             logger.info("added the description for cycle");
 
-            Assert.assertEquals(individualTestCyclePage.getTargetRelease(),releaseName);
+            Assert.assertEquals(individualTestCyclePage.getTargetRelease(), releaseName);
             logger.info("verified the targeted release ");
 
             individualTestCyclePage.clickSave();
@@ -62,10 +63,6 @@ public class TC015 extends BaseClass {
 
             Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg, "Validation message did not match!");
             logger.info("Verified success notification successfully");
-
-
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

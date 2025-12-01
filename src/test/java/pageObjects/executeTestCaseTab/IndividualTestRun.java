@@ -10,7 +10,6 @@ import pageObjects.BasePage;
 import java.util.List;
 
 import java.time.Duration;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class IndividualTestRun extends BasePage {
@@ -20,7 +19,7 @@ public class IndividualTestRun extends BasePage {
 
     // Locators
 
-    @FindBy (xpath = "//body/div[@class='requirements']/div[@class='frame']/div[@id='execute_rightPanel']/div[@class='test-run-cases']/div[@id='test-run-frames']/div[@class='test-run-frame-5']/div[@class='test-run-frame-6']/div[@class='test-run-frame-6-1']/div[1]")
+    @FindBy(xpath = "//body/div[@class='requirements']/div[@class='frame']/div[@id='execute_rightPanel']/div[@class='test-run-cases']/div[@id='test-run-frames']/div[@class='test-run-frame-5']/div[@class='test-run-frame-6']/div[@class='test-run-frame-6-1']/div[1]")
     WebElement QAUser;
 
     @FindBy(xpath = "//body/div[@class='requirements']/div[@class='frame']/div[@id='execute_rightPanel']/div[@class='test-run-cases']/div[@id='test-run-frames']/div[@class='test-run-frame-5']/div[@class='test-run-frame-6']/div[@class='test-run-frame-6-1']/div[2]")
@@ -81,32 +80,36 @@ public class IndividualTestRun extends BasePage {
     WebElement checkBoxSelectAllSteps;
 
     public WebElement checkboxForSteps(int stepNo) {
-        return driver.findElement(By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell checkbox-cell']"));
+        return driver.findElement(
+                By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell checkbox-cell']"));
     }
 
     public WebElement uatCategoryForSteps(int stepNo) {
-        return driver.findElement(By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell uat-category']"));
+        return driver.findElement(
+                By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell uat-category']"));
     }
 
     public WebElement descriptionForSteps(int stepNo) {
-        return driver.findElement(By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell name']"));
+        return driver.findElement(
+                By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell name']"));
     }
 
     public WebElement expectedResultForSteps(int stepNo) {
-        return driver.findElement(By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell expected-result']"));
+        return driver.findElement(
+                By.xpath("//div[normalize-space()='" + stepNo + "']/../div[@class='table-row-cell expected-result']"));
     }
 
     public WebElement actualResultForSteps(int stepNo) {
-        return driver.findElement(By.xpath("//div[normalize-space()='" + stepNo + "']/..//textarea[@class='non-expandable-textarea']"));
+        return driver.findElement(
+                By.xpath("//div[normalize-space()='" + stepNo + "']/..//textarea[@class='non-expandable-textarea']"));
     }
 
     public WebElement statusForSteps(int stepNo) {
-        return driver.findElement(By.xpath("//div[normalize-space()='" + stepNo + "']/..//select[@class='test-run-text select-dropdown']"));
+        return driver.findElement(By
+                .xpath("//div[normalize-space()='" + stepNo + "']/..//select[@class='test-run-text select-dropdown']"));
     }
 
-
-    //Actions
-
+    // Actions
 
     Actions a = new Actions(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -185,8 +188,7 @@ public class IndividualTestRun extends BasePage {
 
     public void clickShowAllStepsRadio() {
         WebElement checkbox = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='viewAll']"))
-        );
+                ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='viewAll']")));
 
         checkbox.click();
 
@@ -245,7 +247,6 @@ public class IndividualTestRun extends BasePage {
         }
     }
 
-
     @FindBy(id = "searchInput")
     private WebElement searchInput;
 
@@ -285,12 +286,11 @@ public class IndividualTestRun extends BasePage {
 
     }
 
-
     public String getActualResultOfStep(int stepNo) {
         try {
             WebElement actualResultField = driver.findElement(
-                    By.xpath("//div[normalize-space()='" + stepNo + "']/..//textarea[@class='non-expandable-textarea']")
-            );
+                    By.xpath("//div[normalize-space()='" + stepNo
+                            + "']/..//textarea[@class='non-expandable-textarea']"));
             wait.until(ExpectedConditions.visibilityOf(actualResultField));
             return actualResultField.getAttribute("value").trim();
         } catch (NoSuchElementException e) {
@@ -316,22 +316,24 @@ public class IndividualTestRun extends BasePage {
             WebElement tableContainer = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//div[@class='test-run-frame-10']")));
 
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tableContainer);
 
             long lastHeight = -1;
             while (true) {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;", tableContainer);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;",
+                        tableContainer);
                 Thread.sleep(500);
 
-                long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return arguments[0].scrollHeight;", tableContainer);
-                if (newHeight == lastHeight) break;
+                long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return arguments[0].scrollHeight;",
+                        tableContainer);
+                if (newHeight == lastHeight)
+                    break;
                 lastHeight = newHeight;
             }
 
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                    By.xpath("//div[@class='test-run-frame-10']//div[contains(@class,'tr') or contains(@class,'table-row')]")
-            ));
+                    By.xpath(
+                            "//div[@class='test-run-frame-10']//div[contains(@class,'tr') or contains(@class,'table-row')]")));
 
             List<WebElement> rows = tableContainer.findElements(
                     By.xpath(".//div[contains(@class,'tr') or contains(@class,'table-row')]"));
@@ -346,7 +348,8 @@ public class IndividualTestRun extends BasePage {
 
     public boolean isDefectPresent() {
         try {
-            By defectLocator = By.xpath("//body/div[@class='requirements']/div[@class='frame']/div[@id='execute_rightPanel']/div[@class='test-run-cases']/div[@id='test-run-frames']/div[@class='test-run-form-text-field']/div[1]");
+            By defectLocator = By.xpath(
+                    "//body/div[@class='requirements']/div[@class='frame']/div[@id='execute_rightPanel']/div[@class='test-run-cases']/div[@id='test-run-frames']/div[@class='test-run-form-text-field']/div[1]");
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement defectSection = wait.until(ExpectedConditions.visibilityOfElementLocated(defectLocator));
@@ -377,9 +380,4 @@ public class IndividualTestRun extends BasePage {
         }
     }
 
-
 }
-
-
-
-

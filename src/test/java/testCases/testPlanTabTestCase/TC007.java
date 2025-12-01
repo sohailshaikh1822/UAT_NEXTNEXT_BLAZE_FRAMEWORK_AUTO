@@ -8,7 +8,7 @@ import utils.RetryAnalyzer;
 
 public class TC007 extends BaseClass {
 
-    @Test(dataProvider = "tc007", dataProviderClass = DataProviders.TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc007", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyCyclesUnderExpandedRelease(String projectName, String releaseName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify cycles are listed under expanded release *****************");
 

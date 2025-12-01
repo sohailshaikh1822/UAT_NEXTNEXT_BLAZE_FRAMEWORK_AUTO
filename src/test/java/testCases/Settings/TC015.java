@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC015 extends BaseClass {
-    @Test(dataProvider = "tc015", dataProviderClass = SettingTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc015", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_create_a_Custom_Field_inside_Release_Tab(
             String fieldName,
             String textBox)
@@ -30,22 +31,22 @@ public class TC015 extends BaseClass {
             otherTab.clickOnAddCustomField();
             logger.info("Clicked on custom Field button");
 
-            otherTab.createCustomEnterFieldName(fieldName);
-            logger.info("Entered Field Name: " + fieldName);
+            long timeMillis = System.currentTimeMillis();
+            String dynamicfield = fieldName + timeMillis;
+
+            otherTab.createCustomEnterFieldName(dynamicfield);
+            logger.info("Entered Field Name: " + dynamicfield);
 
             otherTab.createCustomSelectDataType(textBox);
             logger.info("Selected Data Type as Text Box");
 
-
             otherTab.clickcreatefieldButton();
             logger.info("Clicked on create field button");
 
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC035 extends BaseClass {
-    @Test(dataProvider = "tc035", dataProviderClass = SettingTestCaseDataProvider.class)
+
+    @Test(dataProvider = "tc035", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_delete_a_Custom_Field_inside_Test_step(
             String fieldName1,
             String fieldType) throws InterruptedException {
@@ -43,7 +45,6 @@ public class TC035 extends BaseClass {
 
             otherTab.clickOnDelete(fieldName1);
             logger.info("Clicked Delete icon for the field: " + fieldName1);
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

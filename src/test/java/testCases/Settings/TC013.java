@@ -7,6 +7,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC013 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void VerifySelectAllAndCLearAllButton()
             throws InterruptedException {
@@ -33,12 +34,10 @@ public class TC013 extends BaseClass {
             globalTab.clickonClearAll();
             logger.info("Clicked on Clear All Button");
             Thread.sleep(3000);
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

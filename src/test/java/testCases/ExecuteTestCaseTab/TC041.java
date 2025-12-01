@@ -10,15 +10,16 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC041 extends BaseClass {
-    @Test(dataProvider = "tc041", dataProviderClass = ExecuteTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void verifyFileAbove5MBInDefect( String projectName,
-                                            String ReleaseName,
-                                            String CycleName,
-                                            String SuiteName,
-                                            String TR,
-                                           String summary,
-                                           String status,
-                                           String fileAddress
+
+    @Test(dataProvider = "tc041", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void verifyFileAbove5MBInDefect(String projectName,
+            String ReleaseName,
+            String CycleName,
+            String SuiteName,
+            String TR,
+            String summary,
+            String status,
+            String fileAddress
     ) throws InterruptedException {
         logger.info("****** Starting Test Case 041: Verify that files up to 5MB can be uploaded as defect attachments inside the defect *****************");
 
@@ -47,20 +48,20 @@ public class TC041 extends BaseClass {
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
 
-            IndividualTestRun individualTestRun= new IndividualTestRun(getDriver());
+            IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             individualTestRun.clickLinkDefect();
             logger.info("Clicked on link defect ");
 
-            LinkDefectPage linkDefectPage= new LinkDefectPage(getDriver());
+            LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
 
             linkDefectPage.clickNew();
             logger.info("Clicked On the New ");
 
             linkDefectPage.enterSummary(summary);
-            logger.info("Entered Summary"+summary);
+            logger.info("Entered Summary" + summary);
 
             linkDefectPage.selectStatus(status);
-            logger.info("Clicked on status"+status);
+            logger.info("Clicked on status" + status);
 
             linkDefectPage.uploadFile(fileAddress);
             logger.info("<less than 5 mb uploaded");

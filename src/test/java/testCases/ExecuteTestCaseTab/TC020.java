@@ -9,8 +9,8 @@ import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-
 public class TC020 extends BaseClass {
+
     @Test(dataProvider = "tc020", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verify_the_user_is_able_to_click_on_the_linked_defect_and_see_the_details(
             String projectName,
@@ -51,22 +51,17 @@ public class TC020 extends BaseClass {
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             Thread.sleep(3000);
 
-
             boolean defectPresent = individualTestrun.isDefectPresent();
             if (defectPresent) {
                 logger.info("Defect is present");
                 Assert.assertTrue(true, "Defect is not displayed under the defect category.");
             } else {
                 logger.error("Defect is NOT present under the defect category.");
-                LinkDefectPage linkDefectPage= new LinkDefectPage(getDriver());
+                LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
 
                 linkDefectPage.clickDefectById(defid);
-                logger.info("clicked on defect id"+defid);
+                logger.info("clicked on defect id" + defid);
             }
-
-
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
@@ -79,4 +74,3 @@ public class TC020 extends BaseClass {
         logger.info("************ Test Case Finished *************************");
     }
 }
-

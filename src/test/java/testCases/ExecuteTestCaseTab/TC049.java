@@ -9,6 +9,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC049 extends BaseClass {
+
     @Test(dataProvider = "tc049", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_Save_New_Test_Log_button_saves_the_log_successfully(
             String projectName,
@@ -46,8 +47,6 @@ public class TC049 extends BaseClass {
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
 
-
-
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             Thread.sleep(3000);
 
@@ -58,8 +57,8 @@ public class TC049 extends BaseClass {
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
-            individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno),actual_result);
-            logger.info("Entered actual desc:"+actual_result+"->in:"+stepno);
+            individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
+            logger.info("Entered actual desc:" + actual_result + "->in:" + stepno);
             Thread.sleep(3000);
             individualTestrun.clickSaveButton();
 

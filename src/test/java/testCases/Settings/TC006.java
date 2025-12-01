@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC006 extends BaseClass {
+
     @Test(dataProvider = "tc006", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verifythatuserabletoclickonthecheckboxofavailablecustomfield(String rowName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify that user able to click on the check box of available custom field *****************");
@@ -17,7 +18,6 @@ public class TC006 extends BaseClass {
 
             GlobalTabPage globalTab = new GlobalTabPage(getDriver());
             OtherTabPage otherTab = new OtherTabPage(getDriver());
-
 
             globalTab.clickCurrentUserAndGoToSettings();
             logger.info("Clicked on Settings option from user dropdown");

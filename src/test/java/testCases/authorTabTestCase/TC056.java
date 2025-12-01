@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC056 extends BaseClass {
 
-    @Test(dataProvider = "tc056", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc056", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyTestCaseNamefieldisupdatableinTestCaseForm(
             String epicName,
             String featureName,

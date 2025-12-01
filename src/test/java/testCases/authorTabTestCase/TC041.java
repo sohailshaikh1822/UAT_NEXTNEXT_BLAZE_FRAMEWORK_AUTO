@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC041 extends BaseClass {
 
-    @Test(dataProvider = "tc041", dataProviderClass = AuthorTestCaseDataProvider.class ,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc041", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyUpdatedCountoftestcase(String rqName, String tcName, String description,
             String priority, String type, String qaUser, String preCondition)
             throws InterruptedException {

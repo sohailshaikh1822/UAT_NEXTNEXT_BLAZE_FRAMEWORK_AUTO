@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC037 extends BaseClass {
+
     @Test(dataProvider = "tc037", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyViewAllRadioButton(
             String parentModule,
@@ -55,4 +56,3 @@ public class TC037 extends BaseClass {
         logger.info("************ Test Case Finished *************************");
     }
 }
-

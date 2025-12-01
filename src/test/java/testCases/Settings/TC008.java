@@ -4,12 +4,12 @@ import org.testng.annotations.Test;
 import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC008 extends BaseClass {
-    @Test
-    public void Verify_that_user_is_able_to_select_Module_Tab(
 
-    ) throws InterruptedException {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void Verify_that_user_is_able_to_select_Module_Tab() throws InterruptedException {
 
         logger.info("****** Starting the TC009: Verify that user is able to create a Custom Field inside Module Tab *****************");
 
@@ -25,7 +25,6 @@ public class TC008 extends BaseClass {
 
             otherTab.clickModule();
             logger.info("Navigated to Module tab");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

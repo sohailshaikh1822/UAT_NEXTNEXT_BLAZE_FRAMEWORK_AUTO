@@ -9,13 +9,13 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC064 extends BaseClass {
-    @Test(dataProvider = "tc042",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc042", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifySaveAndCloseButton(
-            String requirementId,String TestcaseId
-    )throws InterruptedException {
+            String requirementId, String TestcaseId
+    ) throws InterruptedException {
         logger.info("************ Starting the Test Case *****************");
-        try
-        {
+        try {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -37,19 +37,13 @@ public class TC064 extends BaseClass {
             logger.info("Clicked Close button");
             logger.info("Save and Close buttons verification completed successfully");
 
-
-        }
-        catch (AssertionError e)
-        {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
         logger.info("************ Test Case Finished *************************");
     }
 }
-

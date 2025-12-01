@@ -44,7 +44,6 @@ public class TC017 extends BaseClass {
             assert isFieldAdded : "Custom field was not added successfully.";
             logger.info("Verified: Custom field '" + fieldName + "' added successfully");
 
-           
             otherTab.deleteCustomFieldAndVerify(fieldName);
             logger.info("Verified: Custom field '" + fieldName + "' deleted successfully from the dashboard");
 

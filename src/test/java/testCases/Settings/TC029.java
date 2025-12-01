@@ -5,12 +5,14 @@ import org.testng.annotations.Test;
 import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC029 extends BaseClass {
-    @Test(dataProvider = "tc029", dataProviderClass = SettingTestCaseDataProvider.class)
+
+    @Test(dataProvider = "tc029", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = utils.RetryAnalyzer.class)
     public void VerifyDeleteCustomFieldFromTestCaseTab(
             String fieldName1,
-            String fieldType,String fieldName2
+            String fieldType, String fieldName2
     ) throws InterruptedException {
 
         logger.info("****** Starting the TC009: Verify that user is able to create a Custom Field inside Module Tab *****************");
@@ -45,7 +47,6 @@ public class TC029 extends BaseClass {
 
             otherTab.clickOnDeleteRowConfirmation();
             logger.info("clicked on yes confirmation");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

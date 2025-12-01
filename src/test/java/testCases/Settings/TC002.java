@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC002 extends BaseClass {
-    @Test(dataProvider = "tc002", dataProviderClass = SettingTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc002", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_create_a_Global_Custom_Field(
             String fieldName,
             String textBox,
@@ -32,6 +33,8 @@ public class TC002 extends BaseClass {
             globalTab.clickonAddGlobalField();
             logger.info("Clicked on Add Global Field button");
 
+            long timeMillis = System.currentTimeMillis();
+            String dynamicfield = fieldName + timeMillis;
             globalTab.EnterFieldName(fieldName);
             logger.info("Entered Field Name: " + fieldName);
 
@@ -47,12 +50,10 @@ public class TC002 extends BaseClass {
             globalTab.clickSaveButton();
             logger.info("Clicked on Save button to add global field");
 
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

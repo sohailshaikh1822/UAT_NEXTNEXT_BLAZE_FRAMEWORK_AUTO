@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC004 extends BaseClass {
+
     @Test(dataProvider = "tc004", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyExpandSubTestCycle(
             String parentModule,
@@ -41,8 +42,6 @@ public class TC004 extends BaseClass {
             executeLandingPage.isSuitVisible(subTestsuit);
             logger.info("TestSuit visible");
 
-
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
@@ -54,4 +53,3 @@ public class TC004 extends BaseClass {
         logger.info("************ Test Case Finished *************************");
     }
 }
-

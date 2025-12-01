@@ -8,17 +8,18 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC051 extends BaseClass {
-    @Test(dataProvider = "tc051", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
 
-    public void addNewTestcaseInsideRq(String rqName,String tcName,String description,String priority,String type,String qaUser,String preCondition) throws InterruptedException {
+    @Test(dataProvider = "tc051", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+
+    public void addNewTestcaseInsideRq(String rqName, String tcName, String description, String priority, String type, String qaUser, String preCondition) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
             logger.info("Logged in successfully");
             logger.info("Navigated to Author Test Case tab");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-            AddTestcasePage addTestcasePage=new AddTestcasePage(getDriver());
-             authorTestCasePage.searchRq(rqName);
+            AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
+            authorTestCasePage.searchRq(rqName);
             logger.info("Sucessfully search with RQId");
             authorTestCasePage.clickRequirement(rqName);
             logger.info("Click Selected Rq");

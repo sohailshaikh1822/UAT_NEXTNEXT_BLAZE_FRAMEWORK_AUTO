@@ -8,15 +8,15 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC023 extends BaseClass {
+
     @Test(dataProvider = "tc023", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_can_delete_a_custom_field_using_the_Delete_icon(
             String customfield,
             String Datatype,
             String fieldName
-//            String value,
-//            String text
-    ) throws InterruptedException
-    {
+    //            String value,
+    //            String text
+    ) throws InterruptedException {
 
         logger.info("****** Starting the TC023:Verify that user can delete a custom field using the Delete icon***************");
 
@@ -39,26 +39,23 @@ public class TC023 extends BaseClass {
             logger.info("clicked on add custom field");
 
             otherTab.createCustomEnterFieldName(customfield);
-            logger.info("Custom field:"+customfield);
+            logger.info("Custom field:" + customfield);
 
             otherTab.createCustomSelectDataType(Datatype);
-            logger.info("selected datatype:"+Datatype);
+            logger.info("selected datatype:" + Datatype);
 
             otherTab.clickcreatefieldButton();
 
-
             otherTab.clickOnDelete(fieldName);
-            logger.info("clicked on delete row:"+fieldName);
+            logger.info("clicked on delete row:" + fieldName);
 
             otherTab.clickConfirmYesButton();
-            logger.info("Clicked on confirm button:"+"yes");
+            logger.info("Clicked on confirm button:" + "yes");
 //
 //            otherTab.clickOnAddCustomField(); ;
 //            otherTab.createCustomEnterFieldName(value);
 //            otherTab.createCustomSelectDataType(text);
 //            otherTab.clickcreatefieldButton();
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

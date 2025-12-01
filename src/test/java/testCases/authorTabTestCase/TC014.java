@@ -7,9 +7,10 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC014 extends BaseClass {
-    @Test(dataProvider = "tc011", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc011", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRQListBasedOnfFeature(
-            String epicName,String feature
+            String epicName, String feature
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
@@ -17,7 +18,7 @@ public class TC014 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             logger.info("Navigated to Author Test Case tab");
-            AuthorTestCasePage authorTestCasePage= new AuthorTestCasePage(getDriver());
+            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickEpic();
             logger.info("Click on the Epic Drop Down");
             authorTestCasePage.selectEpic(epicName);
@@ -29,12 +30,10 @@ public class TC014 extends BaseClass {
             System.out.println(authorTestCasePage.getCountRQInFeature());
             logger.info("Got the count of RQ in selected feature");
             logger.info("Verification done...");
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: {}", e.getMessage());
             throw e;
         }

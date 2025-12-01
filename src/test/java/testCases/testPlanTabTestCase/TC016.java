@@ -10,7 +10,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC016 extends BaseClass {
-    @Test(dataProvider = "tc010", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc010", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyCreationOfTestSuite(
             String projectName,
             String releaseName,
@@ -46,14 +47,14 @@ public class TC016 extends BaseClass {
             testPlanPage.clickNewTestCycle();
             logger.info("Clicked on the new testCycle");
 
-            IndividualTestCyclePage individualTestCyclePage=new IndividualTestCyclePage(getDriver());
+            IndividualTestCyclePage individualTestCyclePage = new IndividualTestCyclePage(getDriver());
             individualTestCyclePage.setTestCycleName(testCycleName);
             logger.info("added the test cycle name");
 
             individualTestCyclePage.setDescription(testDescription);
             logger.info("added the description for cycle");
 
-            Assert.assertEquals(individualTestCyclePage.getTargetRelease(),releaseName);
+            Assert.assertEquals(individualTestCyclePage.getTargetRelease(), releaseName);
             logger.info("verified the targeted release ");
 
             individualTestCyclePage.clickSave();
@@ -65,7 +66,7 @@ public class TC016 extends BaseClass {
             testPlanPage.clickNewTestSuite();
             logger.info("Clicked on the new test suite icon ");
 
-            IndividualTestSuitePage individualTestSuitePage=new IndividualTestSuitePage(getDriver());
+            IndividualTestSuitePage individualTestSuitePage = new IndividualTestSuitePage(getDriver());
 
             individualTestSuitePage.enterTestSuiteName(suiteName);
             logger.info("Entered the suite name");
@@ -92,10 +93,6 @@ public class TC016 extends BaseClass {
 
             Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg, "Validation message did not match!");
             logger.info("Verified success notification successfully");
-
-
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

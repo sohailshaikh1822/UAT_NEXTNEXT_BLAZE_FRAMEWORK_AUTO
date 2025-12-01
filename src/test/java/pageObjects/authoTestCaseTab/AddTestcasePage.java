@@ -16,11 +16,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class AddTestcasePage extends BasePage {
-    public AddTestcasePage(WebDriver driver){
+    public AddTestcasePage(WebDriver driver) {
         super(driver);
     }
 
-    //locators
+    // locators
 
     @FindBy(xpath = "(//input[@type='text'])[1]")
     WebElement textName;
@@ -49,83 +49,85 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), 'Error: Name is required.')]")
     WebElement tcNameRequiredWarningMessage;
 
-
-    public WebElement linkTestCaseIdFromId(String id){
-        return driver.findElement(By.xpath("//div[@class='testlistcell']/a[text()='"+id+"']"));
+    public WebElement linkTestCaseIdFromId(String id) {
+        return driver.findElement(By.xpath("//div[@class='testlistcell']/a[text()='" + id + "']"));
     }
 
-    public WebElement linkTestCaseIdFromName(String name){
-        return driver.findElement(By.xpath("//p[text()='"+name+"']/ancestor::div[@class='testlistrow']//a"));
+    public WebElement linkTestCaseIdFromName(String name) {
+        return driver.findElement(By.xpath("//p[text()='" + name + "']/ancestor::div[@class='testlistrow']//a"));
     }
 
-    //Actions
+    // Actions
 
-    public void setTestCaseName(String testCaseName){
+    public void setTestCaseName(String testCaseName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement nameField = wait.until(ExpectedConditions.visibilityOf(textName));
         nameField.clear(); // Optional: clear existing text before entering
         nameField.sendKeys(testCaseName);
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         textDescription.sendKeys(description);
     }
 
-    public void selectPriority(String priority){
-        Select s= new Select(dropDownPriority);
+    public void selectPriority(String priority) {
+        Select s = new Select(dropDownPriority);
         s.selectByVisibleText(priority);
     }
 
-    public void selectType(String type){
-        Select s= new Select(dropDownType);
+    public void selectType(String type) {
+        Select s = new Select(dropDownType);
         s.selectByVisibleText(type);
     }
 
-    public void selectQaUser(String qaUser){
-        Select s= new Select(dropDownQAUser);
+    public void selectQaUser(String qaUser) {
+        Select s = new Select(dropDownQAUser);
         s.selectByVisibleText(qaUser);
     }
-    public void setPrecondition(String precondition){
+
+    public void setPrecondition(String precondition) {
         textPrecondition.sendKeys(precondition);
     }
-    public void clickSave(){
+
+    public void clickSave() {
         buttonSave.click();
     }
 
-    public String getTestcaseId(String name){
+    public String getTestcaseId(String name) {
         return linkTestCaseIdFromName(name).getText();
     }
 
-    public boolean isNameDisplayed(){
+    public boolean isNameDisplayed() {
         return textName.isDisplayed();
     }
 
-    public boolean isDescriptionDisplayed(){
+    public boolean isDescriptionDisplayed() {
         return textDescription.isDisplayed();
     }
 
-    public boolean isPriorityDropdownDisplayed(){
+    public boolean isPriorityDropdownDisplayed() {
         return dropDownPriority.isDisplayed();
     }
 
-    public boolean isTypeDropdownDisplayed(){
+    public boolean isTypeDropdownDisplayed() {
         return dropDownType.isDisplayed();
     }
 
-    public boolean isQAUserDropdownDisplayed(){
+    public boolean isQAUserDropdownDisplayed() {
         return dropDownQAUser.isDisplayed();
     }
 
-    public boolean isPreconditionDisplayed(){
+    public boolean isPreconditionDisplayed() {
         return textPrecondition.isDisplayed();
     }
 
-    public boolean isAllTypeOptionsVisible(){
-        List<String>  actual= new ArrayList<>();
-        for (WebElement ele : optionsDropDownType){
+    public boolean isAllTypeOptionsVisible() {
+        List<String> actual = new ArrayList<>();
+        for (WebElement ele : optionsDropDownType) {
             actual.add(ele.getText());
         }
-        List<String> expected= new ArrayList<>(Arrays.asList("Manual","Automation","Performance","Scenario","Please Select"));
+        List<String> expected = new ArrayList<>(
+                Arrays.asList("Manual", "Automation", "Performance", "Scenario", "Please Select"));
         Collections.sort(actual);
         Collections.sort(expected);
         return actual.equals(expected);
@@ -134,8 +136,7 @@ public class AddTestcasePage extends BasePage {
     public String waitForNameFieldRequiredError() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("notification"))
-        );
+                ExpectedConditions.visibilityOfElementLocated(By.id("notification")));
         return element.getText().trim();
     }
 
@@ -151,7 +152,5 @@ public class AddTestcasePage extends BasePage {
         textName.sendKeys(longName);
         return textName.getAttribute("value");
     }
-
-
 
 }

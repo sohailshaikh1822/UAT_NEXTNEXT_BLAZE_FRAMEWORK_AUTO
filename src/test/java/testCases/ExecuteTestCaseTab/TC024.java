@@ -12,12 +12,13 @@ import utils.RetryAnalyzer;
 @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
 public class TC024 extends BaseClass {
-    public void verifyEvidenceAttachment( String projName,
-                                         String releaseName,
-                                         String testRun,
-                                         String defSummary,
-                                         String status,
-                                         String description
+
+    public void verifyEvidenceAttachment(String projName,
+            String releaseName,
+            String testRun,
+            String defSummary,
+            String status,
+            String description
     ) throws Exception {
         logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
@@ -52,7 +53,7 @@ public class TC024 extends BaseClass {
             logger.info("Select status");
             linkDefectPage.enterDescription(description);
             logger.info("Entered description ");
-             Thread.sleep(3000);
+            Thread.sleep(3000);
             linkDefectPage.uploadFile("uploadInDefect.png");
             logger.info("Defect has successfully created");
             Thread.sleep(6000);
@@ -60,9 +61,7 @@ public class TC024 extends BaseClass {
             linkDefectPage.clickSave();
             logger.info("New Defect has been created with evidence");
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
         } catch (Exception e) {

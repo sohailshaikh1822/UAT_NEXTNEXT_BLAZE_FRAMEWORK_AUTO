@@ -5,19 +5,21 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 import DataProviders.AuthorTestCaseDataProvider;
 
 public class AddTestCase extends BaseClass {
-    @Test(dataProvider="AddTest",dataProviderClass = AuthorTestCaseDataProvider.class)
+
+    @Test(dataProvider = "AddTest", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyTestCaseCreation(
-            String epic,String feature,String requirementId,
-            String testCaseName,String description,String priority,
+            String epic, String feature, String requirementId,
+            String testCaseName, String description, String priority,
             String QA
     ) throws InterruptedException {
         logger.info("****** Starting the Log in Test Case *****************");
         try {
             login();
-            AuthorTestCasePage authorTestCasePage=new AuthorTestCasePage(getDriver());
+            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.selectEpic(epic);
             authorTestCasePage.selectFeature(feature);
@@ -25,17 +27,16 @@ public class AddTestCase extends BaseClass {
 
             authorTestCasePage.clickAddTestcase();
 
-            AddTestcasePage addTestcasePage= new AddTestcasePage(getDriver());
+            AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
             addTestcasePage.setTestCaseName(testCaseName);
             addTestcasePage.setDescription(description);
             addTestcasePage.selectPriority(priority);
             addTestcasePage.selectQaUser(QA);
             addTestcasePage.clickSave();
-            String testCaseId=addTestcasePage.getTestcaseId(testCaseName);
+            String testCaseId = addTestcasePage.getTestcaseId(testCaseName);
             System.out.println(testCaseId);
             Assert.assertFalse(testCaseId.isEmpty());
-        }
-        catch (Exception | AssertionError e){
+        } catch (Exception | AssertionError e) {
             e.printStackTrace();
             logger.error("Test case failed ...");
             throw e;

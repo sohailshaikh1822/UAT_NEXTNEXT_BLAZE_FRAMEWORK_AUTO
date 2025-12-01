@@ -8,10 +8,11 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC011 extends BaseClass {
+
     @Test(dataProvider = "tc011", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDeleteCustomFieldINModuleTab(
             String fieldName1,
-            String fieldType,String fieldName2
+            String fieldType, String fieldName2
     ) throws InterruptedException {
 
         logger.info("****** Starting the TC009: Verify that user is able to create a Custom Field inside Module Tab *****************");
@@ -44,10 +45,8 @@ public class TC011 extends BaseClass {
             otherTab.clickOnDelete(fieldName2);
             logger.info("Clicked Delete icon for the field: " + fieldName2);
 
-           // otherTab.clickOnDeleteRowConfirmation();
+            // otherTab.clickOnDeleteRowConfirmation();
             logger.info("clicked on yes confirmation");
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

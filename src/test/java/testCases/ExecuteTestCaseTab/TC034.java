@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC034 extends BaseClass {
+
     @Test(dataProvider = "tc034", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_behavior_when_an_extremely_long_actual_result_is_entered(
             String projectName,
@@ -51,8 +52,8 @@ public class TC034 extends BaseClass {
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
-            individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno),actual_result);
-            logger.info("Entered actual result:"+actual_result+"->in:"+stepno);
+            individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
+            logger.info("Entered actual result:" + actual_result + "->in:" + stepno);
 
             String actualFieldValue = individualTestrun.getActualResultOfStep(Integer.parseInt(step));
             logger.info("Fetched actual result value from field: " + actualFieldValue);

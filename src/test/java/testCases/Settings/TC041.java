@@ -8,10 +8,11 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC041 extends BaseClass {
+
     @Test(dataProvider = "tc041", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_delete_Custom_Field_inside_TestCycle_Tab(
             String fieldName1,
-            String fieldType,String fieldName2
+            String fieldType, String fieldName2
     ) throws InterruptedException {
 
         logger.info("****** Starting the TC009: Verify that user is able to create a Custom Field inside Module Tab *****************");
@@ -46,7 +47,6 @@ public class TC041 extends BaseClass {
 
             otherTab.clickOnDeleteRowConfirmation();
             logger.info("clicked on yes confirmation");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

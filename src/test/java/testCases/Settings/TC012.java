@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC012 extends BaseClass {
+
     @Test(dataProvider = "tc012", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyClickOnCheckBoxOfCustomFieldInModule(
             String rowName
@@ -30,7 +31,6 @@ public class TC012 extends BaseClass {
 
             otherTab.clickOnCheckbox(rowName);
             logger.info("Clicked on checkbox");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

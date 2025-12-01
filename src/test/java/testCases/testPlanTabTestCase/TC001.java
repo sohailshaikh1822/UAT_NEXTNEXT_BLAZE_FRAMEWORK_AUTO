@@ -33,14 +33,13 @@ public class TC001 extends BaseClass {
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
             WebElement toggleIcon = wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.xpath("//div[contains(@class,'project') and contains(.,'STG- PulseCodeOnAzureCloud')]//i[contains(@class,'toggle-icon')]")
-            ));
+                    By.xpath(
+                            "//div[contains(@class,'project') and contains(.,'STG- PulseCodeOnAzureCloud')]//i[contains(@class,'toggle-icon')]")));
 
             wait.until(driver -> toggleIcon.getAttribute("style").contains("90deg"));
 
             String transform = toggleIcon.getAttribute("style");
             Assert.assertTrue(transform.contains("90deg"), "Project dropdown is not expanded/visible!");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

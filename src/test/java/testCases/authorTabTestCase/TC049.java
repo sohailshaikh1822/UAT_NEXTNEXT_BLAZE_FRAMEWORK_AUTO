@@ -9,10 +9,11 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC049 extends BaseClass {
-    @Test(dataProvider = "tc049",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc049", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyCloseInTestcases(
-            String requirementId,String TestcaseId
-    )throws InterruptedException {
+            String requirementId, String TestcaseId
+    ) throws InterruptedException {
         logger.info("****** Starting the Test Case ****************");
         try {
             login();
@@ -21,23 +22,21 @@ public class TC049 extends BaseClass {
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
             authorTestCasePage.clickAddTestcase();
-            AddTestcasePage addTestCase=new AddTestcasePage(getDriver());
+            AddTestcasePage addTestCase = new AddTestcasePage(getDriver());
             addTestCase.setTestCaseName("For unlink");
             addTestCase.clickSave();
-            String testCaseId=addTestCase.getTestcaseId("For unlink");
+            String testCaseId = addTestCase.getTestcaseId("For unlink");
             authorTestCasePage.clickActionIcon(testCaseId);
             logger.info("Clicked unlink icon for test case ");
 
             authorTestCasePage.confirmUnlink();
             logger.info("Clicked Yes to unlink the test case successfully");
 
-            boolean isDelete= authorTestCasePage.isRowDeleted(testCaseId);
-            Assert.assertTrue(isDelete,"Row not deleted");
+            boolean isDelete = authorTestCasePage.isRowDeleted(testCaseId);
+            Assert.assertTrue(isDelete, "Row not deleted");
             logger.info("Row deleted");
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
         } catch (Exception e) {

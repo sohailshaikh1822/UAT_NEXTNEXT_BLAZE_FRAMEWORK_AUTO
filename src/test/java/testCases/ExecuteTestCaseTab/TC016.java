@@ -9,6 +9,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC016 extends BaseClass {
+
     @Test(dataProvider = "tc016", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verify_update_overall_status_feature(
             String projectName,
@@ -54,7 +55,7 @@ public class TC016 extends BaseClass {
             logger.info("All steps were selected");
 
             individualTestrun.selectDropdownStatusBesidesUpdate(update);
-            logger.info("status changed for all steps to:"+update);
+            logger.info("status changed for all steps to:" + update);
 
             individualTestrun.clickSaveButton();
             logger.info("Clicked on Save button");
@@ -70,7 +71,6 @@ public class TC016 extends BaseClass {
 
             individualTestrun.clickCloseButton();
             logger.info("Clicked on Close button");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

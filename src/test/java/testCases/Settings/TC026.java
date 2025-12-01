@@ -7,10 +7,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC026 extends BaseClass {
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyThatUserAbleToAccessTheSetting(
 
-    ) throws InterruptedException {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyThatUserAbleToAccessTheSetting() throws InterruptedException {
 
         logger.info("****** Starting the TC009: Verify that user is able to create a Custom Field inside Module Tab *****************");
 
@@ -26,7 +25,6 @@ public class TC026 extends BaseClass {
 
             otherTab.clickTestCase();
             logger.info("Navigated to Module tab");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC066 extends BaseClass {
-    @Test(dataProvider = "tc066", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc066", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void addNewTestcaseWithoutTcName(String rqName) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -50,7 +51,6 @@ public class TC066 extends BaseClass {
         }
 
         logger.info("************ Test Case Finished *************************");
-
 
     }
 }

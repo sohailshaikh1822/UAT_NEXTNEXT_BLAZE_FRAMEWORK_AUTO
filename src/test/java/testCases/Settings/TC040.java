@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC040 extends BaseClass {
+
     @Test(dataProvider = "tc046", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_add_a_Default_Field_Value_in_the_Defect_Tab(
             String customfield,
@@ -35,26 +36,24 @@ public class TC040 extends BaseClass {
             otherTab.clickOnAddCustomField();
             logger.info("clicked on add custom field");
             long timeMillis = System.currentTimeMillis();
-            String dynamicfield=customfield+timeMillis;
+            String dynamicfield = customfield + timeMillis;
 
             otherTab.createCustomEnterFieldName(dynamicfield);
-            logger.info("Custom field:"+customfield);
+            logger.info("Custom field:" + customfield);
 
             otherTab.createCustomSelectDataType(Datatype);
-            logger.info("selected datatype:"+Datatype);
+            logger.info("selected datatype:" + Datatype);
 
             otherTab.clickcreatefieldButton();
 
-
             otherTab.clickOnEdit(dynamicfield);
-            logger.info("clicked on edit row:"+dynamicfield);
+            logger.info("clicked on edit row:" + dynamicfield);
 
-
-            otherTab.clickDefaultAddValue(); ;
+            otherTab.clickDefaultAddValue();;
             logger.info("clicked on add default value");
 
             otherTab.enterDefaultValue(value);
-            logger.info("entered default value"+value);
+            logger.info("entered default value" + value);
 
             otherTab.clickDefaultSaveChanges();
             logger.info("clicked on save changes");
@@ -67,7 +66,6 @@ public class TC040 extends BaseClass {
 
             otherTab.clickOnDelete(dynamicfield);
             otherTab.clickConfirmYesButton();
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

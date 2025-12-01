@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 import java.util.Random;
 
 public class TC006 extends BaseClass {
-    @Test(dataProvider = "tc006", dataProviderClass = DataProviders.TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc006", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyDeletingReleaseRemovesItFromUI(String projectName, String releaseName1)
             throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Deleting a Release Removes It from the UI *****************");
@@ -26,10 +26,9 @@ public class TC006 extends BaseClass {
             logger.info("Sidebar expanded if it was collapsed");
             testPlanPage.clickOnTheProjectName();
             testPlanPage.clickNewRelease();
-            String releaseName=releaseName1+String.valueOf((100 + new Random().nextInt(900)));
+            String releaseName = releaseName1 + String.valueOf((100 + new Random().nextInt(900)));
             testPlanPage.enterReleaseName(releaseName);
             testPlanPage.clickSaveRelease();
-
 
             testPlanPage.selectProjectByName(releaseName);
             logger.info("Selected project: " + releaseName);

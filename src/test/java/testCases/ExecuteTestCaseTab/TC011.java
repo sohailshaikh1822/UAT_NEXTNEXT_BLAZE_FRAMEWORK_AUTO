@@ -42,8 +42,6 @@ public class TC011 extends BaseClass {
             executeLandingPage.clickTestRunById(SearchTR);
             logger.info("Clicked on Test Run ID: " + SearchTR);
 
-
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
@@ -55,4 +53,3 @@ public class TC011 extends BaseClass {
         logger.info("************ Test Case Finished *************************");
     }
 }
-

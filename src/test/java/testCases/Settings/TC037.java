@@ -5,10 +5,12 @@ import org.testng.annotations.Test;
 import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC037 extends BaseClass {
-    @Test
-    public void verify_SelectAll_And_ClearAllButton_Clickable_On_TestStep()throws InterruptedException {
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void verify_SelectAll_And_ClearAllButton_Clickable_On_TestStep() throws InterruptedException {
         logger.info("****** Starting TC037: verify SelectAll And ClearAllButton Clickable On TestStep *****************");
         try {
             login();
@@ -16,7 +18,6 @@ public class TC037 extends BaseClass {
 
             GlobalTabPage globalTab = new GlobalTabPage(getDriver());
             OtherTabPage otherTab = new OtherTabPage(getDriver());
-
 
             globalTab.clickCurrentUserAndGoToSettings();
             logger.info("Clicked on Settings option from user dropdown");
@@ -33,7 +34,6 @@ public class TC037 extends BaseClass {
 //
 //            otherTab.clickOnClearAll();
 //            logger.info("Clicked on ClearAll Button");
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;

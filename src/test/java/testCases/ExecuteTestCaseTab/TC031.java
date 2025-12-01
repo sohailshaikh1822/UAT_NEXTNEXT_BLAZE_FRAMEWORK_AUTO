@@ -15,12 +15,13 @@ public class TC031 extends BaseClass {
 
     @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public class TC022 extends BaseClass {
+
         public void verifyDefectIdNonDuplicacy(String projName,
-                                            String releaseName,
-                                            String testRun,
-                                            String defSummary,
-                                            String status,
-                                            String description
+                String releaseName,
+                String testRun,
+                String defSummary,
+                String status,
+                String description
         ) throws InterruptedException {
             logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
@@ -46,16 +47,15 @@ public class TC031 extends BaseClass {
                 logger.info("clicked on Action Play button");
                 individualTestrun.clickLinkDefect();
                 logger.info("clicked on link defect button");
-                LinkDefectPage linkDefectPage=new LinkDefectPage(getDriver());
-                List<String> defectIds=linkDefectPage.getAllDefectIds();
+                LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+                List<String> defectIds = linkDefectPage.getAllDefectIds();
                 System.out.println("Defect IDs found:");
                 for (String id : defectIds) {
                     System.out.println(id);
                 }
                 logger.info("All defect have a unique id's");
 
-        }
-            catch (AssertionError e) {
+            } catch (AssertionError e) {
                 logger.error("Assertion failed: {}", e.getMessage());
                 throw e;
             } catch (Exception e) {
@@ -66,4 +66,4 @@ public class TC031 extends BaseClass {
             logger.info("************ Test Case Finished *************************");
         }
     }
-    }
+}

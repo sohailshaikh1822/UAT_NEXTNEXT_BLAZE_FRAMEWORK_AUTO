@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TC004 extends BaseClass {
 
-    @Test(dataProvider = "tc004", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc004", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyReleaseListUpdatesBasedOnProjectSelection(String ReleaseName, String SecondReleaseName)
             throws InterruptedException {
         logger.info(

@@ -9,7 +9,7 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
         <classes>
-            <class name="testCases.Settings.TC001"/>
+        <class name="testCases.Settings.TC001"/>
             <class name="testCases.Settings.TC002"/>
             <class name="testCases.Settings.TC003"/>
             <class name="testCases.Settings.TC004"/>
@@ -70,6 +70,8 @@
             <class name="testCases.Settings.TC059"/>
             <class name="testCases.Settings.TC060"/>
             <class name="testCases.Settings.TC061"/>
+
         </classes>
+
     </test>
 </suite>

@@ -4,9 +4,10 @@ import org.testng.annotations.Test;
 import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC007 extends BaseClass {
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verify_SelectAll_And_ClearAllButton_ClickableOn_GlobalFieldSetting()throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Project Selection from Dropdown *****************");
         try {

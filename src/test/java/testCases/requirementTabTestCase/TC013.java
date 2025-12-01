@@ -6,8 +6,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC013 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void verifyuserisabletoclickonhelp () throws InterruptedException {
+    public void verifyuserisabletoclickonhelp() throws InterruptedException {
         logger.info("****** Starting the TC:13 verify user is able to click on help   *************");
         try {
             login();
@@ -20,13 +21,10 @@ public class TC013 extends BaseClass {
             reqPage.verifyHelpDropdown(getDriver());
             logger.info("Help dropdown is visible");
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

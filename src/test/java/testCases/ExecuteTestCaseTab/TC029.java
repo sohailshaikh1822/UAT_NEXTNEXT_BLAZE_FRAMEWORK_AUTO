@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC029 extends BaseClass {
+
     @Test(dataProvider = "tc029", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifythesearchfeature(
             String projectName,
@@ -56,8 +57,6 @@ public class TC029 extends BaseClass {
             logger.info("Next page button clickable for second release: " + isNextButtonClickableSecond);
             Assert.assertTrue(isNextButtonClickableSecond,
                     "Next button should be enabled when test runs are more than 10");
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

@@ -8,13 +8,14 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC002 extends BaseClass {
-    @Test(dataProvider = "tc002", dataProviderClass = ExecuteTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc002", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyProjectSelectionFromDropdown(String projectName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Project Selection from Dropdown *****************");
         try {
             login();
             logger.info("Logged in successfully");
-            ExecuteLandingPage executeLandingPage =new ExecuteLandingPage(getDriver());
+            ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             executeLandingPage.clickExecuteTab();
             executeLandingPage.clickExecuteTab();

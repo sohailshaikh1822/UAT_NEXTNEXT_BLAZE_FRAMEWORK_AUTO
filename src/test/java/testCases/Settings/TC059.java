@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC059 extends BaseClass {
-    @Test(dataProvider = "tc059",  dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc059", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDeleteACustomeFieldInDefectTab(
             String fieldName1,
             String fieldType,
@@ -48,7 +49,6 @@ public class TC059 extends BaseClass {
             otherTab.clickOnDeleteRowConfirmation();
             logger.info("clicked on yes confirmation");
 
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
@@ -61,4 +61,3 @@ public class TC059 extends BaseClass {
     }
 
 }
-

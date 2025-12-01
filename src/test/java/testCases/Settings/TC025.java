@@ -7,6 +7,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC025 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void VerifySelectAllAndClearAllButtonForRequirementField() throws InterruptedException {
         logger.info("****** Starting the TC025 ***************");

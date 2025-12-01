@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC033 extends BaseClass {
 
-    @Test(dataProvider = "tc033", dataProviderClass = DataProviders.RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc033", dataProviderClass = DataProviders.RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyModuleDeletionWithSuccessMessage(String projectName, String moduleName)
             throws InterruptedException {
         logger.info("************ Starting Test Case: Verify module deletion with success message *****************");

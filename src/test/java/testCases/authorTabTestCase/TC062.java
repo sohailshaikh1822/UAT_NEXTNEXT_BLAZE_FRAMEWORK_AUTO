@@ -8,13 +8,13 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC062 extends BaseClass {
-    @Test(dataProvider = "tc040",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc040", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyAddTestStepButton(
-            String requirementId,String TestcaseId
-    )throws InterruptedException {
+            String requirementId, String TestcaseId
+    ) throws InterruptedException {
         logger.info("************ Starting the Test Case ****************");
-        try
-        {
+        try {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -25,19 +25,14 @@ public class TC062 extends BaseClass {
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
 
             individualTestCasePage.clickAddTestStep();
-          logger.info("Add Test Step Button works ");
-        }
-        catch (AssertionError e)
-        {
+            logger.info("Add Test Step Button works ");
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
         logger.info("************ Test Case Finished *************************");
     }
 }
-

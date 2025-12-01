@@ -8,13 +8,12 @@ import utils.RetryAnalyzer;
 
 public class TC020 extends BaseClass {
 
-    @Test(dataProvider = "tc020", dataProviderClass = DataProviders.TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc020", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyEmptyReleaseName(
             String projectName,
             String releaseName
     )
-            throws InterruptedException
-    {
+            throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Adding a New Release Under a Project *****************");
 
         try {
@@ -57,4 +56,3 @@ public class TC020 extends BaseClass {
         }
     }
 }
-

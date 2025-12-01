@@ -13,10 +13,10 @@ import pageObjects.BasePage;
 import java.time.Duration;
 
 public class AddRequirementPage extends BasePage {
-    public AddRequirementPage(WebDriver driver){
+    public AddRequirementPage(WebDriver driver) {
         super(driver);
     }
-    //locators
+    // locators
 
     @FindBy(xpath = "//div[@class='testcase-text-3']")
     WebElement getTextRequirementId;
@@ -60,9 +60,9 @@ public class AddRequirementPage extends BasePage {
     @FindBy(id = "notification")
     WebElement errorNotification;
 
-    //actions
+    // actions
 
-    public void setRequirementId(String id){
+    public void setRequirementId(String id) {
         textRequirementId.sendKeys(id);
     }
 
@@ -70,53 +70,61 @@ public class AddRequirementPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(textRequirementDescriptionBeforeClick));
         textRequirementDescriptionBeforeClick.click();
-//        Thread.sleep(1000);
+        // Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(textRequirementDescriptionAfterClick));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", textRequirementDescriptionAfterClick);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';",
+                textRequirementDescriptionAfterClick);
         textRequirementDescriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         textRequirementDescriptionAfterClick.sendKeys(Keys.BACK_SPACE);
         textRequirementDescriptionAfterClick.clear();
         textRequirementDescriptionAfterClick.sendKeys(description);
     }
-    public void clickAddRequirementBtn(){
+
+    public void clickAddRequirementBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         addRequirementBtn.click();
     }
-    public void selectPriority(String priority){
+
+    public void selectPriority(String priority) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(dropDownPriority));
-        Select s= new Select(dropDownPriority);
+        Select s = new Select(dropDownPriority);
         s.selectByVisibleText(priority);
     }
-    public void selectStatus(String status){
+
+    public void selectStatus(String status) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(dropDownStatus));
-        Select s= new Select(dropDownStatus);
+        Select s = new Select(dropDownStatus);
         s.selectByVisibleText(status);
     }
-    public void selectType(String type){
+
+    public void selectType(String type) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(dropDownType));
-        Select s= new Select(dropDownType);
+        Select s = new Select(dropDownType);
         s.selectByVisibleText(type);
     }
 
-    public void clickSave(){
+    public void clickSave() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave));
         buttonSave.click();
     }
-    public void clickClose(){
+
+    public void clickClose() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose));
         buttonClose.click();
     }
-    public void requirementDetailsVisibility(){
+
+    public void requirementDetailsVisibility() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(requirementExpandCollapseArrow));
         requirementExpandCollapseArrow.click();
     }
-    public String getRequirementIdName(){
+
+    public String getRequirementIdName() {
         return getTextRequirementId.getText();
     }
 
@@ -129,13 +137,12 @@ public class AddRequirementPage extends BasePage {
             return false;
         }
     }
+
     public String getRequirementUpdatedSuccessMessage() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(requirementUpdatedSuccessMessage));
         return requirementUpdatedSuccessMessage.getText();
     }
-
-
 
     public String getErrorMessage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -143,13 +150,13 @@ public class AddRequirementPage extends BasePage {
         return errorNotification.getText().trim();
     }
 
-    public String getRequirementDescription(){
+    public String getRequirementDescription() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement editableField = wait.until(ExpectedConditions.visibilityOf(textRequirementDescriptionBeforeClick));
         return editableField.getText();
     }
 
-    public void clickOnRequirementIdLabel(){
+    public void clickOnRequirementIdLabel() {
         textRequirementId.click();
     }
 

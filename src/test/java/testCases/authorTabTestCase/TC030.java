@@ -7,8 +7,9 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC030 extends BaseClass{
-    @Test(dataProvider = "tc028", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+public class TC030 extends BaseClass {
+
+    @Test(dataProvider = "tc028", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyNextButtonFunctionality(
             String expectedPagination
     ) throws InterruptedException {
@@ -16,7 +17,7 @@ public class TC030 extends BaseClass{
         try {
             login();
             logger.info("Logged in successfully");
-            AuthorTestCasePage authorTestCasePage=new AuthorTestCasePage(getDriver());
+            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
 
@@ -26,14 +27,12 @@ public class TC030 extends BaseClass{
             authorTestCasePage.clickPreviousArrow();
             logger.info("Clicked the previous arrow");
 
-            Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(),expectedPagination);
+            Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(), expectedPagination);
             logger.info("Expected pagination verified ....");
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

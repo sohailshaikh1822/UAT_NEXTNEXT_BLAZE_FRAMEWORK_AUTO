@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC036 extends BaseClass {
-    @Test(dataProvider = "tc036", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc036", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementEntriesUpdate(String project, String epic) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
@@ -32,10 +33,10 @@ public class TC036 extends BaseClass {
             Thread.sleep(6000);
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
-            logger.info("Selected project"+project);
+            logger.info("Selected project" + project);
 
             requirementTabPage.clickOnModule(epic);
-            logger.info("Selected epic"+epic);
+            logger.info("Selected epic" + epic);
             individualModulePage.clearModuleName();
             logger.info("Cleared Module Name: ");
             individualModulePage.clickSave();
@@ -46,8 +47,6 @@ public class TC036 extends BaseClass {
             Assert.assertEquals(actualAlert, expectedAlert);
 
             individualModulePage.clickCancelButton();
-
-
 
         } catch (AssertionError e) {
             logger.error("❌ Assertion failed: " + e.getMessage(), e);

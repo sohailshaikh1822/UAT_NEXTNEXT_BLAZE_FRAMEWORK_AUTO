@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC047 extends BaseClass {
-    @Test(dataProvider = "tc047", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc047", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyTypeDropdown(String requirementId
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -25,12 +26,10 @@ public class TC047 extends BaseClass {
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
             Assert.assertTrue(addTestcasePage.isAllTypeOptionsVisible());
             logger.info("Verified Successfully....");
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

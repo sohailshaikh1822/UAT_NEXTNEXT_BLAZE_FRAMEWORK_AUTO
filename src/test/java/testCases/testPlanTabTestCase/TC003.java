@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TC003 extends BaseClass {
 
-    @Test(dataProvider = "tc003", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc003", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyListingOfAllConfiguredProjects(String projectName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Listing of All Configured Projects *****************");
         try {

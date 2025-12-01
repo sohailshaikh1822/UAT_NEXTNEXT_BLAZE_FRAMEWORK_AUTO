@@ -9,16 +9,15 @@ import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-
 public class TC032 extends BaseClass {
+
     @Test(dataProvider = "tc032", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyPreventionOfSameDefect(
             String projName,
             String releaseName,
             String testRun,
             String defectID
-    ) throws InterruptedException
-    {
+    ) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
         try {
@@ -41,35 +40,28 @@ public class TC032 extends BaseClass {
             executeLandingPage.clickPlayActionById(testRun);
             logger.info("clicked on Action Play button");
 
-
-            IndividualTestRun individualTestRun= new IndividualTestRun(getDriver());
+            IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             individualTestRun.clickLinkDefect();
             logger.info("Clicked on link defect ");
 
-            LinkDefectPage linkDefectPage= new LinkDefectPage(getDriver());
+            LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
             linkDefectPage.enterDefectSearch(defectID.replaceAll("[^0-9]", ""));
             logger.info("Entered the defect defect id");
 
             linkDefectPage.clickSearchButton();
             logger.info("Searched the defect");
 
-            try
-            {
+            try {
                 linkDefectPage.clickRadioButtonBesideDefectId(defectID);
                 logger.info("Clicked on defect id {}", defectID);
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
                 logger.warn("Defect {} is already linked : {}", defectID, e.getMessage());
             }
 
-        }
-        catch (AssertionError e)
-        {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Exception occurred: {}", e.getMessage());
             throw e;
         }

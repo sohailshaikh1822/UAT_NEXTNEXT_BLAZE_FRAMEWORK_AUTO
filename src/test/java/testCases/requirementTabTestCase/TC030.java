@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
- 
+
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
@@ -14,7 +14,8 @@ import utils.RetryAnalyzer;
 import java.time.Duration;
 
 public class TC030 extends BaseClass {
-    @Test(dataProvider = "tc030", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc030", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyDeleteRequirementButton(
             String project,
             String epic,
@@ -26,7 +27,7 @@ public class TC030 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-      
+
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
@@ -41,18 +42,13 @@ public class TC030 extends BaseClass {
             wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='partialTestCaseContainer']//p[@id='actionDialog-message']")));
             logger.info("Requirement Deletion Confirmation messgae appears successfully");
 
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
         logger.info("************ Test Case Finished *************************");
     }
 }
-
-
-

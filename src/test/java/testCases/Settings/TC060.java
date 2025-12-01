@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC060 extends BaseClass {
-    @Test(dataProvider = "tc060", dataProviderClass = SettingTestCaseDataProvider.class)
+
+    @Test(dataProvider = "tc060", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_able_to_click_on_the_checkbox_of_available_customfield_in_defect_section(
             String rowName) throws InterruptedException {
         logger.info(

@@ -9,17 +9,18 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC028 extends BaseClass {
-    @Test(dataProvider = "tc028", dataProviderClass = ExecuteTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc028", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyProjectSelectionFromDropdown(String projectName,
-                                                   String releaseName,
-                                                   String reqId,
-                                                   String testCaseId1,
-                                                   String testCaseId2) throws InterruptedException {
+            String releaseName,
+            String reqId,
+            String testCaseId1,
+            String testCaseId2) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Project Selection from Dropdown *****************");
         try {
             login();
             logger.info("Logged in successfully");
-            ExecuteLandingPage executeLandingPage =new ExecuteLandingPage(getDriver());
+            ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
             executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
@@ -30,7 +31,7 @@ public class TC028 extends BaseClass {
             executeLandingPage.clickCreateTestRunButton();
             logger.info("Clicked on Create Test Run button");
 
-            AuthorTestCasePage authorTestCasePage= new AuthorTestCasePage(getDriver());
+            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
 
             authorTestCasePage.clickRequirement(reqId);
             logger.info("Selected a Requirement from left panel");

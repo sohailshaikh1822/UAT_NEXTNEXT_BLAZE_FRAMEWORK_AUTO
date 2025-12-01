@@ -15,6 +15,7 @@ import utils.RetryAnalyzer;
 import java.time.Duration;
 
 public class TC010 extends BaseClass {
+
     @Test(dataProvider = "tc010", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyFieldDetails(
             String project,

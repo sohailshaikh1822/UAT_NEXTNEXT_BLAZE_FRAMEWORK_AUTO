@@ -14,11 +14,11 @@ import java.util.List;
 import java.time.Duration;
 
 public class RequirementTabPage extends BasePage {
-    public RequirementTabPage(WebDriver driver){
+    public RequirementTabPage(WebDriver driver) {
         super(driver);
     }
 
-    //Locators
+    // Locators
 
     @FindBy(xpath = "//span[@id='requirements']")
     WebElement tabRequirements;
@@ -37,9 +37,8 @@ public class RequirementTabPage extends BasePage {
     @FindBy(id = "confirmBtn")
     WebElement buttonYesConfirmDelete;
 
-    @FindBy(id="notification")
+    @FindBy(id = "notification")
     WebElement notificationPopUp;
-
 
     @FindBy(xpath = "//button[normalize-space()='Help?']")
     WebElement clickHelp;
@@ -52,13 +51,14 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//button[@id='cancelBtn']")
     WebElement noBtnConfirmationPopUp;
 
-
-    public WebElement arrowBeforeExpandRightPointing(String moduleName){
-        return driver.findElement(By.xpath("//span[text()='"+moduleName+"']/..//i[@class='fa-solid tree-arrow fa-caret-right']"));
+    public WebElement arrowBeforeExpandRightPointing(String moduleName) {
+        return driver.findElement(
+                By.xpath("//span[text()='" + moduleName + "']/..//i[@class='fa-solid tree-arrow fa-caret-right']"));
     }
 
-    public WebElement arrowAfterExpandDownPointing(String moduleName){
-        return driver.findElement(By.xpath("//span[text()='"+moduleName+"']/..//i[@class='fa-solid tree-arrow fa-caret-down']"));
+    public WebElement arrowAfterExpandDownPointing(String moduleName) {
+        return driver.findElement(
+                By.xpath("//span[text()='" + moduleName + "']/..//i[@class='fa-solid tree-arrow fa-caret-down']"));
     }
 
     @FindBy(xpath = "//i[@title='New Module']")
@@ -87,11 +87,10 @@ public class RequirementTabPage extends BasePage {
     @FindBy(id = "cancelBtn")
     WebElement btnNoInDeleteNotification;
 
-    public WebElement leftModuleNameByName(String name){
+    public WebElement leftModuleNameByName(String name) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@class='tree-node tree-node expanded']//span[normalize-space()='" + name + "']")
-        ));
+                By.xpath("//div[@class='tree-node tree-node expanded']//span[normalize-space()='" + name + "']")));
     }
 
     @FindBy(xpath = "//div[contains(text(),'Priority')]")
@@ -106,8 +105,7 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
-
-    //Actions
+    // Actions
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -116,69 +114,72 @@ public class RequirementTabPage extends BasePage {
         tabRequirements.click();
         Thread.sleep(1500);
     }
+
     public void clickOnTheProjectName() throws InterruptedException {
 
         leftPanelProjectName.click();
         wait.until(ExpectedConditions.visibilityOf(buttonSave));
 
     }
+
     public void clickNewModule() throws InterruptedException {
         Thread.sleep(1000);
         iconNewModule.click();
         Thread.sleep(1000);
 
     }
-    public void setModuleName(String moduleName){
+
+    public void setModuleName(String moduleName) {
         textModuleName.clear();
         textModuleName.sendKeys(moduleName);
     }
 
-    public void saveModule(){
+    public void saveModule() {
         buttonSave.click();
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@id='notification' and normalize-space(text())='Module created successfully.']")
-        ));
+                By.xpath("//div[@id='notification' and normalize-space(text())='Module created successfully.']")));
     }
 
-    public void clickDeleteModule(){
+    public void clickDeleteModule() {
         wait.until(d -> iconDelete.getCssValue("cursor").equalsIgnoreCase("pointer"));
         iconDelete.click();
     }
 
-    public void clickArrowRightPointingForExpandModule(String moduleName){
+    public void clickArrowRightPointingForExpandModule(String moduleName) {
         arrowBeforeExpandRightPointing(moduleName).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//div[@class='tree-children']") // children of the project
         ));
     }
 
-    public void clickArrowDownPointingForCollapseModule(String moduleName){
+    public void clickArrowDownPointingForCollapseModule(String moduleName) {
         arrowAfterExpandDownPointing(moduleName).click();
     }
 
     public void clickOnModule(String moduleName) throws InterruptedException {
-        Actions a= new Actions(driver);
+        Actions a = new Actions(driver);
         try {
             a.moveToElement(leftModuleNameByName(moduleName)).perform();
             leftModuleNameByName(moduleName).click();
         } catch (Exception e) {
-            WebElement ele=driver.findElement(By.xpath("//div[@class='tree-node tree-node collapsed']//span[contains(text(),'"+moduleName+"')]"));
+            WebElement ele = driver.findElement(By.xpath(
+                    "//div[@class='tree-node tree-node collapsed']//span[contains(text(),'" + moduleName + "')]"));
             a.moveToElement(ele).perform();
             ele.click();
         }
     }
 
-    public String getNewCreatedRqIdText(){
+    public String getNewCreatedRqIdText() {
         return getNewRqIdText.getText();
     }
-    public String totalCountOfAvailabelRq(){
+
+    public String totalCountOfAvailabelRq() {
         return totalEntriesRqCount.getText().trim();
     }
+
     public int extractNumber(String text) {
         return Integer.parseInt(text.replaceAll("[^0-9]", ""));
     }
-
-
 
     public void clickProjectName() throws InterruptedException {
         clickOnTheProjectName();
@@ -190,11 +191,13 @@ public class RequirementTabPage extends BasePage {
 
     public List<String> getRequirementIDs() {
         List<WebElement> rows = getRequirementsFromModuleTable();
-        return rows.stream().map(row -> row.findElement(By.cssSelector("div.testlistcell a.text-wrapper-14")).getText()).toList();
+        return rows.stream().map(row -> row.findElement(By.cssSelector("div.testlistcell a.text-wrapper-14")).getText())
+                .toList();
     }
 
     public List<WebElement> getRequirementsFromModuleTable() {
-        WebElement tableContainer = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("existingTestCasesInnerTable"))));
+        WebElement tableContainer = wait
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("existingTestCasesInnerTable"))));
         return tableContainer.findElements(By.cssSelector("div.testlistrow"));
     }
 
@@ -221,7 +224,6 @@ public class RequirementTabPage extends BasePage {
         btnNoInDeleteNotification.click();
     }
 
-
     public void verifyHelpDropdown(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(clickHelp)).click();
@@ -233,24 +235,20 @@ public class RequirementTabPage extends BasePage {
         Thread.sleep(1000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.refreshed(
-                ExpectedConditions.elementToBeClickable(closeSideBar)
-        )).click();
+                ExpectedConditions.elementToBeClickable(closeSideBar))).click();
         wait.until(ExpectedConditions.refreshed(
-                ExpectedConditions.visibilityOf(openSideBar)
-        ));
+                ExpectedConditions.visibilityOf(openSideBar)));
         Assert.assertTrue(openSideBar.isDisplayed(), "Sidebar did not collapse");
         System.out.println("Sidebar closed successfully");
         wait.until(ExpectedConditions.refreshed(
-                ExpectedConditions.elementToBeClickable(openSideBar)
-        )).click();
+                ExpectedConditions.elementToBeClickable(openSideBar))).click();
         wait.until(ExpectedConditions.refreshed(
-                ExpectedConditions.visibilityOf(closeSideBar)
-        ));
+                ExpectedConditions.visibilityOf(closeSideBar)));
         Assert.assertTrue(closeSideBar.isDisplayed(), "Sidebar did not expand");
         System.out.println("Sidebar opened successfully");
     }
-    public boolean isTypeFieldVisible()
-    {
+
+    public boolean isTypeFieldVisible() {
         return type.isDisplayed();
     }
 
@@ -260,13 +258,12 @@ public class RequirementTabPage extends BasePage {
         return status.isDisplayed();
     }
 
-    public boolean isPriorityFieldVisible()
-    {
+    public boolean isPriorityFieldVisible() {
         return priority.isDisplayed();
     }
 
-    public int getAllModulesOnly(){
-        return allModulesIncludeProject.size()-1;
+    public int getAllModulesOnly() {
+        return allModulesIncludeProject.size() - 1;
     }
 
     public void unlinkRequirementById(String requirementId, int previousCount) {
@@ -279,20 +276,23 @@ public class RequirementTabPage extends BasePage {
         yesBtn.click();
         wait.until(driver -> getRequirementIDs().size() < previousCount);
     }
-    public void clickYesBtn(){
+
+    public void clickYesBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         yesBtnConfirmationPopUp.click();
 
     }
-    public void clickNoBtn(){
+
+    public void clickNoBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         noBtnConfirmationPopUp.click();
 
     }
-    public void clickConfirmDelete(){
+
+    public void clickConfirmDelete() {
         new Actions(driver).moveToElement(buttonYesConfirmDelete);
         buttonYesConfirmDelete.click();
-        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
 
 }

@@ -8,17 +8,18 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC036 extends BaseClass {
-    @Test(dataProvider="AddTest",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "AddTest", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyAddTestcaseDisplayedNextWindow(
-            String epic,String feature,String requirementId,
-            String testCaseName,String description,String priority,
+            String epic, String feature, String requirementId,
+            String testCaseName, String description, String priority,
             String QA
     ) throws InterruptedException {
         logger.info("****** Starting the Log in Test Case *****************");
         try {
             login();
             logger.info("Logged in successfully");
-            AuthorTestCasePage authorTestCasePage=new AuthorTestCasePage(getDriver());
+            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Clicked the Author test case");
             authorTestCasePage.selectEpic(epic);
@@ -26,14 +27,13 @@ public class TC036 extends BaseClass {
             authorTestCasePage.selectFeature(feature);
             logger.info("Selected the feature");
             authorTestCasePage.clickRequirement(requirementId);
-            logger.info("Clicked on requirement id "+requirementId);
+            logger.info("Clicked on requirement id " + requirementId);
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked Add test case ..");
             Assert.assertTrue(authorTestCasePage.isCreateTextHeadingVisible());
             logger.info("Verified Successfully");
 
-        }
-        catch (Exception | AssertionError e){
+        } catch (Exception | AssertionError e) {
             e.printStackTrace();
             logger.error("Test case failed ...");
             throw e;

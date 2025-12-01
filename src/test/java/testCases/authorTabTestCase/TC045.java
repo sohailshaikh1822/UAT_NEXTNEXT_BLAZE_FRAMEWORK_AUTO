@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC045 extends BaseClass {
 
-    @Test(dataProvider = "tc045", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc045", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyNamefieldismandatoryinAddTestcase(
             String epicName,
             String featureName,

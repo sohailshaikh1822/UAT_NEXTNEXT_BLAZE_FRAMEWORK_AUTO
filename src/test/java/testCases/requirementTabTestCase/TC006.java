@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TC006 extends BaseClass {
 
-    @Test(dataProvider = "tc006", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc006", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementListUnderModule(String projectName, String moduleName) throws InterruptedException {
 
         logger.info("************ Starting Test Case: Verify Requirement list under module *****************");
@@ -45,7 +45,7 @@ public class TC006 extends BaseClass {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
-        
+
         logger.info("************ Test Case Finished *************************");
     }
 }

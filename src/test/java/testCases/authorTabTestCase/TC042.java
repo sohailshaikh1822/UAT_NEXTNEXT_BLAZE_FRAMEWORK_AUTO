@@ -8,8 +8,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC042 extends BaseClass {
-    @Test(dataProvider = "tc042", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyVisibilityOfAllFieldsInAddTestCase(String requirementId,String TestcaseId
+
+    @Test(dataProvider = "tc042", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyVisibilityOfAllFieldsInAddTestCase(String requirementId, String TestcaseId
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
@@ -20,10 +21,10 @@ public class TC042 extends BaseClass {
             logger.info("Navigated to Author Test Case tab");
             authorTestCasePage.clickRequirement(requirementId);
             authorTestCasePage.clickAddTestcase();
-            AddTestcasePage addTestCase=new AddTestcasePage(getDriver());
+            AddTestcasePage addTestCase = new AddTestcasePage(getDriver());
             addTestCase.setTestCaseName("For unlink");
             addTestCase.clickSave();
-            String testCaseId=addTestCase.getTestcaseId("For unlink");
+            String testCaseId = addTestCase.getTestcaseId("For unlink");
             Thread.sleep(1000);
             AuthorTestCasePage authorTestCasePage1 = new AuthorTestCasePage(getDriver());
             authorTestCasePage1.clickActionIcon(testCaseId);
@@ -31,13 +32,10 @@ public class TC042 extends BaseClass {
             authorTestCasePage1.confirmUnlink();
             logger.info("Clicked Yes to unlink the test case successfully");
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

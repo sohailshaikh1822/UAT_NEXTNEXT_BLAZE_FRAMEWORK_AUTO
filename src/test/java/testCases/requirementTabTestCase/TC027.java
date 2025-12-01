@@ -10,90 +10,87 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC027 extends BaseClass {
-    @Test(dataProvider = "tc027", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-public void verifyRequirementEntriesUpdate(String project,
-                                           String epic, String description, String priority, String status, String type
-) throws InterruptedException {
-    logger.info("****** Starting the Test Case *****************");
-    try {
-        logger.info("************ Test Case Started *************************");
 
-        login();
-        logger.info("Logged in successfully");
+    @Test(dataProvider = "tc027", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void verifyRequirementEntriesUpdate(String project,
+            String epic, String description, String priority, String status, String type
+    ) throws InterruptedException {
+        logger.info("****** Starting the Test Case *****************");
+        try {
+            logger.info("************ Test Case Started *************************");
 
-        RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-        logger.info("Initialized RequirementTabPage");
+            login();
+            logger.info("Logged in successfully");
 
-        IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
-        logger.info("Initialized IndividualModulePage");
+            RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            logger.info("Initialized RequirementTabPage");
 
-        AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-        logger.info("Initialized AddRequirementPage");
+            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            logger.info("Initialized IndividualModulePage");
 
-        requirementTabPage.clickRequirementTab();
-        logger.info("Clicked on Requirement Tab");
+            AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
+            logger.info("Initialized AddRequirementPage");
 
-        Thread.sleep(6000);
+            requirementTabPage.clickRequirementTab();
+            logger.info("Clicked on Requirement Tab");
 
-        requirementTabPage.clickArrowRightPointingForExpandModule(project);
-        logger.info("Selected project"+project);
+            Thread.sleep(6000);
 
-        requirementTabPage.clickOnModule(epic);
-        logger.info("Selected epic"+epic);
+            requirementTabPage.clickArrowRightPointingForExpandModule(project);
+            logger.info("Selected project" + project);
 
-        int countBefore = individualModulePage.getRequirementCountFromFooter();
-        logger.info("Requirement count before adding: " + countBefore);
+            requirementTabPage.clickOnModule(epic);
+            logger.info("Selected epic" + epic);
 
-        individualModulePage.clickAddRequirement();
-        logger.info("Clicked on Add Requirement");
+            int countBefore = individualModulePage.getRequirementCountFromFooter();
+            logger.info("Requirement count before adding: " + countBefore);
 
+            individualModulePage.clickAddRequirement();
+            logger.info("Clicked on Add Requirement");
 
-        Thread.sleep(2000);
+            Thread.sleep(2000);
 
-        addRequirementPage.setDescription(description);
-        logger.info("Set Description");
+            addRequirementPage.setDescription(description);
+            logger.info("Set Description");
 
-        addRequirementPage.selectPriority(priority);
-        logger.info("Selected Priority: " + priority);
+            addRequirementPage.selectPriority(priority);
+            logger.info("Selected Priority: " + priority);
 
-        Thread.sleep(3000);
+            Thread.sleep(3000);
 
-        addRequirementPage.selectStatus(status);
-        logger.info("Selected Status: " + status);
+            addRequirementPage.selectStatus(status);
+            logger.info("Selected Status: " + status);
 
-        Thread.sleep(2000);
+            Thread.sleep(2000);
 
-        addRequirementPage.selectType(type);
-        logger.info("Selected Type: " + type);
+            addRequirementPage.selectType(type);
+            logger.info("Selected Type: " + type);
 
-        addRequirementPage.clickSave();
-        logger.info("Clicked Save button");
-        logger.info("Requirement successfully added");
+            addRequirementPage.clickSave();
+            logger.info("Clicked Save button");
+            logger.info("Requirement successfully added");
 
-        Thread.sleep(4000);
-        addRequirementPage.clickClose();
-        logger.info("Clicked on Close button");
+            Thread.sleep(4000);
+            addRequirementPage.clickClose();
+            logger.info("Clicked on Close button");
 
-        Thread.sleep(4000);
-        int countAfter = individualModulePage.getRequirementCountFromFooter();
-        logger.info("Requirement count after attempting to add without name: " + countAfter);
+            Thread.sleep(4000);
+            int countAfter = individualModulePage.getRequirementCountFromFooter();
+            logger.info("Requirement count after attempting to add without name: " + countAfter);
 
-        Assert.assertEquals(countAfter, countBefore,
-                "Requirement without name should not be saved in the table");
-        logger.info("Verified requirement without name is not saved, count remained same");
+            Assert.assertEquals(countAfter, countBefore,
+                    "Requirement without name should not be saved in the table");
+            logger.info("Verified requirement without name is not saved, count remained same");
 
+        } catch (AssertionError e) {
+            logger.error("❌ Assertion failed: " + e.getMessage(), e);
+            throw e;
+        } catch (Exception e) {
+            logger.error("❌ Exception occurred: " + e.getMessage(), e);
+            throw e;
+        }
 
+        logger.info("************ Test Case Finished *************************");
 
-
-    } catch (AssertionError e) {
-        logger.error("❌ Assertion failed: " + e.getMessage(), e);
-        throw e;
-    } catch (Exception e) {
-        logger.error("❌ Exception occurred: " + e.getMessage(), e);
-        throw e;
     }
-
-    logger.info("************ Test Case Finished *************************");
-
-}
 }

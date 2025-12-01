@@ -9,13 +9,13 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC065 extends BaseClass {
-    @Test(dataProvider = "tc042",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc042", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyCreateTestRun(
-            String requirementId,String TestcaseId
-    )throws InterruptedException {
+            String requirementId, String TestcaseId
+    ) throws InterruptedException {
         logger.info("************ Starting the Test Case *****************");
-        try
-        {
+        try {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -33,15 +33,10 @@ public class TC065 extends BaseClass {
             Assert.assertTrue(individualTestCasePage.isCreateTestRunClickable(), "Create Test Run button is not clickable");
             logger.info("Create Test Run button is clickable");
 
-
-        }
-        catch (AssertionError e)
-        {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

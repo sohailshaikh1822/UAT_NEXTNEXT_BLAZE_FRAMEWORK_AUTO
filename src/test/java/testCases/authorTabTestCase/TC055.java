@@ -9,13 +9,13 @@ import org.testng.Assert;
 import utils.RetryAnalyzer;
 
 public class TC055 extends BaseClass {
-    @Test(dataProvider = "tc059",dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc059", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyLinkedTestcases(
-            String requirementId,String TestcaseId
-    )throws InterruptedException {
+            String requirementId, String TestcaseId
+    ) throws InterruptedException {
         logger.info("************ Starting the Test Case *****************");
-        try
-        {
+        try {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -31,15 +31,10 @@ public class TC055 extends BaseClass {
                     "Description, Precondition, Priority, or Status is not visible");
             logger.info("Verified test case details are displayed successfully");
 
-
-        }
-        catch (AssertionError e)
-        {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

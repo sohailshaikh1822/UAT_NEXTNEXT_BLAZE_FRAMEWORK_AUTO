@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 public class TC018 extends BaseClass {
 
     @Test(dataProvider = "tc018", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class, groups = {
-            "Settings" })
+        "Settings"})
     public void verifyClickOnCheckboxOfAvailableCustomField(
             String fieldName,
             String textBox,
@@ -38,8 +38,11 @@ public class TC018 extends BaseClass {
             globalTab.clickonAddGlobalField();
             logger.info("Clicked on Add Global Field button");
 
-            globalTab.EnterFieldName(fieldName);
-            logger.info("Entered Field Name: " + fieldName);
+            long timeMillis = System.currentTimeMillis();
+            String dynamicfield = fieldName + timeMillis;
+
+            globalTab.EnterFieldName(dynamicfield);
+            logger.info("Entered Field Name: " + dynamicfield);
 
             globalTab.SelectDataType(textBox);
             logger.info("Selected Data Type: " + textBox);
@@ -53,10 +56,10 @@ public class TC018 extends BaseClass {
             globalTab.clickSaveButton();
             logger.info("Clicked on Save button to add global field");
 
-            globalTab.clickShowInGridCheckbox(fieldName);
-            logger.info("Clicked on the 'Show in Grid' checkbox for field: " + fieldName);
+            globalTab.clickShowInGridCheckbox(dynamicfield);
+            logger.info("Clicked on the 'Show in Grid' checkbox for field: " + dynamicfield);
 
-            boolean isChecked = globalTab.isShowInGridCheckboxSelected(fieldName);
+            boolean isChecked = globalTab.isShowInGridCheckboxSelected(dynamicfield);
             if (isChecked) {
                 logger.info("Verified: The 'Show in Grid' checkbox is selected (Activated)");
             } else {

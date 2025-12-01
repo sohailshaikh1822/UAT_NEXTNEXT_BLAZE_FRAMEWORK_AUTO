@@ -7,6 +7,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC001 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_able_to_access_the_Setting() throws InterruptedException {
         logger.info("****** Starting the TC001 :  Verify that user able to access the Setting.*****************");

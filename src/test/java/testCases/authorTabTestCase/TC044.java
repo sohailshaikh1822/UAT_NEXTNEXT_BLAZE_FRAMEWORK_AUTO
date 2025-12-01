@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC044 extends BaseClass {
-    @Test(dataProvider = "tc044", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc044", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyVisibilityOfAllFieldsInAddTestCase(String requirementId
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -37,13 +38,10 @@ public class TC044 extends BaseClass {
             logger.info("Verified Precondition field is displayed");
             logger.info("All columns in Add Test Case page verified successfully");
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

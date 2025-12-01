@@ -6,8 +6,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC014 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void verifytheexpandcollapseontheleftpannel () throws InterruptedException {
+    public void verifytheexpandcollapseontheleftpannel() throws InterruptedException {
         logger.info("****** Starting the TC:14 verify the expand/collapse on the left pannel   *************");
         try {
             login();
@@ -20,15 +21,13 @@ public class TC014 extends BaseClass {
             reqPage.clicktoggleSidebar();
             logger.info("Verified that Toggle button are clickable");
 
-    }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
-        throw e;
-    }
-        catch (Exception e) {
+            throw e;
+        } catch (Exception e) {
             logger.error("Exception occurred: {}", e.getMessage());
-        throw e;
-    }
+            throw e;
+        }
         logger.info("************ TC:14 Finished *************************");
-}
+    }
 }

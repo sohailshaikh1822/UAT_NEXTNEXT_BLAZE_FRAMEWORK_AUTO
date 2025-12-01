@@ -10,14 +10,12 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 
-public class IndividualReleasePage extends BasePage
-{
-    public IndividualReleasePage(WebDriver driver)
-    {
+public class IndividualReleasePage extends BasePage {
+    public IndividualReleasePage(WebDriver driver) {
         super(driver);
     }
 
-    //locators
+    // locators
 
     @FindBy(xpath = "//div[@class='test-plan-releases-text-3']")
     WebElement releaseId;
@@ -52,7 +50,7 @@ public class IndividualReleasePage extends BasePage
     @FindBy(xpath = "//div[@class='test-plan-releases-save']")
     WebElement saveButton;
 
-    //Actions
+    // Actions
 
     public String getReleaseId() {
         return releaseId.getText();
@@ -103,5 +101,4 @@ public class IndividualReleasePage extends BasePage
         }
     }
 
-    
 }

@@ -15,6 +15,7 @@ public class AuthorTestCasePage extends BasePage {
     public AuthorTestCasePage(WebDriver driver) {
         super(driver);
     }
+
     // locators
     @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]")
     WebElement dropdownEpic;
@@ -71,9 +72,9 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(id = "notification")
     WebElement notificationDiv;
 
-
     public WebElement actionIconForTestcase(String testCaseId) {
-        return driver.findElement(By.xpath("//a[text()='" + testCaseId + "']/ancestor::div[@class='testlistrow']//div[@class='testlistcell48']//img"));
+        return driver.findElement(By.xpath("//a[text()='" + testCaseId
+                + "']/ancestor::div[@class='testlistrow']//div[@class='testlistcell48']//img"));
     }
 
     @FindBy(id = "confirmBtn")
@@ -88,18 +89,17 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//img[@alt='Open Sidebar']")
     WebElement buttonExpandToggle;
 
-    //This will fetch Locator for any linked Test case inside
-    public WebElement linkTestCaseIdFromName(String name){
-        return driver.findElement(By.xpath("//p[text()='"+name+"']/ancestor::div[@class='testlistrow']//a"));
+    // This will fetch Locator for any linked Test case inside
+    public WebElement linkTestCaseIdFromName(String name) {
+        return driver.findElement(By.xpath("//p[text()='" + name + "']/ancestor::div[@class='testlistrow']//a"));
     }
 
-    public WebElement linkTestCaseIdFromId(String id){
-        return driver.findElement(By.xpath("//div[@class='testlistcell']/a[text()='"+id+"']"));
+    public WebElement linkTestCaseIdFromId(String id) {
+        return driver.findElement(By.xpath("//div[@class='testlistcell']/a[text()='" + id + "']"));
     }
 
     @FindBy(xpath = "//div[normalize-space()='LINK TESTCASE']")
     WebElement LinkTestcase;
-
 
     @FindBy(xpath = "//input[@id='searchInputTCModal']")
     WebElement inputSearchTestCase;
@@ -116,15 +116,15 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//input[@id='searchInput']")
     WebElement searchInput;
 
-    @FindBy(xpath="//i[@class='fas fa-search search-icon']")
+    @FindBy(xpath = "//i[@class='fas fa-search search-icon']")
     WebElement searchBtn;
 
-    @FindBy(xpath="//span[@class='entry-info']")
+    @FindBy(xpath = "//span[@class='entry-info']")
     WebElement totalEntryConutOfTestcases;
 
-    @FindBy(xpath="//div[@class='text-wrapper-8']")
+    @FindBy(xpath = "//div[@class='text-wrapper-8']")
     WebElement rqIdText;
-    @FindBy(xpath="//div[@class='text-wrapper-7']")
+    @FindBy(xpath = "//div[@class='text-wrapper-7']")
     WebElement rqTitleText;
 
     @FindBy(id = "existingTestCasesTable")
@@ -136,7 +136,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//table[@id='newTestCasesTable']//tr[1]/td[2]/input")
     WebElement inputDescription;
 
-    //actions
+    // actions
 
     public void selectEpic(String epicName) {
         Select s = new Select(dropdownEpic);
@@ -167,14 +167,14 @@ public class AuthorTestCasePage extends BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tabAuthorTestcase);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", tabAuthorTestcase);
     }
+
     public void clickActionIcon(String testCaseId) throws InterruptedException {
         Thread.sleep(2000);
         actionIconForTestcase(testCaseId).click();
         Thread.sleep(2000);
     }
 
-
-    public String getEpicLabelName(){
+    public String getEpicLabelName() {
         return labelEpic.getText();
     }
 
@@ -227,7 +227,6 @@ public class AuthorTestCasePage extends BasePage {
         lastPageArrowBtn.click();
     }
 
-
     public String checkIfPreviousButtonIsClickable() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
@@ -249,7 +248,6 @@ public class AuthorTestCasePage extends BasePage {
             return "not-visible";
         }
     }
-
 
     public String checkIfNextButtonIsClickable() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -290,8 +288,7 @@ public class AuthorTestCasePage extends BasePage {
         Thread.sleep(3000);
     }
 
-
-    public void clickPreviousArrow(){
+    public void clickPreviousArrow() {
         arrowBackwardPrevious.click();
     }
 
@@ -315,7 +312,6 @@ public class AuthorTestCasePage extends BasePage {
         }
     }
 
-
     public void clickCollapseToggle() throws InterruptedException {
         Thread.sleep(1000);
         buttonCollapseToggle.click();
@@ -327,7 +323,6 @@ public class AuthorTestCasePage extends BasePage {
         buttonExpandToggle.click();
         Thread.sleep(2000);
     }
-
 
     public void clicklinktestcase() throws InterruptedException {
         Thread.sleep(3000);
@@ -346,19 +341,17 @@ public class AuthorTestCasePage extends BasePage {
         Thread.sleep(2000);
     }
 
-
-    public boolean isRowDeleted(String testcaseId)
-    {
-        try{
+    public boolean isRowDeleted(String testcaseId) {
+        try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            boolean isInvisible = wait.until((ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='testlistcell']/a[text()='"+testcaseId+"']"))));
+            boolean isInvisible = wait.until((ExpectedConditions.invisibilityOfElementLocated(
+                    By.xpath("//div[@class='testlistcell']/a[text()='" + testcaseId + "']"))));
             return isInvisible;
-        }
-        catch (Exception e)
-        {
-            return false ;
+        } catch (Exception e) {
+            return false;
         }
     }
+
     public void clickTestCase(String tcID) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -378,10 +371,12 @@ public class AuthorTestCasePage extends BasePage {
                 }
             }
 
-            if (found) break;
+            if (found)
+                break;
 
             // Locate the next button fresh each time
-            WebElement nextButton = driver.findElement(By.xpath("//div[@id='rd_paginationContainer']//img[@alt='Next']"));
+            WebElement nextButton = driver
+                    .findElement(By.xpath("//div[@id='rd_paginationContainer']//img[@alt='Next']"));
 
             // Stop if pagination ends
             if (nextButton.getCssValue("cursor").equalsIgnoreCase("default")) {
@@ -395,7 +390,6 @@ public class AuthorTestCasePage extends BasePage {
             Thread.sleep(1500);
         }
     }
-
 
     public boolean isAllTestIdSorted() throws InterruptedException {
         Thread.sleep(3000);
@@ -415,7 +409,7 @@ public class AuthorTestCasePage extends BasePage {
         return false;
     }
 
-    public void searchRq(String Rq){
+    public void searchRq(String Rq) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         wait.until(ExpectedConditions.elementToBeClickable(searchInput));
@@ -429,7 +423,7 @@ public class AuthorTestCasePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(searchBtn));
         searchBtn.click();
     }
-   
+
     public String totalNoOfTestcasesInsideRq() {
         return totalEntryConutOfTestcases.getText();
     }
@@ -455,7 +449,8 @@ public class AuthorTestCasePage extends BasePage {
     public String getRQId() {
         return rqIdText.getText();
     }
-    public String getRQTitle(){
+
+    public String getRQTitle() {
         return rqTitleText.getText();
     }
 
@@ -513,21 +508,23 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public void clickCloseButtonOnEditModal() {
-        WebElement closeBtn = driver.findElement(By.xpath("//button[@id='closeButton' or contains(@class,'close-button')]"));
+        WebElement closeBtn = driver
+                .findElement(By.xpath("//button[@id='closeButton' or contains(@class,'close-button')]"));
         closeBtn.click();
     }
 
     public void confirmCloseDiscardChanges() {
-        WebElement yesBtn = driver.findElement(By.xpath("//button[contains(@id,'confirmBtn') or normalize-space(text())='Yes']"));
+        WebElement yesBtn = driver
+                .findElement(By.xpath("//button[contains(@id,'confirmBtn') or normalize-space(text())='Yes']"));
         yesBtn.click();
     }
+
     public void clickSubmitButtonOnAddTestCaseModal() throws InterruptedException {
-        Actions a= new Actions(driver);
+        Actions a = new Actions(driver);
         Thread.sleep(1500);
         a.moveToElement(buttonSubmitTestCaseModal).perform();
         buttonSubmitTestCaseModal.click();
     }
-
 
     public boolean isErrorDisplayedForField(String fieldName) {
         try {
@@ -548,8 +545,9 @@ public class AuthorTestCasePage extends BasePage {
                 requirementId + "']]//img[@id='rotatable-image']";
 
         WebElement toggle = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", toggle);
-        Actions a= new Actions(driver);
+        // ((JavascriptExecutor)
+        // driver).executeScript("arguments[0].scrollIntoView(true);", toggle);
+        Actions a = new Actions(driver);
         a.moveToElement(toggle).perform();
         toggle.click();
     }
@@ -564,7 +562,8 @@ public class AuthorTestCasePage extends BasePage {
         // Expanded if rotate(0deg), Collapsed if rotate(180deg)
         return style != null && style.contains("rotate(0deg)");
     }
-    public void clickRequirementPagination(){
+
+    public void clickRequirementPagination() {
         divRequirementPagination.click();
     }
 
@@ -590,6 +589,3 @@ public class AuthorTestCasePage extends BasePage {
         }
     }
 }
-
-
-

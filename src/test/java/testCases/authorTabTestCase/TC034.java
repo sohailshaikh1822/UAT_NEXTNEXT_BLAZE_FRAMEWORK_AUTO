@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC034 extends BaseClass {
 
-    @Test(dataProvider = "tc034", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc034", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyPaginationReset(
             String epicName,
             String featureName,
@@ -33,15 +33,13 @@ public class TC034 extends BaseClass {
             authorTestCasePage.selectFeature(featureName);
             logger.info("Selected Feature: " + featureName);
 
-
             int initialPage = Integer.parseInt(authorTestCasePage.showPaginationOfRequirement());
             authorTestCasePage.clickNextArrow();
-            int movedPage =Integer.parseInt( authorTestCasePage.showPaginationOfRequirement());
+            int movedPage = Integer.parseInt(authorTestCasePage.showPaginationOfRequirement());
 
             Assert.assertNotEquals(initialPage, movedPage,
                     "Pagination did not move to the next page");
             logger.info("Successfully moved from page " + initialPage + " to " + movedPage);
-
 
             authorTestCasePage.selectFeature(nextFeature);
             logger.info("Re-applied Epic & Feature filters");
@@ -61,4 +59,3 @@ public class TC034 extends BaseClass {
         logger.info("************ TC034 Finished ************");
     }
 }
-

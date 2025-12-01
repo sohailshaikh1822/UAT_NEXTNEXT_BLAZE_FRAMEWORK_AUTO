@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC015 extends BaseClass {
-    @Test(dataProvider = "tc015", dataProviderClass = DataProviders.RequirementDataProvider.class, description = "Verify error when requirement name is left blank during creation",retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc015", dataProviderClass = DataProviders.RequirementDataProvider.class, description = "Verify error when requirement name is left blank during creation", retryAnalyzer = RetryAnalyzer.class)
     public void verifyErrorWhenRequirementNameBlank(String projectName, String moduleName) throws InterruptedException {
         logger.info(
                 "************ Starting Test Case: Verify error when requirement name is left blank during creation *****************");

@@ -7,6 +7,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC027 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyVisibilityOfPaginationControls() throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -42,4 +43,3 @@ public class TC027 extends BaseClass {
         logger.info("************ Test Case Finished *************************");
     }
 }
-

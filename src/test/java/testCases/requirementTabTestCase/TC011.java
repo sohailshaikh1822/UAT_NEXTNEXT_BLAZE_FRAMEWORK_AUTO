@@ -8,9 +8,9 @@ import pageObjects.requirementTab.IndividualModulePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-
 public class TC011 extends BaseClass {
-    @Test (dataProvider = "tc011", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc011", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifySavebuttonfunctionalityintherequirements(
             String project,
             String epic,
@@ -28,17 +28,17 @@ public class TC011 extends BaseClass {
             logger.info("clicked on requirement tab");
 
             reqPage.clickArrowRightPointingForExpandModule(project);
-            logger.info("Selected project"+project);
+            logger.info("Selected project" + project);
 
             reqPage.clickOnModule(epic);
-            logger.info("Selected epic"+epic);
+            logger.info("Selected epic" + epic);
 
             IndividualModulePage req = new IndividualModulePage(getDriver());
             req.clickRequirement(rq);
-            logger.info("Selected Requirement"+rq);
+            logger.info("Selected Requirement" + rq);
 
             req.setPriority(pri);
-            logger.info("Priority changed"+pri);
+            logger.info("Priority changed" + pri);
 
             req.clickSave();
             logger.info("Clicked saved");
@@ -57,14 +57,10 @@ public class TC011 extends BaseClass {
             req.setPriority(pri1);
             req.clickSave();
 
-
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

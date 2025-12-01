@@ -8,12 +8,12 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC034 extends BaseClass {
+
     @Test(dataProvider = "tc034", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifythatuserisabletoaddaDefaultFieldValueintheTestcaseTab(
             String fieldName,
             String value
-    ) throws InterruptedException
-    {
+    ) throws InterruptedException {
 
         logger.info("****** Starting the TC022:Verify that user is able to add a Default Field Value in the Module Tab.***************");
 
@@ -30,17 +30,14 @@ public class TC034 extends BaseClass {
             otherTab.clickTestStep();
             logger.info("Navigated to TestCase tab");
 
-
             otherTab.clickOnEdit(fieldName);
-            logger.info("clicked on edit row:"+fieldName);
-
+            logger.info("clicked on edit row:" + fieldName);
 
             otherTab.enterDefaultValue(value);
-            logger.info("entered default value:"+value);
+            logger.info("entered default value:" + value);
 
             otherTab.clickDefaultSaveChanges();
             logger.info("clicked on save changes");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

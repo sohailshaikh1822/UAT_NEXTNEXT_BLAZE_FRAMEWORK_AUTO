@@ -42,7 +42,6 @@ public class TC009 extends BaseClass {
             otherTab.clickcreatefieldButton();
             logger.info("clicked on create field button#");
 
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;

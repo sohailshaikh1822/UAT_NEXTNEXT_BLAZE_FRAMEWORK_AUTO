@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC059 extends BaseClass {
-    @Test(dataProvider = "tc059", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc059", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyClickFunctionalityOfAddCalledTestCaseBtn(String rqName, String tcId) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -27,7 +28,7 @@ public class TC059 extends BaseClass {
             authorTestCasePage.clickTestCasesId(tcId);
             logger.info("Clicked on Test Case ID: " + tcId);
             logger.info("Clicking on 'Add Called Test Case' button.");
-            if(individualTestCasePage.clickAddCalledTestcaseBtn()){
+            if (individualTestCasePage.clickAddCalledTestcaseBtn()) {
                 logger.info("Add Called Test Case' button clicked successfully.");
             } else {
                 logger.warn("Failed to click 'Add Called Test Case' button.");

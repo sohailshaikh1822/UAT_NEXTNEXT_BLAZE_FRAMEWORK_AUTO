@@ -4,8 +4,10 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-@Test( retryAnalyzer = RetryAnalyzer.class)
+
+@Test(retryAnalyzer = RetryAnalyzer.class)
 public class TC030 extends BaseClass {
+
     public void verifyHelpDropDown() throws InterruptedException {
         try {
 
@@ -18,7 +20,6 @@ public class TC030 extends BaseClass {
             executeLandingPage.clickHelpBtn();
             logger.info("Clicked on the Help Btn");
 
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
@@ -29,5 +30,4 @@ public class TC030 extends BaseClass {
 
         logger.info("************ Test Case Finished *************************");
     }
-    }
-
+}

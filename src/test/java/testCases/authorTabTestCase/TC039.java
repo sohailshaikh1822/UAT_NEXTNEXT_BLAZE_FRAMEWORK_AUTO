@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC039 extends BaseClass {
 
-    @Test(dataProvider = "tc039", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc039", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyPaginationReset(
             String epicName,
             String featureName,
@@ -41,19 +41,16 @@ public class TC039 extends BaseClass {
 
             LinkTestCasePage linkTestCasewindow = new LinkTestCasePage(getDriver());
 
-
             linkTestCasewindow.searchTestCase(tcId);
             logger.info("Searched Test Case with ID......: " + tcId);
 
             linkTestCasewindow.clickPid(tcId);
-            logger.info("select Test case"+ tcId);
-
+            logger.info("select Test case" + tcId);
 
             String alertMsg = linkTestCasewindow.getAlertMessage();
             logger.info("Alert message: " + alertMsg);
             Assert.assertTrue(linkTestCasewindow.isTestCaseAlreadyLinked(),
                     "Expected alert not shown after linking TC");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

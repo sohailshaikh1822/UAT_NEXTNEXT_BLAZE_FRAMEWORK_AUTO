@@ -7,9 +7,9 @@ import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-
 public class TC047 extends BaseClass {
-    @Test(dataProvider = "tc047", dataProviderClass = SettingTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc047", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_create_a_Custom_Field_inside_TestSuite_Tab(
             String fieldName1,
             String fieldType,
@@ -48,7 +48,6 @@ public class TC047 extends BaseClass {
 
             otherTab.clickOnDeleteRowConfirmation();
             logger.info("clicked on yes confirmation");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

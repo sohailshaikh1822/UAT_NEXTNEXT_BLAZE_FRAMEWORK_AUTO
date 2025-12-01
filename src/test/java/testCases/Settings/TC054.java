@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC054 extends BaseClass {
-    @Test(dataProvider = "tc054", dataProviderClass = SettingTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc054", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_able_to_click_on_the_checkbox_of_available_customfield_intestrunsection(
             String rowName) throws InterruptedException {
         logger.info(

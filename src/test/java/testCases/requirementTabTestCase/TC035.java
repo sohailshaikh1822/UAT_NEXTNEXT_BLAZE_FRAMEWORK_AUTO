@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC035 extends BaseClass {
-    @Test(dataProvider = "tc035", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc035", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyConfirmationMessageWhenDeleteTheModule(String project, String epic
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -33,21 +34,21 @@ public class TC035 extends BaseClass {
             Thread.sleep(6000);
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
-            logger.info("Selected project"+project);
+            logger.info("Selected project" + project);
 
             requirementTabPage.clickOnModule(epic);
-            logger.info("Selected epic"+epic);
+            logger.info("Selected epic" + epic);
 
-          requirementTabPage.clickDeleteModule();
-          logger.info("Clicked Delete button");
-          Thread.sleep(4000);
-         String Actual_Warning= individualModulePage.alretMeaasgeForDeletingModule();
-         System.out.println(Actual_Warning);
+            requirementTabPage.clickDeleteModule();
+            logger.info("Clicked Delete button");
+            Thread.sleep(4000);
+            String Actual_Warning = individualModulePage.alretMeaasgeForDeletingModule();
+            System.out.println(Actual_Warning);
 
-         Assert.assertEquals(Actual_Warning,"Deleting a module will also delete its associated requirements and test cases. Are you sure you want to delete?");
+            Assert.assertEquals(Actual_Warning, "Deleting a module will also delete its associated requirements and test cases. Are you sure you want to delete?");
             logger.info("Assertion has done user can see the warning message");
-           Thread.sleep(3000);
-           requirementTabPage.clickNoBtn();
+            Thread.sleep(3000);
+            requirementTabPage.clickNoBtn();
 
         } catch (AssertionError e) {
             logger.error("❌ Assertion failed: " + e.getMessage(), e);

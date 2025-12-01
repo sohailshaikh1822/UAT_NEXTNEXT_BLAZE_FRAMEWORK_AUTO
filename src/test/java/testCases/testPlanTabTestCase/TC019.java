@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC019 extends BaseClass {
 
-    @Test(dataProvider = "tc019", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc019", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDuplicateReleaseNames(String projectName, String release) throws InterruptedException {
         logger.info("****** Test Case 19: Verify duplicate release names *****************");
         try {
@@ -17,17 +17,13 @@ public class TC019 extends BaseClass {
             login();
             logger.info("Logged in successfully");
 
-
             TestPlanLandingPage testPlanPage = new TestPlanLandingPage(getDriver());
-
 
             testPlanPage.selectTestPlanTab();
             logger.info("Navigated to Test Plan tab");
 
-
             testPlanPage.expandProjectSTG(projectName);
             logger.info("Expanded STG Project: " + projectName);
-
 
             int count = testPlanPage.getDuplicateReleaseCount(release);
             logger.info("Release name '" + release + "' found " + count + " times");

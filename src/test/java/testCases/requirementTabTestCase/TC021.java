@@ -10,7 +10,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC021 extends BaseClass {
-    @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementsCountsUpdatedAfterAddNewRQ(String rQid, String description, String priority, String status, String type
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");

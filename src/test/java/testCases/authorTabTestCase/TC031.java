@@ -6,9 +6,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC031 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void verifyDisabledPreviousBtnOnFirstPage(
-    ) throws InterruptedException {
+    public void verifyDisabledPreviousBtnOnFirstPage() throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();

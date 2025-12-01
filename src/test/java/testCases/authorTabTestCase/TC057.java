@@ -9,7 +9,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC057 extends BaseClass {
-    @Test(dataProvider = "tc057", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc057", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDescriptionandPreconditionfieldsInTestCaseForm(
             String epicName,
             String featureName,
@@ -51,9 +52,8 @@ public class TC057 extends BaseClass {
                 Assert.fail("Description field not displayed");
             }
 
-          addTestcasePage.selectPriority(pri);
-            logger.info("User able to select Priority from the drop down "+ pri);
-
+            addTestcasePage.selectPriority(pri);
+            logger.info("User able to select Priority from the drop down " + pri);
 
             logger.info("User able to set description and priority in add test case page");
 

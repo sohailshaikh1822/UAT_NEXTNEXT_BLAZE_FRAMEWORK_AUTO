@@ -27,12 +27,10 @@ public class TC070 extends BaseClass {
 
             Assert.assertTrue(authorTestCasePage.isErrorDisplayedForField("Name"), "Error for Name field not displayed");
             logger.info("Validation notification appeared as expected for missing mandatory fields");
-        } 
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }

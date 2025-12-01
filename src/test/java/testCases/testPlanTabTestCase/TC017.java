@@ -7,6 +7,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC017 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyProjectDropdownVisibility() throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Project Dropdown Visibility *****************");
@@ -24,7 +25,6 @@ public class TC017 extends BaseClass {
             testPlanPage.clickExpandToggle();
             logger.info("Clicked expand toggle icon");
             Assert.assertTrue(testPlanPage.getSidebarVisibility(), "Sidebar should be visible after expand");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

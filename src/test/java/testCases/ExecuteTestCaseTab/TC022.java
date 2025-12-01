@@ -11,12 +11,13 @@ import utils.RetryAnalyzer;
 
 @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 public class TC022 extends BaseClass {
-    public void verifyNewDefectCreation( String projName,
-                                         String releaseName,
-                                         String testRun,
-                                         String defSummary,
-                                         String status,
-                                         String description
+
+    public void verifyNewDefectCreation(String projName,
+            String releaseName,
+            String testRun,
+            String defSummary,
+            String status,
+            String description
     ) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
@@ -56,13 +57,11 @@ public class TC022 extends BaseClass {
             logger.info("Defect has successfully created");
 
             String actualAlert = linkDefectPage.getNotificationPopUpText();
-            String expectedAlert="Defect created and linked successfully.";
+            String expectedAlert = "Defect created and linked successfully.";
             Assert.assertEquals(actualAlert, expectedAlert);
             logger.info("Assertion has completed");
 
-
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
         } catch (Exception e) {
@@ -72,4 +71,4 @@ public class TC022 extends BaseClass {
 
         logger.info("************ Test Case Finished *************************");
     }
-    }
+}

@@ -7,14 +7,13 @@ import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC010 extends BaseClass
-{
+public class TC010 extends BaseClass {
+
     @Test(dataProvider = "tc010", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyThatUserIsAbleToAddaDefaultFieldValueintheModuleTab(
             String fieldrow,
             String fieldName
-    ) throws InterruptedException
-    {
+    ) throws InterruptedException {
 
         logger.info("****** Starting the TC010 ***********");
 
@@ -33,9 +32,8 @@ public class TC010 extends BaseClass
             otherTab.clickModule();
             logger.info("Navigated to Module tab");
 
-
             otherTab.clickOnEdit(fieldrow);
-            logger.info("Clicked on edit field button:"+fieldrow);
+            logger.info("Clicked on edit field button:" + fieldrow);
 
             otherTab.clickDefaultAddValue();
             logger.info("Click on add default value");

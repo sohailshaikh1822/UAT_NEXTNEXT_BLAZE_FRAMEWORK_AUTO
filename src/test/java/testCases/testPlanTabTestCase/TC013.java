@@ -8,12 +8,11 @@ import utils.RetryAnalyzer;
 
 public class TC013 extends BaseClass {
 
-    @Test(dataProvider = "tc013", dataProviderClass = DataProviders.TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc013", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verifycollapsefunctionalityforreleaseandcycle(
             String projectName,
             String releaseName,
-            String testcycle
-    ) throws InterruptedException {
+            String testcycle) throws InterruptedException {
         logger.info("****** TC013: Verify collapse functionality for release and cycle *****************");
 
         try {

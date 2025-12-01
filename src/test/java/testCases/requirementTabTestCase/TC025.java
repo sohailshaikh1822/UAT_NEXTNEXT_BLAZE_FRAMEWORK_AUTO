@@ -11,7 +11,7 @@ import utils.RetryAnalyzer;
 import java.util.List;
 public class TC025 extends BaseClass {
 
-    @Test(dataProvider = "tc025", dataProviderClass = DataProviders.RequirementDataProvider.class, description = "Verify linked requirement count increases and decreases",retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc025", dataProviderClass = DataProviders.RequirementDataProvider.class, description = "Verify linked requirement count increases and decreases", retryAnalyzer = RetryAnalyzer.class)
     public void verifyLinkedRequirementCountIncreasesAndDecreases(String projectName, String moduleName)
             throws InterruptedException {
         logger.info(
@@ -34,15 +34,14 @@ public class TC025 extends BaseClass {
             requirementTabPage.clickOnModule(moduleName);
             logger.info("Opened module: " + moduleName);
 
-            IndividualModulePage individualModulePage= new IndividualModulePage(getDriver());
-            if(individualModulePage.isClickableNextArrow()){
+            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            if (individualModulePage.isClickableNextArrow()) {
                 individualModulePage.clickLastPageArrowBtn();
             }
             WebElement countBeforeAdd = getDriver().findElement(By.xpath("//span[@class='entry-info']"));
-            
+
             Thread.sleep(2000);
-
-
+           
             int beforeCount = Integer.parseInt(countBeforeAdd.getText().replaceAll("[^0-9]", ""));
             logger.info("Initial requirement count: " + beforeCount);
 
@@ -51,15 +50,14 @@ public class TC025 extends BaseClass {
             addRequirementPage.setRequirementId(newRequirementName);
             addRequirementPage.clickSave();
 
-
             Thread.sleep(2000);
             addRequirementPage.clickClose();
             Thread.sleep(4000);
 
-            if(individualModulePage.isClickableNextArrow()){
+            if (individualModulePage.isClickableNextArrow()) {
                 individualModulePage.clickLastPageArrowBtn();
             }
-            RequirementTabPage requirementTabPage1= new RequirementTabPage(getDriver());
+            RequirementTabPage requirementTabPage1 = new RequirementTabPage(getDriver());
             Thread.sleep(2000);
             List<String> afterAddList = requirementTabPage1.getRequirementIDs();
             WebElement countAfterAdd = getDriver().findElement(By.xpath("//span[@class='entry-info']"));
@@ -72,6 +70,7 @@ public class TC025 extends BaseClass {
             logger.info("Unlinked requirement: " + newRequirementId);
             Thread.sleep(3000);
             Thread.sleep(2000);
+           
             int afterRemoveCount = Integer.parseInt(countAfterAdd.getText().replaceAll("[^0-9]", ""));
 
             logger.info("Requirement count after unlink: " + afterRemoveCount);

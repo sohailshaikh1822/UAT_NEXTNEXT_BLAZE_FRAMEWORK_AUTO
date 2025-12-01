@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC046 extends BaseClass {
 
-    @Test(dataProvider = "tc046", dataProviderClass = AuthorTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc046", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifydropdownselectionforQAandBusinessUserinAddTestCase(
             String epicName,
             String featureName,
@@ -55,7 +55,6 @@ public class TC046 extends BaseClass {
             if (addTestcasePage.isQAUserDropdownDisplayed()) {
                 addTestcasePage.selectQaUser(Qauser);
                 logger.info("User able to select QA User from dropdown: " + Qauser);
-
 
                 String selectedUser = Qauser;
                 Assert.assertEquals(selectedUser, Qauser, "QA User dropdown selection mismatch!");

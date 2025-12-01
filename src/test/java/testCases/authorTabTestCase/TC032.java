@@ -5,12 +5,10 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-
 public class TC032 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void verifyDisabledNextBtnOnLastPage(
-    ) throws InterruptedException {
+    public void verifyDisabledNextBtnOnLastPage() throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();

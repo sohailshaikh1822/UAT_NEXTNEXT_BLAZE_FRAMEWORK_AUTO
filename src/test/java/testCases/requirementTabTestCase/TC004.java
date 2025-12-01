@@ -10,9 +10,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC004 extends BaseClass {
-    @Test(dataProvider = "tc004", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void verifyUpdateDescription
-            (String reqId,String description) throws InterruptedException {
+
+    @Test(dataProvider = "tc004", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void verifyUpdateDescription(String reqId, String description) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
@@ -42,7 +42,6 @@ public class TC004 extends BaseClass {
             logger.info("Actual: " + actualSuccessMsg);
             Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg, "Validation message did not match!");
             logger.info("Verified warning notification successfully");
-
 
         } catch (Exception e) {
             logger.error("Exception occurred during test execution: " + e.getMessage(), e);

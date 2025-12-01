@@ -10,9 +10,10 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC024 extends BaseClass {
-    @Test(dataProvider = "tc024", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc024", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementEntriesUpdate(String project,
-                                               String epic,String rQname, String description, String priority, String status, String type
+            String epic, String rQname, String description, String priority, String status, String type
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
@@ -36,10 +37,10 @@ public class TC024 extends BaseClass {
             Thread.sleep(6000);
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
-            logger.info("Selected project"+project);
+            logger.info("Selected project" + project);
 
             requirementTabPage.clickOnModule(epic);
-            logger.info("Selected epic"+epic);
+            logger.info("Selected epic" + epic);
 
             int countBefore = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count before adding: " + countBefore);

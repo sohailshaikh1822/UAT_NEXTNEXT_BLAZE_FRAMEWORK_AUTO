@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC052 extends BaseClass {
+
     @Test(dataProvider = "tc052", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyRQSearchFunctionality(String rqName, String rqTitle) throws InterruptedException {

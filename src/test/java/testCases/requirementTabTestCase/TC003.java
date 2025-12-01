@@ -8,6 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC003 extends BaseClass {
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyLinkedRequirementTable() throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");

@@ -9,13 +9,12 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC008 extends BaseClass {
-    @Test(dataProvider = "tc008", dataProviderClass = TestPlanDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc008", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyCreationOfNewTestCycle(
             String projectName,
             String releaseName,
             String testCycleName,
-            String testDescription
-    )
+            String testDescription)
             throws InterruptedException {
         logger.info(
                 "****** Starting Test Case: Verify Release List Updates Based on Project Selection *****************");
@@ -40,19 +39,18 @@ public class TC008 extends BaseClass {
             testPlanPage.clickNewTestCycle();
             logger.info("Clicked on the new testCycle");
 
-            IndividualTestCyclePage individualTestCyclePage=new IndividualTestCyclePage(getDriver());
+            IndividualTestCyclePage individualTestCyclePage = new IndividualTestCyclePage(getDriver());
             individualTestCyclePage.setTestCycleName(testCycleName);
             logger.info("added the test cycle name");
 
             individualTestCyclePage.setDescription(testDescription);
             logger.info("added the description for cycle");
 
-            Assert.assertEquals(individualTestCyclePage.getTargetRelease(),releaseName);
+            Assert.assertEquals(individualTestCyclePage.getTargetRelease(), releaseName);
             logger.info("verified the targeted release ");
 
             individualTestCyclePage.clickSave();
             logger.info("Clicked on the save button");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

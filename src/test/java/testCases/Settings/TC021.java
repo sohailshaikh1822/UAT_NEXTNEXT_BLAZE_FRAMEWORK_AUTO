@@ -8,7 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC021 extends BaseClass {
-    @Test(dataProvider = "tc015", dataProviderClass = SettingTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(dataProvider = "tc015", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_create_a_Custom_Field_inside_Requirements_Tab(
             String fieldName,
             String textBox)
@@ -37,16 +38,13 @@ public class TC021 extends BaseClass {
             otherTab.createCustomSelectDataType(textBox);
             logger.info("Selected Data Type as Text Box");
 
-
             otherTab.clickcreatefieldButton();
             logger.info("Clicked on create field button");
 
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
