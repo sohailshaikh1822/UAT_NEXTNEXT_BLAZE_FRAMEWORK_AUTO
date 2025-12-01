@@ -94,14 +94,19 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
-        actions.moveToElement(element).build().perform();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
         element.clear();
-        element.sendKeys(summary);
+        for (char c : summary.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+        }
+        js.executeScript("arguments[0].blur();", element);
+        wait.until(driver -> element.getAttribute("value").equals(summary));
+        Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
 
 
-
+    
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -109,8 +114,16 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Description ----------
     public void enterDescription(String description) {
-       wait.until(ExpectedConditions.visibilityOf(textAreaDescription)).clear();
-        textAreaDescription.sendKeys(description);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        element.clear();
+        for (char c : description.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+        }
+        js.executeScript("arguments[0].blur();", element);
+        wait.until(driver -> element.getAttribute("value").equals(description));
+        Assert.assertEquals(element.getAttribute("value"), description,
+                "FAILED: Description text did not set properly.");
     }
 
     public String getDescription() {
@@ -221,8 +234,7 @@ public class CreateDefectPage extends BasePage {
 
         Assert.assertTrue(
                 selectedText.equalsIgnoreCase("-- Select Status --"),
-                "FAILED: Status dropdown is NOT at default value '-- Select Status --'. Actual value: " + selectedText
-        );
+                "FAILED: Status dropdown is NOT at default value '-- Select Status --'. Actual value: " + selectedText);
     }
 
     public void verifyStatusErrorMessage() {
@@ -235,13 +247,12 @@ public class CreateDefectPage extends BasePage {
             Assert.assertEquals(
                     actualMessage,
                     expectedMessage,
-                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '" + actualMessage + "'"
-            );
+                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
+                            + actualMessage + "'");
 
         } catch (TimeoutException e) {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
     }
-
 
 }
