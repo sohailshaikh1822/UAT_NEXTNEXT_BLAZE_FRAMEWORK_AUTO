@@ -82,7 +82,6 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
-
     @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
     WebElement msgSummaryCannotBeBlank;
 
@@ -106,9 +105,6 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(summary));
         Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
-
-
-    
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -168,6 +164,7 @@ public class CreateDefectPage extends BasePage {
             System.out.println(" -> " + option.getText());
         }
     }
+
     public void clickReasonDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
         dropdown.click();
@@ -192,6 +189,7 @@ public class CreateDefectPage extends BasePage {
             System.out.println(" -> " + option.getText());
         }
     }
+
     public void clickModuleDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
         dropdown.click();
@@ -204,12 +202,9 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
-
-
     public void clickAffectedReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease)).click();
     }
-
 
     public void clickTargetReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
@@ -226,6 +221,7 @@ public class CreateDefectPage extends BasePage {
             System.out.println(" -> " + option.getText());
         }
     }
+
     public void clickStatusDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
         dropdown.click();
@@ -237,6 +233,7 @@ public class CreateDefectPage extends BasePage {
             System.out.println(" -> " + option.getText());
         }
     }
+
     public void clickPriorityDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
         dropdown.click();
@@ -248,7 +245,6 @@ public class CreateDefectPage extends BasePage {
             System.out.println(" -> " + option.getText());
         }
     }
-
 
     public void selectReason(String value) {
         selectDropdown(dropdownReason, value);
@@ -323,34 +319,6 @@ public class CreateDefectPage extends BasePage {
         return options;
     }
 
-    // Check if Status dropdown is at default placeholder
-    public void verifyStatusIsDefault() {
-        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
-        String selectedText = select.getFirstSelectedOption().getText().trim();
-
-        Assert.assertTrue(
-                selectedText.equalsIgnoreCase("-- Select Status --"),
-                "FAILED: Status dropdown is NOT at default value '-- Select Status --'. Actual value: " + selectedText);
-    }
-
-    public void verifyStatusErrorMessage() {
-        try {
-            WebElement msgElement = wait.until(ExpectedConditions.visibilityOf(successNotification));
-            String actualMessage = msgElement.getText().trim();
-
-            String expectedMessage = "Error: Please select a valid Status.";
-
-            Assert.assertEquals(
-                    actualMessage,
-                    expectedMessage,
-                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
-                            + actualMessage + "'");
-
-        } catch (TimeoutException e) {
-            Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
-        }
-    }
-
     public boolean isSummaryBlankErrorDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(msgSummaryCannotBeBlank))
                 .isDisplayed();
@@ -361,12 +329,8 @@ public class CreateDefectPage extends BasePage {
                 + "/following-sibling::span[normalize-space(text())='*']";
 
         WebElement mandatoryStar = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath))
-        );
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath)));
 
         return mandatoryStar.isDisplayed();
     }
-
-
-
 }
