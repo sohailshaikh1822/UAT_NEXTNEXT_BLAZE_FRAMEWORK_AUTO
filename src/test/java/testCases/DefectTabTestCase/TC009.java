@@ -14,7 +14,7 @@ public class TC009 extends BaseClass {
             String expectedUrlAfterClick,
             String Summary,
             String Description
-    ) throws InterruptedException {
+        ) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -52,7 +52,7 @@ public class TC009 extends BaseClass {
             logger.info("Verified: Status mandatory error message displayed.");
 
 
-
+            
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
