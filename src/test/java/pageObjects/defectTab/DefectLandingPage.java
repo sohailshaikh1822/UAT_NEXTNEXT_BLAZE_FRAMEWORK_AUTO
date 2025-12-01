@@ -82,7 +82,7 @@ public class DefectLandingPage extends BasePage {
     public void enterSummary(String text) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(summary));
-        summary.clear(); // optional, but recommended
+        summary.clear();
         summary.sendKeys(text);
     }
 

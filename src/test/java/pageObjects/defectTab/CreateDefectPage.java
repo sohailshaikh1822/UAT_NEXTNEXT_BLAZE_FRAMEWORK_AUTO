@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
+import org.testng.Assert;
 import pageObjects.BasePage;
 
 import java.time.Duration;
@@ -81,6 +82,8 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
+
+
     // ACTION OBJECTS
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -91,9 +94,19 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        wait.until(ExpectedConditions.visibilityOf(textAreaSummary)).clear();
-        textAreaSummary.sendKeys(summary);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        element.clear();
+        for (char c : summary.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+        }
+        js.executeScript("arguments[0].blur();", element);
+        wait.until(driver -> element.getAttribute("value").equals(summary));
+        Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
+
+
+    
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -101,8 +114,16 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Description ----------
     public void enterDescription(String description) {
-        wait.until(ExpectedConditions.visibilityOf(textAreaDescription)).clear();
-        textAreaDescription.sendKeys(description);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        element.clear();
+        for (char c : description.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+        }
+        js.executeScript("arguments[0].blur();", element);
+        wait.until(driver -> element.getAttribute("value").equals(description));
+        Assert.assertEquals(element.getAttribute("value"), description,
+                "FAILED: Description text did not set properly.");
     }
 
     public String getDescription() {
@@ -299,4 +320,33 @@ public class CreateDefectPage extends BasePage {
         }
         return options;
     }
+
+    // Check if Status dropdown is at default placeholder
+    public void verifyStatusIsDefault() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
+        String selectedText = select.getFirstSelectedOption().getText().trim();
+
+        Assert.assertTrue(
+                selectedText.equalsIgnoreCase("-- Select Status --"),
+                "FAILED: Status dropdown is NOT at default value '-- Select Status --'. Actual value: " + selectedText);
+    }
+
+    public void verifyStatusErrorMessage() {
+        try {
+            WebElement msgElement = wait.until(ExpectedConditions.visibilityOf(successNotification));
+            String actualMessage = msgElement.getText().trim();
+
+            String expectedMessage = "Error: Please select a valid Status.";
+
+            Assert.assertEquals(
+                    actualMessage,
+                    expectedMessage,
+                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
+                            + actualMessage + "'");
+
+        } catch (TimeoutException e) {
+            Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
+        }
+    }
+
 }
