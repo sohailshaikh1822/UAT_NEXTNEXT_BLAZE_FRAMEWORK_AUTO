@@ -333,6 +333,7 @@ public class CreateDefectPage extends BasePage {
 
         return mandatoryStar.isDisplayed();
     }
+
     public void verifyStatusIsDefault() {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
         String selectedText = select.getFirstSelectedOption().getText().trim();
