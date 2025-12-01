@@ -83,6 +83,8 @@ public class CreateDefectPage extends BasePage {
     WebElement successNotification;
 
 
+    @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
+    WebElement msgSummaryCannotBeBlank;
 
     // ACTION OBJECTS
 
@@ -348,5 +350,23 @@ public class CreateDefectPage extends BasePage {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
     }
+
+    public boolean isSummaryBlankErrorDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOf(msgSummaryCannotBeBlank))
+                .isDisplayed();
+    }
+
+    public boolean isMandatoryStarVisible(String fieldName) {
+        String dynamicXpath = "//span[normalize-space(text())='" + fieldName + "']"
+                + "/following-sibling::span[normalize-space(text())='*']";
+
+        WebElement mandatoryStar = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath))
+        );
+
+        return mandatoryStar.isDisplayed();
+    }
+
+
 
 }
