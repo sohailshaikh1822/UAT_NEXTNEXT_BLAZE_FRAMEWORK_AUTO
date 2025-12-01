@@ -12,6 +12,7 @@
         <parameter name="mode" value="headless"/>
         <classes>
             <class name="testCases.DefectTabTestCase.TC001"/>
+            <class name="testCases.DefectTabTestCase.TC003"/>
         </classes>
     </test>
 </suite>
