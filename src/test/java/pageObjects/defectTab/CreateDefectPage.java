@@ -133,6 +133,100 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownSeverity, value);
     }
 
+    public void clickSeverityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
+        dropdown.click();
+
+        // Print all values
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickReasonDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickTypeDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        System.out.println("Type dropdown values:");
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickModuleDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+
+
+    public void clickAffectedReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease)).click();
+    }
+
+
+    public void clickTargetReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
+    }
+
+    public void clickCategoryDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickStatusDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickPriorityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+
     public void selectReason(String value) {
         selectDropdown(dropdownReason, value);
     }
