@@ -360,4 +360,15 @@ public class CreateDefectPage extends BasePage {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
     }
+    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription) throws InterruptedException {
+        Thread.sleep(1500);
+
+        String actualSummary = getSummary().trim();
+        String actualDescription = getDescription().trim();
+
+        System.out.println("DEBUG SUMMARY -> actual: [" + actualSummary + "] | expected: [" + expectedSummary + "]");
+        System.out.println("DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
+
+        return actualSummary.equals(expectedSummary) && actualDescription.equals(expectedDescription);
+    }
 }
