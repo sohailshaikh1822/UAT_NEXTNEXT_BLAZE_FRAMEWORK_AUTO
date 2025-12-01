@@ -31,7 +31,7 @@ public class DefectLandingPage extends BasePage {
     WebElement defectTab;
 
     @FindBy(xpath = "//input[@type='text']")
-    WebElement summary;
+    public WebElement summary;
 
     @FindBy(id = "statusDropdown")
     WebElement statusDropdown;
@@ -158,9 +158,10 @@ public class DefectLandingPage extends BasePage {
         select.selectByVisibleText(project);
     }
 
-    public WebElement defectDetailsById(String defectId) {
-        return driver.findElement(
+    public void defectDetailsById(String defectId) {
+        WebElement element = driver.findElement(
                 By.xpath("//a[contains(normalize-space(.), '" + defectId + "')]"));
+        element.click();
     }
 
     public void resizeColumn(String columnName, int offsetX) {
@@ -185,4 +186,24 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(helpBtn)).click();
 
     }
+    public void clickStatusDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(statusDropdown)).click();
+    }
+
+    public void clickSeverityDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(severityDropdown)).click();
+    }
+
+    public void clickPriorityDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(priorityDropdown)).click();
+    }
+
+    public void clickAssignedToDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(assignToDropdown)).click();
+    }
+
+    public void clickAffectedReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown)).click();
+    }
+
 }
