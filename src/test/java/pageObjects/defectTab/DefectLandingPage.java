@@ -1,7 +1,6 @@
 package pageObjects.defectTab;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,12 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import testBase.BaseClass;
 import pageObjects.BasePage;
-
-import java.sql.DriverManager;
 import java.time.Duration;
-import java.util.List;
 
 public class DefectLandingPage extends BasePage {
 
@@ -37,7 +32,6 @@ public class DefectLandingPage extends BasePage {
 
     @FindBy(xpath = "//input[@type='text']")
     WebElement summary;
-
 
     @FindBy(id = "statusDropdown")
     WebElement statusDropdown;
@@ -78,19 +72,17 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "//p[@class='pagination-text']")
     WebElement totalDefectEntryCount;
 
-
-
-
     // ================= ACTIONS =================
     public void clickDefectTab() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(defectTab));
         defectTab.click();
     }
+
     public void enterSummary(String text) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(summary));
-        summary.clear();     // optional, but recommended
+        summary.clear(); // optional, but recommended
         summary.sendKeys(text);
     }
 
@@ -166,8 +158,6 @@ public class DefectLandingPage extends BasePage {
         select.selectByVisibleText(project);
     }
 
-
-
     public WebElement defectDetailsById(String defectId) {
         return driver.findElement(
                 By.xpath("//a[contains(normalize-space(.), '" + defectId + "')]"));
@@ -190,11 +180,9 @@ public class DefectLandingPage extends BasePage {
                 .release()
                 .perform();
     }
-//resizeColumn("Defect ID", 50);   // drag right by 50 px
 
     public void clickHelpBtn() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(helpBtn)).click();
 
     }
 }
-
