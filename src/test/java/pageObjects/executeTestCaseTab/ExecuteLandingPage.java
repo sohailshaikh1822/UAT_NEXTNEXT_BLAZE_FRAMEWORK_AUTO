@@ -524,7 +524,7 @@ public class ExecuteLandingPage extends BasePage {
                 return 0;
             }
 
-            String[] parts = text.split(" ");
+            // String[] parts = text.split(" ");
 
             return Integer.parseInt(text.replaceAll("[^0-9]", ""));
         } catch (Exception e) {
