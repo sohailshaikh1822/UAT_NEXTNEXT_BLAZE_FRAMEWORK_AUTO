@@ -1,7 +1,6 @@
 package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
@@ -15,11 +14,10 @@ public class TC011 extends BaseClass {
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
         try {
-            // Step 1: Login
+
             login();
             logger.info("Logged in successfully and dashboard loaded");
 
-            // Step 2: Navigate to Defect Tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
 
             defectLandingPage.clickDefectTab();
@@ -40,10 +38,6 @@ public class TC011 extends BaseClass {
 
             createDefectPage.clickSave();
             logger.info("Clicked the save button");
-
-
-
-
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

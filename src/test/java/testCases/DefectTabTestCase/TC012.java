@@ -1,6 +1,5 @@
 package testCases.DefectTabTestCase;
 
-import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
@@ -15,11 +14,10 @@ public class TC012 extends BaseClass {
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
         try {
-            // Step 1: Login
+
             login();
             logger.info("Logged in successfully and dashboard loaded");
 
-            // Step 2: Navigate to Defect Tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
 
             defectLandingPage.clickDefectTab();

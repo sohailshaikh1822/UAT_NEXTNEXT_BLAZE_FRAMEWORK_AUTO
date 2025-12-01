@@ -3,7 +3,6 @@ package testCases.DefectTabTestCase;
 import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.BasePage;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
