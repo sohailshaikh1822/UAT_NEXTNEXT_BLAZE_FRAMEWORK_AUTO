@@ -8,9 +8,9 @@
 
     <test verbose="2" preserve-order="true" name="Demo flow ">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="head"/>
+        <parameter name="mode" value="headless"/>
         <classes>
-<!--            <class name="testCases.demo.testplan_execute_automation"/>-->
+           <class name="testCases.demo.testplan_execute_automation"/>
             <class name="testCases.demo.FinalFlow"/>
         </classes>
     </test>
