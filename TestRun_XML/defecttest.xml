@@ -11,8 +11,8 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headed"/>
         <classes>
-<!--            <class name="testCases.DefectTabTestCase.TC001"/>-->
-            <class name="testCases.DefectTabTestCase.TC009"/>
+            <class name="testCases.DefectTabTestCase.TC001"/>
+            <class name="testCases.DefectTabTestCase.TC003"/>
         </classes>
     </test>
 </suite>
