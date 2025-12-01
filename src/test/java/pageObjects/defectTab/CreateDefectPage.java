@@ -81,6 +81,9 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
+    @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
+    WebElement msgSummaryCannotBeBlank;
+
     // ACTION OBJECTS
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -205,4 +208,23 @@ public class CreateDefectPage extends BasePage {
         }
         return options;
     }
+
+    public boolean isSummaryBlankErrorDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOf(msgSummaryCannotBeBlank))
+                .isDisplayed();
+    }
+
+    public boolean isMandatoryStarVisible(String fieldName) {
+        String dynamicXpath = "//span[normalize-space(text())='" + fieldName + "']"
+                + "/following-sibling::span[normalize-space(text())='*']";
+
+        WebElement mandatoryStar = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath))
+        );
+
+        return mandatoryStar.isDisplayed();
+    }
+
+
+
 }
