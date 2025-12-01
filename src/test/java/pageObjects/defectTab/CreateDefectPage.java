@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.*;
+import org.testng.Assert;
 import pageObjects.BasePage;
 
 import java.time.Duration;
@@ -94,9 +95,19 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        wait.until(ExpectedConditions.visibilityOf(textAreaSummary)).clear();
-        textAreaSummary.sendKeys(summary);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        element.clear();
+        for (char c : summary.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+        }
+        js.executeScript("arguments[0].blur();", element);
+        wait.until(driver -> element.getAttribute("value").equals(summary));
+        Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
+
+
+    
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -104,8 +115,16 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Description ----------
     public void enterDescription(String description) {
-        wait.until(ExpectedConditions.visibilityOf(textAreaDescription)).clear();
-        textAreaDescription.sendKeys(description);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        element.clear();
+        for (char c : description.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+        }
+        js.executeScript("arguments[0].blur();", element);
+        wait.until(driver -> element.getAttribute("value").equals(description));
+        Assert.assertEquals(element.getAttribute("value"), description,
+                "FAILED: Description text did not set properly.");
     }
 
     public String getDescription() {
@@ -135,6 +154,100 @@ public class CreateDefectPage extends BasePage {
     public void selectSeverity(String value) {
         selectDropdown(dropdownSeverity, value);
     }
+
+    public void clickSeverityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
+        dropdown.click();
+
+        // Print all values
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickReasonDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickTypeDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        System.out.println("Type dropdown values:");
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickModuleDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+
+
+    public void clickAffectedReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease)).click();
+    }
+
+
+    public void clickTargetReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
+    }
+
+    public void clickCategoryDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickStatusDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+    public void clickPriorityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
 
     public void selectReason(String value) {
         selectDropdown(dropdownReason, value);
