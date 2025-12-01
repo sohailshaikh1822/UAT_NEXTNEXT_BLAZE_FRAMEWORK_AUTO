@@ -30,7 +30,6 @@ public class CreateDefectPage extends BasePage {
     @FindBy(id = "DefSummary")
     WebElement textAreaSummary;
 
-
     // Dropdowns
     @FindBy(id = "AffectedReleaseDropdown")
     WebElement dropdownAffectedRelease;
