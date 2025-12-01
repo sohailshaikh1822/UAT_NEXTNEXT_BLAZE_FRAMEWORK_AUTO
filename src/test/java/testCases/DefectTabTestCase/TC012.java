@@ -9,7 +9,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC012 extends BaseClass {
-    @Test(, retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyNavigationToDefectPage() throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
