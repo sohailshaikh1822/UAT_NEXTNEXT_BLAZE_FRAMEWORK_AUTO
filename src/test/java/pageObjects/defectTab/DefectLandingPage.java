@@ -175,16 +175,6 @@ public class DefectLandingPage extends BasePage {
         defectElement.click();
     }
 
-    public void clickDefectByIndex(int defectIndex) {
-        String xpath = "(//div[@class='testlistcell1'])[" + defectIndex + "]";
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement defectElement = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
-        );
-
-        defectElement.click();
-    }
 
     public void resizeColumn(String columnName, int offsetX) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
