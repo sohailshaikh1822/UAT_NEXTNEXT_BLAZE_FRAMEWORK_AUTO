@@ -19,7 +19,7 @@ public class CreateDefectPage extends BasePage {
 
     // LOCATORS
     // Buttons
-    @FindBy(id = "createDefect")
+    @FindBy(id = "updateDefect")
     WebElement buttonSave;
 
     @FindBy(id = "closeButton")
@@ -81,6 +81,9 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
+    @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
+    WebElement msgSummaryCannotBeBlank;
+
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
@@ -90,7 +93,8 @@ public class CreateDefectPage extends BasePage {
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
+                element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -120,10 +124,6 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(description));
         Assert.assertEquals(element.getAttribute("value"), description,
                 "FAILED: Description text did not set properly.");
-    }
-
-    public String getDescription() {
-        return textAreaDescription.getAttribute("value");
     }
 
     public boolean textAreaDescriptionIsDisplayed() {
@@ -317,22 +317,37 @@ public class CreateDefectPage extends BasePage {
                     actualMessage,
                     expectedMessage,
                     "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
-                    + actualMessage + "'");
+                            + actualMessage + "'");
 
         } catch (TimeoutException e) {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
     }
-    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription) throws InterruptedException {
+
+    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
+            throws InterruptedException {
         Thread.sleep(1500);
 
         String actualSummary = getSummary().trim();
         String actualDescription = getDescription().trim();
 
         System.out.println("DEBUG SUMMARY -> actual: [" + actualSummary + "] | expected: [" + expectedSummary + "]");
-        System.out.println("DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
+        System.out.println(
+                "DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
 
         return actualSummary.equals(expectedSummary) && actualDescription.equals(expectedDescription);
+    }
+
+    public static By textAreaDescriptionLocator() {
+        return By.xpath("//textarea[@rows='8']");
+    }
+
+    public String getDescription() {
+        return textAreaDescription.getAttribute("value");
+    }
+
+    public WebElement getDescriptionField() {
+        return textAreaDescription;
     }
 
     public String getSuccessNotificationText() throws InterruptedException {
@@ -367,6 +382,5 @@ public class CreateDefectPage extends BasePage {
             throw new RuntimeException("Save button is not visible or not clickable.");
         }
     }
-
 
 }
