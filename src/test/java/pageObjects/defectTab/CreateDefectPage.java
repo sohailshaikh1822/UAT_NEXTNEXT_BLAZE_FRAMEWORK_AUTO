@@ -141,6 +141,22 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownAffectedRelease, value);
     }
 
+    public void selectModule(String value) {
+        selectDropdown(dropdownModule, value);
+    }
+
+    public void selectTargetRelease(String value) {
+        selectDropdown(dropdownTargetRelease, value);
+    }
+
+    public void selectSeverity(String value) {
+        selectDropdown(dropdownSeverity, value);
+    }
+
+    public void clickAffectedReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease)).click();
+    }
+
     public boolean dropdownAffectedReleaseIsDisplayed() {
         return dropdownAffectedRelease.isDisplayed();
     }
@@ -322,6 +338,96 @@ public class CreateDefectPage extends BasePage {
         } catch (TimeoutException e) {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
+    }
+
+    public void clickSeverityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
+        dropdown.click();
+
+        // Print all values
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickReasonDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickTypeDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        System.out.println("Type dropdown values:");
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickModuleDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickCategoryDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickStatusDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickPriorityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickTargetReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
     }
 
     public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
