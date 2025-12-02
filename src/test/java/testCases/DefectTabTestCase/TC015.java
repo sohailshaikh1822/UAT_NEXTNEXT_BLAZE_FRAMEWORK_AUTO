@@ -17,7 +17,7 @@ public class TC015 extends BaseClass {
             String message
     ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
+        logger.info("****** Starting Test Case ********");
 
         try {
             login();
@@ -58,6 +58,6 @@ public class TC015 extends BaseClass {
             throw ex;
         }
 
-        logger.info("************ Test Case Finished: Verify Navigation to Defect Page *************");
+        logger.info("************ Test Case Finished *************");
     }
 }
