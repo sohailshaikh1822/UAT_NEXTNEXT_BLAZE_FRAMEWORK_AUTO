@@ -334,4 +334,39 @@ public class CreateDefectPage extends BasePage {
 
         return actualSummary.equals(expectedSummary) && actualDescription.equals(expectedDescription);
     }
+
+    public String getSuccessNotificationText() throws InterruptedException {
+        Thread.sleep(2000);
+        return successNotification.getText().trim();
+    }
+
+    public boolean isSaveButtonVisible() throws InterruptedException {
+        Thread.sleep(1500);
+        try {
+            return buttonSave.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isSaveButtonClickable() throws InterruptedException {
+        Thread.sleep(1500);
+        try {
+            return buttonSave.isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickSaveIfVisibleAndClickable() throws InterruptedException {
+        Thread.sleep(1500);
+
+        if (buttonSave.isDisplayed() && buttonSave.isEnabled()) {
+            buttonSave.click();
+        } else {
+            throw new RuntimeException("Save button is not visible or not clickable.");
+        }
+    }
+
+
 }
