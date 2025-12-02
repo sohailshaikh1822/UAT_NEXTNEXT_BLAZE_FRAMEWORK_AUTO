@@ -145,10 +145,6 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownModule, value);
     }
 
-    public void selectTargetRelease(String value) {
-        selectDropdown(dropdownTargetRelease, value);
-    }
-
     public void selectSeverity(String value) {
         selectDropdown(dropdownSeverity, value);
     }
@@ -161,10 +157,6 @@ public class CreateDefectPage extends BasePage {
         return dropdownAffectedRelease.isDisplayed();
     }
 
-    public void selectModule(String value) {
-        selectDropdown(dropdownModule, value);
-    }
-
     public boolean dropdownModuleIsDisplayed() {
         return dropdownModule.isDisplayed();
     }
@@ -175,10 +167,6 @@ public class CreateDefectPage extends BasePage {
 
     public boolean dropdownTargetReleaseIsDisplayed() {
         return dropdownTargetRelease.isDisplayed();
-    }
-
-    public void selectSeverity(String value) {
-        selectDropdown(dropdownSeverity, value);
     }
 
     public boolean dropdownSeverityIsDisplayed() {
