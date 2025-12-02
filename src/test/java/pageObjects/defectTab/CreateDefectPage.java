@@ -18,7 +18,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     // LOCATORS
-
     // Buttons
     @FindBy(id = "createDefect")
     WebElement buttonSave;
@@ -82,16 +81,12 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
-
-
     // ACTION OBJECTS
-
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // METHODS
-
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
@@ -105,11 +100,12 @@ public class CreateDefectPage extends BasePage {
         Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
 
-
-    
-
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
+    }
+
+    public boolean textAreaSummaryIsDisplayed() {
+        return textAreaSummary.isDisplayed();
     }
 
     // ---------- Description ----------
@@ -130,6 +126,10 @@ public class CreateDefectPage extends BasePage {
         return textAreaDescription.getAttribute("value");
     }
 
+    public boolean textAreaDescriptionIsDisplayed() {
+        return textAreaDescription.isDisplayed();
+    }
+
     // ---------- Generic Dropdown Selector ----------
     private void selectDropdown(WebElement dropdown, String visibleText) {
         Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
@@ -137,49 +137,92 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Dropdown Methods ----------
-
     public void selectAffectedRelease(String value) {
         selectDropdown(dropdownAffectedRelease, value);
+    }
+
+    public boolean dropdownAffectedReleaseIsDisplayed() {
+        return dropdownAffectedRelease.isDisplayed();
     }
 
     public void selectModule(String value) {
         selectDropdown(dropdownModule, value);
     }
 
+    public boolean dropdownModuleIsDisplayed() {
+        return dropdownModule.isDisplayed();
+    }
+
     public void selectTargetRelease(String value) {
         selectDropdown(dropdownTargetRelease, value);
+    }
+
+    public boolean dropdownTargetReleaseIsDisplayed() {
+        return dropdownTargetRelease.isDisplayed();
     }
 
     public void selectSeverity(String value) {
         selectDropdown(dropdownSeverity, value);
     }
 
+    public boolean dropdownSeverityIsDisplayed() {
+        return dropdownSeverity.isDisplayed();
+    }
+
     public void selectReason(String value) {
         selectDropdown(dropdownReason, value);
+    }
+
+    public boolean dropdownReasonIsDisplayed() {
+        return dropdownReason.isDisplayed();
     }
 
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
 
+    public boolean dropdownStatusIsDisplayed() {
+        return dropdownStatus.isDisplayed();
+    }
+
     public void selectFixedRelease(String value) {
         selectDropdown(dropdownFixedRelease, value);
+    }
+
+    public boolean dropdownFixedReleaseIsDisplayed() {
+        return dropdownFixedRelease.isDisplayed();
     }
 
     public void selectCategory(String value) {
         selectDropdown(dropdownCategory, value);
     }
 
+    public boolean dropdownCategoryIsDisplayed() {
+        return dropdownCategory.isDisplayed();
+    }
+
     public void selectPriority(String value) {
         selectDropdown(dropdownPriority, value);
+    }
+
+    public boolean dropdownPriorityIsDisplayed() {
+        return dropdownPriority.isDisplayed();
     }
 
     public void selectType(String value) {
         selectDropdown(dropdownType, value);
     }
 
+    public boolean dropdownTypeIsDisplayed() {
+        return dropdownType.isDisplayed();
+    }
+
     public void selectAssignTo(String value) {
         selectDropdown(dropdownAssignTo, value);
+    }
+
+    public boolean dropdownAssignToIsDisplayed() {
+        return dropdownAssignTo.isDisplayed();
     }
 
     // ---------- Button Clicks ----------
@@ -187,14 +230,26 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
 
+    public boolean buttonSaveIsDisplayed() {
+        return buttonSave.isDisplayed();
+    }
+
     public void clickClose() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
+    }
+
+    public boolean buttonCloseIsDisplayed() {
+        return buttonClose.isDisplayed();
     }
 
     // ---------- Attachment Upload ----------
     public void uploadFile(String filePath) {
         wait.until(ExpectedConditions.elementToBeClickable(buttonBrowseFile)).click();
         inputUploadFile.sendKeys(filePath);
+    }
+
+    public boolean buttonBrowseFileIsDisplayed() {
+        return buttonBrowseFile.isDisplayed();
     }
 
     public boolean isFileUploaded() {
@@ -248,7 +303,7 @@ public class CreateDefectPage extends BasePage {
                     actualMessage,
                     expectedMessage,
                     "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
-                            + actualMessage + "'");
+                    + actualMessage + "'");
 
         } catch (TimeoutException e) {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
