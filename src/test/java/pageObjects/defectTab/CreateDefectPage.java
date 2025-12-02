@@ -81,8 +81,6 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
-
-
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
@@ -165,6 +163,10 @@ public class CreateDefectPage extends BasePage {
 
     public void selectSeverity(String value) {
         selectDropdown(dropdownSeverity, value);
+    }
+
+    public boolean dropdownSeverityIsDisplayed() {
+        return dropdownSeverity.isDisplayed();
     }
 
     public void selectReason(String value) {
@@ -315,7 +317,7 @@ public class CreateDefectPage extends BasePage {
                     actualMessage,
                     expectedMessage,
                     "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
-                            + actualMessage + "'");
+                    + actualMessage + "'");
 
         } catch (TimeoutException e) {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
