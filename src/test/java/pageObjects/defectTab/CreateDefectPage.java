@@ -18,9 +18,8 @@ public class CreateDefectPage extends BasePage {
     }
 
     // LOCATORS
-
     // Buttons
-    @FindBy(id = "createDefect")
+    @FindBy(id = "updateDefect")
     WebElement buttonSave;
 
     @FindBy(id = "closeButton")
@@ -82,18 +81,20 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     WebElement successNotification;
 
-    // ACTION OBJECTS
+    @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
+    WebElement msgSummaryCannotBeBlank;
 
+    // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // METHODS
-
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
+                element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -105,6 +106,10 @@ public class CreateDefectPage extends BasePage {
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
+    }
+
+    public boolean textAreaSummaryIsDisplayed() {
+        return textAreaSummary.isDisplayed();
     }
 
     // ---------- Description ----------
@@ -121,8 +126,8 @@ public class CreateDefectPage extends BasePage {
                 "FAILED: Description text did not set properly.");
     }
 
-    public String getDescription() {
-        return textAreaDescription.getAttribute("value");
+    public boolean textAreaDescriptionIsDisplayed() {
+        return textAreaDescription.isDisplayed();
     }
 
     // ---------- Generic Dropdown Selector ----------
@@ -132,7 +137,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Dropdown Methods ----------
-
     public void selectAffectedRelease(String value) {
         selectDropdown(dropdownAffectedRelease, value);
     }
@@ -153,32 +157,88 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease)).click();
     }
 
+    public boolean dropdownAffectedReleaseIsDisplayed() {
+        return dropdownAffectedRelease.isDisplayed();
+    }
+
+    public void selectModule(String value) {
+        selectDropdown(dropdownModule, value);
+    }
+
+    public boolean dropdownModuleIsDisplayed() {
+        return dropdownModule.isDisplayed();
+    }
+
+    public void selectTargetRelease(String value) {
+        selectDropdown(dropdownTargetRelease, value);
+    }
+
+    public boolean dropdownTargetReleaseIsDisplayed() {
+        return dropdownTargetRelease.isDisplayed();
+    }
+
+    public void selectSeverity(String value) {
+        selectDropdown(dropdownSeverity, value);
+    }
+
+    public boolean dropdownSeverityIsDisplayed() {
+        return dropdownSeverity.isDisplayed();
+    }
+
     public void selectReason(String value) {
         selectDropdown(dropdownReason, value);
+    }
+
+    public boolean dropdownReasonIsDisplayed() {
+        return dropdownReason.isDisplayed();
     }
 
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
 
+    public boolean dropdownStatusIsDisplayed() {
+        return dropdownStatus.isDisplayed();
+    }
+
     public void selectFixedRelease(String value) {
         selectDropdown(dropdownFixedRelease, value);
+    }
+
+    public boolean dropdownFixedReleaseIsDisplayed() {
+        return dropdownFixedRelease.isDisplayed();
     }
 
     public void selectCategory(String value) {
         selectDropdown(dropdownCategory, value);
     }
 
+    public boolean dropdownCategoryIsDisplayed() {
+        return dropdownCategory.isDisplayed();
+    }
+
     public void selectPriority(String value) {
         selectDropdown(dropdownPriority, value);
+    }
+
+    public boolean dropdownPriorityIsDisplayed() {
+        return dropdownPriority.isDisplayed();
     }
 
     public void selectType(String value) {
         selectDropdown(dropdownType, value);
     }
 
+    public boolean dropdownTypeIsDisplayed() {
+        return dropdownType.isDisplayed();
+    }
+
     public void selectAssignTo(String value) {
         selectDropdown(dropdownAssignTo, value);
+    }
+
+    public boolean dropdownAssignToIsDisplayed() {
+        return dropdownAssignTo.isDisplayed();
     }
 
     // ---------- Button Clicks ----------
@@ -186,14 +246,26 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
 
+    public boolean buttonSaveIsDisplayed() {
+        return buttonSave.isDisplayed();
+    }
+
     public void clickClose() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
+    }
+
+    public boolean buttonCloseIsDisplayed() {
+        return buttonClose.isDisplayed();
     }
 
     // ---------- Attachment Upload ----------
     public void uploadFile(String filePath) {
         wait.until(ExpectedConditions.elementToBeClickable(buttonBrowseFile)).click();
         inputUploadFile.sendKeys(filePath);
+    }
+
+    public boolean buttonBrowseFileIsDisplayed() {
+        return buttonBrowseFile.isDisplayed();
     }
 
     public boolean isFileUploaded() {
@@ -226,7 +298,21 @@ public class CreateDefectPage extends BasePage {
         return options;
     }
 
-    // Check if Status dropdown is at default placeholder
+    public boolean isSummaryBlankErrorDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOf(msgSummaryCannotBeBlank))
+                .isDisplayed();
+    }
+
+    public boolean isMandatoryStarVisible(String fieldName) {
+        String dynamicXpath = "//span[normalize-space(text())='" + fieldName + "']"
+                + "/following-sibling::span[normalize-space(text())='*']";
+
+        WebElement mandatoryStar = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath)));
+
+        return mandatoryStar.isDisplayed();
+    }
+
     public void verifyStatusIsDefault() {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
         String selectedText = select.getFirstSelectedOption().getText().trim();
@@ -342,6 +428,65 @@ public class CreateDefectPage extends BasePage {
 
     public void clickTargetReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
+    }
+
+    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
+            throws InterruptedException {
+        Thread.sleep(1500);
+
+        String actualSummary = getSummary().trim();
+        String actualDescription = getDescription().trim();
+
+        System.out.println("DEBUG SUMMARY -> actual: [" + actualSummary + "] | expected: [" + expectedSummary + "]");
+        System.out.println(
+                "DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
+
+        return actualSummary.equals(expectedSummary) && actualDescription.equals(expectedDescription);
+    }
+
+    public static By textAreaDescriptionLocator() {
+        return By.xpath("//textarea[@rows='8']");
+    }
+
+    public String getDescription() {
+        return textAreaDescription.getAttribute("value");
+    }
+
+    public WebElement getDescriptionField() {
+        return textAreaDescription;
+    }
+
+    public String getSuccessNotificationText() throws InterruptedException {
+        Thread.sleep(2000);
+        return successNotification.getText().trim();
+    }
+
+    public boolean isSaveButtonVisible() throws InterruptedException {
+        Thread.sleep(1500);
+        try {
+            return buttonSave.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isSaveButtonClickable() throws InterruptedException {
+        Thread.sleep(1500);
+        try {
+            return buttonSave.isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickSaveIfVisibleAndClickable() throws InterruptedException {
+        Thread.sleep(1500);
+
+        if (buttonSave.isDisplayed() && buttonSave.isEnabled()) {
+            buttonSave.click();
+        } else {
+            throw new RuntimeException("Save button is not visible or not clickable.");
+        }
     }
 
 }

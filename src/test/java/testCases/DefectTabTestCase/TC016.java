@@ -8,15 +8,21 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC009 extends BaseClass {
-    @Test(dataProvider = "tc009", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void Verify_dropdown_mandatory_validation_does_not_accept_placeholder(
+public class TC016 extends BaseClass {
+    @Test(dataProvider = "tc016", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void Verify_saving_with_all_fields_filled(
             String expectedUrlAfterClick,
             String Summary,
+            String Severity,
+            String Type,
+            String Category,
+            String Priority,
+            String Status,
+            String AssignTo,
             String Description
-        ) throws InterruptedException {
+    ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case: Verify dropdown mandatory validation does not accept placeholder ********");
+        logger.info("****** Starting Test Case: Verify saving with all fields filled ********");
 
         try {
             login();
@@ -37,10 +43,24 @@ public class TC009 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(3000);
 
-            createDefectPage.verifyStatusIsDefault();
-            Thread.sleep(3000);
+            createDefectPage.selectSeverity(Severity);
+            logger.info("Severity selected:"+Severity);
+
+            createDefectPage.selectType(Type);
+            logger.info("Severity selected:"+Type);
+
+            createDefectPage.selectCategory(Category);
+            logger.info("Category selected:"+Category);
+
+            createDefectPage.selectPriority(Priority);
+            logger.info("Priority selected:"+Priority);
+
+            createDefectPage.selectStatus(Status);
+            logger.info("Status selected:"+Status);
+
+            createDefectPage.selectAssignTo(AssignTo);
+            logger.info("Assign To selected:"+AssignTo);
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled:"+Description);
@@ -48,11 +68,7 @@ public class TC009 extends BaseClass {
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            createDefectPage.verifyStatusErrorMessage();
-            logger.info("Verified: Status mandatory error message displayed.");
 
-
-            
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
@@ -61,6 +77,6 @@ public class TC009 extends BaseClass {
             throw ex;
         }
 
-        logger.info("************ Test Case Finished: Verify dropdown mandatory validation does not accept placeholder *************");
+        logger.info("************ Test Case Finished: Verify saving with all fields filled *************");
     }
 }

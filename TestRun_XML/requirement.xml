@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="utils.ExtentReportManager"/>
+        <listener class-name="utils.ExtentSuiteListener"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="requirement Test ">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headed"/>
+        <classes>
+<!--            <class name="testCases.requirementTabTestCase.TC001"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC002"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC003"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC004"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC005"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC006"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC007"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC008"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC009"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC010"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC011"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC012"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC013"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC014"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC015"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC017"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC018"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC019"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC020"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC021"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC022"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC024"/>-->
+            <class name="testCases.requirementTabTestCase.TC025"/>
+<!--            <class name="testCases.requirementTabTestCase.TC026"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC027"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC028"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC029"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC030"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC031"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC032"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC033"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC035"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC036"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC037"/>-->
+        </classes>
+    </test>
+</suite>

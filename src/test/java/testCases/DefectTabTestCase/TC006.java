@@ -3,7 +3,6 @@ package testCases.DefectTabTestCase;
 import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.BasePage;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
@@ -33,7 +32,7 @@ public class TC006 extends BaseClass {
                     "User did not navigate to the expected Defect Page URL.");
 
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
-            defectLandingPage.defectDetailsById(defectID);
+            defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
             Thread.sleep(3000);
 
