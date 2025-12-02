@@ -20,7 +20,7 @@ public class CreateDefectPage extends BasePage {
     // LOCATORS
 
     // Buttons
-    @FindBy(id = "createDefect")
+    @FindBy(id = "updateDefect")
     WebElement buttonSave;
 
     @FindBy(id = "closeButton")
@@ -96,7 +96,8 @@ public class CreateDefectPage extends BasePage {
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
+                element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -105,6 +106,28 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(summary));
         Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
+
+    // public void enterSummary(String summary) {
+    // WebElement element =
+    // wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
+
+    // js.executeScript(
+    // "arguments[0].value = arguments[1];" +
+    // "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+    // "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
+    // element, summary);
+
+    // try {
+    // Thread.sleep(500);
+    // } catch (InterruptedException e) {
+    // Thread.currentThread().interrupt();
+    // }
+
+    // Assert.assertEquals(
+    // element.getAttribute("value").trim(),
+    // summary,
+    // "FAILED: Summary text did not set properly.");
+    // }
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -122,10 +145,6 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(description));
         Assert.assertEquals(element.getAttribute("value"), description,
                 "FAILED: Description text did not set properly.");
-    }
-
-    public String getDescription() {
-        return textAreaDescription.getAttribute("value");
     }
 
     // ---------- Generic Dropdown Selector ----------
@@ -360,15 +379,30 @@ public class CreateDefectPage extends BasePage {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
     }
-    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription) throws InterruptedException {
+
+    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
+            throws InterruptedException {
         Thread.sleep(1500);
 
         String actualSummary = getSummary().trim();
         String actualDescription = getDescription().trim();
 
         System.out.println("DEBUG SUMMARY -> actual: [" + actualSummary + "] | expected: [" + expectedSummary + "]");
-        System.out.println("DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
+        System.out.println(
+                "DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
 
         return actualSummary.equals(expectedSummary) && actualDescription.equals(expectedDescription);
+    }
+
+    public static By textAreaDescriptionLocator() {
+        return By.xpath("//textarea[@rows='8']");
+    }
+
+    public String getDescription() {
+        return textAreaDescription.getAttribute("value");
+    }
+
+    public WebElement getDescriptionField() {
+        return textAreaDescription;
     }
 }

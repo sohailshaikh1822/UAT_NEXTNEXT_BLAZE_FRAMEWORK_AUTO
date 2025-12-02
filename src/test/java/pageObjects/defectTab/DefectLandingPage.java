@@ -158,7 +158,7 @@ public class DefectLandingPage extends BasePage {
         select.selectByVisibleText(project);
     }
 
-    public void defectDetailsById(String defectId) {
+    public void ClickDefectbyID(String defectId) {
         WebElement element = driver.findElement(
                 By.xpath("//a[contains(normalize-space(.), '" + defectId + "')]"));
         element.click();
@@ -205,5 +205,5 @@ public class DefectLandingPage extends BasePage {
     public void clickAffectedReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown)).click();
     }
-
+    
 }
