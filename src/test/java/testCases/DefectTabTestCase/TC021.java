@@ -11,7 +11,7 @@ import utils.RetryAnalyzer;
 
 public class TC021 extends BaseClass {
 
-    @Test(dataProvider = "tc021", dataProviderClass = DefectTabTestCaseDataProvider.class)
+    @Test(dataProvider = "tc021", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class, description = "Verify Description supports multiline")
     public void verifyDescriptionSupportsMultiline(String defectId, String multilineDescription)
             throws InterruptedException {
 
