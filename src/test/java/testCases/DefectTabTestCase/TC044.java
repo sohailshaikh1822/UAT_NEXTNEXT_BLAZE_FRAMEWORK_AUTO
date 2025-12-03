@@ -9,7 +9,6 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-
 import javax.swing.*;
 
 public class TC044 extends BaseClass {

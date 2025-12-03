@@ -44,7 +44,6 @@ public class TC043 extends BaseClass {
             landingPage.ClickDefectbyID("312");
             logger.info("Opened an existing defect");
 
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
