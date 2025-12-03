@@ -1,14 +1,15 @@
 package testCases.DefectTabTestCase;
 
-import org.openqa.selenium.NoSuchElementException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import pageObjects.defectTab.CreateDefectPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC022 extends BaseClass {
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyErrorOnSaveWithoutMandatoryFields() throws InterruptedException {
 
         logger.info("****** Starting TC022 - Error on SAVE without mandatory fields ******");

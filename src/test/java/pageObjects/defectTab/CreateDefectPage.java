@@ -519,6 +519,18 @@ public class CreateDefectPage extends BasePage {
         return successNotification.getText().trim();
     }
 
+    public String getNotificationText() {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//*[contains(@id,'notification') or contains(@class,'notification')]")));
+            return element.getText().trim();
+        } catch (Exception e) {
+            System.out.println("Notification NOT found.");
+            return "";
+        }
+    }
+
+
     public boolean isSaveButtonVisible() throws InterruptedException {
         Thread.sleep(1500);
         try {
@@ -550,4 +562,26 @@ public class CreateDefectPage extends BasePage {
     public void scrollToSaveButton() {
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", buttonSavefornewDefect);
     }
+
+    public String getRawSummary() {
+    return textAreaSummary.getAttribute("value");
+}
+
+    public String getSuccessNotificationMessage() {
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(successNotification)
+        );
+        return element.getText().trim();
+    }
+
+    public void verifySuccessNotificationMessage(String expectedMessage) {
+        String actualMessage = getSuccessNotificationMessage();
+        Assert.assertEquals(
+                actualMessage,
+                expectedMessage,
+                "FAILED: Success notification message mismatch."
+        );
+    }
+
+
 }
