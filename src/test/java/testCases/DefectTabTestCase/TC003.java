@@ -8,12 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 import java.time.Duration;
 
 public class TC003 extends BaseClass {
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyDefectPageNotAccessibleWithoutLogin() throws InterruptedException {
 
         logger.info("****** Starting TC003: Verify Deep Link Access Restriction *****************");
