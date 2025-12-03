@@ -13,6 +13,10 @@
         <classes>
 <!--            <class name="testCases.DefectTabTestCase.TC001"/>-->
             <class name="testCases.DefectTabTestCase.TC040"/>
+           <class name="testCases.DefectTabTestCase.TC001"/>
+           <class name="testCases.DefectTabTestCase.TC003"/>
+           <class name="testCases.DefectTabTestCase.TC004"/>
+            <class name="testCases.DefectTabTestCase.TC023"/>
         </classes>
     </test>
 </suite>

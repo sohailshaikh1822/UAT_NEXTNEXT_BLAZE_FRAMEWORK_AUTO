@@ -19,7 +19,7 @@ public class CreateDefectPage extends BasePage {
 
     // LOCATORS
     // Buttons
-    @FindBy(id = "updateDefect")
+    @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
     @FindBy(id = "createDefect")
@@ -93,6 +93,14 @@ public class CreateDefectPage extends BasePage {
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // METHODS
+
+    // ------------------PAGE SCROLLING METHODS------------------
+    public void scrollUp(){
+        By containerLocator = By.xpath("//div[@class='test-execution-frame-2']");
+        WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
+        js.executeScript("arguments[0].scrollTop = 0;", container);
+    }
+
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
