@@ -495,4 +495,9 @@ public class CreateDefectPage extends BasePage {
     public void scrollToSaveButton() {
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", buttonSavefornewDefect);
     }
+
+    public String getRawSummary() {
+    return textAreaSummary.getAttribute("value");
+}
+
 }
