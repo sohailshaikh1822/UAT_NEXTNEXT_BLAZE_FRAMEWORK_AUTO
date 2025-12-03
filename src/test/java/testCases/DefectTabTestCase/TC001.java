@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 
-public class TC001 extends BaseClass {
+public class TC001 extends BaseClass{
 
     @Test()
     public void verifyNavigationToDefectPage() throws InterruptedException {
