@@ -1,0 +1,79 @@
+package testCases.DefectTabTestCase;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pageObjects.defectTab.CreateDefectPage;
+import pageObjects.defectTab.DefectLandingPage;
+import testBase.BaseClass;
+
+public class TC039 extends BaseClass {
+
+    @Test()
+    public void verifyCancelDoesNotCreateDefect() throws InterruptedException {
+
+        logger.info("****** Starting Test Case TC039 ******");
+
+        try {
+            login();
+            logger.info("Logged in successfully");
+
+            DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
+            defectLandingPage.clickDefectTab();
+            logger.info("User navigated to Defect Landing Page");
+
+            defectLandingPage.clickCreateTestCaseButton();
+            logger.info("Clicked Create Defect");
+
+            CreateDefectPage createDefect = new CreateDefectPage(getDriver());
+
+            String tempSummary = "AutoTest_CancelDefect_" + System.currentTimeMillis();
+            String tempDescription = "Temporary Description - Should Not Be Saved";
+
+            createDefect.enterSummary(tempSummary);
+            logger.info("Entered Summary: " + tempSummary);
+
+            createDefect.enterDescription(tempDescription);
+            logger.info("Entered Description");
+
+            createDefect.selectSeverity("Minor");
+            createDefect.selectPriority("Medium");
+
+            logger.info("Filled mandatory details WITHOUT saving");
+
+            createDefect.clickClose();
+            logger.info("Clicked CLOSE without saving");
+
+            Thread.sleep(2000);
+
+            defectLandingPage.enterSummary(tempSummary);
+            defectLandingPage.clickSearchButton();
+            logger.info("Searching for unsaved defect on listing page");
+
+            Thread.sleep(2000);
+
+            defectLandingPage.clickLastPageArrow();
+            logger.info("Navigated to last page of defect listing");
+
+            Thread.sleep(2000);
+
+            String pageText = getDriver().getPageSource();
+
+            boolean defectFound = pageText.contains(tempSummary);
+
+            Assert.assertFalse(defectFound,
+                    "FAILED Defect was found even after cancelling! SUMMARY: " + tempSummary);
+
+            logger.info("PASSED  No defect found with Summary: " + tempSummary);
+
+        } catch (AssertionError e) {
+            logger.error("Assertion Failure: " + e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+            logger.error("Exception Occurred: " + e.getMessage());
+            throw e;
+        }
+
+        logger.info("************ TC039 Finished Successfully ************");
+    }
+}

@@ -28,13 +28,10 @@ public class TC036 extends BaseClass {
             getDriver().navigate().back();
             logger.info("Clicked on browser back button");
 
-
-
             getDriver().navigate().forward();
             logger.info("Clicked on browser forward button");
 
             Thread.sleep(3000);
-
 
             String actualUrl = getDriver().getCurrentUrl();
             String expectedUrlAfterClick = "https://webapp-stg-testnext.azurewebsites.net/defect";
@@ -42,14 +39,10 @@ public class TC036 extends BaseClass {
                     "User is not navigated to the Defect page!");
             logger.info("Defect Page loaded and form fields are visible.");
 
-        }
-        catch (AssertionError ae)
-        {
+        } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             logger.error("Exception occurred: " + ex.getMessage());
             throw ex;
         }
