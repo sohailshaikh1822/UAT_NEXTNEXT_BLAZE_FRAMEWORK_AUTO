@@ -2,12 +2,10 @@ package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
-import utils.RetryAnalyzer;
 
 public class TC021 extends BaseClass {
 
