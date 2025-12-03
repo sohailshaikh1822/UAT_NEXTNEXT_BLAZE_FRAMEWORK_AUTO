@@ -4,10 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC001 extends BaseClass{
 
-    @Test()
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyNavigationToDefectPage() throws InterruptedException {
 
         logger.info("****** Starting the Test Case *****************");

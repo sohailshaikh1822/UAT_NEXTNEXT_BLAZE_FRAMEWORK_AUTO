@@ -4,13 +4,13 @@
     <listeners>
         <listener class-name="utils.ExtentReportManager"/>
         <listener class-name="utils.ExtentSuiteListener"/>
-
     </listeners>
 
     <test verbose="2" preserve-order="true" name="Defect Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headed"/>
+        <parameter name="mode" value="headless"/>
         <classes>
+<<<<<<< HEAD
 <!--            <class name="testCases.DefectTabTestCase.TC001"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC040"/>-->
 <!--           <class name="testCases.DefectTabTestCase.TC001"/>-->
@@ -19,6 +19,35 @@
             <!-- <class name="testCases.DefectTabTestCase.TC040"/> -->
 <!--            <class name="testCases.DefectTabTestCase.TC041"/>-->
             <class name="testCases.DefectTabTestCase.TC042"/>
+=======
+            <class name="testCases.DefectTabTestCase.TC001"/>
+            <class name="testCases.DefectTabTestCase.TC003"/>
+            <class name="testCases.DefectTabTestCase.TC004"/>
+            <class name="testCases.DefectTabTestCase.TC006"/>
+            <class name="testCases.DefectTabTestCase.TC007"/>
+            <class name="testCases.DefectTabTestCase.TC008"/>
+            <class name="testCases.DefectTabTestCase.TC009"/>
+            <class name="testCases.DefectTabTestCase.TC010"/>
+            <class name="testCases.DefectTabTestCase.TC011"/>
+            <class name="testCases.DefectTabTestCase.TC012"/>
+            <class name="testCases.DefectTabTestCase.TC013"/>
+            <class name="testCases.DefectTabTestCase.TC014"/>
+            <class name="testCases.DefectTabTestCase.TC015"/>
+            <class name="testCases.DefectTabTestCase.TC016"/>
+            <class name="testCases.DefectTabTestCase.TC017"/>
+            <class name="testCases.DefectTabTestCase.TC018"/>
+            <class name="testCases.DefectTabTestCase.TC019"/>
+            <class name="testCases.DefectTabTestCase.TC021"/>
+            <class name="testCases.DefectTabTestCase.TC022"/>
+            <class name="testCases.DefectTabTestCase.TC023"/>
+            <class name="testCases.DefectTabTestCase.TC029"/>
+            <class name="testCases.DefectTabTestCase.TC030"/>
+            <class name="testCases.DefectTabTestCase.TC036"/>
+            <class name="testCases.DefectTabTestCase.TC037"/>
+            <class name="testCases.DefectTabTestCase.TC039"/>
+            <class name="testCases.DefectTabTestCase.TC040"/>
+            <class name="testCases.DefectTabTestCase.TC048"/>
+>>>>>>> 9b0cb28 (Added TC040, TC048 and Added RetryAnalyzer for misssing testcase)
         </classes>
     </test>
 </suite>
