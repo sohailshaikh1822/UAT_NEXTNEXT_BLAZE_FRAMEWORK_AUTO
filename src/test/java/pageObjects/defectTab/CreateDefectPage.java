@@ -22,6 +22,9 @@ public class CreateDefectPage extends BasePage {
     @FindBy(id = "updateDefect")
     WebElement buttonSave;
 
+    @FindBy(id = "createDefect")
+    WebElement buttonSavefornewDefect;
+
     @FindBy(id = "closeButton")
     WebElement buttonClose;
 
@@ -232,6 +235,10 @@ public class CreateDefectPage extends BasePage {
     // ---------- Button Clicks ----------
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
+    }
+
+    public void clickSaveforNewDefect() {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSavefornewDefect)).click();
     }
 
     public boolean buttonSaveIsDisplayed() {
@@ -477,4 +484,7 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
+    public void scrollToSaveButton() {
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", buttonSavefornewDefect);
+    }
 }
