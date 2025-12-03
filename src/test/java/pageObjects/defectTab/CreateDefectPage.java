@@ -507,4 +507,26 @@ public class CreateDefectPage extends BasePage {
     public void scrollToSaveButton() {
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", buttonSavefornewDefect);
     }
+
+    public String getRawSummary() {
+    return textAreaSummary.getAttribute("value");
+}
+
+    public String getSuccessNotificationMessage() {
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(successNotification)
+        );
+        return element.getText().trim();
+    }
+
+    public void verifySuccessNotificationMessage(String expectedMessage) {
+        String actualMessage = getSuccessNotificationMessage();
+        Assert.assertEquals(
+                actualMessage,
+                expectedMessage,
+                "FAILED: Success notification message mismatch."
+        );
+    }
+
+
 }

@@ -1,6 +1,6 @@
 package testCases.DefectTabTestCase;
 
-import org.openqa.selenium.NoSuchElementException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
