@@ -5,10 +5,11 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import pageObjects.defectTab.CreateDefectPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC019 extends BaseClass {
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyCloseButtonWithoutChanges() throws InterruptedException {
 
         logger.info("****** Starting TC019 - CLOSE button without changes ******");

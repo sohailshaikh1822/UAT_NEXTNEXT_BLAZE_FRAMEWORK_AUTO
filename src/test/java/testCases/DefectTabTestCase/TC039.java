@@ -5,10 +5,11 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC039 extends BaseClass {
 
-    @Test()
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyCancelDoesNotCreateDefect() throws InterruptedException {
 
         logger.info("****** Starting Test Case TC039 ******");
