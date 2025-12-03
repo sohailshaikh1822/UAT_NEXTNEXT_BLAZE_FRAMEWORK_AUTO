@@ -500,4 +500,21 @@ public class CreateDefectPage extends BasePage {
     return textAreaSummary.getAttribute("value");
 }
 
+    public String getSuccessNotificationMessage() {
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(successNotification)
+        );
+        return element.getText().trim();
+    }
+
+    public void verifySuccessNotificationMessage(String expectedMessage) {
+        String actualMessage = getSuccessNotificationMessage();
+        Assert.assertEquals(
+                actualMessage,
+                expectedMessage,
+                "FAILED: Success notification message mismatch."
+        );
+    }
+
+
 }
