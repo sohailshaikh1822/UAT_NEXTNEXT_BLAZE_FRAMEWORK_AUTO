@@ -9,7 +9,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC046 extends BaseClass {
-    @Test(dataProvider = "tc047", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc046", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyThatUserCanSearchCreatedDefectInListingAfterSave(
             String expectedUrlAfterClick,
             String Summary,
