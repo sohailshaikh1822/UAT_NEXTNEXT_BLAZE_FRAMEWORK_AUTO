@@ -8,7 +8,7 @@
 
     <test verbose="2" preserve-order="true" name="Defect Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="headed"/>
         <classes>
             <class name="testCases.DefectTabTestCase.TC001"/>
             <class name="testCases.DefectTabTestCase.TC003"/>
@@ -30,6 +30,8 @@
             <class name="testCases.DefectTabTestCase.TC021"/>
             <class name="testCases.DefectTabTestCase.TC022"/>
             <class name="testCases.DefectTabTestCase.TC023"/>
+            <class name="testCases.DefectTabTestCase.TC026"/>
+            <class name="testCases.DefectTabTestCase.TC027"/>
             <class name="testCases.DefectTabTestCase.TC029"/>
             <class name="testCases.DefectTabTestCase.TC030"/>
             <class name="testCases.DefectTabTestCase.TC036"/>
