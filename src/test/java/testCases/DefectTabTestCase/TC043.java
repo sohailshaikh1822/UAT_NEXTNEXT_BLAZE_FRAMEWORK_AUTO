@@ -34,6 +34,9 @@ public class TC043 extends BaseClass {
             createPage.clickClose();
             logger.info("Clicked CLOSE button");
 
+            createPage.selectYes();
+
+
             String expectedUrl = "https://webapp-stg-testnext.azurewebsites.net/defect";
             String currentUrl = getDriver().getCurrentUrl();
 
