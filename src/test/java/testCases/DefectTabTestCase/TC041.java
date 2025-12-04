@@ -59,6 +59,7 @@ public class TC041 extends BaseClass {
 
             String savedSummary = createDefectPage.getRawSummary();
             logger.info("Saved Summary captured: '" + savedSummary + "'");
+            Thread.sleep(3000);
 
             Assert.assertEquals(
                     savedSummary,

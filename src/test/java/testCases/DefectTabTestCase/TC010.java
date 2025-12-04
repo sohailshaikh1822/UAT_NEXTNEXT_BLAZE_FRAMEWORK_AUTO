@@ -39,9 +39,11 @@ public class TC010 extends BaseClass {
 
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled: " + Summary);
+            Thread.sleep(3000);
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled:\n" + Description);
+            Thread.sleep(3000);
 
             boolean isVerified = createDefectPage.verifySummaryAndDescription(Summary, Description);
             Assert.assertTrue(isVerified, "Summary or Description text validation failed.");
