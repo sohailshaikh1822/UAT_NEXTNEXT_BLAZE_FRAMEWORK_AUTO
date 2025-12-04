@@ -10,19 +10,6 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
         <classes>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<!--            <class name="testCases.DefectTabTestCase.TC001"/>-->
-<!--            <class name="testCases.DefectTabTestCase.TC040"/>-->
-<!--           <class name="testCases.DefectTabTestCase.TC001"/>-->
-<!--           <class name="testCases.DefectTabTestCase.TC003"/>-->
-<!--           <class name="testCases.DefectTabTestCase.TC004"/>-->
-            <!-- <class name="testCases.DefectTabTestCase.TC040"/> -->
-<!--            <class name="testCases.DefectTabTestCase.TC041"/>-->
-            <class name="testCases.DefectTabTestCase.TC042"/>
-=======
-=======
->>>>>>> 07d9171ca09b12e27d079c1a6161d6717497321d
             <class name="testCases.DefectTabTestCase.TC001"/>
             <class name="testCases.DefectTabTestCase.TC003"/>
             <class name="testCases.DefectTabTestCase.TC004"/>
@@ -50,10 +37,6 @@
             <class name="testCases.DefectTabTestCase.TC039"/>
             <class name="testCases.DefectTabTestCase.TC040"/>
             <class name="testCases.DefectTabTestCase.TC048"/>
-<<<<<<< HEAD
->>>>>>> 9b0cb28 (Added TC040, TC048 and Added RetryAnalyzer for misssing testcase)
-=======
->>>>>>> 07d9171ca09b12e27d079c1a6161d6717497321d
         </classes>
     </test>
 </suite>
