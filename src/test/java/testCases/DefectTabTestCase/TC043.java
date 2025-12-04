@@ -1,21 +1,19 @@
 package testCases.DefectTabTestCase;
 
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.defectTab.DefectLandingPage;
 import pageObjects.defectTab.CreateDefectPage;
+import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC022 extends BaseClass {
+public class TC043 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void verifyErrorOnSaveWithoutMandatoryFields() throws InterruptedException {
+    public void VerifyThatUserCanCancelEditAndKeepOldValues() throws InterruptedException {
 
-        logger.info("****** Starting TC022 - Error on SAVE without mandatory fields ******");
+        logger.info("****** Starting TC043 ******");
 
         try {
-
             login();
             logger.info("Logged in successfully");
 
@@ -23,26 +21,27 @@ public class TC022 extends BaseClass {
             landingPage.clickDefectTab();
             logger.info("Navigated to Defect page");
 
-            landingPage.clickCreateTestCaseButton();
-            logger.info("Opened Create Defect form");
+            landingPage.ClickDefectbyID("312");
+            logger.info("Opened an existing defect");
 
             CreateDefectPage createPage = new CreateDefectPage(getDriver());
 
+            Thread.sleep(3000);
             createPage.enterSummary("Automation defect summary");
 
             createPage.selectStatus("New");
 
-            createPage.clickSave();
-            logger.info("Clicked Save button");
+            createPage.clickClose();
+            logger.info("Clicked CLOSE button");
 
-            String expectedError = "Error: Please enter a valid Description.";
+            String expectedUrl = "https://webapp-stg-testnext.azurewebsites.net/defect";
+            String currentUrl = getDriver().getCurrentUrl();
 
-            boolean isErrorDisplayed = createPage.verifySuccessMessage(expectedError);
+            Assert.assertEquals(currentUrl, expectedUrl,
+                    "FAILED: CLOSE button did not navigate back to Defect page");
 
-            Assert.assertTrue(isErrorDisplayed,
-                    "FAILED: Expected popup not displayed OR text mismatch.");
-
-            logger.info("Validation message verified successfully: " + expectedError);
+            landingPage.ClickDefectbyID("312");
+            logger.info("Opened an existing defect");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
@@ -52,6 +51,6 @@ public class TC022 extends BaseClass {
             throw e;
         }
 
-        logger.info("************ TC022 Finished *************************");
+        logger.info("************ TC043 Finished *************************");
     }
 }

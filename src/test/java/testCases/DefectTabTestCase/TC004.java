@@ -1,7 +1,6 @@
 package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;

@@ -6,7 +6,7 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC001 extends BaseClass {
+public class TC001 extends BaseClass{
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyNavigationToDefectPage() throws InterruptedException {
