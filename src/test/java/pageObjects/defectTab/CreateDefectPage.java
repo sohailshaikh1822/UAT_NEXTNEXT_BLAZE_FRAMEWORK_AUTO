@@ -18,10 +18,12 @@ public class CreateDefectPage extends BasePage {
     }
 
     // LOCATORS
-
     // Buttons
-    @FindBy(id = "createDefect")
+    @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
+
+    @FindBy(id = "createDefect")
+    WebElement buttonSavefornewDefect;
 
     @FindBy(id = "closeButton")
     WebElement buttonClose;
@@ -61,7 +63,7 @@ public class CreateDefectPage extends BasePage {
     @FindBy(id = "TypeDropdown")
     WebElement dropdownType;
 
-    @FindBy(id = "AssignToDropdown")
+    @FindBy(xpath = "//select[@id='AssignToDropdown']")
     WebElement dropdownAssignTo;
 
     // Description
@@ -86,17 +88,24 @@ public class CreateDefectPage extends BasePage {
     WebElement msgSummaryCannotBeBlank;
 
     // ACTION OBJECTS
-
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // METHODS
 
+    // ------------------PAGE SCROLLING METHODS------------------
+    public void scrollUp(){
+        By containerLocator = By.xpath("//div[@class='test-execution-frame-2']");
+        WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
+        js.executeScript("arguments[0].scrollTop = 0;", container);
+    }
+
     // ---------- Summary ----------
     public void enterSummary(String summary) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
+                element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -108,6 +117,10 @@ public class CreateDefectPage extends BasePage {
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
+    }
+
+    public boolean textAreaSummaryIsDisplayed() {
+        return textAreaSummary.isDisplayed();
     }
 
     // ---------- Description ----------
@@ -124,8 +137,8 @@ public class CreateDefectPage extends BasePage {
                 "FAILED: Description text did not set properly.");
     }
 
-    public String getDescription() {
-        return textAreaDescription.getAttribute("value");
+    public boolean textAreaDescriptionIsDisplayed() {
+        return textAreaDescription.isDisplayed();
     }
 
     // ---------- Generic Dropdown Selector ----------
@@ -135,7 +148,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Dropdown Methods ----------
-
     public void selectAffectedRelease(String value) {
         selectDropdown(dropdownAffectedRelease, value);
     }
@@ -144,134 +156,88 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownModule, value);
     }
 
-    public void selectTargetRelease(String value) {
-        selectDropdown(dropdownTargetRelease, value);
-    }
-
     public void selectSeverity(String value) {
         selectDropdown(dropdownSeverity, value);
-    }
-
-    public void clickSeverityDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
-        dropdown.click();
-
-        // Print all values
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
-    }
-
-    public void clickReasonDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
-        dropdown.click();
-
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
-    }
-
-    public void clickTypeDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
-        dropdown.click();
-
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        System.out.println("Type dropdown values:");
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
-    }
-
-    public void clickModuleDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
-        dropdown.click();
-
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
     }
 
     public void clickAffectedReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease)).click();
     }
 
-    public void clickTargetReleaseDropdown() {
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
+    public boolean dropdownAffectedReleaseIsDisplayed() {
+        return dropdownAffectedRelease.isDisplayed();
     }
 
-    public void clickCategoryDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
-        dropdown.click();
-
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
+    public boolean dropdownModuleIsDisplayed() {
+        return dropdownModule.isDisplayed();
     }
 
-    public void clickStatusDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
-        dropdown.click();
-
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
+    public void selectTargetRelease(String value) {
+        selectDropdown(dropdownTargetRelease, value);
     }
 
-    public void clickPriorityDropdown() {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
-        dropdown.click();
+    public boolean dropdownTargetReleaseIsDisplayed() {
+        return dropdownTargetRelease.isDisplayed();
+    }
 
-        Select select = new Select(dropdown);
-        List<WebElement> options = select.getOptions();
-
-        for (WebElement option : options) {
-            System.out.println(" -> " + option.getText());
-        }
+    public boolean dropdownSeverityIsDisplayed() {
+        return dropdownSeverity.isDisplayed();
     }
 
     public void selectReason(String value) {
         selectDropdown(dropdownReason, value);
     }
 
+    public boolean dropdownReasonIsDisplayed() {
+        return dropdownReason.isDisplayed();
+    }
+
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
+    }
+
+    public boolean dropdownStatusIsDisplayed() {
+        return dropdownStatus.isDisplayed();
     }
 
     public void selectFixedRelease(String value) {
         selectDropdown(dropdownFixedRelease, value);
     }
 
+    public boolean dropdownFixedReleaseIsDisplayed() {
+        return dropdownFixedRelease.isDisplayed();
+    }
+
     public void selectCategory(String value) {
         selectDropdown(dropdownCategory, value);
+    }
+
+    public boolean dropdownCategoryIsDisplayed() {
+        return dropdownCategory.isDisplayed();
     }
 
     public void selectPriority(String value) {
         selectDropdown(dropdownPriority, value);
     }
 
+    public boolean dropdownPriorityIsDisplayed() {
+        return dropdownPriority.isDisplayed();
+    }
+
     public void selectType(String value) {
         selectDropdown(dropdownType, value);
     }
 
+    public boolean dropdownTypeIsDisplayed() {
+        return dropdownType.isDisplayed();
+    }
+
     public void selectAssignTo(String value) {
         selectDropdown(dropdownAssignTo, value);
+    }
+
+    public boolean dropdownAssignToIsDisplayed() {
+        return dropdownAssignTo.isDisplayed();
     }
 
     // ---------- Button Clicks ----------
@@ -279,14 +245,30 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
 
+    public void clickSaveforNewDefect() {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSavefornewDefect)).click();
+    }
+
+    public boolean buttonSaveIsDisplayed() {
+        return buttonSave.isDisplayed();
+    }
+
     public void clickClose() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
+    }
+
+    public boolean buttonCloseIsDisplayed() {
+        return buttonClose.isDisplayed();
     }
 
     // ---------- Attachment Upload ----------
     public void uploadFile(String filePath) {
         wait.until(ExpectedConditions.elementToBeClickable(buttonBrowseFile)).click();
         inputUploadFile.sendKeys(filePath);
+    }
+
+    public boolean buttonBrowseFileIsDisplayed() {
+        return buttonBrowseFile.isDisplayed();
     }
 
     public boolean isFileUploaded() {
@@ -353,22 +335,253 @@ public class CreateDefectPage extends BasePage {
             Assert.assertEquals(
                     actualMessage,
                     expectedMessage,
-                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage +
-                            "' but found: '" + actualMessage + "'");
+                    "FAILED: Incorrect validation message. Expected: '" + expectedMessage + "' but found: '"
+                            + actualMessage + "'");
 
         } catch (TimeoutException e) {
             Assert.fail("FAILED: Status error notification did NOT appear after clicking Save.");
         }
     }
-    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription) throws InterruptedException {
+
+    public void clickSeverityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
+        dropdown.click();
+
+        // Print all values
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickReasonDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickTypeDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        System.out.println("Type dropdown values:");
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public String getSelectedAffectedRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownAffectedRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedModule() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownModule)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedTargetRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownTargetRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedSeverity() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownSeverity)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedReason() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownReason)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedStatus() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedFixedRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownFixedRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedCategory() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownCategory)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedPriority() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownPriority)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedAssignTo() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownAssignTo)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedType() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownType)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public void clickModuleDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickCategoryDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickStatusDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickPriorityDropdown() {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        dropdown.click();
+
+        Select select = new Select(dropdown);
+        List<WebElement> options = select.getOptions();
+
+        for (WebElement option : options) {
+            System.out.println(" -> " + option.getText());
+        }
+    }
+
+    public void clickTargetReleaseDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
+    }
+
+    public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
+            throws InterruptedException {
         Thread.sleep(1500);
 
         String actualSummary = getSummary().trim();
         String actualDescription = getDescription().trim();
 
         System.out.println("DEBUG SUMMARY -> actual: [" + actualSummary + "] | expected: [" + expectedSummary + "]");
-        System.out.println("DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
+        System.out.println(
+                "DEBUG DESCRIPTION -> actual: [" + actualDescription + "] | expected: [" + expectedDescription + "]");
 
         return actualSummary.equals(expectedSummary) && actualDescription.equals(expectedDescription);
     }
+
+    public static By textAreaDescriptionLocator() {
+        return By.xpath("//textarea[@rows='8']");
+    }
+
+    public String getDescription() {
+        return textAreaDescription.getAttribute("value");
+    }
+
+    public WebElement getDescriptionField() {
+        return textAreaDescription;
+    }
+
+    public String getSuccessNotificationText() throws InterruptedException {
+        Thread.sleep(2000);
+        return successNotification.getText().trim();
+    }
+
+    public String getNotificationText() {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//*[contains(@id,'notification') or contains(@class,'notification')]")));
+            return element.getText().trim();
+        } catch (Exception e) {
+            System.out.println("Notification NOT found.");
+            return "";
+        }
+    }
+
+
+    public boolean isSaveButtonVisible() throws InterruptedException {
+        Thread.sleep(1500);
+        try {
+            return buttonSave.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isSaveButtonClickable() throws InterruptedException {
+        Thread.sleep(1500);
+        try {
+            return buttonSave.isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickSaveIfVisibleAndClickable() throws InterruptedException {
+        Thread.sleep(1500);
+
+        if (buttonSave.isDisplayed() && buttonSave.isEnabled()) {
+            buttonSave.click();
+        } else {
+            throw new RuntimeException("Save button is not visible or not clickable.");
+        }
+    }
+
+    public void scrollToSaveButton() {
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", buttonSavefornewDefect);
+    }
+
+    public String getRawSummary() {
+    return textAreaSummary.getAttribute("value");
+}
+
+    public String getSuccessNotificationMessage() {
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(successNotification)
+        );
+        return element.getText().trim();
+    }
+
+    public void verifySuccessNotificationMessage(String expectedMessage) {
+        String actualMessage = getSuccessNotificationMessage();
+        Assert.assertEquals(
+                actualMessage,
+                expectedMessage,
+                "FAILED: Success notification message mismatch."
+        );
+    }
+
+
 }

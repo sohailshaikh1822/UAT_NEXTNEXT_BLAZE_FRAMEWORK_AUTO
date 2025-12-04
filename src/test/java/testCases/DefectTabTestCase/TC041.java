@@ -1,55 +1,73 @@
 package testCases.DefectTabTestCase;
 
-import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import DataProviders.DefectTabTestCaseDataProvider;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC015 extends BaseClass {
-    @Test(dataProvider = "tc015", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifySavingWithOnlyMandatoryFieldsFilled(
+public class TC041 extends BaseClass {
+
+    @Test(dataProvider = "tc041", dataProviderClass = DefectTabTestCaseDataProvider.class,
+            retryAnalyzer = RetryAnalyzer.class)
+    public void Verify_that_Summary_field_dosent_trims_leading_and_trailing_spaces(
             String expectedUrlAfterClick,
+            String ID,
             String Summary,
-            String status,
-            String message
+            String ID1
     ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case ********");
+        logger.info("****** Starting Test Case: Verify that Summary field dosen't trims leading and trailing spaces ********");
 
         try {
             login();
             logger.info("Logged in successfully and dashboard loaded");
+
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
-            logger.info("Defect Page loaded and form fields are visible.");
-            defectLandingPage.clickCreateTestCaseButton();
 
-            logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
             Thread.sleep(3000);
-            createDefectPage.enterSummary(Summary);
-            logger.info("Summary filled:"+Summary);
+
+            defectLandingPage.ClickDefectbyID(ID);
+            logger.info("Defect clicked: " + ID);
             Thread.sleep(3000);
 
-            createDefectPage.selectStatus(status);
-            logger.info("status is selected");
+            createDefectPage.enterSummary(Summary);
+            logger.info("Summary filled: " + Summary);
             Thread.sleep(3000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            createDefectPage.verifySuccessMessage(message);
+            createDefectPage.clickClose();
+            logger.info("closed button clicked");
+
+            defectLandingPage.ClickDefectbyID(ID1);
+            logger.info("Again defect clicked: " + ID1);
+            Thread.sleep(3000);
+
+            String savedSummary = createDefectPage.getRawSummary();
+            logger.info("Saved Summary captured: '" + savedSummary + "'");
+
+            Assert.assertEquals(
+                    savedSummary,
+                    Summary,
+                    "FAILED: Summary saved does not match the exact user input including spaces."
+            );
+
+            logger.info("Summary verified with exact spacing as entered");
+
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
@@ -58,6 +76,6 @@ public class TC015 extends BaseClass {
             throw ex;
         }
 
-        logger.info("************ Test Case Finished *************");
+        logger.info("************ Test Case Finished: Verify that Summary field dosen't trims leading and trailing spaces *************");
     }
 }

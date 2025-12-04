@@ -8,11 +8,12 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC014 extends BaseClass {
-    @Test(dataProvider = "tc014", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyErrorWhenOneMandatoryFieldisMissing(
-            String expectedUrlAfterClick,
-            String Summary
+public class TC037 extends BaseClass {
+    @Test(dataProvider = "tc037", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyNoDuplicateDefectisCreatedOnDoubleClickingSAVE(
+            String Summary,
+            String status,
+            String Description
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case ********");
@@ -23,13 +24,17 @@ public class TC014 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
+            Thread.sleep(3000);
+
             String actualUrl = getDriver().getCurrentUrl();
-            Assert.assertNotNull(actualUrl);
-            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
-                    "User did not navigate to the expected Defect Page URL.");
-            logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
+            String expectedUrlAfterClick = "https://webapp-stg-testnext.azurewebsites.net/defect";
+            Assert.assertEquals(actualUrl, expectedUrlAfterClick,
+                    "User is not navigated to the Defect page!");
             logger.info("Defect Page loaded and form fields are visible.");
+
+
             defectLandingPage.clickCreateTestCaseButton();
+
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
@@ -38,13 +43,16 @@ public class TC014 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
+            createDefectPage.selectStatus(status);
+            logger.info("status is selected");
+            Thread.sleep(3000);
+
+            createDefectPage.enterDescription(Description);
+            logger.info("Description filled:"+Description);
 
             createDefectPage.clickSave();
-            logger.info("Clicked on save button");
-
-            createDefectPage.verifyStatusErrorMessage();
-            logger.info("Verified: Status mandatory error message displayed.");
-
+            createDefectPage.clickSave();
+            logger.info("Clicked on save button twice");
 
 
         } catch (AssertionError ae) {

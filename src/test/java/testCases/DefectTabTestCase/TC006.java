@@ -32,7 +32,7 @@ public class TC006 extends BaseClass {
                     "User did not navigate to the expected Defect Page URL.");
 
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
-            defectLandingPage.defectDetailsById(defectID);
+            defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
             Thread.sleep(3000);
 
