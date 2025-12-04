@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
+
     <listeners>
         <listener class-name="utils.ExtentReportManager"/>
         <listener class-name="utils.ExtentSuiteListener"/>
@@ -9,6 +10,7 @@
     <test verbose="2" preserve-order="true" name="Defect Test Suite">
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headed"/>
+
         <classes>
             <class name="testCases.DefectTabTestCase.TC001"/>
             <class name="testCases.DefectTabTestCase.TC003"/>
@@ -41,4 +43,5 @@
             <class name="testCases.DefectTabTestCase.TC048"/>
         </classes>
     </test>
+
 </suite>
