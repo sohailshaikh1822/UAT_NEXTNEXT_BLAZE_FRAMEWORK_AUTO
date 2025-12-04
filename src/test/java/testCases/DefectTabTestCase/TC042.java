@@ -47,6 +47,7 @@ public class TC042 extends BaseClass {
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
+            Thread.sleep(3000);
 
             createDefectPage.verifySuccessNotificationMessage("Defect updated successfully.");
             logger.info("Success notification verified successfully");
