@@ -1,6 +1,5 @@
 package testCases.DefectTabTestCase;
 
-import DataProviders.DefectTabTestCaseDataProvider;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -9,7 +8,6 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-import javax.swing.*;
 
 public class TC044 extends BaseClass {
     @Test( retryAnalyzer = RetryAnalyzer.class)

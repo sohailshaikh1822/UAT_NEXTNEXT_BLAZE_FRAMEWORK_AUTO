@@ -1,6 +1,5 @@
 package testCases.DefectTabTestCase;
 
-import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
