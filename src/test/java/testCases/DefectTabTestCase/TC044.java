@@ -44,14 +44,14 @@ public class TC044 extends BaseClass {
             Actions actions = new Actions(getDriver());
             actions.click(createDefectPage.getDescriptionField())
                     .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
-                    .keyDown(Keys.CONTROL).sendKeys("c").keyUp(Keys.CONTROL)
-                    .keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL)
+                    .keyDown(Keys.CONTROL).sendKeys("c").keyUp(Keys.CONTROL);
+            Thread.sleep(3000);
+            actions.click(createDefectPage.getDescriptionField())
+                    .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL);
+            Thread.sleep(3000);
+            actions.click(createDefectPage.getDescriptionField()).keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL)
                     .perform();
             logger.info("Copied & pasted Description text");
-
-            createDefectPage.clickSave();
-            logger.info("Clicked on save button");
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

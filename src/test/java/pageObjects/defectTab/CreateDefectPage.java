@@ -87,6 +87,9 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
     WebElement msgSummaryCannotBeBlank;
 
+    @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
+     WebElement popupYes;
+
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
@@ -243,6 +246,10 @@ public class CreateDefectPage extends BasePage {
     // ---------- Button Clicks ----------
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
+    }
+    public void selectYes()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYes)).click();
     }
 
     public void clickSaveforNewDefect() {
