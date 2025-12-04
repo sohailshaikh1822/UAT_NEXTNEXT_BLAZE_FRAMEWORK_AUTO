@@ -15,15 +15,17 @@ jobs:
       matrix:
         include:
           - suite: testplan.xml
-            logName: testPlan
+            logName: TestPlan_Log
           - suite: requirement.xml
-            logName: requirementLog
+            logName: Requirement_Log
           - suite: authortest.xml
-            logName: authorLog
+            logName: Author_Log
           - suite: executetest.xml
-            logName: executeLog
+            logName: Execute_Log
           - suite: settings.xml
-            logName: settingLog
+            logName: Setting_Log
+          - suite: defecttest.xml
+            logName: Defect_Log
 
     steps:
       - name: Checkout repository
