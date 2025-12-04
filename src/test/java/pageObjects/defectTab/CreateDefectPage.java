@@ -381,6 +381,61 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
+    public String getSelectedAffectedRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownAffectedRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedModule() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownModule)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedTargetRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownTargetRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedSeverity() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownSeverity)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedReason() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownReason)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedStatus() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedFixedRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownFixedRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedCategory() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownCategory)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedPriority() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownPriority)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedAssignTo() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownAssignTo)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedType() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownType)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
     public void clickModuleDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
         dropdown.click();
@@ -507,4 +562,26 @@ public class CreateDefectPage extends BasePage {
     public void scrollToSaveButton() {
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", buttonSavefornewDefect);
     }
+
+    public String getRawSummary() {
+    return textAreaSummary.getAttribute("value");
+}
+
+    public String getSuccessNotificationMessage() {
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(successNotification)
+        );
+        return element.getText().trim();
+    }
+
+    public void verifySuccessNotificationMessage(String expectedMessage) {
+        String actualMessage = getSuccessNotificationMessage();
+        Assert.assertEquals(
+                actualMessage,
+                expectedMessage,
+                "FAILED: Success notification message mismatch."
+        );
+    }
+
+
 }
