@@ -11,8 +11,8 @@ import utils.RetryAnalyzer;
 public class TC008 extends BaseClass {
 
     @Test(dataProvider = "tc008", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyDropdownSelectionAndDisplayOfChosenValue(String expectedUrlAfterClick,String defectID,String affectedrealese, String severity,String fixedRelease,String type,String module,String reason,String category,String targetRealse,String status,
-                                                               String priority , String assignTo) throws InterruptedException {
+    public void VerifyDropdownSelectionAndDisplayOfChosenValue(String expectedUrlAfterClick,String defectID,String affectedrealese, String severity,String fixedRelease,String type,String module,String reason,String category,String assignTo, String targetRealse,String status,
+                                                               String priority) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 

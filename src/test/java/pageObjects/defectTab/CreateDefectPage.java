@@ -63,7 +63,7 @@ public class CreateDefectPage extends BasePage {
     @FindBy(id = "TypeDropdown")
     WebElement dropdownType;
 
-    @FindBy(id = "AssignToDropdown")
+    @FindBy(xpath = "//select[@id='AssignToDropdown']")
     WebElement dropdownAssignTo;
 
     // Description
