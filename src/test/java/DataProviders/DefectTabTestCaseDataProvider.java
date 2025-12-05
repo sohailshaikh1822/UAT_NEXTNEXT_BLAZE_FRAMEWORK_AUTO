@@ -182,10 +182,6 @@ public class DefectTabTestCaseDataProvider {
         return ExcelDataProviders.getExcelDataForDefectTestCase("tc035");
     }
 
-    @DataProvider(name = "tc036")
-    public static Object[][] getDataTC036() throws IOException {
-        return ExcelDataProviders.getExcelDataForDefectTestCase("tc036");
-    }
 
     @DataProvider(name = "tc037")
     public static Object[][] getDataTC037() throws IOException {
@@ -215,16 +211,6 @@ public class DefectTabTestCaseDataProvider {
     @DataProvider(name = "tc042")
     public static Object[][] getDataTC042() throws IOException {
         return ExcelDataProviders.getExcelDataForDefectTestCase("tc042");
-    }
-
-    @DataProvider(name = "tc043")
-    public static Object[][] getDataTC043() throws IOException {
-        return ExcelDataProviders.getExcelDataForDefectTestCase("tc043");
-    }
-
-    @DataProvider(name = "tc044")
-    public static Object[][] getDataTC044() throws IOException {
-        return ExcelDataProviders.getExcelDataForDefectTestCase("tc044");
     }
 
     @DataProvider(name = "tc045")

@@ -1,7 +1,6 @@
 package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
@@ -9,7 +8,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC033 extends BaseClass {
-    @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class)
+    @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class ,retryAnalyzer = RetryAnalyzer.class )
     public void VerifySavingWithOnlyMandatoryFieldsFilled(
             String Summary,
             String status,

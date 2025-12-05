@@ -11,8 +11,8 @@ import utils.RetryAnalyzer;
 public class TC008 extends BaseClass {
 
     @Test(dataProvider = "tc008", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyDropdownSelectionAndDisplayOfChosenValue(String expectedUrlAfterClick,String defectID,String affectedrealese, String severity,String fixedRelease,String type,String module,String reason,String category,String targetRealse,String status,
-                                                               String priority , String assignTo) throws InterruptedException {
+    public void VerifyDropdownSelectionAndDisplayOfChosenValue(String expectedUrlAfterClick,String defectID,String affectedrealese, String severity,String fixedRelease,String type,String module,String reason,String category,String assignTo, String targetRealse,String status,
+                                                               String priority) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -33,7 +33,7 @@ public class TC008 extends BaseClass {
                     "User did not navigate to the expected Defect Page URL.");
 
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
-            defectLandingPage.defectDetailsById(defectID);
+            defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
             Thread.sleep(3000);
             createDefectPage.selectAffectedRelease(affectedrealese);

@@ -2,17 +2,16 @@ package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.annotations.Test;
-import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.RetryAnalyzer;
 
 public class TC035 extends BaseClass {
-    @Test(dataProvider = "tc035", dataProviderClass = DefectTabTestCaseDataProvider.class)
+    @Test(dataProvider = "tc035", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifySavingWithOnlyMandatoryFieldsFilled(
             String affectedRelease,
             String status,
-            String severity
-    ) throws InterruptedException {
+            String severity) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 

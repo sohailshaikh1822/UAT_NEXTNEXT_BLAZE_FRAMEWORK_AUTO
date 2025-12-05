@@ -8,14 +8,21 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC014 extends BaseClass {
-    @Test(dataProvider = "tc014", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyErrorWhenOneMandatoryFieldisMissing(
+public class TC017 extends BaseClass {
+    @Test(dataProvider = "tc017", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void Verify_success_message_content_after_save(
             String expectedUrlAfterClick,
-            String Summary
+            String Summary,
+            String Severity,
+            String Type,
+            String Category,
+            String Priority,
+            String Status,
+            String AssignTo,
+            String Description
     ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case ********");
+        logger.info("****** Starting Test Case: Verify success message content after save ********");
 
         try {
             login();
@@ -36,14 +43,35 @@ public class TC014 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(3000);
 
+            createDefectPage.selectSeverity(Severity);
+            logger.info("Severity selected:"+Severity);
+
+            createDefectPage.selectType(Type);
+            logger.info("Severity selected:"+Type);
+
+            createDefectPage.selectCategory(Category);
+            logger.info("Category selected:"+Category);
+
+            createDefectPage.selectPriority(Priority);
+            logger.info("Priority selected:"+Priority);
+
+            createDefectPage.selectStatus(Status);
+            logger.info("Status selected:"+Status);
+
+            createDefectPage.selectAssignTo(AssignTo);
+            logger.info("Assign To selected:"+AssignTo);
+
+            createDefectPage.enterDescription(Description);
+            logger.info("Description filled:"+Description);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            createDefectPage.verifyStatusErrorMessage();
-            logger.info("Verified: Status mandatory error message displayed.");
+            String actualMsg = createDefectPage.getSuccessNotificationText();
+            Assert.assertEquals(actualMsg, "Defect created successfully.",
+                    "Success message mismatch!");
+            logger.info("Success message verified: " + actualMsg);
 
 
 
@@ -55,6 +83,6 @@ public class TC014 extends BaseClass {
             throw ex;
         }
 
-        logger.info("************ Test Case Finished *************");
+        logger.info("************ Test Case Finished: Verify success message content after save *************");
     }
 }

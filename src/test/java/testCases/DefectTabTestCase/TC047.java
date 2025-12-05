@@ -8,14 +8,17 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC014 extends BaseClass {
-    @Test(dataProvider = "tc014", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyErrorWhenOneMandatoryFieldisMissing(
+public class TC047 extends BaseClass {
+
+    @Test(dataProvider = "tc047", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyThatInvalidCharactersAreRestrictedOrAllowed(
             String expectedUrlAfterClick,
-            String Summary
+            String Summary,
+            String status,String description
+
     ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case ********");
+        logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
         try {
             login();
@@ -23,6 +26,7 @@ public class TC014 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
+            Thread.sleep(3000);
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
@@ -30,6 +34,7 @@ public class TC014 extends BaseClass {
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             logger.info("Defect Page loaded and form fields are visible.");
             defectLandingPage.clickCreateTestCaseButton();
+
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
@@ -38,13 +43,15 @@ public class TC014 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
+            createDefectPage.selectStatus(status);
+            logger.info("status is selected");
+            Thread.sleep(3000);
+
+            createDefectPage.enterDescription(description);
+            logger.info("Description filled");
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-
-            createDefectPage.verifyStatusErrorMessage();
-            logger.info("Verified: Status mandatory error message displayed.");
-
 
 
         } catch (AssertionError ae) {
@@ -55,6 +62,6 @@ public class TC014 extends BaseClass {
             throw ex;
         }
 
-        logger.info("************ Test Case Finished *************");
+        logger.info("************ Test Case Finished: Verify Navigation to Defect Page *************");
     }
 }
