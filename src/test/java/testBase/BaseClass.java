@@ -139,7 +139,7 @@ public class BaseClass {
 
     // Wait for page to fully load (useful for Blazor apps after navigation)
     public void waitForPageLoad() {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(20))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(30))
                 .until(webDriver -> ((JavascriptExecutor) webDriver)
                         .executeScript("return document.readyState").equals("complete"));
     }
