@@ -106,9 +106,9 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
-                element);
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
