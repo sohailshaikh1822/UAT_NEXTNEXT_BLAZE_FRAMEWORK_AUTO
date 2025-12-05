@@ -11,6 +11,8 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    //pagefactory generally used to use @findby method to identify the we elements
+
     public BasePage() {
     }
 }
