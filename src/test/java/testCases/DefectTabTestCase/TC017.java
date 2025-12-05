@@ -40,7 +40,6 @@ public class TC017 extends BaseClass {
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
 
