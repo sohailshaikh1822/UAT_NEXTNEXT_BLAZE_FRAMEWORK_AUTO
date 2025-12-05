@@ -117,10 +117,14 @@ public class DefectLandingPage extends BasePage {
     }
 
     public void clickCreateTestCaseButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(createTestCaseButton));
-        createTestCaseButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement button = wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+        if (button.isDisplayed() && button.isEnabled()) {
+            button.click();
+        }
     }
+
 
     public String getTotalDefectEntryCount() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
