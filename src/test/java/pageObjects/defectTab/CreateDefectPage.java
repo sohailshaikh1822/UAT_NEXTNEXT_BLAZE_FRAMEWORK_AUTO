@@ -63,7 +63,7 @@ public class CreateDefectPage extends BasePage {
     @FindBy(id = "TypeDropdown")
     WebElement dropdownType;
 
-    @FindBy(id = "AssignToDropdown")
+    @FindBy(xpath = "//select[@id='AssignToDropdown']")
     WebElement dropdownAssignTo;
 
     // Description
@@ -86,6 +86,9 @@ public class CreateDefectPage extends BasePage {
 
     @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
     WebElement msgSummaryCannotBeBlank;
+
+    @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
+     WebElement popupYes;
 
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -244,6 +247,10 @@ public class CreateDefectPage extends BasePage {
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
+    public void selectYes()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYes)).click();
+    }
 
     public void clickSaveforNewDefect() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSavefornewDefect)).click();
@@ -379,6 +386,61 @@ public class CreateDefectPage extends BasePage {
         for (WebElement option : options) {
             System.out.println(" -> " + option.getText());
         }
+    }
+
+    public String getSelectedAffectedRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownAffectedRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedModule() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownModule)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedTargetRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownTargetRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedSeverity() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownSeverity)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedReason() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownReason)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedStatus() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedFixedRelease() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownFixedRelease)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedCategory() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownCategory)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedPriority() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownPriority)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedAssignTo() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownAssignTo)));
+        return select.getFirstSelectedOption().getText().trim();
+    }
+
+    public String getSelectedType() {
+        Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownType)));
+        return select.getFirstSelectedOption().getText().trim();
     }
 
     public void clickModuleDropdown() {
