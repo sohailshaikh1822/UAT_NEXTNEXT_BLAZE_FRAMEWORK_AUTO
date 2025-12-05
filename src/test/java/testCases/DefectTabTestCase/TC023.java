@@ -37,14 +37,21 @@ public class TC023 extends BaseClass {
 
             // Step 4: Fill the mandatory fields only and create the defect.
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
+            Thread.sleep(2000);
             createDefectPage.enterSummary(summary);
             logger.info("Summary Entered");
+
+            Thread.sleep(2000);
             createDefectPage.selectStatus(status);
             logger.info("Defect status selected");
+
+            Thread.sleep(2000);
             createDefectPage.enterDescription(description);
             logger.info("Description Added");
 
-//            createDefectPage.scrollUp();
+            Thread.sleep(2000);
+            createDefectPage.scrollUp();
+            Thread.sleep(2000);
             createDefectPage.clickSave();
             logger.info("Save Button Clicked");
             Assert.assertTrue(createDefectPage.verifySuccessMessage("Defect created successfully."), "Failed to create the defect.");

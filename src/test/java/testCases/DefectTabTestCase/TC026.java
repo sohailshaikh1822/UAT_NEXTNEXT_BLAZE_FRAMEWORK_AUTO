@@ -28,15 +28,21 @@ public class TC026 extends BaseClass {
             // Step 3: Select the project and open existing defect and close the defect
             defectLandingPage.selectProject(project);
             logger.info("project selected");
+
+            Thread.sleep(2000);
             defectLandingPage.clickSearchButton();
             logger.info("search button clicked");
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             defectLandingPage.clickDefectByIndex(1);
+//            defectLandingPage.ClickDefectbyID("DF-448");
             logger.info("Opened the Existing Defect");
+
             Thread.sleep(5000);
             CreateDefectPage defect = new CreateDefectPage(getDriver());
             defect.scrollUp();
             logger.info("Scrolled up the defect form");
+
+            Thread.sleep(2000);
             defect.clickClose();
             logger.info("defect closed");
             Thread.sleep(5000);
@@ -45,33 +51,61 @@ public class TC026 extends BaseClass {
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Test Case Button");
 
+            Thread.sleep(2000);
             Assert.assertEquals(expectedSummary, defect.getSummary(), "Summary value is not reset to default");
             logger.info("Summary value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedAffectedRelease, defect.getSelectedAffectedRelease(), "Affected Release value is not reset to default");
             logger.info("Affected Release value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedSeverity, defect.getSelectedSeverity(), "Severity value is not reset to default");
             logger.info("Severity value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedFixedRelease, defect.getSelectedFixedRelease(), "Fixed Release value is not reset to default");
             logger.info("Fixed Release value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedType, defect.getSelectedType(), "Type value is not reset to default");
             logger.info("Type value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedModule, defect.getSelectedModule(), "Module value is not reset to default");
             logger.info("Module value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedReason, defect.getSelectedReason(), "Reason value is not reset to default");
             logger.info("Reason value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedCategory, defect.getSelectedCategory(), "Category value is not reset to default");
             logger.info("Category value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedAssignTo, defect.getSelectedAssignTo(), "Assign To value is not reset to default");
             logger.info("Assign To value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedTargetRelease, defect.getSelectedTargetRelease(), "Target Release value is not reset to default");
             logger.info("Target Release value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedStatus, defect.getSelectedStatus(), "Status value is not reset to default");
             logger.info("Status value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedPriority, defect.getSelectedPriority(), "Priority value is not reset to default");
             logger.info("Priority value is reset to default");
+
+            Thread.sleep(2000);
             Assert.assertEquals(expectedDescription, defect.getDescription(), "Description value is not reset to default");
             logger.info("Description value is reset to default");
 
+            Thread.sleep(2000);
+            defect.scrollUp();
+            Thread.sleep(2000);
             defect.clickClose();
             logger.info("new defect form closed");
 
