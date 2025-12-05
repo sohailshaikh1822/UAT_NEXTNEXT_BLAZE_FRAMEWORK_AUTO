@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC011 extends BaseClass {
     @Test(dataProvider = "tc011", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyNavigationToDefectPage(String status, String summary) throws InterruptedException {
+    public void verifyTextInSummaryField(String status, String summary) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -23,6 +23,7 @@ public class TC011 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
+            Thread.sleep(3000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 

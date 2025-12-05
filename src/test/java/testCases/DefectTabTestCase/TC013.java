@@ -9,22 +9,21 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC013 extends BaseClass {
-    @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyNavigationToDefectPage(String affectedRelease, String module, String severity) throws InterruptedException {
+    @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class)
+    public void verifyNavigationToDefectPage(String affectedRelease, String reason, String severity) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
         try {
-            // Step 1: Login
             login();
             logger.info("Logged in successfully and dashboard loaded");
 
-            // Step 2: Navigate to Defect Tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
 
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
+            Thread.sleep(3000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
@@ -35,7 +34,7 @@ public class TC013 extends BaseClass {
             createDefectPage.selectAffectedRelease(affectedRelease);
             logger.info("Status Selected from Dropdown");
             Thread.sleep(3000);
-            createDefectPage.selectModule(module);
+            createDefectPage.selectReason(reason);
             logger.info("Filled the Summary field");
 
             Thread.sleep(3000);
