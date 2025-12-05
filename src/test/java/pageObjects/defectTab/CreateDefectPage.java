@@ -522,7 +522,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getSuccessNotificationText() throws InterruptedException {
-        Thread.sleep(2000);
         return successNotification.getText().trim();
     }
 

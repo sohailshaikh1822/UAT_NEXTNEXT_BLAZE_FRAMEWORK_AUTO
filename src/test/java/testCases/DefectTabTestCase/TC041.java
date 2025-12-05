@@ -53,9 +53,11 @@ public class TC041 extends BaseClass {
             createDefectPage.clickClose();
             logger.info("closed button clicked");
 
+            Thread.sleep(3000);
+
             defectLandingPage.ClickDefectbyID(ID1);
             logger.info("Again defect clicked: " + ID1);
-            Thread.sleep(3000);
+
 
             String savedSummary = createDefectPage.getRawSummary();
             logger.info("Saved Summary captured: '" + savedSummary + "'");
