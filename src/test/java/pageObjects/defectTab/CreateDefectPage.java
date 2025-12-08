@@ -22,7 +22,7 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
-    @FindBy(id="updateDefect")
+    @FindBy(id = "updateDefect")
     WebElement buttonSaveForUpdateDefect;
 
     @FindBy(id = "createDefect")
@@ -160,8 +160,17 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Generic Dropdown Selector ----------
+    // private void selectDropdown(WebElement dropdown, String visibleText) {
+    //     Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+    //     select.selectByVisibleText(visibleText);
+    // }
+
     private void selectDropdown(WebElement dropdown, String visibleText) {
-        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+        Select select = new Select(dropdown);
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath(".//option[normalize-space()='" + visibleText + "']")));
         select.selectByVisibleText(visibleText);
     }
 
@@ -213,6 +222,7 @@ public class CreateDefectPage extends BasePage {
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
+    
 
     public boolean dropdownStatusIsDisplayed() {
         return dropdownStatus.isDisplayed();
@@ -618,4 +628,15 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(popupNoButton)).click();
     }
 
+    public void clearDescriptionField() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        try {
+            element.clear();
+        } catch (Exception e) {
+            js.executeScript("arguments[0].value='';", element);
+        }
+        wait.until(driver -> element.getAttribute("value").isEmpty());
+        Assert.assertEquals(element.getAttribute("value"), "", "FAILED: Description field was not cleared.");
+    }
 }

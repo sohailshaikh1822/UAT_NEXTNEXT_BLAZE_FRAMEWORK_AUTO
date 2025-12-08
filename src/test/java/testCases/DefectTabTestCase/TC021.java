@@ -47,7 +47,7 @@ public class TC021 extends BaseClass {
             defectPage.clickPopupYes();
             logger.info("Confirmed closing the defect page");
 
-            Thread.sleep(3000); // Wait for 2 seconds to ensure the defect is closed properly
+            Thread.sleep(2000); // Wait for 2 seconds to ensure the defect is closed properly
 
             landingPage.ClickDefectbyID(defectId);
             logger.info("Re-opened defect with ID: " + defectId);
