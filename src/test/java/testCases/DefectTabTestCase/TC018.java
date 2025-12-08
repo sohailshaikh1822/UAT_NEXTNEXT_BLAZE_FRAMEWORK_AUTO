@@ -15,7 +15,6 @@ public class TC018 extends BaseClass {
     public void Verify_success_message_content_after_save(
             String expectedUrlAfterClick,
             String Summary,
-            String Severity,
             String Type,
             String Category,
             String Priority,
@@ -49,10 +48,6 @@ public class TC018 extends BaseClass {
 
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled: " + Summary);
-            Thread.sleep(3000);
-
-            createDefectPage.selectSeverity(Severity);
-            logger.info("Severity selected: " + Severity);
             Thread.sleep(3000);
 
             createDefectPage.selectType(Type);
