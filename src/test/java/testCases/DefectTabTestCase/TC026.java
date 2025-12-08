@@ -33,19 +33,19 @@ public class TC026 extends BaseClass {
             defectLandingPage.clickSearchButton();
             logger.info("search button clicked");
             Thread.sleep(10000);
-            defectLandingPage.clickDefectByIndex(1);
+//            defectLandingPage.clickDefectByIndex(1);
 //            defectLandingPage.ClickDefectbyID("DF-448");
-            logger.info("Opened the Existing Defect");
+//            logger.info("Opened the Existing Defect");
 
-            Thread.sleep(5000);
+//            Thread.sleep(10000);
             CreateDefectPage defect = new CreateDefectPage(getDriver());
-            defect.scrollUp();
-            logger.info("Scrolled up the defect form");
+//            defect.scrollUp();
+//            logger.info("Scrolled up the defect form");
 
-            Thread.sleep(2000);
-            defect.clickClose();
-            logger.info("defect closed");
-            Thread.sleep(5000);
+//            Thread.sleep(5000);
+//            defect.clickClose();
+//            logger.info("defect closed");
+//            Thread.sleep(5000);
 
             // Step 4: Click on create defect button to open new defect form and compare all the values with expected default values
             defectLandingPage.clickCreateTestCaseButton();
