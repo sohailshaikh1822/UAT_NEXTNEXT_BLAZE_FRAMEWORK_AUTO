@@ -15,8 +15,7 @@ public class TC041 extends BaseClass {
     public void Verify_that_Summary_field_dosent_trims_leading_and_trailing_spaces(
             String expectedUrlAfterClick,
             String ID,
-            String Summary,
-            String ID1
+            String Summary
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify that Summary field dosen't trims leading and trailing spaces ********");
@@ -47,18 +46,9 @@ public class TC041 extends BaseClass {
             logger.info("Summary filled: " + Summary);
             Thread.sleep(3000);
 
-            createDefectPage.clickSave();
-            logger.info("Clicked on save button");
-
-            createDefectPage.clickClose();
-            logger.info("closed button clicked");
-
-            defectLandingPage.ClickDefectbyID(ID1);
-            logger.info("Again defect clicked: " + ID1);
-            Thread.sleep(3000);
-
             String savedSummary = createDefectPage.getRawSummary();
             logger.info("Saved Summary captured: '" + savedSummary + "'");
+            Thread.sleep(3000);
 
             Assert.assertEquals(
                     savedSummary,

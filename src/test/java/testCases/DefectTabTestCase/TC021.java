@@ -44,6 +44,11 @@ public class TC021 extends BaseClass {
             defectPage.clickClose();
             logger.info("Defect page closed successfully");
 
+            defectPage.clickPopupYes();
+            logger.info("Confirmed closing the defect page");
+
+            Thread.sleep(3000); // Wait for 2 seconds to ensure the defect is closed properly
+
             landingPage.ClickDefectbyID(defectId);
             logger.info("Re-opened defect with ID: " + defectId);
             logger.info("Verified multiline description is retained after re-opening the defect");
@@ -56,6 +61,6 @@ public class TC021 extends BaseClass {
             throw e;
         }
 
-        logger.info("************ TC019 Finished *************************");
+        logger.info("************ TC021 Finished *************************");
     }
 }

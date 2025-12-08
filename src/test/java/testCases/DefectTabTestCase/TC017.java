@@ -1,6 +1,9 @@
 package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
@@ -8,7 +11,10 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
+import java.time.Duration;
+
 public class TC017 extends BaseClass {
+
     @Test(dataProvider = "tc017", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_success_message_content_after_save(
             String expectedUrlAfterClick,
@@ -27,55 +33,38 @@ public class TC017 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully and dashboard loaded");
+
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
+
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
-            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
-                    "User did not navigate to the expected Defect Page URL.");
+            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick), "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
-            logger.info("Defect Page loaded and form fields are visible.");
-            Thread.sleep(3000);
 
             defectLandingPage.clickCreateTestCaseButton();
-            logger.info("clicked on Create Defect Button");
+            logger.info("Clicked on Create Defect Button");
+
+            // ◆ IMPORTANT: Wait for Create Defect form to fully load
+            new WebDriverWait(getDriver(), Duration.ofSeconds(40))
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.id("DefSummary")));
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+
             createDefectPage.enterSummary(Summary);
-            logger.info("Summary filled:"+Summary);
-
             createDefectPage.selectSeverity(Severity);
-            logger.info("Severity selected:"+Severity);
-
             createDefectPage.selectType(Type);
-            logger.info("Severity selected:"+Type);
-
             createDefectPage.selectCategory(Category);
-            logger.info("Category selected:"+Category);
-
             createDefectPage.selectPriority(Priority);
-            logger.info("Priority selected:"+Priority);
-
             createDefectPage.selectStatus(Status);
-            logger.info("Status selected:"+Status);
-
             createDefectPage.selectAssignTo(AssignTo);
-            logger.info("Assign To selected:"+AssignTo);
-
             createDefectPage.enterDescription(Description);
-            logger.info("Description filled:"+Description);
 
             createDefectPage.clickSave();
-            logger.info("Clicked on save button");
 
             String actualMsg = createDefectPage.getSuccessNotificationText();
-            Assert.assertEquals(actualMsg, "Defect created successfully.",
-                    "Success message mismatch!");
-            logger.info("Success message verified: " + actualMsg);
-
-
+            Assert.assertEquals(actualMsg, "Defect created successfully.", "Success message mismatch!");
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

@@ -117,9 +117,12 @@ public class DefectLandingPage extends BasePage {
     }
 
     public void clickCreateTestCaseButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(createTestCaseButton));
-        createTestCaseButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement button = wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+        if (button.isDisplayed() && button.isEnabled()) {
+            button.click();
+        }
     }
 
     public String getTotalDefectEntryCount() {
@@ -169,12 +172,10 @@ public class DefectLandingPage extends BasePage {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement defectElement = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
-        );
+                ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
         defectElement.click();
     }
-
 
     public void resizeColumn(String columnName, int offsetX) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -217,5 +218,5 @@ public class DefectLandingPage extends BasePage {
     public void clickAffectedReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown)).click();
     }
-    
+
 }

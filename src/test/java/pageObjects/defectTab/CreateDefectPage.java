@@ -22,10 +22,13 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
+    @FindBy(id="updateDefect")
+    WebElement buttonSaveForUpdateDefect;
+
     @FindBy(id = "createDefect")
     WebElement buttonSavefornewDefect;
 
-    @FindBy(id = "closeButton")
+    @FindBy(xpath = "//button[@id='closeButton']")
     WebElement buttonClose;
 
     // Summary
@@ -87,6 +90,19 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
     WebElement msgSummaryCannotBeBlank;
 
+    @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
+    WebElement popupYes;
+
+    // Popup Buttons
+    @FindBy(id = "confirmBtn")
+    WebElement popupYesButton;
+
+    @FindBy(id = "cancelBtn")
+    WebElement popupNoButton;
+
+    @FindBy(xpath = "//div[contains(@class,'unsaved-button-container')]")
+    WebElement unsavedPopupContainer;
+
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
@@ -95,7 +111,7 @@ public class CreateDefectPage extends BasePage {
     // METHODS
 
     // ------------------PAGE SCROLLING METHODS------------------
-    public void scrollUp(){
+    public void scrollUp() {
         By containerLocator = By.xpath("//div[@class='test-execution-frame-2']");
         WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
         js.executeScript("arguments[0].scrollTop = 0;", container);
@@ -103,9 +119,11 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
-                element);
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -243,6 +261,10 @@ public class CreateDefectPage extends BasePage {
     // ---------- Button Clicks ----------
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
+    }
+
+    public void selectYes() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYes)).click();
     }
 
     public void clickSaveforNewDefect() {
@@ -515,7 +537,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getSuccessNotificationText() throws InterruptedException {
-        Thread.sleep(2000);
         return successNotification.getText().trim();
     }
 
@@ -529,7 +550,6 @@ public class CreateDefectPage extends BasePage {
             return "";
         }
     }
-
 
     public boolean isSaveButtonVisible() throws InterruptedException {
         Thread.sleep(1500);
@@ -564,13 +584,12 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getRawSummary() {
-    return textAreaSummary.getAttribute("value");
-}
+        return textAreaSummary.getAttribute("value");
+    }
 
     public String getSuccessNotificationMessage() {
         WebElement element = wait.until(
-                ExpectedConditions.visibilityOf(successNotification)
-        );
+                ExpectedConditions.visibilityOf(successNotification));
         return element.getText().trim();
     }
 
@@ -579,9 +598,24 @@ public class CreateDefectPage extends BasePage {
         Assert.assertEquals(
                 actualMessage,
                 expectedMessage,
-                "FAILED: Success notification message mismatch."
-        );
+                "FAILED: Success notification message mismatch.");
     }
 
+    public boolean isUnsavedPopupVisible() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(unsavedPopupContainer));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickPopupYes() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYesButton)).click();
+    }
+
+    public void clickPopupNo() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupNoButton)).click();
+    }
 
 }

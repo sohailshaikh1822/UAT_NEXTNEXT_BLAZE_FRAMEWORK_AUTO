@@ -7,39 +7,51 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC011 extends BaseClass {
-    @Test(dataProvider = "tc011", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyTextInSummaryField(String status, String summary) throws InterruptedException {
+public class TC033 extends BaseClass {
+    @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifySavingWithOnlyMandatoryFieldsFilled(
+            String Summary,
+            String status,
+            String description,
+            String summary2
+    ) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
         try {
-
             login();
             logger.info("Logged in successfully and dashboard loaded");
-
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
-
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-
             Thread.sleep(3000);
+
+            logger.info("Defect Page loaded and form fields are visible.");
             defectLandingPage.clickCreateTestCaseButton();
-            logger.info("Clicked on Create Defect Button");
+
+            logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-
             Thread.sleep(3000);
+            createDefectPage.enterSummary(Summary);
+            logger.info("Summary filled:"+Summary);
+
+            Thread.sleep(4000);
 
             createDefectPage.selectStatus(status);
-            logger.info("Status Selected from Dropdown");
+            logger.info("status is selected");
             Thread.sleep(3000);
-            createDefectPage.enterSummary(summary);
-            logger.info("Filled the Summary field");
+
+            createDefectPage.enterDescription(description);
+            logger.info("Descrption filled:"+description);
+            Thread.sleep(3000);
 
             createDefectPage.clickSave();
-            logger.info("Clicked the save button");
+            logger.info("Clicked on save button");
 
+            defectLandingPage.enterSummary(summary2);
+            defectLandingPage.clickSearchButton();
+            Thread.sleep(5000);
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
