@@ -1,9 +1,6 @@
 package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
@@ -11,7 +8,6 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-import java.time.Duration;
 
 public class TC017 extends BaseClass {
 
@@ -42,29 +38,33 @@ public class TC017 extends BaseClass {
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick), "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
+            Thread.sleep(3000);
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
-
-            // ◆ IMPORTANT: Wait for Create Defect form to fully load
-            new WebDriverWait(getDriver(), Duration.ofSeconds(40))
-                    .until(ExpectedConditions.visibilityOfElementLocated(By.id("DefSummary")));
+            Thread.sleep(3000);
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
 
             createDefectPage.enterSummary(Summary);
+            Thread.sleep(3000);
             createDefectPage.selectSeverity(Severity);
+            Thread.sleep(3000);
             createDefectPage.selectType(Type);
+            Thread.sleep(3000);
             createDefectPage.selectCategory(Category);
+            Thread.sleep(3000);
             createDefectPage.selectPriority(Priority);
+            Thread.sleep(3000);
             createDefectPage.selectStatus(Status);
+            Thread.sleep(3000);
             createDefectPage.selectAssignTo(AssignTo);
+            Thread.sleep(3000);
             createDefectPage.enterDescription(Description);
 
             createDefectPage.clickSave();
 
-            String actualMsg = createDefectPage.getSuccessNotificationText();
-            Assert.assertEquals(actualMsg, "Defect created successfully.", "Success message mismatch!");
+            createDefectPage.verifySuccessNotification();
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

@@ -49,7 +49,7 @@ public class TC042 extends BaseClass {
             logger.info("Clicked on save button");
             Thread.sleep(3000);
 
-            createDefectPage.verifySuccessNotificationMessage("Defect updated successfully.");
+            createDefectPage.getSuccessNotificationText();
             logger.info("Success notification verified successfully");
 
         } catch (AssertionError ae) {

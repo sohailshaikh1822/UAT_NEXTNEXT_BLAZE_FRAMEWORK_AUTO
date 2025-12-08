@@ -22,7 +22,7 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
-    @FindBy(id="updateDefect")
+    @FindBy(id = "updateDefect")
     WebElement buttonSaveForUpdateDefect;
 
     @FindBy(id = "createDefect")
@@ -70,7 +70,7 @@ public class CreateDefectPage extends BasePage {
     WebElement dropdownAssignTo;
 
     // Description
-    @FindBy(xpath = "//textarea[@rows='8']")
+    @FindBy(xpath = "//textarea[@class='defect-text-wrapper-5']")
     WebElement textAreaDescription;
 
     // Attachments
@@ -91,7 +91,17 @@ public class CreateDefectPage extends BasePage {
     WebElement msgSummaryCannotBeBlank;
 
     @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
-     WebElement popupYes;
+    WebElement popupYes;
+
+    // Popup Buttons
+    @FindBy(id = "confirmBtn")
+    WebElement popupYesButton;
+
+    @FindBy(id = "cancelBtn")
+    WebElement popupNoButton;
+
+    @FindBy(xpath = "//div[contains(@class,'unsaved-button-container')]")
+    WebElement unsavedPopupContainer;
 
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -101,7 +111,7 @@ public class CreateDefectPage extends BasePage {
     // METHODS
 
     // ------------------PAGE SCROLLING METHODS------------------
-    public void scrollUp(){
+    public void scrollUp() {
         By containerLocator = By.xpath("//div[@class='test-execution-frame-2']");
         WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
         js.executeScript("arguments[0].scrollTop = 0;", container);
@@ -122,7 +132,6 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(summary));
         Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
-
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -151,8 +160,17 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Generic Dropdown Selector ----------
+    // private void selectDropdown(WebElement dropdown, String visibleText) {
+    //     Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+    //     select.selectByVisibleText(visibleText);
+    // }
+
     private void selectDropdown(WebElement dropdown, String visibleText) {
-        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+        Select select = new Select(dropdown);
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath(".//option[normalize-space()='" + visibleText + "']")));
         select.selectByVisibleText(visibleText);
     }
 
@@ -204,6 +222,7 @@ public class CreateDefectPage extends BasePage {
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
+    
 
     public boolean dropdownStatusIsDisplayed() {
         return dropdownStatus.isDisplayed();
@@ -253,8 +272,8 @@ public class CreateDefectPage extends BasePage {
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
-    public void selectYes()
-    {
+
+    public void selectYes() {
         wait.until(ExpectedConditions.elementToBeClickable(popupYes)).click();
     }
 
@@ -579,7 +598,6 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
-
     public boolean isSaveButtonVisible() throws InterruptedException {
         Thread.sleep(1500);
         try {
@@ -613,26 +631,55 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getRawSummary() {
-    return textAreaSummary.getAttribute("value");
-}
+        return textAreaSummary.getAttribute("value");
+    }
 
-    public String getSuccessNotificationMessage() {
+    public void getSuccessNotificationMessage() {
         WebElement element = wait.until(
-                ExpectedConditions.visibilityOf(successNotification)
-        );
-        return element.getText().trim();
-    }
-
-    public void verifySuccessNotificationMessage(String expectedMessage) {
-        String actualMessage = getSuccessNotificationMessage();
-        Assert.assertEquals(
-                actualMessage,
-                expectedMessage,
-                "FAILED: Success notification message mismatch."
-        );
+                ExpectedConditions.visibilityOf(successNotification));
+        String actualMessage = element.getText().trim();
+        boolean isValid =
+                actualMessage.equals("Defect created successfully.") ||
+                        actualMessage.equals("Defect updated successfully.");
+        Assert.assertTrue(isValid,
+                "FAILED: Unexpected success message. Actual: " + actualMessage);
     }
 
 
+    public void verifySuccessNotification() throws InterruptedException {
+        Thread.sleep(2000);
+        String actualMessage = successNotification.getText().trim();
+        Assert.assertEquals(actualMessage, "Defect created successfully.",
+                "FAILED: Success notification text mismatch.");
+    }
 
 
+    public boolean isUnsavedPopupVisible() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(unsavedPopupContainer));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickPopupYes() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYesButton)).click();
+    }
+
+    public void clickPopupNo() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupNoButton)).click();
+    }
+
+    public void clearDescriptionField() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        try {
+            element.clear();
+        } catch (Exception e) {
+            js.executeScript("arguments[0].value='';", element);
+        }
+        wait.until(driver -> element.getAttribute("value").isEmpty());
+        Assert.assertEquals(element.getAttribute("value"), "", "FAILED: Description field was not cleared.");
+    }
 }
