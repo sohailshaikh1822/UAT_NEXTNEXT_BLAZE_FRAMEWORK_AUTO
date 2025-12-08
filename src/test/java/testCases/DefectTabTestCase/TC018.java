@@ -40,6 +40,7 @@ public class TC018 extends BaseClass {
                     "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             Thread.sleep(3000);
+
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 

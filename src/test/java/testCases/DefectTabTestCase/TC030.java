@@ -25,7 +25,7 @@ public class TC030 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
@@ -37,7 +37,7 @@ public class TC030 extends BaseClass {
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
