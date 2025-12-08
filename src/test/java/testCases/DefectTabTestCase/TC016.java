@@ -62,7 +62,7 @@ public class TC016 extends BaseClass {
             logger.info("Status selected:"+Status);
             Thread.sleep(3000);
 
-            createDefectPage.selectPriorityByIndex(Integer.parseInt(AssignTo));
+            createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
             logger.info("Assign To selected:"+AssignTo);
             Thread.sleep(3000);
 
