@@ -91,7 +91,17 @@ public class CreateDefectPage extends BasePage {
     WebElement msgSummaryCannotBeBlank;
 
     @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
-     WebElement popupYes;
+    WebElement popupYes;
+
+    // Popup Buttons
+    @FindBy(id = "confirmBtn")
+    WebElement popupYesButton;
+
+    @FindBy(id = "cancelBtn")
+    WebElement popupNoButton;
+
+    @FindBy(xpath = "//div[contains(@class,'unsaved-button-container')]")
+    WebElement unsavedPopupContainer;
 
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -101,7 +111,7 @@ public class CreateDefectPage extends BasePage {
     // METHODS
 
     // ------------------PAGE SCROLLING METHODS------------------
-    public void scrollUp(){
+    public void scrollUp() {
         By containerLocator = By.xpath("//div[@class='test-execution-frame-2']");
         WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
         js.executeScript("arguments[0].scrollTop = 0;", container);
@@ -122,7 +132,6 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(summary));
         Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
-
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -253,8 +262,8 @@ public class CreateDefectPage extends BasePage {
     public void clickSave() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
-    public void selectYes()
-    {
+
+    public void selectYes() {
         wait.until(ExpectedConditions.elementToBeClickable(popupYes)).click();
     }
 
@@ -542,7 +551,6 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
-
     public boolean isSaveButtonVisible() throws InterruptedException {
         Thread.sleep(1500);
         try {
@@ -576,13 +584,12 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getRawSummary() {
-    return textAreaSummary.getAttribute("value");
-}
+        return textAreaSummary.getAttribute("value");
+    }
 
     public String getSuccessNotificationMessage() {
         WebElement element = wait.until(
-                ExpectedConditions.visibilityOf(successNotification)
-        );
+                ExpectedConditions.visibilityOf(successNotification));
         return element.getText().trim();
     }
 
@@ -591,9 +598,24 @@ public class CreateDefectPage extends BasePage {
         Assert.assertEquals(
                 actualMessage,
                 expectedMessage,
-                "FAILED: Success notification message mismatch."
-        );
+                "FAILED: Success notification message mismatch.");
     }
 
+    public boolean isUnsavedPopupVisible() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(unsavedPopupContainer));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickPopupYes() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYesButton)).click();
+    }
+
+    public void clickPopupNo() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupNoButton)).click();
+    }
 
 }
