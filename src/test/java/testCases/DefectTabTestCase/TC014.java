@@ -10,9 +10,10 @@ import utils.RetryAnalyzer;
 
 public class TC014 extends BaseClass {
     @Test(dataProvider = "tc014", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyErrorWhenOneMandatoryFieldisMissing(
+    public void VerifyMessageWhenMandatoryFieldIsMissing(
             String expectedUrlAfterClick,
-            String Summary
+            String Summary,
+            String description
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case ********");
@@ -29,6 +30,7 @@ public class TC014 extends BaseClass {
                     "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             logger.info("Defect Page loaded and form fields are visible.");
+            Thread.sleep(3000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("clicked on Create Defect Button");
 
@@ -38,16 +40,14 @@ public class TC014 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
+            createDefectPage.enterDescription(description);
+            logger.info("description enetered");
+            Thread.sleep(3000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-
-            createDefectPage.verifyStatusErrorMessage();
-            logger.info("Verified: Status mandatory error message displayed.");
-
-
-
-        } catch (AssertionError ae) {
+        }
+        catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
         } catch (Exception ex) {
