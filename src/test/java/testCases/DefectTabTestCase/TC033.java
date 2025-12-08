@@ -48,8 +48,9 @@ public class TC033 extends BaseClass {
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-
+            Thread.sleep(3000);
             defectLandingPage.enterSummary(summary2);
+            Thread.sleep(3000);
             defectLandingPage.clickSearchButton();
             Thread.sleep(5000);
         } catch (AssertionError ae) {
