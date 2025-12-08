@@ -29,12 +29,15 @@ public class TC022 extends BaseClass {
 
             CreateDefectPage createPage = new CreateDefectPage(getDriver());
 
+            Thread.sleep(500);
             createPage.enterSummary("Automation defect summary");
             Thread.sleep(2000);
             createPage.selectStatus("New");
+            Thread.sleep(2000);
             createPage.clearDescriptionField();
             logger.info("Cleared Description field to leave it empty");
 
+            Thread.sleep(500);
             createPage.clickSaveforNewDefect();
             logger.info("Clicked Save button");
 

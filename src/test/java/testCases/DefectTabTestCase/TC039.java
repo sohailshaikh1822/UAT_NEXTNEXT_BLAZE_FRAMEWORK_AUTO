@@ -31,40 +31,41 @@ public class TC039 extends BaseClass {
             String tempSummary = "AutoTest_CancelDefect_" + System.currentTimeMillis();
             String tempDescription = "Temporary Description - Should Not Be Saved";
 
+            Thread.sleep(500);
             createDefect.enterSummary(tempSummary);
             logger.info("Entered Summary: " + tempSummary);
 
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
+            Thread.sleep(1000);
             createDefect.selectSeverity("Minor");
-            createDefect.selectPriority("Medium");
 
+            Thread.sleep(1000);
+            createDefect.selectPriority("Medium");
             logger.info("Filled mandatory details WITHOUT saving");
 
+            Thread.sleep(500);
             createDefect.clickClose();
             logger.info("Clicked CLOSE without saving");
 
+            Thread.sleep(1000);
             createDefect.clickPopupYes();
             logger.info("Confirmed to close without saving");
 
             Thread.sleep(2000);
-
             defectLandingPage.enterSummary(tempSummary);
+            Thread.sleep(500);
             defectLandingPage.clickSearchButton();
             logger.info("Searching for unsaved defect on listing page");
 
             Thread.sleep(2000);
-
             defectLandingPage.clickLastPageArrow();
             logger.info("Navigated to last page of defect listing");
 
             Thread.sleep(2000);
-
             String pageText = getDriver().getPageSource();
-
             boolean defectFound = pageText.contains(tempSummary);
-
             Assert.assertFalse(defectFound,
                     "FAILED Defect was found even after cancelling! SUMMARY: " + tempSummary);
 

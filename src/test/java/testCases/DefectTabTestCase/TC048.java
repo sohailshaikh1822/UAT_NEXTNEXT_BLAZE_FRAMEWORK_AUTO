@@ -28,6 +28,7 @@ public class TC048 extends BaseClass {
 
             CreateDefectPage createDefect = new CreateDefectPage(getDriver());
 
+            Thread.sleep(2000);
             Assert.assertTrue(createDefect.textAreaSummaryIsDisplayed(),
                     "Summary field is NOT visible!");
             Assert.assertTrue(createDefect.dropdownSeverityIsDisplayed(),
@@ -46,7 +47,10 @@ public class TC048 extends BaseClass {
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
+            Thread.sleep(1000);
             createDefect.selectStatus("Closed");
+
+            Thread.sleep(1000);
             createDefect.selectPriority("Medium");
 
             createDefect.scrollToSaveButton();

@@ -161,12 +161,13 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Generic Dropdown Selector ----------
     // private void selectDropdown(WebElement dropdown, String visibleText) {
-    //     Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
-    //     select.selectByVisibleText(visibleText);
+    // Select select = new
+    // Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+    // select.selectByVisibleText(visibleText);
     // }
 
     private void selectDropdown(WebElement dropdown, String visibleText) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.elementToBeClickable(dropdown));
         Select select = new Select(dropdown);
         wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -222,7 +223,6 @@ public class CreateDefectPage extends BasePage {
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
-    
 
     public boolean dropdownStatusIsDisplayed() {
         return dropdownStatus.isDisplayed();
@@ -338,7 +338,6 @@ public class CreateDefectPage extends BasePage {
                 .isDisplayed();
     }
 
-
     public boolean isSummaryMandatoryStarVisible() {
         String xpath = "//p[contains(@class,'defect-p')]"
                 + "//span[normalize-space(text())='Summary']"
@@ -346,8 +345,7 @@ public class CreateDefectPage extends BasePage {
 
         try {
             WebElement star = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
-            );
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             return star.isDisplayed();
         } catch (TimeoutException e) {
             return false;
@@ -360,8 +358,7 @@ public class CreateDefectPage extends BasePage {
 
         try {
             WebElement star = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
-            );
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             return star.isDisplayed();
         } catch (TimeoutException e) {
             return false;
@@ -374,16 +371,12 @@ public class CreateDefectPage extends BasePage {
 
         try {
             WebElement star = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
-            );
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             return star.isDisplayed();
         } catch (TimeoutException e) {
             return false;
         }
     }
-
-
-
 
     public void verifyStatusIsDefault() {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
@@ -638,13 +631,11 @@ public class CreateDefectPage extends BasePage {
         WebElement element = wait.until(
                 ExpectedConditions.visibilityOf(successNotification));
         String actualMessage = element.getText().trim();
-        boolean isValid =
-                actualMessage.equals("Defect created successfully.") ||
-                        actualMessage.equals("Defect updated successfully.");
+        boolean isValid = actualMessage.equals("Defect created successfully.") ||
+                actualMessage.equals("Defect updated successfully.");
         Assert.assertTrue(isValid,
                 "FAILED: Unexpected success message. Actual: " + actualMessage);
     }
-
 
     public void verifySuccessNotification() throws InterruptedException {
         Thread.sleep(2000);
@@ -652,7 +643,6 @@ public class CreateDefectPage extends BasePage {
         Assert.assertEquals(actualMessage, "Defect created successfully.",
                 "FAILED: Success notification text mismatch.");
     }
-
 
     public boolean isUnsavedPopupVisible() {
         try {
