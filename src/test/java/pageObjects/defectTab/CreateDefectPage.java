@@ -22,10 +22,13 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
+    @FindBy(id="updateDefect")
+    WebElement buttonSaveForUpdateDefect;
+
     @FindBy(id = "createDefect")
     WebElement buttonSavefornewDefect;
 
-    @FindBy(id = "closeButton")
+    @FindBy(xpath = "//button[@id='closeButton']")
     WebElement buttonClose;
 
     // Summary

@@ -42,17 +42,19 @@ public class TC027 extends BaseClass {
             CreateDefectPage defect = new CreateDefectPage(getDriver());
             defect.enterSummary(summary);
             logger.info("Summary Entered");
-            Thread.sleep(2000);
 
             //Step 7: Select Status
+            Thread.sleep(2000);
             defect.selectStatus(status);
             logger.info("Status Selected");
 
             //Step 8: Select Description
+            Thread.sleep(2000);
             defect.enterDescription(description);
             logger.info("Description entered");
 
             //Step 9: Scroll up
+            Thread.sleep(2000);
             defect.scrollUp();
             logger.info("Create Defect page scrolled up");
             Thread.sleep(2000);
@@ -64,6 +66,7 @@ public class TC027 extends BaseClass {
             //Step 11: Assert that defect Saved or not
             Assert.assertTrue(defect.verifySuccessMessage("Defect created successfully."), "Failed to create the defect.");
             logger.info("New Defect Created");
+            Thread.sleep(2000);
 
             //Step 12: Open the created defect with help of summary
             defectLandingPage.enterSummary(summary);
@@ -76,6 +79,7 @@ public class TC027 extends BaseClass {
 
             //Step 14: Select the first defect
             defectLandingPage.clickDefectByIndex(1);
+//            defectLandingPage.ClickDefectbyID("DF-448");
             Thread.sleep(10000);
 
             //Step 15: Get the summary and compare with expected summary
