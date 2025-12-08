@@ -338,15 +338,52 @@ public class CreateDefectPage extends BasePage {
                 .isDisplayed();
     }
 
-    public boolean isMandatoryStarVisible(String fieldName) {
-        String dynamicXpath = "//span[normalize-space(text())='" + fieldName + "']"
-                + "/following-sibling::span[normalize-space(text())='*']";
 
-        WebElement mandatoryStar = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath)));
+    public boolean isSummaryMandatoryStarVisible() {
+        String xpath = "//p[contains(@class,'defect-p')]"
+                + "//span[normalize-space(text())='Summary']"
+                + "/following-sibling::span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
 
-        return mandatoryStar.isDisplayed();
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+            );
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
+
+    public boolean isDescriptionMandatoryStarVisible() {
+        String xpath = "//div[contains(@class,'defect-text-4')][contains(normalize-space(.),'Description')]"
+                + "//span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
+
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+            );
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    public boolean isStatusMandatoryStarVisible() {
+        String xpath = "//div[contains(@class,'defect-text-wrapper-4')][contains(normalize-space(.),'Status')]"
+                + "//span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
+
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+            );
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+
+
 
     public void verifyStatusIsDefault() {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));
@@ -597,14 +634,20 @@ public class CreateDefectPage extends BasePage {
         return textAreaSummary.getAttribute("value");
     }
 
-    public String getSuccessNotificationMessage() {
+    public void getSuccessNotificationMessage() {
         WebElement element = wait.until(
                 ExpectedConditions.visibilityOf(successNotification));
-        return element.getText().trim();
+        String actualMessage = element.getText().trim();
+        boolean isValid =
+                actualMessage.equals("Defect created successfully.") ||
+                        actualMessage.equals("Defect updated successfully.");
+        Assert.assertTrue(isValid,
+                "FAILED: Unexpected success message. Actual: " + actualMessage);
     }
 
+
     public void verifySuccessNotification() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         String actualMessage = successNotification.getText().trim();
         Assert.assertEquals(actualMessage, "Defect created successfully.",
                 "FAILED: Success notification text mismatch.");

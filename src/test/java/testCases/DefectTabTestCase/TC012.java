@@ -31,13 +31,13 @@ public class TC012 extends BaseClass {
 
             Thread.sleep(3000);
 
-            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Summary"),
+            Assert.assertTrue(createDefectPage.isSummaryMandatoryStarVisible(),
                     "Summary mandatory star not visible");
 
-            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Description"),
+            Assert.assertTrue(createDefectPage.isDescriptionMandatoryStarVisible(),
                     "Description mandatory star not visible");
 
-            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Status"),
+            Assert.assertTrue(createDefectPage.isStatusMandatoryStarVisible(),
                     "Status mandatory star not visible");
 
         } catch (AssertionError ae) {
