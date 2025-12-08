@@ -1,6 +1,7 @@
 package pageObjects.defectTab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -116,12 +117,25 @@ public class DefectLandingPage extends BasePage {
         arrowForwardNextPagination.click();
     }
 
+    // public void clickCreateTestCaseButton() {
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    // WebElement button =
+    // wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
+    // wait.until(ExpectedConditions.elementToBeClickable(button));
+    // if (button.isDisplayed() && button.isEnabled()) {
+    // button.click();
+    // }
+    // }
+
     public void clickCreateTestCaseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement button = wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
-        wait.until(ExpectedConditions.elementToBeClickable(button));
-        if (button.isDisplayed() && button.isEnabled()) {
+        try {
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(createTestCaseButton));
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block:'center'});", button);
             button.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", createTestCaseButton);
         }
     }
 
@@ -199,6 +213,7 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(helpBtn)).click();
 
     }
+
     public void clickStatusDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(statusDropdown)).click();
     }

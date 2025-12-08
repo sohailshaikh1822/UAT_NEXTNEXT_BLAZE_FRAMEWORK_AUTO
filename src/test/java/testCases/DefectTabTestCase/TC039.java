@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC039 extends BaseClass {
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test()
     public void verifyCancelDoesNotCreateDefect() throws InterruptedException {
 
         logger.info("****** Starting Test Case TC039 ******");
@@ -22,6 +22,7 @@ public class TC039 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("User navigated to Defect Landing Page");
 
+            Thread.sleep(1000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect");
 
@@ -43,6 +44,9 @@ public class TC039 extends BaseClass {
 
             createDefect.clickClose();
             logger.info("Clicked CLOSE without saving");
+
+            createDefect.clickPopupYes();
+            logger.info("Confirmed to close without saving");
 
             Thread.sleep(2000);
 
