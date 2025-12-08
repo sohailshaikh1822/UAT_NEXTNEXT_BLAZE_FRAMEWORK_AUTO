@@ -60,6 +60,7 @@ public class TC018 extends BaseClass {
 
             createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
             logger.info("Priority selected: " + Priority);
+            Thread.sleep(3000);
 
             createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
             logger.info("Status selected: " + Status);
