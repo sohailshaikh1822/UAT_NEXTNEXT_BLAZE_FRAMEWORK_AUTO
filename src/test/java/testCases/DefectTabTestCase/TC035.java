@@ -11,7 +11,7 @@ public class TC035 extends BaseClass {
     public void VerifySavingWithOnlyMandatoryFieldsFilled(
             String affectedRelease,
             String status,
-            String severity) throws InterruptedException {
+            String severity, String priority, String assigned_To) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -24,15 +24,22 @@ public class TC035 extends BaseClass {
             Thread.sleep(3000);
 
             logger.info("Defect Page loaded and form fields are visible.");
-            defectLandingPage.clickCreateTestCaseButton();
 
-            logger.info("clicked on Create Defect Button");
 
             defectLandingPage.selectAffectedRelease(affectedRelease);
+            Thread.sleep(3000);
             defectLandingPage.selectStatus(status);
+            Thread.sleep(3000);
             defectLandingPage.selectSeverity(severity);
+            Thread.sleep(3000);
+            defectLandingPage.selectPriority(priority);
+            Thread.sleep(3000);
+            defectLandingPage.selectAssignedTo(assigned_To);
+            Thread.sleep(3000);
             defectLandingPage.clickSearchButton();
+            Thread.sleep(3000);
             defectLandingPage.clickClearButton();
+            Thread.sleep(3000);
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
