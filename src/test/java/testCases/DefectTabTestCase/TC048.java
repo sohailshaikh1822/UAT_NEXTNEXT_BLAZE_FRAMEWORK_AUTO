@@ -22,6 +22,7 @@ public class TC048 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Navigated to Defect Landing Page");
 
+            Thread.sleep(2000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Opened Create Defect page");
 

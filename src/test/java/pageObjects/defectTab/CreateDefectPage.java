@@ -22,7 +22,7 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
-    @FindBy(id="updateDefect")
+    @FindBy(id = "updateDefect")
     WebElement buttonSaveForUpdateDefect;
 
     @FindBy(id = "createDefect")
@@ -618,4 +618,15 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(popupNoButton)).click();
     }
 
+    public void clearDescriptionField() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        try {
+            element.clear();
+        } catch (Exception e) {
+            js.executeScript("arguments[0].value='';", element);
+        }
+        wait.until(driver -> element.getAttribute("value").isEmpty());
+        Assert.assertEquals(element.getAttribute("value"), "", "FAILED: Description field was not cleared.");
+    }
 }
