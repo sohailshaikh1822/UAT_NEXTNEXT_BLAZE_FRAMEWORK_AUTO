@@ -50,22 +50,22 @@ public class TC018 extends BaseClass {
             logger.info("Summary filled: " + Summary);
             Thread.sleep(3000);
 
-            createDefectPage.selectType(Type);
+            createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
             logger.info("Type selected: " + Type);
             Thread.sleep(3000);
 
-            createDefectPage.selectCategory(Category);
+            createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
             logger.info("Category selected: " + Category);
             Thread.sleep(3000);
 
-            createDefectPage.selectPriority(Priority);
+            createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
             logger.info("Priority selected: " + Priority);
 
-            createDefectPage.selectStatus(Status);
+            createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
             logger.info("Status selected: " + Status);
             Thread.sleep(3000);
 
-            createDefectPage.selectAssignTo(AssignTo);
+            createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
             logger.info("Assign To selected: " + AssignTo);
             Thread.sleep(3000);
 
