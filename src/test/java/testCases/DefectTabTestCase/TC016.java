@@ -13,7 +13,6 @@ public class TC016 extends BaseClass {
     public void Verify_saving_with_all_fields_filled(
             String expectedUrlAfterClick,
             String Summary,
-            String Severity,
             String Type,
             String Category,
             String Priority,
@@ -46,9 +45,6 @@ public class TC016 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
-            createDefectPage.selectSeverity(Severity);
-            logger.info("Severity selected:"+Severity);
-            Thread.sleep(3000);
 
             createDefectPage.selectType(Type);
             logger.info("Severity selected:"+Type);

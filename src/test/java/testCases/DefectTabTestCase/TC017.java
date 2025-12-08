@@ -15,7 +15,6 @@ public class TC017 extends BaseClass {
     public void Verify_success_message_content_after_save(
             String expectedUrlAfterClick,
             String Summary,
-            String Severity,
             String Type,
             String Category,
             String Priority,
@@ -47,8 +46,6 @@ public class TC017 extends BaseClass {
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
 
             createDefectPage.enterSummary(Summary);
-            Thread.sleep(3000);
-            createDefectPage.selectSeverity(Severity);
             Thread.sleep(3000);
             createDefectPage.selectType(Type);
             Thread.sleep(3000);
