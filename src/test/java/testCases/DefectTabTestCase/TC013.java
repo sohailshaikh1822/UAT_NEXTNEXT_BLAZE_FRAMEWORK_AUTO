@@ -40,7 +40,7 @@ public class TC013 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.selectSeverity(severity);
             logger.info("Filled the Summary field");
-
+            Thread.sleep(3000);
             createDefectPage.clickSave();
             logger.info("Clicked the save button");
 
