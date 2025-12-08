@@ -222,7 +222,15 @@ public class CreateDefectPage extends BasePage {
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
-    
+
+    //Mohit
+    public void selectStatusByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    //Mohit
+
 
     public boolean dropdownStatusIsDisplayed() {
         return dropdownStatus.isDisplayed();
@@ -256,6 +264,14 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownType, value);
     }
 
+    //Mohit
+    public void selectTypeByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    //mohit
+
     public boolean dropdownTypeIsDisplayed() {
         return dropdownType.isDisplayed();
     }
@@ -263,6 +279,13 @@ public class CreateDefectPage extends BasePage {
     public void selectAssignTo(String value) {
         selectDropdown(dropdownAssignTo, value);
     }
+    //Mohit
+    public void selectAssignToByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAssignTo));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    //Mohit
 
     public boolean dropdownAssignToIsDisplayed() {
         return dropdownAssignTo.isDisplayed();
@@ -529,6 +552,13 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
+    public void selectCategoryByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+
     public void clickStatusDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
         dropdown.click();
@@ -552,6 +582,15 @@ public class CreateDefectPage extends BasePage {
             System.out.println(" -> " + option.getText());
         }
     }
+
+    //mohit
+    public void selectPriorityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    //mohit
+
 
     public void clickTargetReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
