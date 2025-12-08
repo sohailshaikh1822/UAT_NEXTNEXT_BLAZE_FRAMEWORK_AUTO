@@ -160,8 +160,17 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Generic Dropdown Selector ----------
+    // private void selectDropdown(WebElement dropdown, String visibleText) {
+    //     Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+    //     select.selectByVisibleText(visibleText);
+    // }
+
     private void selectDropdown(WebElement dropdown, String visibleText) {
-        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+        Select select = new Select(dropdown);
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath(".//option[normalize-space()='" + visibleText + "']")));
         select.selectByVisibleText(visibleText);
     }
 
@@ -213,6 +222,7 @@ public class CreateDefectPage extends BasePage {
     public void selectStatus(String value) {
         selectDropdown(dropdownStatus, value);
     }
+    
 
     public boolean dropdownStatusIsDisplayed() {
         return dropdownStatus.isDisplayed();
