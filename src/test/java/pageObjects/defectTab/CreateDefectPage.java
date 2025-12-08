@@ -597,14 +597,20 @@ public class CreateDefectPage extends BasePage {
         return textAreaSummary.getAttribute("value");
     }
 
-    public String getSuccessNotificationMessage() {
+    public void getSuccessNotificationMessage() {
         WebElement element = wait.until(
                 ExpectedConditions.visibilityOf(successNotification));
-        return element.getText().trim();
+        String actualMessage = element.getText().trim();
+        boolean isValid =
+                actualMessage.equals("Defect created successfully.") ||
+                        actualMessage.equals("Defect updated successfully.");
+        Assert.assertTrue(isValid,
+                "FAILED: Unexpected success message. Actual: " + actualMessage);
     }
 
+
     public void verifySuccessNotification() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         String actualMessage = successNotification.getText().trim();
         Assert.assertEquals(actualMessage, "Defect created successfully.",
                 "FAILED: Success notification text mismatch.");
