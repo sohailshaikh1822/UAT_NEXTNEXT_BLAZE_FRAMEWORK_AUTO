@@ -28,12 +28,12 @@ public class TC043 extends BaseClass {
 
             Thread.sleep(3000);
             createPage.enterSummary("Automation defect summary");
-
+            Thread.sleep(3000);
             createPage.selectStatus("New");
-
+            Thread.sleep(3000);
             createPage.clickClose();
             logger.info("Clicked CLOSE button");
-
+            Thread.sleep(3000);
             createPage.selectYes();
 
 
@@ -42,7 +42,7 @@ public class TC043 extends BaseClass {
 
             Assert.assertEquals(currentUrl, expectedUrl,
                     "FAILED: CLOSE button did not navigate back to Defect page");
-
+            Thread.sleep(3000);
             landingPage.ClickDefectbyID("312");
             logger.info("Opened an existing defect");
 

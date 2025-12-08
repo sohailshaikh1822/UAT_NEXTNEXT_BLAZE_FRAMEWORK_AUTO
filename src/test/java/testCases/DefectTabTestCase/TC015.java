@@ -43,6 +43,7 @@ public class TC015 extends BaseClass {
 
             createDefectPage.enterDescription(msg);
             logger.info("description enetered");
+            Thread.sleep(3000);
             createDefectPage.selectStatus(status);
             logger.info("status is selected");
             Thread.sleep(3000);
