@@ -48,27 +48,34 @@ public class TC018 extends BaseClass {
 
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled: " + Summary);
+            Thread.sleep(3000);
 
             createDefectPage.selectSeverity(Severity);
             logger.info("Severity selected: " + Severity);
+            Thread.sleep(3000);
 
             createDefectPage.selectType(Type);
             logger.info("Type selected: " + Type);
+            Thread.sleep(3000);
 
             createDefectPage.selectCategory(Category);
             logger.info("Category selected: " + Category);
+            Thread.sleep(3000);
 
             createDefectPage.selectPriority(Priority);
             logger.info("Priority selected: " + Priority);
 
             createDefectPage.selectStatus(Status);
             logger.info("Status selected: " + Status);
+            Thread.sleep(3000);
 
             createDefectPage.selectAssignTo(AssignTo);
             logger.info("Assign To selected: " + AssignTo);
+            Thread.sleep(3000);
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled: " + Description);
+            Thread.sleep(3000);
 
             Assert.assertTrue(createDefectPage.isSaveButtonVisible(),
                     "Save button is not visible!");
@@ -81,10 +88,8 @@ public class TC018 extends BaseClass {
             createDefectPage.clickSaveIfVisibleAndClickable();
             logger.info("Clicked on Save button successfully");
 
-            String actualMessage = createDefectPage.getSuccessNotificationText();
-            Assert.assertEquals(actualMessage, "Defect created successfully.",
-                    "Success message mismatch!");
-            logger.info("Success message verified: " + actualMessage);
+           createDefectPage.verifySuccessNotification();
+
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

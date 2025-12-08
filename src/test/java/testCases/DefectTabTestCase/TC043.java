@@ -20,7 +20,7 @@ public class TC043 extends BaseClass {
             DefectLandingPage landingPage = new DefectLandingPage(getDriver());
             landingPage.clickDefectTab();
             logger.info("Navigated to Defect page");
-
+            Thread.sleep(3000);
             landingPage.ClickDefectbyID("312");
             logger.info("Opened an existing defect");
 
