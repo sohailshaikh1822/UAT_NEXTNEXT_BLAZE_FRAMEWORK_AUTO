@@ -26,7 +26,7 @@ public class TC047 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
