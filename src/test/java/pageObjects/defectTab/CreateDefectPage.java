@@ -593,13 +593,13 @@ public class CreateDefectPage extends BasePage {
         return element.getText().trim();
     }
 
-    public void verifySuccessNotificationMessage(String expectedMessage) {
-        String actualMessage = getSuccessNotificationMessage();
-        Assert.assertEquals(
-                actualMessage,
-                expectedMessage,
-                "FAILED: Success notification message mismatch.");
+    public void verifySuccessNotification() throws InterruptedException {
+        Thread.sleep(1000);
+        String actualMessage = successNotification.getText().trim();
+        Assert.assertEquals(actualMessage, "Defect created successfully.",
+                "FAILED: Success notification text mismatch.");
     }
+
 
     public boolean isUnsavedPopupVisible() {
         try {
