@@ -8,8 +8,8 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC012 extends BaseClass {
-    @Test()
-    public void verifyMandatoryFields() throws InterruptedException {
+    @Test(, retryAnalyzer = RetryAnalyzer.class)
+    public void verifyNavigationToDefectPage() throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -19,7 +19,7 @@ public class TC012 extends BaseClass {
             logger.info("Logged in successfully and dashboard loaded");
 
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
-            Thread.sleep(3000);
+
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
@@ -31,13 +31,13 @@ public class TC012 extends BaseClass {
 
             Thread.sleep(3000);
 
-            Assert.assertTrue(createDefectPage.isSummaryMandatoryStarVisible(),
+            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Summary"),
                     "Summary mandatory star not visible");
 
-            Assert.assertTrue(createDefectPage.isDescriptionMandatoryStarVisible(),
+            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Description"),
                     "Description mandatory star not visible");
 
-            Assert.assertTrue(createDefectPage.isStatusMandatoryStarVisible(),
+            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Status"),
                     "Status mandatory star not visible");
 
         } catch (AssertionError ae) {
