@@ -22,10 +22,13 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
+    @FindBy(id="updateDefect")
+    WebElement buttonSaveForUpdateDefect;
+
     @FindBy(id = "createDefect")
     WebElement buttonSavefornewDefect;
 
-    @FindBy(id = "closeButton")
+    @FindBy(xpath = "//button[@id='closeButton']")
     WebElement buttonClose;
 
     // Summary
@@ -106,9 +109,11 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
-                element);
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -117,6 +122,7 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").equals(summary));
         Assert.assertEquals(element.getAttribute("value"), summary, "FAILED: Summary text did not set properly.");
     }
+
 
     public String getSummary() {
         return textAreaSummary.getAttribute("value");
@@ -522,7 +528,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getSuccessNotificationText() throws InterruptedException {
-        Thread.sleep(2000);
         return successNotification.getText().trim();
     }
 

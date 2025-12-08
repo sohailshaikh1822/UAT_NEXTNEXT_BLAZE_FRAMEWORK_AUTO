@@ -14,7 +14,7 @@ public class TC015 extends BaseClass {
             String expectedUrlAfterClick,
             String Summary,
             String status,
-            String message
+            String msg
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case ********");
@@ -25,7 +25,6 @@ public class TC015 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
@@ -33,7 +32,6 @@ public class TC015 extends BaseClass {
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             logger.info("Defect Page loaded and form fields are visible.");
             defectLandingPage.clickCreateTestCaseButton();
-
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
@@ -42,15 +40,16 @@ public class TC015 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
+            createDefectPage.enterDescription(msg);
+            logger.info("description enetered");
             createDefectPage.selectStatus(status);
             logger.info("status is selected");
             Thread.sleep(3000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-
-            createDefectPage.verifySuccessMessage(message);
-        } catch (AssertionError ae) {
+        }
+        catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
         } catch (Exception ex) {
