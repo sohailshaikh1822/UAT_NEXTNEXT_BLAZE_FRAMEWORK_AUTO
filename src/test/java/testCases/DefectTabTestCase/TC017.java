@@ -1,9 +1,6 @@
 package testCases.DefectTabTestCase;
 
 import DataProviders.DefectTabTestCaseDataProvider;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
@@ -11,7 +8,6 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-import java.time.Duration;
 
 public class TC017 extends BaseClass {
 
