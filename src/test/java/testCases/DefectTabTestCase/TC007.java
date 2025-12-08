@@ -29,6 +29,7 @@ public class TC007 extends BaseClass {
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to the expected Defect Page URL.");
+            Thread.sleep(5000);
 
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.clickCreateTestCaseButton();
