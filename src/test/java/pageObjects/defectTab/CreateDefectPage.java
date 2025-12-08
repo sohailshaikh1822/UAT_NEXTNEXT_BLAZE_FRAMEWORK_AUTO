@@ -70,7 +70,7 @@ public class CreateDefectPage extends BasePage {
     WebElement dropdownAssignTo;
 
     // Description
-    @FindBy(xpath = "//textarea[@rows='8']")
+    @FindBy(xpath = "//textarea[@class='defect-text-wrapper-5']")
     WebElement textAreaDescription;
 
     // Attachments
@@ -593,13 +593,13 @@ public class CreateDefectPage extends BasePage {
         return element.getText().trim();
     }
 
-    public void verifySuccessNotificationMessage(String expectedMessage) {
-        String actualMessage = getSuccessNotificationMessage();
-        Assert.assertEquals(
-                actualMessage,
-                expectedMessage,
-                "FAILED: Success notification message mismatch.");
+    public void verifySuccessNotification() throws InterruptedException {
+        Thread.sleep(1000);
+        String actualMessage = successNotification.getText().trim();
+        Assert.assertEquals(actualMessage, "Defect created successfully.",
+                "FAILED: Success notification text mismatch.");
     }
+
 
     public boolean isUnsavedPopupVisible() {
         try {
