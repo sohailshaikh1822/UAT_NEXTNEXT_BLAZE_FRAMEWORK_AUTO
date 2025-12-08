@@ -36,7 +36,7 @@ public class TC011 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(summary);
             logger.info("Filled the Summary field");
-
+            Thread.sleep(3000);
             createDefectPage.clickSave();
             logger.info("Clicked the save button");
 
