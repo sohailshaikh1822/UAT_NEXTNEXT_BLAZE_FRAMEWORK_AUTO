@@ -38,24 +38,31 @@ public class TC007 extends BaseClass {
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickTypeDropdown();
             logger.info("Type dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickModuleDropdown();
             logger.info("Module dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickReasonDropdown();
             logger.info("Reason dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickCategoryDropdown();
             logger.info("Category dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickTargetReleaseDropdown();
             logger.info("Target Release dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickStatusDropdown();
             logger.info("Status dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickPriorityDropdown();
             logger.info("Priority dropdown expanded successfully.");

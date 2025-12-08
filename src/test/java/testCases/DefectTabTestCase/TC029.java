@@ -38,10 +38,10 @@ public class TC029 extends BaseClass {
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(3000);
+            Thread.sleep(5000);
 
             createDefectPage.selectStatus(status);
             logger.info("status is selected");
@@ -49,10 +49,12 @@ public class TC029 extends BaseClass {
 
             createDefectPage.enterDescription(description);
             logger.info("Description filled");
+            Thread.sleep(3000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
+            Thread.sleep(3000);
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

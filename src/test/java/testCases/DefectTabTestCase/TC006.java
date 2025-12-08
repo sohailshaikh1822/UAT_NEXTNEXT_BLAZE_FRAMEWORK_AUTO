@@ -25,6 +25,7 @@ public class TC006 extends BaseClass {
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
+            Thread.sleep(3000);
 
             // Step 3: Assert current URL contains expected Defect page URL
             String actualUrl = getDriver().getCurrentUrl();
@@ -38,24 +39,31 @@ public class TC006 extends BaseClass {
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickTypeDropdown();
             logger.info("Type dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickModuleDropdown();
             logger.info("Module dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickReasonDropdown();
             logger.info("Reason dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickCategoryDropdown();
             logger.info("Category dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickTargetReleaseDropdown();
             logger.info("Target Release dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickStatusDropdown();
             logger.info("Status dropdown expanded successfully.");
+            Thread.sleep(2000);
 
             createDefectPage.clickPriorityDropdown();
             logger.info("Priority dropdown expanded successfully.");
