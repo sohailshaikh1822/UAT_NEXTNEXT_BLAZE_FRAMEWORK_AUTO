@@ -39,34 +39,44 @@ public class TC008 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.selectAffectedRelease(affectedrealese);
             logger.info("Affected Release selected: {}", affectedrealese);
+            Thread.sleep(3000);
 
             createDefectPage.selectSeverity(severity);
             logger.info("Severity selected: {}", severity);
+            Thread.sleep(2000);
 
             createDefectPage.selectFixedRelease(fixedRelease);
             logger.info("Fixed Release selected: {}", fixedRelease);
+            Thread.sleep(2000);
 
             createDefectPage.selectType(type);
             logger.info("Type selected: {}", type);
+            Thread.sleep(2000);
 
             createDefectPage.selectModule(module);
             logger.info("Module selected: {}", module);
+            Thread.sleep(2000);
 
             createDefectPage.selectReason(reason);
             logger.info("Reason selected: {}", reason);
+            Thread.sleep(2000);
 
             createDefectPage.selectCategory(category);
             logger.info("Category selected: {}", category);
+            Thread.sleep(2000);
 
             createDefectPage.selectAssignTo(assignTo);
             logger.info("Assigned To selected: {}", assignTo);
 
+            Thread.sleep(2000);
 
             createDefectPage.selectTargetRelease(targetRealse);
             logger.info("Target Release selected: {}", targetRealse);
+            Thread.sleep(2000);
 
             createDefectPage.selectStatus(status);
             logger.info("Status selected: {}", status);
+            Thread.sleep(2000);
 
             createDefectPage.selectPriority(priority);
             logger.info("Priority selected: {}", priority);
