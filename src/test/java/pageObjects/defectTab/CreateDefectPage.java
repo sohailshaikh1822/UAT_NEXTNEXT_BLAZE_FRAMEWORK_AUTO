@@ -319,15 +319,52 @@ public class CreateDefectPage extends BasePage {
                 .isDisplayed();
     }
 
-    public boolean isMandatoryStarVisible(String fieldName) {
-        String dynamicXpath = "//span[normalize-space(text())='" + fieldName + "']"
-                + "/following-sibling::span[normalize-space(text())='*']";
 
-        WebElement mandatoryStar = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath)));
+    public boolean isSummaryMandatoryStarVisible() {
+        String xpath = "//p[contains(@class,'defect-p')]"
+                + "//span[normalize-space(text())='Summary']"
+                + "/following-sibling::span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
 
-        return mandatoryStar.isDisplayed();
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+            );
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
+
+    public boolean isDescriptionMandatoryStarVisible() {
+        String xpath = "//div[contains(@class,'defect-text-4')][contains(normalize-space(.),'Description')]"
+                + "//span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
+
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+            );
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    public boolean isStatusMandatoryStarVisible() {
+        String xpath = "//div[contains(@class,'defect-text-wrapper-4')][contains(normalize-space(.),'Status')]"
+                + "//span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
+
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))
+            );
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+
+
 
     public void verifyStatusIsDefault() {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOf(dropdownStatus)));

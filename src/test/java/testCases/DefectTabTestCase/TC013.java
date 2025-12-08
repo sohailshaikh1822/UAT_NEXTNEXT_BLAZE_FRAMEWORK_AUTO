@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC013 extends BaseClass {
     @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class)
-    public void verifyNavigationToDefectPage(String affectedRelease, String reason, String severity) throws InterruptedException {
+    public void verifyErrorMessage(String affectedRelease, String reason, String severity) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 

@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC033 extends BaseClass {
     @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifySavingWithOnlyMandatoryFieldsFilled(
+    public void VerifyCreateAndSearchADefect(
             String Summary,
             String status,
             String description,

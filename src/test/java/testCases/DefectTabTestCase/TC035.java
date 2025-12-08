@@ -8,7 +8,7 @@ import utils.RetryAnalyzer;
 
 public class TC035 extends BaseClass {
     @Test(dataProvider = "tc035", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifySavingWithOnlyMandatoryFieldsFilled(
+    public void VerifySearchADefectAndClearTheFields(
             String affectedRelease,
             String status,
             String severity, String priority, String assigned_To) throws InterruptedException {
@@ -27,19 +27,33 @@ public class TC035 extends BaseClass {
 
 
             defectLandingPage.selectAffectedRelease(affectedRelease);
+            logger.info("Selected Affected Release: " + affectedRelease);
             Thread.sleep(3000);
+
             defectLandingPage.selectStatus(status);
+            logger.info("Selected Status: " + status);
             Thread.sleep(3000);
+
             defectLandingPage.selectSeverity(severity);
+            logger.info("Selected Severity: " + severity);
             Thread.sleep(3000);
+
             defectLandingPage.selectPriority(priority);
+            logger.info("Selected Priority: " + priority);
             Thread.sleep(3000);
+
             defectLandingPage.selectAssignedTo(assigned_To);
+            logger.info("Selected Assigned To: " + assigned_To);
             Thread.sleep(3000);
+
             defectLandingPage.clickSearchButton();
+            logger.info("Clicked on Search Button");
             Thread.sleep(3000);
+
             defectLandingPage.clickClearButton();
+            logger.info("Clicked on Clear Button to reset filters");
             Thread.sleep(3000);
+
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
