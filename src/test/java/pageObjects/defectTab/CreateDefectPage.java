@@ -604,7 +604,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public void verifySuccessNotification() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         String actualMessage = successNotification.getText().trim();
         Assert.assertEquals(actualMessage, "Defect created successfully.",
                 "FAILED: Success notification text mismatch.");

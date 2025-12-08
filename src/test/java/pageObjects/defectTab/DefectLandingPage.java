@@ -67,7 +67,7 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Next']")
     WebElement arrowForwardNextPagination;
 
-    @FindBy(xpath = "//div[contains(text(),'CREATE DEFECT')]")
+    @FindBy(id = "createTestCaseButton")
     WebElement createTestCaseButton;
 
     @FindBy(xpath = "//p[@class='pagination-text']")

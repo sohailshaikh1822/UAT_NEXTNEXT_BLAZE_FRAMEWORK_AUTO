@@ -31,7 +31,7 @@ public class TC010 extends BaseClass {
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to expected URL.");
             logger.info("Navigated to Defect Page: " + actualUrl);
-
+            Thread.sleep(3000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
