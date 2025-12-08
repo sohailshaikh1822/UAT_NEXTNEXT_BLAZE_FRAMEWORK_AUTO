@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC014 extends BaseClass {
     @Test(dataProvider = "tc014", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyMessageWhenMandatoryFieldIsMissing(
+    public void VerifyErrorMessageWhenMandatoryFieldIsMissing(
             String expectedUrlAfterClick,
             String Summary,
             String description
@@ -46,6 +46,8 @@ public class TC014 extends BaseClass {
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
+            createDefectPage.verifyStatusErrorMessage();
+            logger.info("verified:Status manadatory error message displayed");
         }
         catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
