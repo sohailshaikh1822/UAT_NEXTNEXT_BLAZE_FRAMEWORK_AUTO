@@ -70,7 +70,7 @@ public class CreateDefectPage extends BasePage {
     WebElement dropdownAssignTo;
 
     // Description
-    @FindBy(xpath = "//textarea[@rows='8']")
+    @FindBy(xpath = "//textarea[@class='defect-text-wrapper-5']")
     WebElement textAreaDescription;
 
     // Attachments
