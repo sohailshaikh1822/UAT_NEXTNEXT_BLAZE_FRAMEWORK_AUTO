@@ -36,10 +36,11 @@ public class TC044 extends BaseClass {
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
             Thread.sleep(3000);
             createDefectPage.enterSummary("Automation defect summary");
-
+            Thread.sleep(3000);
             createDefectPage.selectStatus("New");
-
+            Thread.sleep(3000);
             createDefectPage.enterDescription("description for defect");
+            Thread.sleep(3000);
             Actions actions = new Actions(getDriver());
             actions.click(createDefectPage.getDescriptionField())
                     .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
