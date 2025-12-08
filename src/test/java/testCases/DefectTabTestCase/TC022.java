@@ -1,6 +1,5 @@
 package testCases.DefectTabTestCase;
 
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
@@ -23,19 +22,23 @@ public class TC022 extends BaseClass {
             landingPage.clickDefectTab();
             logger.info("Navigated to Defect page");
 
+            Thread.sleep(2000);
+
             landingPage.clickCreateTestCaseButton();
             logger.info("Opened Create Defect form");
 
             CreateDefectPage createPage = new CreateDefectPage(getDriver());
 
             createPage.enterSummary("Automation defect summary");
-
+            Thread.sleep(2000);
             createPage.selectStatus("New");
+            createPage.clearDescriptionField();
+            logger.info("Cleared Description field to leave it empty");
 
-            createPage.clickSave();
+            createPage.clickSaveforNewDefect();
             logger.info("Clicked Save button");
 
-            String expectedError = "Error: Please enter a valid Description.";
+            String expectedError = "Error: Description cannot be blank.";
 
             boolean isErrorDisplayed = createPage.verifySuccessMessage(expectedError);
 

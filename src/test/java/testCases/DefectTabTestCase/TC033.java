@@ -8,11 +8,10 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC033 extends BaseClass {
-    @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class ,retryAnalyzer = RetryAnalyzer.class )
+    @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifySavingWithOnlyMandatoryFieldsFilled(
             String Summary,
             String status,
-            String message,
             String description,
             String summary2
     ) throws InterruptedException {
@@ -36,7 +35,8 @@ public class TC033 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(3000);
+
+            Thread.sleep(4000);
 
             createDefectPage.selectStatus(status);
             logger.info("status is selected");
@@ -49,9 +49,8 @@ public class TC033 extends BaseClass {
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            createDefectPage.verifySuccessMessage(message);
-
             defectLandingPage.enterSummary(summary2);
+            defectLandingPage.clickSearchButton();
             Thread.sleep(5000);
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

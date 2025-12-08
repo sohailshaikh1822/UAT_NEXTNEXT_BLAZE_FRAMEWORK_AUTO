@@ -23,6 +23,7 @@ public class TC012 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
+            Thread.sleep(3000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 

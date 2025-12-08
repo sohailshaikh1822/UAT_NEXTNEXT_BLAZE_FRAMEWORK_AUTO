@@ -1,6 +1,7 @@
 package pageObjects.defectTab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -66,7 +67,7 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Next']")
     WebElement arrowForwardNextPagination;
 
-    @FindBy(id = "createTestCaseButton")
+    @FindBy(xpath = "//div[contains(text(),'CREATE DEFECT')]")
     WebElement createTestCaseButton;
 
     @FindBy(xpath = "//p[@class='pagination-text']")
@@ -116,15 +117,27 @@ public class DefectLandingPage extends BasePage {
         arrowForwardNextPagination.click();
     }
 
+    // public void clickCreateTestCaseButton() {
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    // WebElement button =
+    // wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
+    // wait.until(ExpectedConditions.elementToBeClickable(button));
+    // if (button.isDisplayed() && button.isEnabled()) {
+    // button.click();
+    // }
+    // }
+
     public void clickCreateTestCaseButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement button = wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
-        wait.until(ExpectedConditions.elementToBeClickable(button));
-        if (button.isDisplayed() && button.isEnabled()) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        try {
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(createTestCaseButton));
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block:'center'});", button);
             button.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", createTestCaseButton);
         }
     }
-
 
     public String getTotalDefectEntryCount() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -173,12 +186,10 @@ public class DefectLandingPage extends BasePage {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement defectElement = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
-        );
+                ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
         defectElement.click();
     }
-
 
     public void resizeColumn(String columnName, int offsetX) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -202,6 +213,7 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(helpBtn)).click();
 
     }
+
     public void clickStatusDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(statusDropdown)).click();
     }
@@ -221,5 +233,5 @@ public class DefectLandingPage extends BasePage {
     public void clickAffectedReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown)).click();
     }
-    
+
 }

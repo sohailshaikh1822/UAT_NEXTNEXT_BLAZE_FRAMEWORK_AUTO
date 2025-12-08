@@ -31,8 +31,7 @@ public class TC037 extends BaseClass {
             Assert.assertEquals(actualUrl, expectedUrlAfterClick,
                     "User is not navigated to the Defect page!");
             logger.info("Defect Page loaded and form fields are visible.");
-
-
+            Thread.sleep(3000);
             defectLandingPage.clickCreateTestCaseButton();
 
             logger.info("clicked on Create Defect Button");

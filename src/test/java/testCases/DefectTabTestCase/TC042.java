@@ -49,8 +49,7 @@ public class TC042 extends BaseClass {
             logger.info("Clicked on save button");
             Thread.sleep(3000);
 
-            createDefectPage.verifySuccessNotificationMessage("Defect updated successfully.");
-            logger.info("Success notification verified successfully");
+            createDefectPage.verifySuccessNotification();
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

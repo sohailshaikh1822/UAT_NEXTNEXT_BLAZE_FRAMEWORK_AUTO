@@ -21,6 +21,7 @@ public class TC040 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Navigated to Defect Landing Page");
+            Thread.sleep(2000);
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect button");

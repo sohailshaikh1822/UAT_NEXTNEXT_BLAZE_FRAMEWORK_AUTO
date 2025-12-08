@@ -43,27 +43,35 @@ public class TC016 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
+            Thread.sleep(3000);
 
             createDefectPage.selectSeverity(Severity);
             logger.info("Severity selected:"+Severity);
+            Thread.sleep(3000);
 
             createDefectPage.selectType(Type);
             logger.info("Severity selected:"+Type);
+            Thread.sleep(3000);
 
             createDefectPage.selectCategory(Category);
             logger.info("Category selected:"+Category);
+            Thread.sleep(3000);
 
             createDefectPage.selectPriority(Priority);
             logger.info("Priority selected:"+Priority);
+            Thread.sleep(3000);
 
             createDefectPage.selectStatus(Status);
             logger.info("Status selected:"+Status);
+            Thread.sleep(3000);
 
             createDefectPage.selectAssignTo(AssignTo);
             logger.info("Assign To selected:"+AssignTo);
+            Thread.sleep(3000);
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled:"+Description);
+            Thread.sleep(3000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
