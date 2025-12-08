@@ -1,6 +1,5 @@
 package testCases.DefectTabTestCase;
 
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
@@ -29,10 +28,10 @@ public class TC022 extends BaseClass {
             CreateDefectPage createPage = new CreateDefectPage(getDriver());
 
             createPage.enterSummary("Automation defect summary");
-
+            Thread.sleep(2000); // Wait for the form to load
             createPage.selectStatus("New");
 
-            createPage.clickSave();
+            createPage.clickSaveforNewDefect();
             logger.info("Clicked Save button");
 
             String expectedError = "Error: Please enter a valid Description.";
