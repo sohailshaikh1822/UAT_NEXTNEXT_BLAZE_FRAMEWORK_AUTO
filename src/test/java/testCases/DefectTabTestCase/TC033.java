@@ -38,7 +38,7 @@ public class TC033 extends BaseClass {
 
             Thread.sleep(4000);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(Integer.parseInt(status));
             logger.info("status is selected");
             Thread.sleep(3000);
 
