@@ -31,7 +31,7 @@ public class TC011 extends BaseClass {
 
             Thread.sleep(3000);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(Integer.parseInt(status));
             logger.info("Status Selected from Dropdown");
             Thread.sleep(3000);
             createDefectPage.enterSummary(summary);

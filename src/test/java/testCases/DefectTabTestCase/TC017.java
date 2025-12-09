@@ -28,25 +28,26 @@ public class TC017 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully and dashboard loaded");
-
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
-            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick), "User did not navigate to the expected Defect Page URL.");
+            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
+                    "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
+            logger.info("Defect Page loaded and form fields are visible.");
             Thread.sleep(3000);
-
             defectLandingPage.clickCreateTestCaseButton();
-            logger.info("Clicked on Create Defect Button");
-            Thread.sleep(3000);
+            logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-
-            createDefectPage.enterSummary(Summary);
             Thread.sleep(3000);
+            createDefectPage.enterSummary(Summary);
+            logger.info("Summary filled:"+Summary);
+            Thread.sleep(3000);
+
+
             createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
             logger.info("Type selected:"+Type);
             Thread.sleep(3000);
@@ -66,9 +67,14 @@ public class TC017 extends BaseClass {
             createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
             logger.info("Assign To selected:"+AssignTo);
             Thread.sleep(3000);
+
             createDefectPage.enterDescription(Description);
+            logger.info("Description filled:"+Description);
+            Thread.sleep(3000);
 
             createDefectPage.clickSave();
+            logger.info("Clicked on save button");
+
 
             createDefectPage.verifySuccessNotification();
 
