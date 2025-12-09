@@ -40,11 +40,9 @@ public class TC030 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(3000);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("status is selected");
-            Thread.sleep(2000);
 
             createDefectPage.enterDescription(description);
             logger.info("Description filled");
