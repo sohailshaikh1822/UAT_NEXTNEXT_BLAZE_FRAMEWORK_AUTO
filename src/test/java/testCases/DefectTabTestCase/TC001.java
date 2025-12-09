@@ -6,7 +6,7 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
-public class TC001 extends BaseClass{
+public class TC001 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyNavigationToDefectPage() throws InterruptedException {
@@ -23,6 +23,8 @@ public class TC001 extends BaseClass{
 
             String actualUrl = getDriver().getCurrentUrl();
             String expectedUrlAfterClick = "https://webapp-stg-testnext.azurewebsites.net/defect";
+
+            Thread.sleep(1000);
             Assert.assertEquals(actualUrl, expectedUrlAfterClick,
                     "User is not navigated to the Defect page!");
         } catch (AssertionError e) {
