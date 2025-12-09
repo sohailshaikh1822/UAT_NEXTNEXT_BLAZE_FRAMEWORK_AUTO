@@ -74,10 +74,11 @@ public class DefectLandingPage extends BasePage {
     WebElement totalDefectEntryCount;
 
     // ================= ACTIONS =================
-    public void clickDefectTab() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(defectTab));
-        defectTab.click();
+    public void clickDefectTab() throws InterruptedException {
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(defectTab)).click();
+        Thread.sleep(1000);
+
     }
 
     public void enterSummary(String text) {
