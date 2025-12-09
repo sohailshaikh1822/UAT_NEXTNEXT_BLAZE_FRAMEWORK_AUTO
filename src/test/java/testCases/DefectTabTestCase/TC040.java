@@ -54,8 +54,8 @@ public class TC040 extends BaseClass {
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
-            createDefect.selectStatus("Closed");
-            createDefect.selectPriority("Medium");
+            createDefect.selectStatusByIndex(1);
+            createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();
             Thread.sleep(800);

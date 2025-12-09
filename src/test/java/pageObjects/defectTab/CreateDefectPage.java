@@ -224,15 +224,6 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownStatus, value);
     }
 
-    //Mohit
-    public void selectStatusByIndex(int index) {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
-        Select select = new Select(dropdown);
-        select.selectByIndex(index);
-    }
-    //Mohit
-
-
     public boolean dropdownStatusIsDisplayed() {
         return dropdownStatus.isDisplayed();
     }
@@ -265,14 +256,6 @@ public class CreateDefectPage extends BasePage {
         selectDropdown(dropdownType, value);
     }
 
-    //Mohit
-    public void selectTypeByIndex(int index) {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
-        Select select = new Select(dropdown);
-        select.selectByIndex(index);
-    }
-    //mohit
-
     public boolean dropdownTypeIsDisplayed() {
         return dropdownType.isDisplayed();
     }
@@ -280,13 +263,6 @@ public class CreateDefectPage extends BasePage {
     public void selectAssignTo(String value) {
         selectDropdown(dropdownAssignTo, value);
     }
-    //Mohit
-    public void selectAssignToByIndex(int index) {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAssignTo));
-        Select select = new Select(dropdown);
-        select.selectByIndex(index);
-    }
-    //Mohit
 
     public boolean dropdownAssignToIsDisplayed() {
         return dropdownAssignTo.isDisplayed();
@@ -576,15 +552,6 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
-    //mohit
-    public void selectPriorityByIndex(int index) {
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
-        Select select = new Select(dropdown);
-        select.selectByIndex(index);
-    }
-    //mohit
-
-
     public void clickTargetReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease)).click();
     }
@@ -711,4 +678,45 @@ public class CreateDefectPage extends BasePage {
         wait.until(driver -> element.getAttribute("value").isEmpty());
         Assert.assertEquals(element.getAttribute("value"), "", "FAILED: Description field was not cleared.");
     }
+
+    // mohit
+    public void selectPriorityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    // mohit
+
+    // Mohit
+    public void selectAssignToByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAssignTo));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    // Mohit
+
+    // Mohit
+    public void selectTypeByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    // mohit
+
+    // Mohit
+    public void selectStatusByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    // Mohit
+    // Mohit
+    public void selectSeverityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+    // Mohit
+
 }

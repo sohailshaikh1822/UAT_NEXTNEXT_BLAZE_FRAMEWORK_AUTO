@@ -22,7 +22,7 @@ public class TC039 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("User navigated to Defect Landing Page");
 
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect");
 
@@ -39,10 +39,10 @@ public class TC039 extends BaseClass {
             logger.info("Entered Description");
 
             Thread.sleep(1000);
-            createDefect.selectSeverity("Minor");
+            createDefect.selectSeverityByIndex(1);
 
             Thread.sleep(1000);
-            createDefect.selectPriority("Medium");
+            createDefect.selectPriorityByIndex(1);
             logger.info("Filled mandatory details WITHOUT saving");
 
             Thread.sleep(500);
