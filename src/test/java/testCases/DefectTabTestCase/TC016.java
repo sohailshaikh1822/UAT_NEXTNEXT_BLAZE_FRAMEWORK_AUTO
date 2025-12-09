@@ -46,23 +46,23 @@ public class TC016 extends BaseClass {
             Thread.sleep(3000);
 
 
-            createDefectPage.selectType(Type);
+            createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
             logger.info("Severity selected:"+Type);
             Thread.sleep(3000);
 
-            createDefectPage.selectCategory(Category);
+            createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
             logger.info("Category selected:"+Category);
             Thread.sleep(3000);
 
-            createDefectPage.selectPriority(Priority);
+            createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
             logger.info("Priority selected:"+Priority);
             Thread.sleep(3000);
 
-            createDefectPage.selectStatus(Status);
+            createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
             logger.info("Status selected:"+Status);
             Thread.sleep(3000);
 
-            createDefectPage.selectAssignTo(AssignTo);
+            createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
             logger.info("Assign To selected:"+AssignTo);
             Thread.sleep(3000);
 

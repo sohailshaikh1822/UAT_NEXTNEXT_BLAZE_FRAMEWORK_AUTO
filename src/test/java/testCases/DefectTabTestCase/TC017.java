@@ -47,15 +47,15 @@ public class TC017 extends BaseClass {
 
             createDefectPage.enterSummary(Summary);
             Thread.sleep(3000);
-            createDefectPage.selectType(Type);
+            createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
             Thread.sleep(3000);
-            createDefectPage.selectCategory(Category);
+            createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
             Thread.sleep(3000);
-            createDefectPage.selectPriority(Priority);
+            createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
             Thread.sleep(3000);
-            createDefectPage.selectStatus(Status);
+            createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
             Thread.sleep(3000);
-            createDefectPage.selectAssignTo(AssignTo);
+            createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
             Thread.sleep(3000);
             createDefectPage.enterDescription(Description);
 
