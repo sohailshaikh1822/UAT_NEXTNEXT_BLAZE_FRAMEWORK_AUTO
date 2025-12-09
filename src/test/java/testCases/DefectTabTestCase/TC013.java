@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC013 extends BaseClass {
     @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class)
-    public void verifyNavigationToDefectPage(String affectedRelease, String reason, String severity) throws InterruptedException {
+    public void verifyNavigationToDefectPage(String affectedRelease, String assignTo, String severity) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -31,14 +31,14 @@ public class TC013 extends BaseClass {
 
             Thread.sleep(3000);
 
-            createDefectPage.selectAffectedRelease(affectedRelease);
+            createDefectPage.selectAffectedReleaseByIndex(Integer.parseInt(affectedRelease));
             logger.info("Status Selected from Dropdown");
             Thread.sleep(3000);
-            createDefectPage.selectReason(reason);
+            createDefectPage.selectAssignToByIndex(Integer.parseInt(assignTo));
             logger.info("Filled the Summary field");
 
             Thread.sleep(3000);
-            createDefectPage.selectSeverity(severity);
+            createDefectPage.selectSeverityByIndex(Integer.parseInt(severity));
             logger.info("Filled the Summary field");
             Thread.sleep(3000);
             createDefectPage.clickSave();

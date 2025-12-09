@@ -235,4 +235,36 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown)).click();
     }
 
+    public void selectSeverityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(severityDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectPriorityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(priorityDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectAssignToByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(assignToDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectAffectedReleaseByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectStatusByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(statusDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+
+
 }
