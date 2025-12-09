@@ -26,15 +26,15 @@ public class TC035 extends BaseClass {
             logger.info("Defect Page loaded and form fields are visible.");
 
 
-            defectLandingPage.selectAffectedRelease(affectedRelease);
+            defectLandingPage.selectAffectedReleaseByIndex(Integer.parseInt(affectedRelease));
             Thread.sleep(3000);
-            defectLandingPage.selectStatus(status);
+            defectLandingPage.selectStatusByIndex(Integer.parseInt(status));
             Thread.sleep(3000);
-            defectLandingPage.selectSeverity(severity);
+            defectLandingPage.selectSeverityByIndex(Integer.parseInt(severity));
             Thread.sleep(3000);
-            defectLandingPage.selectPriority(priority);
+            defectLandingPage.selectPriorityByIndex(Integer.parseInt(priority));
             Thread.sleep(3000);
-            defectLandingPage.selectAssignedTo(assigned_To);
+            defectLandingPage.selectAssignToByIndex(Integer.parseInt(assigned_To));
             Thread.sleep(3000);
             defectLandingPage.clickSearchButton();
             Thread.sleep(3000);
