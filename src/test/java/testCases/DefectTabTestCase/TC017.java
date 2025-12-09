@@ -8,6 +8,7 @@ import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
+
 public class TC017 extends BaseClass {
 
     @Test(dataProvider = "tc017", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -19,7 +20,8 @@ public class TC017 extends BaseClass {
             String Priority,
             String Status,
             String AssignTo,
-            String Description) throws InterruptedException {
+            String Description
+    ) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify success message content after save ********");
 
@@ -33,8 +35,7 @@ public class TC017 extends BaseClass {
 
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
-            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
-                    "User did not navigate to the expected Defect Page URL.");
+            Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick), "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             Thread.sleep(3000);
 
@@ -47,23 +48,23 @@ public class TC017 extends BaseClass {
             createDefectPage.enterSummary(Summary);
             Thread.sleep(3000);
             createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
-            logger.info("Type selected:" + Type);
+            logger.info("Type selected:"+Type);
             Thread.sleep(3000);
 
             createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
-            logger.info("Category selected:" + Category);
+            logger.info("Category selected:"+Category);
             Thread.sleep(3000);
 
             createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
-            logger.info("Priority selected:" + Priority);
+            logger.info("Priority selected:"+Priority);
             Thread.sleep(3000);
 
             createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
-            logger.info("Status selected:" + Status);
+            logger.info("Status selected:"+Status);
             Thread.sleep(3000);
 
             createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
-            logger.info("Assign To selected:" + AssignTo);
+            logger.info("Assign To selected:"+AssignTo);
             Thread.sleep(3000);
             createDefectPage.enterDescription(Description);
 
@@ -79,5 +80,6 @@ public class TC017 extends BaseClass {
             throw ex;
         }
 
+        logger.info("************ Test Case Finished: Verify success message content after save *************");
     }
 }
