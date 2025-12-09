@@ -18,9 +18,9 @@
 <!--            <class name="testCases.DefectTabTestCase.TC008"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC009"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC010"/>-->
-            <class name="testCases.DefectTabTestCase.TC035"/>
-<!--            <class name="testCases.DefectTabTestCase.TC012"/>-->
-<!--            <class name="testCases.DefectTabTestCase.TC013"/>-->
+            <class name="testCases.DefectTabTestCase.TC011"/>
+            <class name="testCases.DefectTabTestCase.TC012"/>
+            <class name="testCases.DefectTabTestCase.TC013"/>
 <!--            <class name="testCases.DefectTabTestCase.TC014"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC015"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC016"/>-->
@@ -28,7 +28,8 @@
 <!--            <class name="testCases.DefectTabTestCase.TC018"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC019"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC021"/>-->
-
+            <class name="testCases.DefectTabTestCase.TC033"/>
+            <class name="testCases.DefectTabTestCase.TC035"/>
 <!--            <class name="testCases.DefectTabTestCase.TC036"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC037"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC039"/>-->
