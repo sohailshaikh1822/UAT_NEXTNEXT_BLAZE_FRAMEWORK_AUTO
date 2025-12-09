@@ -28,7 +28,7 @@
 <!--            <class name="testCases.DefectTabTestCase.TC018"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC019"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC021"/>-->
-<!--            <class name="testCases.DefectTabTestCase.TC022"/>-->
+           <class name="testCases.DefectTabTestCase.TC022"/>
 <!--            <class name="testCases.DefectTabTestCase.TC023"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC026"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC027"/>-->
