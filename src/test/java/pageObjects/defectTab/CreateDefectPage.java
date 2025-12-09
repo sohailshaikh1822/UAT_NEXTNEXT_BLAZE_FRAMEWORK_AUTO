@@ -716,13 +716,20 @@ public class CreateDefectPage extends BasePage {
         select.selectByIndex(index);
     }
 
+    public void selectReasonByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectTargetReleaseByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease));
+    }
+
     public void selectAffectedReleaseByIndex(int index) {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease));
         Select select = new Select(dropdown);
         select.selectByIndex(index);
     }
-
-
-
 
 }

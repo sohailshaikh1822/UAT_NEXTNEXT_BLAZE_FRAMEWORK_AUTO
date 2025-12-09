@@ -42,7 +42,7 @@ public class TC046 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(2000);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("status is selected");
             Thread.sleep(2000);
 

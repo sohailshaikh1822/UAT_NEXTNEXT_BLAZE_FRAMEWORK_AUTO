@@ -42,7 +42,8 @@ public class TC023 extends BaseClass {
             logger.info("Summary Entered");
 
             Thread.sleep(2000);
-            createDefectPage.selectStatus(status);
+//            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("Defect status selected");
 
             Thread.sleep(2000);

@@ -42,43 +42,31 @@ public class TC008 extends BaseClass {
             Thread.sleep(3000);
 
             createDefectPage.selectSeverityByIndex(1);
-            logger.info("Severity selected: {}", severity);
-            Thread.sleep(2000);
 
             createDefectPage.selectFixedRelease(fixedRelease);
-            logger.info("Fixed Release selected: {}", fixedRelease);
-            Thread.sleep(2000);
 
             createDefectPage.selectTypeByIndex(1);
-            logger.info("Type selected: {}", type);
             Thread.sleep(2000);
 
-            createDefectPage.selectModule(module);
-            logger.info("Module selected: {}", module);
+            createDefectPage.selectModuleByIndex(1);
             Thread.sleep(2000);
 
-            createDefectPage.selectReason(reason);
-            logger.info("Reason selected: {}", reason);
+            createDefectPage.selectReasonByIndex(1);
             Thread.sleep(2000);
 
-            createDefectPage.selectCategory(category);
-            logger.info("Category selected: {}", category);
+            createDefectPage.selectCategoryByIndex(1);
             Thread.sleep(2000);
 
-            createDefectPage.selectAssignTo(assignTo);
-            logger.info("Assigned To selected: {}", assignTo);
+            createDefectPage.selectAssignToByIndex(2);
 
             Thread.sleep(2000);
 
-            createDefectPage.selectTargetRelease(targetRealse);
-            logger.info("Target Release selected: {}", targetRealse);
-            Thread.sleep(2000);
+            createDefectPage.selectTargetReleaseByIndex(1);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("Status selected: {}", status);
-            Thread.sleep(2000);
 
-            createDefectPage.selectPriority(priority);
+            createDefectPage.selectPriorityByIndex(1);
             logger.info("Priority selected: {}", priority);
 
 
