@@ -42,7 +42,6 @@ public class TC017 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
-
             createDefectPage.selectCategoryByIndex(1);
             logger.info("Category selected:"+1);
             Thread.sleep(3000);
