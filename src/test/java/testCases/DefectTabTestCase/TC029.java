@@ -41,20 +41,20 @@ public class TC029 extends BaseClass {
             Thread.sleep(5000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("status is selected");
-            Thread.sleep(3000);
+
 
             createDefectPage.enterDescription(description);
             logger.info("Description filled");
-            Thread.sleep(3000);
+            Thread.sleep(2000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            Thread.sleep(3000);
+
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
