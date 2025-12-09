@@ -48,4 +48,5 @@
             <class name="testCases.DefectTabTestCase.TC048"/>
         </classes>
     </test>
+
 </suite>
