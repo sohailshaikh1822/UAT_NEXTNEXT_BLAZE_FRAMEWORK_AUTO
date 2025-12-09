@@ -75,7 +75,6 @@ public class TC017 extends BaseClass {
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-
             createDefectPage.verifySuccessNotification();
 
         } catch (AssertionError ae) {
