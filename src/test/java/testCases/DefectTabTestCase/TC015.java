@@ -14,7 +14,7 @@ public class TC015 extends BaseClass {
             String expectedUrlAfterClick,
             String Summary,
             String status,
-            String msg
+            String description
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case ********");
@@ -41,11 +41,12 @@ public class TC015 extends BaseClass {
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
-            createDefectPage.enterDescription(msg);
-            logger.info("description enetered");
+            createDefectPage.selectStatusByIndex(Integer.parseInt(status));
+            logger.info("Status selected:"+status);
             Thread.sleep(3000);
-            createDefectPage.selectStatus(status);
-            logger.info("status is selected");
+
+            createDefectPage.enterDescription(description);
+            logger.info("Description filled:"+description);
             Thread.sleep(3000);
 
             createDefectPage.clickSave();
