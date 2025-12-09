@@ -15,11 +15,6 @@ public class TC017 extends BaseClass {
     public void Verify_success_message_content_after_save(
             String expectedUrlAfterClick,
             String Summary,
-            String Type,
-            String Category,
-            String Priority,
-            String Status,
-            String AssignTo,
             String Description
     ) throws InterruptedException {
 
@@ -48,24 +43,24 @@ public class TC017 extends BaseClass {
             Thread.sleep(3000);
 
 
-            createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
-            logger.info("Type selected:"+Type);
+            createDefectPage.selectTypeByIndex(1);
+            logger.info("Type selected:"+1);
             Thread.sleep(3000);
 
-            createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
-            logger.info("Category selected:"+Category);
+            createDefectPage.selectCategoryByIndex(1);
+            logger.info("Category selected:"+1);
             Thread.sleep(3000);
 
-            createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
-            logger.info("Priority selected:"+Priority);
+            createDefectPage.selectPriorityByIndex(2);
+            logger.info("Priority selected:"+2);
             Thread.sleep(3000);
 
-            createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
-            logger.info("Status selected:"+Status);
+            createDefectPage.selectStatusByIndex(1);
+            logger.info("Status selected:"+1);
             Thread.sleep(3000);
 
-            createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
-            logger.info("Assign To selected:"+AssignTo);
+            createDefectPage.selectAssignToByIndex(12);
+            logger.info("Assign To selected:"+12);
             Thread.sleep(3000);
 
             createDefectPage.enterDescription(Description);
