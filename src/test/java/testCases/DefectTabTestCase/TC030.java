@@ -37,17 +37,18 @@ public class TC030 extends BaseClass {
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
             Thread.sleep(3000);
 
             createDefectPage.selectStatus(status);
             logger.info("status is selected");
-            Thread.sleep(3000);
+            Thread.sleep(2000);
 
             createDefectPage.enterDescription(description);
             logger.info("Description filled");
+            Thread.sleep(2000);
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
