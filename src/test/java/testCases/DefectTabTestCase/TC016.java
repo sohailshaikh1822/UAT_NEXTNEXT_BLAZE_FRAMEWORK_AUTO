@@ -47,7 +47,7 @@ public class TC016 extends BaseClass {
 
 
             createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
-            logger.info("Severity selected:"+Type);
+            logger.info("Type selected:"+Type);
             Thread.sleep(3000);
 
             createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
