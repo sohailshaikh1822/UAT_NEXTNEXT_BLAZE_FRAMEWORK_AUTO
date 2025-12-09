@@ -41,7 +41,7 @@ public class TC008 extends BaseClass {
             logger.info("Affected Release selected: {}", affectedrealese);
             Thread.sleep(3000);
 
-            createDefectPage.selectSeverity(severity);
+            createDefectPage.selectSeverityByIndex(1);
             logger.info("Severity selected: {}", severity);
             Thread.sleep(2000);
 
@@ -49,7 +49,7 @@ public class TC008 extends BaseClass {
             logger.info("Fixed Release selected: {}", fixedRelease);
             Thread.sleep(2000);
 
-            createDefectPage.selectType(type);
+            createDefectPage.selectTypeByIndex(1);
             logger.info("Type selected: {}", type);
             Thread.sleep(2000);
 

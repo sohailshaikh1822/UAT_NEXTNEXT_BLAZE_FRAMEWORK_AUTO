@@ -679,44 +679,41 @@ public class CreateDefectPage extends BasePage {
         Assert.assertEquals(element.getAttribute("value"), "", "FAILED: Description field was not cleared.");
     }
 
-    // mohit
+    // New implementations for selecting by index
     public void selectPriorityByIndex(int index) {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
         Select select = new Select(dropdown);
         select.selectByIndex(index);
     }
-    // mohit
 
-    // Mohit
     public void selectAssignToByIndex(int index) {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAssignTo));
         Select select = new Select(dropdown);
         select.selectByIndex(index);
     }
-    // Mohit
 
-    // Mohit
     public void selectTypeByIndex(int index) {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
         Select select = new Select(dropdown);
         select.selectByIndex(index);
     }
-    // mohit
 
-    // Mohit
     public void selectStatusByIndex(int index) {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
         Select select = new Select(dropdown);
         select.selectByIndex(index);
     }
 
-    // Mohit
-    // Mohit
     public void selectSeverityByIndex(int index) {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
         Select select = new Select(dropdown);
         select.selectByIndex(index);
     }
-    // Mohit
+
+    public void selectModuleByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
 
 }
