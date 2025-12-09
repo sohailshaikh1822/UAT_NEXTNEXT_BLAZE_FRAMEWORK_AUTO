@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="Defect Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headed"/>
+        <parameter name="mode" value="headless"/>
 
         <classes>
 
@@ -18,9 +18,7 @@
 <!--            <class name="testCases.DefectTabTestCase.TC008"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC009"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC010"/>-->
-            <class name="testCases.DefectTabTestCase.TC011"/>
-            <class name="testCases.DefectTabTestCase.TC012"/>
-            <class name="testCases.DefectTabTestCase.TC013"/>
+
 <!--            <class name="testCases.DefectTabTestCase.TC014"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC015"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC016"/>-->
