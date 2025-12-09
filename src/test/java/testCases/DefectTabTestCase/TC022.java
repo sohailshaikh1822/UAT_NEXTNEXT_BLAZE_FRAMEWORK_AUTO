@@ -33,7 +33,7 @@ public class TC022 extends BaseClass {
             createPage.enterSummary("Automation defect summary");
             Thread.sleep(2000);
 
-            createPage.selectStatusByIndex(2);
+            createPage.selectStatusByIndex(1);
             Thread.sleep(2000);
             createPage.clearDescriptionField();
             logger.info("Cleared Description field to leave it empty");
