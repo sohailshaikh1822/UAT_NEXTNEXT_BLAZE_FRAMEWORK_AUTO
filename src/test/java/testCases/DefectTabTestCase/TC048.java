@@ -48,10 +48,10 @@ public class TC048 extends BaseClass {
             logger.info("Entered Description");
 
             Thread.sleep(1000);
-            createDefect.selectStatus("Closed");
+            createDefect.selectStatusByIndex(1);
 
             Thread.sleep(1000);
-            createDefect.selectPriority("Medium");
+            createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();
             Thread.sleep(500);
