@@ -43,10 +43,6 @@ public class TC017 extends BaseClass {
             Thread.sleep(3000);
 
 
-            createDefectPage.selectTypeByIndex(1);
-            logger.info("Type selected:"+1);
-            Thread.sleep(3000);
-
             createDefectPage.selectCategoryByIndex(1);
             logger.info("Category selected:"+1);
             Thread.sleep(3000);
