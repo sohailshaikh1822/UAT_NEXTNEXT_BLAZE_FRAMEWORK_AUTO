@@ -31,7 +31,7 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//select)[3]")
     WebElement dropDownPriority;
 
-    @FindBy(xpath = "(//select)[4]")
+    @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[2]")
     WebElement dropDownType;
 
     @FindBy(xpath = "(//select)[4]/option")
