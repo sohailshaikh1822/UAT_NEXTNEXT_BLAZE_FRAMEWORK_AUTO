@@ -20,11 +20,11 @@ public class TC052 extends BaseClass {
 
             logger.info("Navigating to 'Author Test Case' tab.");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-
+            WaitUtils.waitFor1000Milliseconds();
             // Search by RQ ID
             authorTestCasePage.searchRq(rqName);
             logger.info("Searched using RQ ID: " + rqName);
-
+            WaitUtils.waitFor1000Milliseconds();
             String expectedRQId = authorTestCasePage.getRQId();
             Assert.assertEquals(expectedRQId, rqName, "Mismatch in RQ ID after search.");
             logger.info("Successfully verified RQ ID: " + expectedRQId);

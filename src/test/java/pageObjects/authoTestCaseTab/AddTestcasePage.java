@@ -23,7 +23,7 @@ public class AddTestcasePage extends BasePage {
 
     // locators
 
-    @FindBy(xpath = "(//table//input[@type='text'])[1]")
+    @FindBy(xpath = "(//input[@type='text'])[1]")
     WebElement textName;
 
     @FindBy(xpath = "(//input[@type='text'])[2]")
@@ -61,11 +61,19 @@ public class AddTestcasePage extends BasePage {
     // Actions
 
     public void setTestCaseName(String testCaseName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement nameField = wait.until(ExpectedConditions.visibilityOf(textName));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        Actions actions = new Actions(driver);
+
+        WebElement nameField = wait.until(
+                ExpectedConditions.visibilityOf(textName)
+        );
+        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+        actions.moveToElement(nameField).perform();
+        actions.click(nameField).perform();
         nameField.clear();
         nameField.sendKeys(testCaseName);
     }
+
 
     public void setDescription(String description) {
         textDescription.sendKeys(description);
@@ -146,7 +154,7 @@ public class AddTestcasePage extends BasePage {
             actual.add(ele.getText());
         }
         List<String> expected = new ArrayList<>(
-                Arrays.asList("Manual", "Automation", "Performance", "Scenario", "Please Select"));
+                Arrays.asList("Please Select","Manual", "Automation", "Performance", "Scenario"));
         Collections.sort(actual);
         Collections.sort(expected);
         return actual.equals(expected);

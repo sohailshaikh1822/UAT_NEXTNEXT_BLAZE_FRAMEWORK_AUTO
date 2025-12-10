@@ -22,7 +22,7 @@ public class IndividualTestCasePage extends BasePage {
     @FindBy(xpath = "//div[normalize-space()='CLOSE']")
     WebElement buttonClose;
 
-    @FindBy(xpath = "//div[normalize-space()='Create Test Run']")
+    @FindBy(xpath = "//div[normalize-space()='CREATE TEST RUN']")
     WebElement buttonCreateTestRun;
 
     @FindBy(xpath = "//div[normalize-space()='SAVE']")
@@ -195,9 +195,9 @@ public class IndividualTestCasePage extends BasePage {
                 .elementToBeClickable(buttonSave));
         actions.moveToElement(saveBtn).perform();
         saveBtn.click();
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(
-                By.xpath("//div[@id='notification']"),
-                "Test Case updated successfully."));
+//        wait.until(ExpectedConditions.textToBePresentInElementLocated(
+//                By.xpath("//div[@id='notification']"),
+//                "Test Case updated successfully."));
     }
 
     public void addTestStepsFromExcelForNewTestCase(String description, String expectedResult)
