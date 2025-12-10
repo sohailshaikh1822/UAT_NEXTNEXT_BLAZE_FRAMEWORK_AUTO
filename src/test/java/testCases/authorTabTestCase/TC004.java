@@ -19,6 +19,7 @@ public class TC004 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickEpic();
             logger.info("Click on the Epic Drop Down");
+            Thread.sleep(3000);
             authorTestCasePage.selectEpic(epicName);
             logger.info("selected the epic from the dropdown");
             Assert.assertEquals(authorTestCasePage.getSelectedEpic(), epicName);
