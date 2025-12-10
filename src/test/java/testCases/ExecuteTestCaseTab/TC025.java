@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC025 extends BaseClass {
 
@@ -46,7 +47,7 @@ public class TC025 extends BaseClass {
             executeLandingPage.waitForTestRunInterfaceToLoad();
             logger.info("Clicked on the Play button of a test run");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Waited for 2 seconds for Test Run page to load");
 
             individualTestRun.clickCloseButton();

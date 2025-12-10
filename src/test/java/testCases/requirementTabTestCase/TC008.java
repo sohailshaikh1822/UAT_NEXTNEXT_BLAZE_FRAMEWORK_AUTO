@@ -8,12 +8,13 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC008 extends BaseClass {
 
     @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyRequirementsCreation(String rQid, String description, String priority, String status, String type
-    ) throws InterruptedException {
+    public void verifyRequirementsCreation(String rQid, String description, String priority, String status, String type)
+            throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             logger.info("************ Test Case Started *************************");
@@ -57,24 +58,27 @@ public class TC008 extends BaseClass {
             logger.info("Clicked Save button");
 
             logger.info("Requirement successfully added");
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
             String newRqIdText = addRequirementPage.getRequirementIdName();
             logger.info("Captured new Requirement ID from popup: " + newRqIdText);
-            Thread.sleep(1000);
+
+            WaitUtils.waitFor1000Milliseconds();
+
             addRequirementPage.clickClose();
             logger.info("Closed the Add Requirement popup");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             individualModulePage.clickLastPageArrowBtn();
             logger.info("Navigated to the last page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             String expectedRqId = requirementTabPage.getNewCreatedRqIdText();
             logger.info("Fetched last row Requirement ID: " + expectedRqId);
 
             Assert.assertEquals(newRqIdText, expectedRqId,
-                    "Mismatch in newly added Requirement ID: expected '" + newRqIdText + "', but found '" + expectedRqId + "'");
+                    "Mismatch in newly added Requirement ID: expected '" + newRqIdText + "', but found '" + expectedRqId
+                            + "'");
 
             logger.info("Requirement ID successfully verified: " + newRqIdText);
 

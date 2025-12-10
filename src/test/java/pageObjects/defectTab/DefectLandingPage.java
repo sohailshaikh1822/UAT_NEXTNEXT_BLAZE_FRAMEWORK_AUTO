@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
+import utils.WaitUtils;
 
 public class DefectLandingPage extends BasePage {
 
@@ -75,9 +76,9 @@ public class DefectLandingPage extends BasePage {
 
     // ================= ACTIONS =================
     public void clickDefectTab() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(defectTab)).click();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
 
     }
 

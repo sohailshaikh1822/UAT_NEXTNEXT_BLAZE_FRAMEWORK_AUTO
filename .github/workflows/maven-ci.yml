@@ -14,18 +14,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # - suite: testplan.xml
-          #   logName: TestPlan_Log
-          # - suite: requirement.xml
-          #   logName: Requirement_Log
+          - suite: testplan.xml
+            logName: TestPlan_Log
+          - suite: requirement.xml
+            logName: Requirement_Log
           - suite: authortest.xml
             logName: Author_Log
-          # - suite: executetest.xml
-          #   logName: Execute_Log
-          # - suite: settings.xml
-          #   logName: Setting_Log
-          # - suite: defecttest.xml
-          #   logName: Defect_Log
+          - suite: executetest.xml
+            logName: Execute_Log
+          - suite: settings.xml
+            logName: Setting_Log
+          - suite: defecttest.xml
+            logName: Defect_Log
 
     steps:
       - name: Checkout repository

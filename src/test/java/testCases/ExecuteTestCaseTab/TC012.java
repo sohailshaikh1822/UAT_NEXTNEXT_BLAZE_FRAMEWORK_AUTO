@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC012 extends BaseClass {
 
@@ -46,13 +47,13 @@ public class TC012 extends BaseClass {
             executeLandingPage.waitForTestRunInterfaceToLoad();
             logger.info("Clicked on the Play button of a test run");
 
-            Thread.sleep(1500);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Waited for 1.5 seconds for Test Run page to load");
 
             individualTestRun.clickShowOnlyBusinessStepsRadio();
             logger.info("Clicked on 'Show Only Business Test Steps' radio button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestRun.clickShowAllStepsRadio();
             logger.info("Clicked on 'Show All Steps' radio button");

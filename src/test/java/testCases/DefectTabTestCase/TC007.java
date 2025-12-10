@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC007 extends BaseClass {
     @Test(dataProvider = "tc007", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -38,15 +39,15 @@ public class TC007 extends BaseClass {
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
 
             createDefectPage.clickTypeDropdown();
             logger.info("Type dropdown expanded successfully.");
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
 
             createDefectPage.clickModuleDropdown();
             logger.info("Module dropdown expanded successfully.");
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
 
             createDefectPage.clickReasonDropdown();
             logger.info("Reason dropdown expanded successfully.");

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC008 extends BaseClass {
 
@@ -30,7 +31,7 @@ public class TC008 extends BaseClass {
             executeLandingPage.clickNextArrow();
             logger.info("Clicked the next arrow button to go to the next page");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             String currentPageAfter = executeLandingPage.getCurrentPageNumber();
             logger.info("Current page after clicking next arrow: " + currentPageAfter);

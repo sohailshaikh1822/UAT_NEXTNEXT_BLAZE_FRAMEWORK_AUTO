@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC042 extends BaseClass {
 
@@ -25,7 +26,7 @@ public class TC042 extends BaseClass {
             addTestCase.setTestCaseName("For unlink");
             addTestCase.clickSave();
             String testCaseId = addTestCase.getTestcaseId("For unlink");
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
             AuthorTestCasePage authorTestCasePage1 = new AuthorTestCasePage(getDriver());
             authorTestCasePage1.clickActionIcon(testCaseId);
             logger.info("Clicked unlink icon for test case ");

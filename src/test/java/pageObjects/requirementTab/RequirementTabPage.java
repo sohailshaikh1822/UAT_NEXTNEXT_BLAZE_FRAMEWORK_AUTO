@@ -1,6 +1,7 @@
 package pageObjects.requirementTab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageObjects.BasePage;
 import java.util.List;
+import utils.WaitUtils;
 
 import java.time.Duration;
 
@@ -123,9 +125,9 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clickNewModule() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         iconNewModule.click();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
 
     }
 
@@ -145,12 +147,22 @@ public class RequirementTabPage extends BasePage {
         iconDelete.click();
     }
 
-    public void clickArrowRightPointingForExpandModule(String moduleName) {
-        arrowBeforeExpandRightPointing(moduleName).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@class='tree-children']") // children of the project
-        ));
+//    public void clickArrowRightPointingForExpandModule(String moduleName) {
+//        arrowBeforeExpandRightPointing(moduleName).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//div[@class='tree-children']") // children of the project
+//        ));
+//    }
+
+    public void clickArrowRightPointingForExpandModule(String projectName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        By arrow = By.xpath("//span[text()='" + projectName + "']/..//i[contains(@class,'tree-arrow')]");
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(arrow));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        try { Thread.sleep(300); } catch (Exception ignored) {}
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
+
 
     public void clickArrowDownPointingForCollapseModule(String moduleName) {
         arrowAfterExpandDownPointing(moduleName).click();
@@ -232,7 +244,7 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clicktoggleSidebar() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.elementToBeClickable(closeSideBar))).click();

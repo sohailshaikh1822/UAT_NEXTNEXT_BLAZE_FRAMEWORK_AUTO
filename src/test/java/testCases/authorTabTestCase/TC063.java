@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.authoTestCaseTab.IndividualTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 import java.time.Duration;
 
@@ -24,12 +25,12 @@ public class TC063 extends BaseClass {
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
             authorTestCasePage.linkTestCaseIdFromId(TestcaseId).click();
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             individualTestCasePage.clickAddTestStep();
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
             int beforeCount = individualTestCasePage.getStepCountInt();
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("before count was " + beforeCount);
             individualTestCasePage.clickDeleteButton(beforeCount);
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));

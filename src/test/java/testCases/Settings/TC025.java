@@ -5,6 +5,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC025 extends BaseClass {
 
@@ -21,22 +22,22 @@ public class TC025 extends BaseClass {
             globalTab.clickCurrentUserAndGoToSettings();
             logger.info("Clicked on Settings option from user dropdown");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickRequirement();
             logger.info("Navigated to Requirement tab");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickOnSelectAll();
             logger.info("Clicked on select All Button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickOnClearAll();
             logger.info("Clicked on Clear All button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

@@ -7,6 +7,8 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC027 extends BaseClass {
     @Test(dataProvider = "tc027", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -16,13 +18,13 @@ public class TC027 extends BaseClass {
             //Step 1: Login
             login();
             logger.info("Login Completed");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             //Step 2: Click on Defect Tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("defect tab clicked");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             //Step 3: Select Project
             defectLandingPage.selectProject(project);
@@ -36,7 +38,7 @@ public class TC027 extends BaseClass {
             //Step 5: click on create new defect
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Create New Defect button clicked");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             //Step 6: Enter Summary
             CreateDefectPage defect = new CreateDefectPage(getDriver());
@@ -77,12 +79,12 @@ public class TC027 extends BaseClass {
             //Step 13: Click Search button
             defectLandingPage.clickSearchButton();
             logger.info("Search button clicked");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             //Step 14: Select the first defect
 //            defectLandingPage.clickDefectByIndex(1);
 //            defectLandingPage.ClickDefectbyID("DF-448");
-//            Thread.sleep(10000);
+//            WaitUtils.waitFor1000Milliseconds();;
 
             //Step 15: Get the summary and compare with expected summary
 //            Assert.assertFalse(defect.getSummary().contains("\n"), "Summary contains the new line character");

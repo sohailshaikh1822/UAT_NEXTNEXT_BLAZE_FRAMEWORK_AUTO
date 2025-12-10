@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC032 extends BaseClass {
 
@@ -17,7 +18,7 @@ public class TC032 extends BaseClass {
 
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickLastPageArrowBtn();
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
             String cursorStyle = authorTestCasePage.checkIfNextButtonIsClickable();
             logger.info("Cursor style of Next button: " + cursorStyle);
 

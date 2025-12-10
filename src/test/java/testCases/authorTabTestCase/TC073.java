@@ -5,12 +5,14 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC073 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyToggleFunctionalityInRequirementPanel() throws Exception {
-        logger.info("************ Starting the Test Case: Verify Toggle Functionality in Requirement Panel *****************");
+        logger.info(
+                "************ Starting the Test Case: Verify Toggle Functionality in Requirement Panel *****************");
         try {
 
             login();
@@ -30,17 +32,17 @@ public class TC073 extends BaseClass {
             logger.info("Initially Expanded? " + initiallyExpanded);
             Assert.assertTrue(initiallyExpanded, "Panel should be expanded initially");
 
-            int cycles = 10;   // Number of toggle cycles
+            int cycles = 10; // Number of toggle cycles
             for (int i = 1; i <= cycles; i++) {
                 // Collapse
                 authorTestCasePage.toggleRequirementPanel(reqId);
-                Thread.sleep(1000);
+                WaitUtils.waitFor1000Milliseconds();
                 boolean collapsed = !authorTestCasePage.isRequirementPanelExpanded(reqId);
                 logger.info("Cycle " + i + " -> Panel collapsed? " + collapsed);
                 Assert.assertTrue(collapsed, "Panel should collapse at cycle " + i);
                 // Expand
                 authorTestCasePage.toggleRequirementPanel(reqId);
-                Thread.sleep(1000);
+                WaitUtils.waitFor1000Milliseconds();
                 boolean expanded = authorTestCasePage.isRequirementPanelExpanded(reqId);
                 logger.info("Cycle " + i + " -> Panel expanded? " + expanded);
                 Assert.assertTrue(expanded, "Panel should expand at cycle " + i);

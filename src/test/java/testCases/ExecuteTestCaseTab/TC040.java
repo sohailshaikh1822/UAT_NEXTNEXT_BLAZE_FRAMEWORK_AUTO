@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC040 extends BaseClass {
 
@@ -34,7 +35,7 @@ public class TC040 extends BaseClass {
 
             executeLandingPage.clickCreateTestRunButton();
             logger.info("Clicked Create Test Run button");
-            Thread.sleep(200);
+            WaitUtils.waitFor200Milliseconds();
 
             executeLandingPage.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
@@ -44,7 +45,7 @@ public class TC040 extends BaseClass {
 
             executeLandingPage.clickSaveInPopup();
             logger.info("Clicked Save button in popup");
-            Thread.sleep(150);
+            WaitUtils.waitFor100Milliseconds();
 
             boolean isSuccess = executeLandingPage.waitForSuccessMessage(successMsg);
             Assert.assertTrue(isSuccess, "Success message not displayed or mismatched!");

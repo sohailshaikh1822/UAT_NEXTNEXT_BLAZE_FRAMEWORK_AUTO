@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.List;
+import utils.WaitUtils;
 
 public class IndividualModulePage extends BasePage {
 
@@ -196,7 +197,7 @@ public class IndividualModulePage extends BasePage {
 
         wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
         descriptionBeforeClick.click();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
         ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
         descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -211,7 +212,7 @@ public class IndividualModulePage extends BasePage {
 
         wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
         descriptionBeforeClick.click();
-        // Thread.sleep(1000);
+        //  WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
         ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
         descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));

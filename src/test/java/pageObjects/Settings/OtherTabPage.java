@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
+import utils.WaitUtils;
 
 public class OtherTabPage extends BasePage {
 
@@ -270,7 +271,7 @@ public class OtherTabPage extends BasePage {
     // wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
     // } catch (Exception firstAttempt) {
     // try {
-    // Thread.sleep(1000);
+    //  WaitUtils.waitFor1000Milliseconds();
     // ((JavascriptExecutor)
     // driver).executeScript("arguments[0].scrollIntoView({block: 'center'});",
     // editBtn);
@@ -306,7 +307,7 @@ public class OtherTabPage extends BasePage {
 
         } catch (Exception e1) {
             try {
-                Thread.sleep(1000);
+                 WaitUtils.waitFor1000Milliseconds();
                 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
                 Thread.sleep(500);
                 wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();

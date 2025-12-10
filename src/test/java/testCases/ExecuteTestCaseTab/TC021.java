@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
@@ -56,7 +57,7 @@ public class TC021 extends BaseClass {
             logger.info("clicked on defect id {}", defectID);
 
             linkDefectPage.clickLink();
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("defect is linked successfully");
 
             individualTestrun.clickLinkDefect();

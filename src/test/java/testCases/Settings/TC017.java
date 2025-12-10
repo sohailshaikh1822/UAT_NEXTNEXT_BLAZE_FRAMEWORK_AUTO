@@ -6,6 +6,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC017 extends BaseClass {
 
@@ -39,7 +40,7 @@ public class TC017 extends BaseClass {
             otherTab.clickcreatefieldButton();
             logger.info("Clicked on Create Field button");
 
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
             boolean isFieldAdded = otherTab.isCustomFieldPresent(fieldName);
             assert isFieldAdded : "Custom field was not added successfully.";
             logger.info("Verified: Custom field '" + fieldName + "' added successfully");
