@@ -182,10 +182,12 @@ public class AuthorTestCasePage extends BasePage {
         return dropdownEpic.isDisplayed();
     }
 
-    public int getCountInEpic() throws InterruptedException {
-        Thread.sleep(2000);
+    public int getCountInEpic() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfAllElements(optionsEpic));
         return optionsEpic.size();
     }
+
 
     public List<WebElement> getAllEpics() throws InterruptedException {
         Thread.sleep(2000);
