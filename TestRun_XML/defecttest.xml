@@ -46,7 +46,7 @@
             <class name="testCases.DefectTabTestCase.TC046"/>
             <class name="testCases.DefectTabTestCase.TC047"/>
             <class name="testCases.DefectTabTestCase.TC048"/>
+
         </classes>
     </test>
-
 </suite>
