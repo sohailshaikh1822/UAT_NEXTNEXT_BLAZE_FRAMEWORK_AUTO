@@ -26,10 +26,10 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]/option")
     List<WebElement> optionsEpic;
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[2]/option")
+    @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]/option")
     List<WebElement> optionsFeatures;
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[2]")
+    @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]")
     WebElement dropdownFeature;
 
     public WebElement linkRequirement(String reqId) {
