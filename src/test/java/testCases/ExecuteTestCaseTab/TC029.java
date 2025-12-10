@@ -34,7 +34,7 @@ public class TC029 extends BaseClass {
             executeLandingPage.clickRelease(releaseName1);
             logger.info("Selected release with less than 10 test runs");
 
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
 
             int totalEntriesFirst = executeLandingPage.getTotalEntriesCount();
             logger.info("Total entries in first release: " + totalEntriesFirst);
@@ -45,7 +45,7 @@ public class TC029 extends BaseClass {
             logger.info("Next page button clickable for first release: " + isNextButtonClickableFirst);
             Assert.assertFalse(isNextButtonClickableFirst,
                     "Next button should be disabled when test runs are less than 10");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickRelease(releaseName2);
             logger.info("Selected release with more than 10 test runs");
             WaitUtils.waitFor1000Milliseconds();;
@@ -53,7 +53,7 @@ public class TC029 extends BaseClass {
             logger.info("Total entries in second release: " + totalEntriesSecond);
             Assert.assertTrue(totalEntriesSecond > 10,
                     "Expected more than 10 test runs in second release but found " + totalEntriesSecond);
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
 
             boolean isNextButtonClickableSecond = executeLandingPage.checkIfNextButtonIsClickable();
             logger.info("Next page button clickable for second release: " + isNextButtonClickableSecond);

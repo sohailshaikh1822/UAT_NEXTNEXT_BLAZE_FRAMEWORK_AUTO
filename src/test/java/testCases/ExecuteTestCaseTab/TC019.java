@@ -7,6 +7,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC019 extends BaseClass {
 
@@ -37,7 +38,7 @@ public class TC019 extends BaseClass {
 
             executeLandingPage.expandSubTestCycle(cycleName);
             logger.info("Expanded Cycle: " + cycleName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(suiteName);
             logger.info("Clicked on Suite: " + suiteName);
 

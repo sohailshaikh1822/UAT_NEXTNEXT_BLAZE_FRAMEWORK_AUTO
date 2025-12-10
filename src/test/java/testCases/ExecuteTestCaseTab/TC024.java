@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
@@ -53,10 +54,10 @@ public class TC024 extends BaseClass {
             logger.info("Select status");
             linkDefectPage.enterDescription(description);
             logger.info("Entered description ");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.uploadFile("uploadInDefect.png");
             logger.info("Defect has successfully created");
-            Thread.sleep(6000);
+            WaitUtils.waitFor1000Milliseconds();
 
             linkDefectPage.clickSave();
             logger.info("New Defect has been created with evidence");

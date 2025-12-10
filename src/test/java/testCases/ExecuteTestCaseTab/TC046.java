@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC046 extends BaseClass {
 
@@ -43,14 +44,14 @@ public class TC046 extends BaseClass {
             page.clickCreateTestRunButton();
             logger.info("Clicked 'Create New Test Run'");
 
-            Thread.sleep(200);
+            WaitUtils.waitFor200Milliseconds();
 
             page.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
 
             page.selectTestCaseCheckbox(testCaseID);
             logger.info("Selected test case ID: " + testCaseID);
-            Thread.sleep(200);
+            WaitUtils.waitFor200Milliseconds();
 
             page.clickCancelInPopup();
             logger.info("Verified that Save and Cancel buttons appear after selecting a test case.");
