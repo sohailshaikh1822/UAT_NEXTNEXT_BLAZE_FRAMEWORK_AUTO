@@ -10,6 +10,7 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.*;
+import utils.WaitUtils;
 
 public class AuthorTestCasePage extends BasePage {
     public AuthorTestCasePage(WebDriver driver) {
@@ -315,13 +316,13 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public void clickCollapseToggle() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonCollapseToggle.click();
         Thread.sleep(2000);
     }
 
     public void clickExpandToggle() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonExpandToggle.click();
         Thread.sleep(2000);
     }
@@ -332,13 +333,13 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public void confirmUnlink() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonYes.click();
         Thread.sleep(2000);
     }
 
     public void cancelUnlink() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonNo.click();
         Thread.sleep(2000);
     }
@@ -385,7 +386,7 @@ public class AuthorTestCasePage extends BasePage {
                 System.out.println("Reached last page. Test case not found: " + tcID);
                 break;
             }
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
             nextButton.click();
 
             // Wait for page reload before rechecking

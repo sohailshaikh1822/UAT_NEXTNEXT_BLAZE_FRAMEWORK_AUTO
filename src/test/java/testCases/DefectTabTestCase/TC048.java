@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC048 extends BaseClass {
 
@@ -47,10 +48,10 @@ public class TC048 extends BaseClass {
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             createDefect.selectStatusByIndex(1);
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();

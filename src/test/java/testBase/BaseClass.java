@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
+import utils.WaitUtils;
 
 public class BaseClass {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -80,7 +81,7 @@ public class BaseClass {
         getDriver().get(p.getProperty("appURL"));
         getDriver().manage().window().maximize();
         if (mode.equalsIgnoreCase("headless")) {
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             getDriver().manage().window().setSize(new Dimension(1920, 1080));
         }
 

@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC039 extends BaseClass {
 
@@ -22,7 +23,7 @@ public class TC039 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("User navigated to Defect Landing Page");
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect");
 
@@ -38,10 +39,10 @@ public class TC039 extends BaseClass {
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             createDefect.selectSeverityByIndex(1);
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             createDefect.selectPriorityByIndex(1);
             logger.info("Filled mandatory details WITHOUT saving");
 
@@ -49,7 +50,7 @@ public class TC039 extends BaseClass {
             createDefect.clickClose();
             logger.info("Clicked CLOSE without saving");
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             createDefect.clickPopupYes();
             logger.info("Confirmed to close without saving");
 

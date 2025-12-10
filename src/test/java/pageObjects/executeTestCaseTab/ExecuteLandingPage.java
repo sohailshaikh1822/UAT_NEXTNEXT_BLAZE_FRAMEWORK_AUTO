@@ -11,6 +11,7 @@ import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import utils.WaitUtils;
 
 public class ExecuteLandingPage extends BasePage {
 
@@ -186,9 +187,9 @@ public class ExecuteLandingPage extends BasePage {
     }
 
     public void clickExecuteTab() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(tabexceute)).click();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
     }
 
     public void clickArrowRightToExpandModule(String moduleName) {
@@ -461,7 +462,7 @@ public class ExecuteLandingPage extends BasePage {
     public void clickPlayActionById(String tcIO) throws InterruptedException {
         Thread.sleep(2000);
         new Actions(driver).moveToElement(buttonActionPlay(tcIO)).perform();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonActionPlay(tcIO).click();
     }
 
@@ -499,7 +500,7 @@ public class ExecuteLandingPage extends BasePage {
         WebElement table = driver.findElement(tableContainer);
 
         js.executeScript("arguments[0].scrollLeft = arguments[0].scrollWidth;", table);
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
 
         List<WebElement> statusElements = driver.findElements(statusCells);
         for (WebElement cell : statusElements) {

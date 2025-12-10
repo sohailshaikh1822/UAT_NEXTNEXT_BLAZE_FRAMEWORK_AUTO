@@ -10,6 +10,7 @@ import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import utils.WaitUtils;
 
 public class TestPlanLandingPage extends BasePage {
     public TestPlanLandingPage(WebDriver driver) {
@@ -130,13 +131,13 @@ public class TestPlanLandingPage extends BasePage {
     }
 
     public void clickCollapseToggle() throws InterruptedException {
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         buttonCollapseToggle.click();
         Thread.sleep(2000);
     }
 
     public void clickExpandToggle() throws InterruptedException {
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         buttonExpandToggle.click();
         Thread.sleep(2000);
     }
@@ -212,7 +213,7 @@ public class TestPlanLandingPage extends BasePage {
         for (WebElement project : allProjects) {
             if (project.getText().trim().equalsIgnoreCase(projectName)) {
                 project.click();
-                Thread.sleep(1000);
+                WaitUtils.waitFor1000Milliseconds();
                 String classAttr = project.getAttribute("class");
                 return classAttr.contains("active");
             }

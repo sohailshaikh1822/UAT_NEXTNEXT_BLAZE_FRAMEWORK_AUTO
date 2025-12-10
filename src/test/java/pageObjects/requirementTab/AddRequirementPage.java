@@ -70,7 +70,7 @@ public class AddRequirementPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(textRequirementDescriptionBeforeClick));
         textRequirementDescriptionBeforeClick.click();
-        // Thread.sleep(1000);
+        //  WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(textRequirementDescriptionAfterClick));
         ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';",
                 textRequirementDescriptionAfterClick);

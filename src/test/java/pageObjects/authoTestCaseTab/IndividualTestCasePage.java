@@ -11,6 +11,7 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.List;
+import utils.WaitUtils;
 
 public class IndividualTestCasePage extends BasePage {
     public IndividualTestCasePage(WebDriver driver) {
@@ -134,7 +135,7 @@ public class IndividualTestCasePage extends BasePage {
     public void clickAddTestStep() throws InterruptedException {
         Actions a = new Actions(driver);
         a.moveToElement(buttonAddTestStep).perform();
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         a.click(buttonAddTestStep).perform();
     }
 
@@ -159,7 +160,7 @@ public class IndividualTestCasePage extends BasePage {
         beforeClick.click();
         WebElement afterClick = wait.until(ExpectedConditions
                 .elementToBeClickable(textStepDescriptionAfterClick(step)));
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         afterClick.clear();
         afterClick.sendKeys(description);
     }
@@ -173,7 +174,7 @@ public class IndividualTestCasePage extends BasePage {
         beforeClick.click();
         WebElement afterClick = wait.until(ExpectedConditions
                 .elementToBeClickable(textStepResultAfterClick(step)));
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         afterClick.clear();
         afterClick.sendKeys(expectedResult);
     }
@@ -222,7 +223,7 @@ public class IndividualTestCasePage extends BasePage {
         for (int i = 0; i <= expectedResultArray.length - 1; i++) {
             clickAddTestStep();
             setStepDescription(descriptionArray[i], currentStep + 1);
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             setStepExpectedResult(expectedResultArray[i], currentStep + 1);
             currentStep = currentStep + 1;
         }

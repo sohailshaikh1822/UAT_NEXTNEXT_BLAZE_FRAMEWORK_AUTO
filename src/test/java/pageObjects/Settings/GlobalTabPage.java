@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.Select;
 import java.util.List;
+import utils.WaitUtils;
 
 public class GlobalTabPage extends BasePage {
     public GlobalTabPage(WebDriver driver) {
@@ -375,7 +376,7 @@ public class GlobalTabPage extends BasePage {
 
     public boolean areAllFieldsSelected() {
         try {
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
 
             List<WebElement> checkboxes = driver.findElements(
                     By.xpath(
@@ -411,7 +412,7 @@ public class GlobalTabPage extends BasePage {
 
     public boolean areAllFieldsCleared() {
         try {
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
 
             List<WebElement> checkboxes = driver.findElements(
                     By.xpath(
@@ -508,7 +509,7 @@ public class GlobalTabPage extends BasePage {
 
             checkbox.click();
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             boolean afterClickState = checkbox.isSelected();
             System.out.println("After click checkbox state for field '" + fieldName + "': " + afterClickState);
 

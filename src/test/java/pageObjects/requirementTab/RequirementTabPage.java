@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageObjects.BasePage;
 import java.util.List;
+import utils.WaitUtils;
 
 import java.time.Duration;
 
@@ -124,9 +125,9 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clickNewModule() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         iconNewModule.click();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
 
     }
 
@@ -243,7 +244,7 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clicktoggleSidebar() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.elementToBeClickable(closeSideBar))).click();
