@@ -39,7 +39,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//p[@class='supporting-text']")
     WebElement headingRequirement;
 
-    @FindBy(xpath = "//button[@id='createTestCaseButton']/div")
+    @FindBy(xpath = "//div[normalize-space()='ADD TESTCASE']")
     WebElement buttonAddTestCase;
 
     @FindBy(xpath = "//span[@id='author']")
@@ -139,14 +139,22 @@ public class AuthorTestCasePage extends BasePage {
     // actions
 
     public void selectEpic(String epicName) {
-        Select s = new Select(dropdownEpic);
-        s.selectByVisibleText(epicName);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+        Select select = new Select(dropdownEpic);
+        select.selectByVisibleText(epicName);
     }
 
+
     public void selectFeature(String featureName) {
-        Select s = new Select(dropdownFeature);
-        s.selectByVisibleText(featureName);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownFeature));
+        Select select = new Select(dropdownFeature);
+        select.selectByVisibleText(featureName);
     }
+
 
     public void clickRequirement(String requirementId) throws InterruptedException {
         Thread.sleep(2000);
@@ -159,9 +167,12 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public void clickAddTestcase() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonAddTestCase));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", buttonAddTestCase);
     }
+
 
     public void clickAuthorTestcase() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tabAuthorTestcase);
