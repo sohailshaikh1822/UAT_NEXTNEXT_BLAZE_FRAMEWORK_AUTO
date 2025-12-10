@@ -71,19 +71,31 @@ public class AddTestcasePage extends BasePage {
     }
 
     public void selectPriority(String priority) {
-        Select s = new Select(dropDownPriority);
-        s.selectByVisibleText(priority);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropDownPriority));
+        wait.until(ExpectedConditions.elementToBeClickable(dropDownPriority));
+        Select select = new Select(dropDownPriority);
+        select.selectByVisibleText(priority);
     }
+
 
     public void selectType(String type) {
-        Select s = new Select(dropDownType);
-        s.selectByVisibleText(type);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropDownType));
+        wait.until(ExpectedConditions.elementToBeClickable(dropDownType));
+        Select select = new Select(dropDownType);
+        select.selectByVisibleText(type);
     }
 
+
     public void selectQaUser(String qaUser) {
-        Select s = new Select(dropDownQAUser);
-        s.selectByVisibleText(qaUser);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropDownQAUser));
+        wait.until(ExpectedConditions.elementToBeClickable(dropDownQAUser));
+        Select select = new Select(dropDownQAUser);
+        select.selectByVisibleText(qaUser);
     }
+
 
     public void setPrecondition(String precondition) {
         textPrecondition.sendKeys(precondition);
