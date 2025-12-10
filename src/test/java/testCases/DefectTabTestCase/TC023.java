@@ -7,6 +7,8 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC023 extends BaseClass {
 
@@ -19,13 +21,13 @@ public class TC023 extends BaseClass {
             // Step 1: Login
             login();
             logger.info("Logged in successfully and dashboard loaded");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             // Step 2: Navigate to Defect tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("defect tab clicked");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             // Step 3: Select the project and click on create defect button to open new defect form.
             defectLandingPage.selectProject(project);

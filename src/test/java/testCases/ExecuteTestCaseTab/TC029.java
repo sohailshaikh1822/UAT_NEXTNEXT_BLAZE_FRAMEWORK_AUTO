@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC029 extends BaseClass {
 
@@ -46,7 +48,7 @@ public class TC029 extends BaseClass {
             Thread.sleep(3000);
             executeLandingPage.clickRelease(releaseName2);
             logger.info("Selected release with more than 10 test runs");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
             int totalEntriesSecond = new ExecuteLandingPage(getDriver()).getTotalEntriesCount();
             logger.info("Total entries in second release: " + totalEntriesSecond);
             Assert.assertTrue(totalEntriesSecond > 10,

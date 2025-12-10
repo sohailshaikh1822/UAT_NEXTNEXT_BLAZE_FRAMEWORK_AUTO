@@ -8,6 +8,7 @@ import pageObjects.defectTab.DefectLandingPage;
 import org.testng.annotations.Test;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC004 extends BaseClass {
     @Test(dataProvider = "tc004", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -24,7 +25,7 @@ public class TC004 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();
 
             // Step 3: Create Defect
             // createDefect(defectLandingPage, summary, priority, type, reason, assignedTo,

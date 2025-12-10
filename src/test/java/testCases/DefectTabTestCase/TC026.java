@@ -7,6 +7,8 @@ import testBase.BaseClass;
 import org.testng.annotations.Test;
 import DataProviders.DefectTabTestCaseDataProvider;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC026 extends BaseClass {
     @Test(dataProvider = "tc026", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -17,13 +19,13 @@ public class TC026 extends BaseClass {
             // Step 1: Login
             login();
             logger.info("Logged in successfully and dashboard loaded");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             // Step 2: Navigate to Defect tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("defect tab clicked");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             // Step 3: Select the project and open existing defect and close the defect
             defectLandingPage.selectProject(project);
@@ -32,12 +34,12 @@ public class TC026 extends BaseClass {
             Thread.sleep(2000);
             defectLandingPage.clickSearchButton();
             logger.info("search button clicked");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 //            defectLandingPage.clickDefectByIndex(1);
 //            defectLandingPage.ClickDefectbyID("DF-448");
 //            logger.info("Opened the Existing Defect");
 
-//            Thread.sleep(10000);
+//            WaitUtils.waitFor1000Milliseconds();;
             CreateDefectPage defect = new CreateDefectPage(getDriver());
 //            defect.scrollUp();
 //            logger.info("Scrolled up the defect form");

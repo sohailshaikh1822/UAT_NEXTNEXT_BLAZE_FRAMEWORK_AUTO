@@ -7,6 +7,8 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC047 extends BaseClass {
 
@@ -44,7 +46,7 @@ public class TC047 extends BaseClass {
             Thread.sleep(3000);
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             int initialCount = executeLandingPage.getTotalEntriesCount();
             logger.info("Initial Entries Count: " + initialCount);
@@ -69,7 +71,7 @@ public class TC047 extends BaseClass {
             executeLandingPage.clickSaveInPopup();
             logger.info("Clicked on Save button ");
 
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
 
             int updatedCount = executeLandingPage.getTotalEntriesCount();
             logger.info("Updated Entries Count: " + updatedCount);

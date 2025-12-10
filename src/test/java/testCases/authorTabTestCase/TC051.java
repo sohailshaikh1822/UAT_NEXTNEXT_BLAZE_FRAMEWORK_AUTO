@@ -11,7 +11,8 @@ public class TC051 extends BaseClass {
 
     @Test(dataProvider = "tc051", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
-    public void addNewTestcaseInsideRq(String rqName, String tcName, String description, String priority, String type, String qaUser, String preCondition) throws InterruptedException {
+    public void addNewTestcaseInsideRq(String rqName, String tcName, String description, String priority, String type,
+            String qaUser, String preCondition) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
