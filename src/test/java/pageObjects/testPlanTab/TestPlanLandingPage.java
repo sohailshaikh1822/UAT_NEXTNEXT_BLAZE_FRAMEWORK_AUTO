@@ -97,6 +97,11 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//div[@class='project-dropdown-menu']")
     private WebElement projectDropdownMenu;
 
+    @FindBy(xpath = "//div[@class='frame']")
+    private WebElement testPlanIframe;
+
+
+
     public WebElement releaseTestCycleTestSuite(String releaseOrTestCycleOrTestSuite) {
         return driver.findElement(By.xpath("//div[text()='" + releaseOrTestCycleOrTestSuite + "']"));
     }
@@ -147,7 +152,17 @@ public class TestPlanLandingPage extends BasePage {
     }
 
     public void expandProjectSTG(String projectName) {
-        expandArrow(projectName).click();
+
+        WebElement arrow = expandArrow(projectName);
+        String rotateStyle = arrow.getAttribute("style");
+
+        if (rotateStyle == null || !rotateStyle.contains("rotate(90deg)")) {
+            arrow.click();
+            System.out.println("Expanded project: " + projectName);
+        } else {
+            System.out.println("Project '" + projectName + "' is already expanded.");
+        }
+
     }
 
     public void expandRelease(String releaseName) {
@@ -404,5 +419,15 @@ public class TestPlanLandingPage extends BasePage {
         //
         // }
         return expectedProjects;
+    }
+    //iframe
+    public void switchToIFrame() {
+        try {
+            driver.switchTo().frame(testPlanIframe);
+            System.out.println("Switched to Test Plan iframe successfully");
+        } catch (Exception e) {
+            System.out.println("Failed to switch to Test Plan iframe: " + e.getMessage());
+            throw e;
+        }
     }
 }

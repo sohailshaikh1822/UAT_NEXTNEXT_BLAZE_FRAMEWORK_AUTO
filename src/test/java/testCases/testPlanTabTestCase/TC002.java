@@ -1,5 +1,6 @@
 package testCases.testPlanTabTestCase;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import DataProviders.TestPlanDataProvider;
@@ -20,16 +21,16 @@ public class TC002 extends BaseClass {
             TestPlanLandingPage testPlanPage = new TestPlanLandingPage(getDriver());
             testPlanPage.selectTestPlanTab();
             logger.info("Navigated to Test Plan tab");
+            Thread.sleep(2000);
 
             testPlanPage.expandSidebarIfCollapsed();
             logger.info("Sidebar expanded if it was collapsed");
-
             testPlanPage.expandProjectSTG(projectName);
             logger.info("Expanded the project dropdown");
 
             testPlanPage.selectProjectByName(releaseName);
             logger.info("Selected project: " + releaseName);
-
+             Thread.sleep(2000);
             Assert.assertTrue(testPlanPage.isProjectSelected(releaseName),
                     "Project '" + releaseName + "' was not selected successfully!");
             logger.info("Project '" + releaseName + "' is selected and active");
