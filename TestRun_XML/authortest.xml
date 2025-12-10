@@ -10,7 +10,7 @@
 
     <test verbose="2" preserve-order="true" name="Author Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="headed"/>
         <classes>
             <class name="testCases.authorTabTestCase.TC001"/>
             <class name="testCases.authorTabTestCase.TC002"/>
