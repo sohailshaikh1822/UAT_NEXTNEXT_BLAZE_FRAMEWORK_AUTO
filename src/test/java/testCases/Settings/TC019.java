@@ -5,6 +5,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC019 extends BaseClass {
 
@@ -23,10 +24,10 @@ public class TC019 extends BaseClass {
 
             otherTab.clickOnRelease();
             logger.info("Navigated to Release section");
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
             otherTab.clickOnSelectAll();
             logger.info("Clicked on selectAll Button");
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
             otherTab.clickOnClearAll();
             logger.info("Clicked on ClearAll Button");
             logger.info("Successfully Completed the testcase");

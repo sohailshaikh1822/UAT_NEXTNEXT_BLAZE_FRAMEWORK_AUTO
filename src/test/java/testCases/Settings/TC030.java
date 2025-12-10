@@ -6,6 +6,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC030 extends BaseClass {
 
@@ -26,7 +27,7 @@ public class TC030 extends BaseClass {
             globalTab.clickCurrentUserAndGoToSettings();
             logger.info("Clicked on Settings option from user dropdown");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickTestCase();
             logger.info("Navigated to TestCase Tab");
@@ -43,11 +44,11 @@ public class TC030 extends BaseClass {
             otherTab.clickcreatefieldButton();
             logger.info("clicked on create field button#");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.checkboxForRow(fieldName).click();
             logger.info("Clicked on checkbox");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

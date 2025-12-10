@@ -7,6 +7,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC049 extends BaseClass {
 
@@ -38,7 +39,7 @@ public class TC049 extends BaseClass {
                 globalTab.clickObjectTypeCheckbox("Test Case");
                 globalTab.clickObjectTypeCheckbox("Requirement");
                 globalTab.clickSaveButton();
-                Thread.sleep(3000);
+                WaitUtils.waitFor1000Milliseconds();
                 Assert.assertTrue(globalTab.isCustomFieldPresent(testFieldName),
                         "Global Field creation failed — field not found after save.");
                 logger.info("Global Field created successfully: " + testFieldName);

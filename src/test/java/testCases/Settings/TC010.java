@@ -6,6 +6,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC010 extends BaseClass {
 
@@ -27,7 +28,7 @@ public class TC010 extends BaseClass {
             globalTab.clickCurrentUserAndGoToSettings();
             logger.info("Clicked on Settings option from user dropdown");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickModule();
             logger.info("Navigated to Module tab");
@@ -44,19 +45,19 @@ public class TC010 extends BaseClass {
             otherTab.clickDefaultSaveButton();
             logger.info("clicked on default save changes button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             logger.info("Now delete the added default field value");
 
             otherTab.clickOnEdit(fieldrow);
             logger.info("Clicked on edit field");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickDefaultDeleteIcon();
             logger.info("Click on delete button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickYesDefaultValueDelete();
             logger.info("Successfully deleted the Default value after adding it");
