@@ -64,7 +64,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//img[@alt='First Page']")
     WebElement firstPageArrowBtn;
 
-    @FindBy(xpath = "//h3[text()='Create Test Cases']")
+    @FindBy(xpath = "//h3[normalize-space()='Create Test Cases']")
     WebElement headingCreateTestCases;
 
     @FindBy(xpath = "//button[normalize-space(text())='SAVE']")
@@ -221,14 +221,22 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public String getSelectedEpic() {
-        Select s = new Select(dropdownEpic);
-        return s.getFirstSelectedOption().getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+        Select select = new Select(dropdownEpic);
+        return select.getFirstSelectedOption().getText();
     }
 
+
     public String getSelectedFeature() {
-        Select s = new Select(dropdownFeature);
-        return s.getFirstSelectedOption().getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownFeature));
+        Select select = new Select(dropdownFeature);
+        return select.getFirstSelectedOption().getText();
     }
+
 
     public int getCountRQInFeature() throws InterruptedException {
         Thread.sleep(2000);
@@ -317,14 +325,16 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public boolean isCreateTextHeadingVisible() {
+        String xpath = "//h3[normalize-space()='Create Test Cases']";
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOf(headingCreateTestCases));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             return element.isDisplayed();
-        } catch (TimeoutException e) {
-            return false; // element not visible within wait time
+        } catch (Exception e) {
+            return false;
         }
     }
+
 
     public void clickCollapseToggle() throws InterruptedException {
          WaitUtils.waitFor1000Milliseconds();

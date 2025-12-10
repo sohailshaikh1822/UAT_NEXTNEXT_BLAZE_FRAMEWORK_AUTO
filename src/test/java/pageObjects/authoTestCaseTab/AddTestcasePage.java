@@ -3,6 +3,7 @@ package pageObjects.authoTestCaseTab;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -22,13 +23,13 @@ public class AddTestcasePage extends BasePage {
 
     // locators
 
-    @FindBy(xpath = "(//input[@type='text'])[1]")
+    @FindBy(xpath = "(//table//input[@type='text'])[1]")
     WebElement textName;
 
     @FindBy(xpath = "(//input[@type='text'])[2]")
     WebElement textDescription;
 
-    @FindBy(xpath = "(//select)[3]")
+    @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[1]")
     WebElement dropDownPriority;
 
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[2]")
@@ -37,7 +38,7 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//select)[4]/option")
     List<WebElement> optionsDropDownType;
 
-    @FindBy(xpath = "(//select)[5]")
+    @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[3]")
     WebElement dropDownQAUser;
 
     @FindBy(xpath = "(//input[@type='text'])[3]")
@@ -62,7 +63,7 @@ public class AddTestcasePage extends BasePage {
     public void setTestCaseName(String testCaseName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement nameField = wait.until(ExpectedConditions.visibilityOf(textName));
-        nameField.clear(); // Optional: clear existing text before entering
+        nameField.clear();
         nameField.sendKeys(testCaseName);
     }
 
@@ -102,8 +103,14 @@ public class AddTestcasePage extends BasePage {
     }
 
     public void clickSave() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(buttonSave).perform();
+        wait.until(ExpectedConditions.visibilityOf(buttonSave));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSave));
         buttonSave.click();
     }
+
 
     public String getTestcaseId(String name) {
         return linkTestCaseIdFromName(name).getText();
