@@ -6,6 +6,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC058 extends BaseClass {
 
@@ -58,7 +59,7 @@ public class TC058 extends BaseClass {
 
             otherTab.clickDefaultSaveChanges();
             logger.info("clicked on save changes");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickOnEdit(dynamicfield);
             otherTab.clickDefaultDeleteIcon();

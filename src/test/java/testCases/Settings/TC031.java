@@ -52,7 +52,7 @@ public class TC031 extends BaseClass {
                 globalTab.clickSaveButton();
                 logger.info("Clicked on Save button to create the custom field");
 
-                Thread.sleep(2000);
+                WaitUtils.waitFor1000Milliseconds();
             } else {
                 logger.info("Custom field already exists: " + fieldName);
             }
@@ -77,7 +77,7 @@ public class TC031 extends BaseClass {
 
             globalTab.clickonClearAll();
             logger.info("Clicked on Clear All button");
-            Thread.sleep(750);
+            WaitUtils.waitFor2000Milliseconds();
 
             int selectedAfterClearAll = globalTab.getSelectedCheckboxCount();
             logger.info("After Clear All -> Total: " + totalCheckboxes + " | Selected: " + selectedAfterClearAll);
