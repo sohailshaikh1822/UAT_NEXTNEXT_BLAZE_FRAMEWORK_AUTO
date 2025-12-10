@@ -17,7 +17,7 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     // locators
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]")
+    @FindBy(xpath = "(//select[@class='text select-dropdown'])[2]")
     WebElement dropdownEpic;
 
     @FindBy(xpath = "//span[normalize-space()='Epic']")
