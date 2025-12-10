@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.List;
+import utils.WaitUtils;
 
 public class IndividualModulePage extends BasePage {
 
