@@ -27,14 +27,14 @@ public class TC001 extends BaseClass {
             testPlanPage.expandSidebarIfCollapsed();
             logger.info("Sidebar expanded if it was collapsed");
 
-            testPlanPage.expandProjectSTG("STG- PulseCodeOnAzureCloud");
+            testPlanPage.expandProjectSTG("STG- SPARK Modernization");
             logger.info("Expanded the project dropdown");
 
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
             WebElement toggleIcon = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath(
-                            "//div[contains(@class,'project') and contains(.,'STG- PulseCodeOnAzureCloud')]//i[contains(@class,'toggle-icon')]")));
+                            "//div[contains(@class,'project') and contains(.,'STG- SPARK Modernization')]//i[contains(@class,'toggle-icon')]")));
 
             wait.until(driver -> toggleIcon.getAttribute("style").contains("90deg"));
 
