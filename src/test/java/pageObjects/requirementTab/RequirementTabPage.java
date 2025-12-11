@@ -118,7 +118,6 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clickOnTheProjectName() throws InterruptedException {
-
         leftPanelProjectName.click();
         wait.until(ExpectedConditions.visibilityOf(buttonSave));
 
