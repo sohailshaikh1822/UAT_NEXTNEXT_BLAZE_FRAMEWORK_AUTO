@@ -1,7 +1,6 @@
 package pageObjects.authoTestCaseTab;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -61,59 +60,19 @@ public class AddTestcasePage extends BasePage {
 
     // Actions
 
-//    public void setTestCaseName(String testCaseName) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-//        Actions actions = new Actions(driver);
-//
-//        WebElement nameField = wait.until(
-//                ExpectedConditions.visibilityOf(textName)
-//        );
-//        wait.until(ExpectedConditions.elementToBeClickable(nameField));
-//        actions.moveToElement(nameField).perform();
-//        actions.click(nameField).perform();
-//        nameField.clear();
-//        nameField.sendKeys(testCaseName);
-//    }
-
     public void setTestCaseName(String testCaseName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
 
-        try {
-            WebElement nameField = wait.until(ExpectedConditions.visibilityOf(textName));
-            js.executeScript("arguments[0].scrollIntoView(true);", nameField);
-            Thread.sleep(300);
-            actions.moveToElement(nameField).pause(200).perform();
-
-            try {
-                nameField.click();
-            } catch (Exception e) {
-                js.executeScript("arguments[0].click();", nameField);
-            }
-
-            wait.until(ExpectedConditions.elementToBeClickable(nameField));
-            nameField.clear();
-            Thread.sleep(200);
-            nameField.sendKeys(testCaseName);
-
-        } catch (Exception e) {
-
-            try {
-                Thread.sleep(500);
-                WebElement retryField = wait.until(ExpectedConditions.visibilityOf(textName));
-                js.executeScript("arguments[0].scrollIntoView(true);", retryField);
-                actions.moveToElement(retryField).pause(200).perform();
-                js.executeScript("arguments[0].click();", retryField);
-                retryField.clear();
-                retryField.sendKeys(testCaseName);
-
-            } catch (Exception ex) {
-                throw new RuntimeException("Failed to set Test Case Name field after retries", ex);
-            }
-        }
+        WebElement nameField = wait.until(
+                ExpectedConditions.visibilityOf(textName)
+        );
+        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+        actions.moveToElement(nameField).perform();
+        actions.click(nameField).perform();
+        nameField.clear();
+        nameField.sendKeys(testCaseName);
     }
-
 
 
     public void setDescription(String description) {
