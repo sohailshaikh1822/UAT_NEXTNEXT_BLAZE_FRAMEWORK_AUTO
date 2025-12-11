@@ -158,9 +158,9 @@ public class AuthorTestCasePage extends BasePage {
 
 
     public void clickRequirement(String requirementId) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         linkRequirement(requirementId).click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String showRequirementHeader() {
@@ -181,9 +181,9 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public void clickActionIcon(String testCaseId) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         actionIconForTestcase(testCaseId).click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String getEpicLabelName() {
@@ -202,7 +202,7 @@ public class AuthorTestCasePage extends BasePage {
 
 
     public List<WebElement> getAllEpics() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return optionsEpic;
     }
 
@@ -239,7 +239,7 @@ public class AuthorTestCasePage extends BasePage {
 
 
     public int getCountRQInFeature() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return rqCountWrapper.size();
     }
 
@@ -298,7 +298,7 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public String showPaginationOfRequirement() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return divRequirementPagination.getText();
     }
 
@@ -339,13 +339,13 @@ public class AuthorTestCasePage extends BasePage {
     public void clickCollapseToggle() throws InterruptedException {
          WaitUtils.waitFor1000Milliseconds();
         buttonCollapseToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickExpandToggle() throws InterruptedException {
          WaitUtils.waitFor1000Milliseconds();
         buttonExpandToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clicklinktestcase() throws InterruptedException {
@@ -356,13 +356,13 @@ public class AuthorTestCasePage extends BasePage {
     public void confirmUnlink() throws InterruptedException {
          WaitUtils.waitFor1000Milliseconds();
         buttonYes.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void cancelUnlink() throws InterruptedException {
          WaitUtils.waitFor1000Milliseconds();
         buttonNo.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public boolean isRowDeleted(String testcaseId) {

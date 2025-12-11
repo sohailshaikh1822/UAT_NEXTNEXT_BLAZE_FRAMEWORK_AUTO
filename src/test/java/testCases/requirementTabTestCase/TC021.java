@@ -8,6 +8,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
@@ -32,7 +33,7 @@ public class TC021 extends BaseClass {
 
             requirementTabPage.clickOnTheProjectName();
             logger.info("Clicked on the project name");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             logger.info(" Fetching the total requirement count before adding a new requirement...");
             String totalRqCountBeforeAdd = requirementTabPage.totalCountOfAvailabelRq();
@@ -44,7 +45,7 @@ public class TC021 extends BaseClass {
             addRequirementPage.setRequirementId(rQid);
             logger.info(" Set Requirement ID: " + rQid);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info(" Set Description");
@@ -57,7 +58,7 @@ public class TC021 extends BaseClass {
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info(" Selected Type: " + type);
@@ -70,7 +71,7 @@ public class TC021 extends BaseClass {
 
             addRequirementPage.clickClose();
             logger.info(" Clicked on 'Close' button");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             logger.info("🔍 Fetching the total requirement count after adding a new requirement...");
             String totalRqCountAfterAdd = requirementTabPage.totalCountOfAvailabelRq();

@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC008 extends BaseClass {
 
@@ -46,20 +47,20 @@ public class TC008 extends BaseClass {
             createDefectPage.selectFixedRelease(fixedRelease);
 
             createDefectPage.selectTypeByIndex(1);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.selectModuleByIndex(1);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.selectReasonByIndex(1);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.selectCategoryByIndex(1);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.selectAssignToByIndex(2);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.selectTargetReleaseByIndex(1);
 

@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC046 extends BaseClass {
     @Test(dataProvider = "tc046", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -40,23 +41,23 @@ public class TC046 extends BaseClass {
             Thread.sleep(3000);
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.selectStatusByIndex(1);
             logger.info("status is selected");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.enterDescription(description);
             logger.info("Description filled");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             defectLandingPage.enterSummary(Summary);
             logger.info("Summary filled");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             defectLandingPage.clickSearchButton();
 

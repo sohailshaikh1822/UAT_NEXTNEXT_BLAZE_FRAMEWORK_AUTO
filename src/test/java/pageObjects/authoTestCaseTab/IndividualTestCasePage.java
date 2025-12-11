@@ -140,7 +140,7 @@ public class IndividualTestCasePage extends BasePage {
     }
 
     public void clickAddRow() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         Actions a = new Actions(driver);
         a.moveToElement(buttonAddTestStep).perform();
         buttonAddTestStep.click();
@@ -240,7 +240,7 @@ public class IndividualTestCasePage extends BasePage {
     }
 
     public int getCountPriorityOptions() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return OptionsDropDownPriority.size();
     }
 

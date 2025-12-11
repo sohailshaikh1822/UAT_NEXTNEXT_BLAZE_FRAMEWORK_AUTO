@@ -7,6 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC007 extends BaseClass {
 
@@ -42,7 +43,7 @@ public class TC007 extends BaseClass {
             addRequirementPage.setRequirementId(rQid);
             logger.info("Set Requirement ID: " + rQid);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
@@ -55,7 +56,7 @@ public class TC007 extends BaseClass {
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);

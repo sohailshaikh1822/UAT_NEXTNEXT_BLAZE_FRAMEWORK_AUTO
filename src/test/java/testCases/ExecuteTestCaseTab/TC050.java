@@ -86,7 +86,7 @@ public class TC050 extends BaseClass {
             boolean countIncreased = false;
 
             for (int i = 0; i < 5; i++) {
-                Thread.sleep(2000);
+                WaitUtils.waitFor2000Milliseconds();
                 updatedCount = individualTestrun.getExecutionHistoryCount();
                 if (updatedCount > initialCount) {
                     countIncreased = true;

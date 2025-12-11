@@ -6,6 +6,7 @@ import pageObjects.defectTab.DefectLandingPage;
 import pageObjects.defectTab.CreateDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC022 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -22,7 +23,7 @@ public class TC022 extends BaseClass {
             landingPage.clickDefectTab();
             logger.info("Navigated to Defect page");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             landingPage.clickCreateTestCaseButton();
             logger.info("Opened Create Defect form");
@@ -31,10 +32,10 @@ public class TC022 extends BaseClass {
 
             Thread.sleep(500);
             createPage.enterSummary("Automation defect summary");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createPage.selectStatusByIndex(1);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             createPage.clearDescriptionField();
             logger.info("Cleared Description field to leave it empty");
 

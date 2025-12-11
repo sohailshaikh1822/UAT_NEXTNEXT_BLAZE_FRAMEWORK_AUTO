@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC040 extends BaseClass {
 
@@ -21,7 +22,7 @@ public class TC040 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Navigated to Defect Landing Page");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect button");
@@ -63,7 +64,7 @@ public class TC040 extends BaseClass {
             createDefect.clickSave();
             logger.info("Clicked SAVE after correcting summary");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             String notificationAfterFix = createDefect.getSuccessNotificationText();
 

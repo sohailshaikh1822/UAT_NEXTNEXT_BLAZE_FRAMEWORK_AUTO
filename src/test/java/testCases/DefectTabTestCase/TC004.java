@@ -35,7 +35,7 @@ public class TC004 extends BaseClass {
             defectLandingPage.selectProject(project);
             logger.info("Project Selected");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.selectAssignedTo(assignedTo);
             logger.info("Assigned to Selected");
             defectLandingPage.clickSearchButton();
@@ -56,66 +56,66 @@ public class TC004 extends BaseClass {
             Assert.assertTrue(defect.buttonSaveIsDisplayed(), "Button Save is not displayed");
             logger.info("Button Save is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.buttonCloseIsDisplayed(), "Button Close is not displayed");
             logger.info("Button Close is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.textAreaSummaryIsDisplayed(), "Text area for summary is not displayed.");
             logger.info("Summary Text area is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownAffectedReleaseIsDisplayed(),
                     "Dropdown Affected Release/Build is not displayed");
             logger.info("Dropdown Affected Release/Build is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownSeverityIsDisplayed(), "Dropdown Severity is not displayed");
             logger.info("Dropdown Severity is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownFixedReleaseIsDisplayed(),
                     "Dropdown Fixed Release/Build is not displayed");
             logger.info("Dropdown Fixed Release/Build is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownTypeIsDisplayed(), "Dropdown Type is not displayed");
             logger.info("Dropdown Type is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownModuleIsDisplayed(), "Dropdown Module is not displayed");
             logger.info("Dropdown Module is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownReasonIsDisplayed(), "Dropdown Reason is not displayed");
             logger.info("Dropdown Reason is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownCategoryIsDisplayed(), "Dropdown Category is not displayed");
             logger.info("Dropdown Category is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownAssignToIsDisplayed(), "Dropdown Assigned To is not displayed");
             logger.info("Dropdown Assigned To is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownTargetReleaseIsDisplayed(),
                     "Dropdown Target Release/Build is not displayed");
             logger.info("Dropdown Target Release/Build is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownStatusIsDisplayed(), "Dropdown Status is not displayed");
             logger.info("Dropdown Status is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.dropdownPriorityIsDisplayed(), "Dropdown Priority is not displayed");
             logger.info("Dropdown Priority is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.textAreaDescriptionIsDisplayed(), "Text area for description is not displayed.");
             logger.info("Description Text area is displayed");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defect.buttonBrowseFileIsDisplayed(), "Button Browse File is not displayed");
             logger.info("Button Browse File is displayed");
 

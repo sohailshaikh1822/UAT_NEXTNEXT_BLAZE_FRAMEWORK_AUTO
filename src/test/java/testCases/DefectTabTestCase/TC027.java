@@ -46,21 +46,21 @@ public class TC027 extends BaseClass {
             logger.info("Summary Entered");
 
             //Step 7: Select Status
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 //            defect.selectStatus(status);
             defect.selectStatusByIndex(1);
             logger.info("Status Selected");
 
             //Step 8: Select Description
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             defect.enterDescription(description);
             logger.info("Description entered");
 
             //Step 9: Scroll up
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             defect.scrollUp();
             logger.info("Create Defect page scrolled up");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             //Step 10: Click Save button
             defect.clickSave();
@@ -69,12 +69,12 @@ public class TC027 extends BaseClass {
             //Step 11: Assert that defect Saved or not
             Assert.assertTrue(defect.verifySuccessMessage("Defect created successfully."), "Failed to create the defect.");
             logger.info("New Defect Created");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             //Step 12: Open the created defect with help of summary
             defectLandingPage.enterSummary(summary);
             logger.info("Summary Entered to search the created defect");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             //Step 13: Click Search button
             defectLandingPage.clickSearchButton();

@@ -10,6 +10,7 @@ import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import utils.WaitUtils;
 
 public class CreateDefectPage extends BasePage {
 
@@ -644,7 +645,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public void verifySuccessNotification() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         String actualMessage = successNotification.getText().trim();
         Assert.assertEquals(actualMessage, "Defect created successfully.",
                 "FAILED: Success notification text mismatch.");

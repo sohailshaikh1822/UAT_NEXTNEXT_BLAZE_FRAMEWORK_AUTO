@@ -124,9 +124,9 @@ public class TestPlanLandingPage extends BasePage {
 
     public void selectTestPlanTab() throws InterruptedException {
         driver.manage().window().setSize(new Dimension(1920, 1080));
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         tabTestPlan.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void expandSidebarIfCollapsed() {
@@ -138,13 +138,13 @@ public class TestPlanLandingPage extends BasePage {
     public void clickCollapseToggle() throws InterruptedException {
         WaitUtils.waitFor1000Milliseconds();
         buttonCollapseToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickExpandToggle() throws InterruptedException {
         WaitUtils.waitFor1000Milliseconds();
         buttonExpandToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public boolean getSidebarVisibility() {
@@ -308,7 +308,7 @@ public class TestPlanLandingPage extends BasePage {
     public void clickSaveRelease() throws InterruptedException {
         btnSaveRelease.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOf(notification));
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickOnTheProjectName() {

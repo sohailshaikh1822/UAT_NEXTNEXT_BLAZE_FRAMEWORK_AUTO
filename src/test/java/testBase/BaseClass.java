@@ -97,7 +97,7 @@ public class BaseClass {
     }
 
     public void logout() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
                 getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
         WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
@@ -123,7 +123,7 @@ public class BaseClass {
         clickToYes.click();
         Thread.sleep(6000);
         getDriver().navigate().refresh();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     // Capture screenshot (Thread-safe)

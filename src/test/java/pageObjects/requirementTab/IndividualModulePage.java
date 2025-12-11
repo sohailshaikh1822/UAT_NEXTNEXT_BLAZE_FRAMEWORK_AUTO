@@ -154,7 +154,7 @@ public class IndividualModulePage extends BasePage {
     }
 
     public String getModuleName() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.visibilityOf(inputTitle)).getAttribute("value").trim();
     }
@@ -219,7 +219,7 @@ public class IndividualModulePage extends BasePage {
         descriptionAfterClick.sendKeys(Keys.BACK_SPACE);
         descriptionAfterClick.clear();
         inputTitle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickInputTitle() {
@@ -242,13 +242,13 @@ public class IndividualModulePage extends BasePage {
     }
 
     public void clickDeleteRequirement(String reqID) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         deleteRequirementIcon(reqID).click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String showPaginationOfRequirement() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return divRequirementPagination.getText();
     }
 
