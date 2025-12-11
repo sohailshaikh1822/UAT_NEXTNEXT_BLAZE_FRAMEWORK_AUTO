@@ -8,6 +8,7 @@ import pageObjects.testPlanTab.TestPlanLandingPage;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class testplan_execute_automation extends BaseClass {
 
@@ -47,7 +48,7 @@ public class testplan_execute_automation extends BaseClass {
             individualTestCyclePage.getTestCycleCreatedSuccessMessage();
             logger.info("Test Cycle created sucessfully");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             executeLandingPage.clickExecuteTab();
             logger.info("clicked on Executetestcase");
@@ -97,11 +98,11 @@ public class testplan_execute_automation extends BaseClass {
             individualTestRun.clickUpdate();
             logger.info("clicked on update button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
-//          individualTestRun.clickSaveButton();
-//           logger.info("Clicked on save button");
-            Thread.sleep(2000);
+            // individualTestRun.clickSaveButton();
+            // logger.info("Clicked on save button");
+            WaitUtils.waitFor2000Milliseconds();
             testPlanPage.selectTestPlanTab();
             logger.info("Navigated to Test Plan tab");
 

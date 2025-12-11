@@ -32,11 +32,11 @@ public class TC021 extends BaseClass {
             requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
 
+            WaitUtils.waitFor3000Milliseconds();;
 
-            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
-            logger.info("Navigated to Module");
-            requirementTabPage.clickOnModule("feature 039");
-            logger.info("clicked on specific module");
+            requirementTabPage.clickOnTheProjectName();
+            logger.info("Clicked on the project name");
+            WaitUtils.waitFor2000Milliseconds();
 
             WaitUtils.waitFor1000Milliseconds();
             logger.info(" Fetching the total requirement count before adding a new requirement...");
@@ -49,7 +49,7 @@ public class TC021 extends BaseClass {
             addRequirementPage.setRequirementId(rQid);
             logger.info(" Set Requirement ID: " + rQid);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info(" Set Description");
@@ -57,12 +57,12 @@ public class TC021 extends BaseClass {
             addRequirementPage.selectPriority(priority);
             logger.info(" Selected Priority: " + priority);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info(" Selected Type: " + type);
@@ -72,13 +72,11 @@ public class TC021 extends BaseClass {
 
             logger.info(" Requirement successfully added");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.clickClose();
             logger.info(" Clicked on 'Close' button");
-            addRequirementPage.ClickYesPopup();
-
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             logger.info("🔍 Fetching the total requirement count after adding a new requirement...");
             String totalRqCountAfterAdd = requirementTabPage.totalCountOfAvailabelRq();

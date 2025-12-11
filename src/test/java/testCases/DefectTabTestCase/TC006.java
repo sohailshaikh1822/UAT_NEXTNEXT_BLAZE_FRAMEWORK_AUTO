@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC006 extends BaseClass {
 
@@ -25,7 +26,7 @@ public class TC006 extends BaseClass {
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             // Step 3: Assert current URL contains expected Defect page URL
             String actualUrl = getDriver().getCurrentUrl();
@@ -35,35 +36,35 @@ public class TC006 extends BaseClass {
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickTypeDropdown();
             logger.info("Type dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickModuleDropdown();
             logger.info("Module dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickReasonDropdown();
             logger.info("Reason dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickCategoryDropdown();
             logger.info("Category dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickTargetReleaseDropdown();
             logger.info("Target Release dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickStatusDropdown();
             logger.info("Status dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickPriorityDropdown();
             logger.info("Priority dropdown expanded successfully.");

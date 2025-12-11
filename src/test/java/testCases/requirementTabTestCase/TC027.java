@@ -35,7 +35,8 @@ public class TC027 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();;
+
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
 
@@ -47,18 +48,21 @@ public class TC027 extends BaseClass {
 
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
-            WaitUtils.waitFor1000Milliseconds();
+
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
 
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
-            WaitUtils.waitFor1000Milliseconds();
+
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
-            WaitUtils.waitFor1000Milliseconds();
+
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);
@@ -66,11 +70,12 @@ public class TC027 extends BaseClass {
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
             logger.info("Requirement successfully added");
-            WaitUtils.waitFor1000Milliseconds();
+
+            WaitUtils.waitFor2000Milliseconds();;
             addRequirementPage.clickClose();
             logger.info("Clicked on Close button");
-            WaitUtils.waitFor1000Milliseconds();
-            addRequirementPage.ClickYesPopup();
+
+            WaitUtils.waitFor2000Milliseconds();;
             int countAfter = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count after attempting to add without name: " + countAfter);
 

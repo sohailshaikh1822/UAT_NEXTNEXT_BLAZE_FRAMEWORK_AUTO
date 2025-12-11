@@ -31,7 +31,7 @@ public class TC026 extends BaseClass {
             defectLandingPage.selectProject(project);
             logger.info("project selected");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.clickSearchButton();
             logger.info("search button clicked");
             WaitUtils.waitFor1000Milliseconds();;
@@ -44,70 +44,70 @@ public class TC026 extends BaseClass {
 //            defect.scrollUp();
 //            logger.info("Scrolled up the defect form");
 
-//            Thread.sleep(5000);
+//            WaitUtils.waitFor2000Milliseconds();;
 //            defect.clickClose();
 //            logger.info("defect closed");
-//            Thread.sleep(5000);
+//            WaitUtils.waitFor2000Milliseconds();;
 
             // Step 4: Click on create defect button to open new defect form and compare all the values with expected default values
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Test Case Button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedSummary, defect.getSummary(), "Summary value is not reset to default");
             logger.info("Summary value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedAffectedRelease, defect.getSelectedAffectedRelease(), "Affected Release value is not reset to default");
             logger.info("Affected Release value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedSeverity, defect.getSelectedSeverity(), "Severity value is not reset to default");
             logger.info("Severity value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedFixedRelease, defect.getSelectedFixedRelease(), "Fixed Release value is not reset to default");
             logger.info("Fixed Release value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedType, defect.getSelectedType(), "Type value is not reset to default");
             logger.info("Type value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedModule, defect.getSelectedModule(), "Module value is not reset to default");
             logger.info("Module value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedReason, defect.getSelectedReason(), "Reason value is not reset to default");
             logger.info("Reason value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedCategory, defect.getSelectedCategory(), "Category value is not reset to default");
             logger.info("Category value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedAssignTo, defect.getSelectedAssignTo(), "Assign To value is not reset to default");
             logger.info("Assign To value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedTargetRelease, defect.getSelectedTargetRelease(), "Target Release value is not reset to default");
             logger.info("Target Release value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedStatus, defect.getSelectedStatus(), "Status value is not reset to default");
             logger.info("Status value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedPriority, defect.getSelectedPriority(), "Priority value is not reset to default");
             logger.info("Priority value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertEquals(expectedDescription, defect.getDescription(), "Description value is not reset to default");
             logger.info("Description value is reset to default");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             defect.scrollUp();
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             defect.clickClose();
             logger.info("new defect form closed");
 

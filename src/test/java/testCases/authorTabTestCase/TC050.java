@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.authoTestCaseTab.IndividualTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC050 extends BaseClass {
 
@@ -20,10 +21,10 @@ public class TC050 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             authorTestCasePage.linkTestCaseIdFromId(TestcaseId).click();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             individualTestCasePage.clickAddRow();
             String beforeCount = individualTestCasePage.getStepCount("1");
             logger.info("Step count before adding a row" + beforeCount);

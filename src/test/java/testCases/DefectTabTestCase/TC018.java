@@ -7,7 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-
+import utils.WaitUtils;
 public class TC018 extends BaseClass {
 
     @Test(dataProvider = "tc018", dataProviderClass = DefectTabTestCaseDataProvider.class,
@@ -38,41 +38,41 @@ public class TC018 extends BaseClass {
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled: " + Summary);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectTypeByIndex(Integer.parseInt(Type));
             logger.info("Type selected: " + Type);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectCategoryByIndex(Integer.parseInt(Category));
             logger.info("Category selected: " + Category);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectPriorityByIndex(Integer.parseInt(Priority));
             logger.info("Priority selected: " + Priority);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectStatusByIndex(Integer.parseInt(Status));
             logger.info("Status selected: " + Status);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectAssignToByIndex(Integer.parseInt(AssignTo));
             logger.info("Assign To selected: " + AssignTo);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled: " + Description);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             Assert.assertTrue(createDefectPage.isSaveButtonVisible(),
                     "Save button is not visible!");

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC005 extends BaseClass {
 
@@ -44,7 +45,8 @@ public class TC005 extends BaseClass {
             testPlanPage.clickSaveRelease();
             logger.info("Clicked Save button");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();
+            ;
 
             boolean isReleaseAdded = testPlanPage.isReleasePresentInList(releaseName);
             Assert.assertTrue(isReleaseAdded, "New release was not added successfully");

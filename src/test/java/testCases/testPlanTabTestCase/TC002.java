@@ -7,6 +7,7 @@ import DataProviders.TestPlanDataProvider;
 import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC002 extends BaseClass {
 
@@ -21,7 +22,7 @@ public class TC002 extends BaseClass {
             TestPlanLandingPage testPlanPage = new TestPlanLandingPage(getDriver());
             testPlanPage.selectTestPlanTab();
             logger.info("Navigated to Test Plan tab");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             testPlanPage.expandSidebarIfCollapsed();
             logger.info("Sidebar expanded if it was collapsed");
@@ -30,7 +31,7 @@ public class TC002 extends BaseClass {
 
             testPlanPage.selectProjectByName(releaseName);
             logger.info("Selected project: " + releaseName);
-             Thread.sleep(2000);
+             WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(testPlanPage.isProjectSelected(releaseName),
                     "Project '" + releaseName + "' was not selected successfully!");
             logger.info("Project '" + releaseName + "' is selected and active");

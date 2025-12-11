@@ -292,7 +292,7 @@ public class OtherTabPage extends BasePage {
 
         try {
             js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             boolean inView = (Boolean) js.executeScript(
                     "var rect = arguments[0].getBoundingClientRect();" +
                             "return (rect.top >= 0 && rect.left >= 0 && " +
@@ -309,7 +309,7 @@ public class OtherTabPage extends BasePage {
             try {
                  WaitUtils.waitFor1000Milliseconds();
                 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
-                Thread.sleep(500);
+                WaitUtils.waitFor500Milliseconds();;
                 wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
             } catch (Exception e2) {
                 js.executeScript("arguments[0].click();", editBtn);
@@ -457,7 +457,7 @@ public class OtherTabPage extends BasePage {
 
     public void deleteCustomFieldAndVerify(String fieldName) throws InterruptedException {
         clickOnDelete(fieldName);
-        Thread.sleep(500);
+        WaitUtils.waitFor500Milliseconds();;
         clickYesDefaultValueDelete();
 
         boolean isDeleted = waitUntilCustomFieldIsDeleted(fieldName, 10);
@@ -470,7 +470,7 @@ public class OtherTabPage extends BasePage {
             if (!isCustomFieldPresent(fieldName)) {
                 return true;
             }
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             waited += 500;
         }
         return false;

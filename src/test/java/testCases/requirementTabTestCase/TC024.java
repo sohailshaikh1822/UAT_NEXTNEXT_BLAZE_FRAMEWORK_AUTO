@@ -35,7 +35,7 @@ public class TC024 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
@@ -52,8 +52,7 @@ public class TC024 extends BaseClass {
             addRequirementPage.setRequirementId(rQname);
             logger.info("Set Requirement ID: " + rQname);
 
-
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
@@ -61,13 +60,12 @@ public class TC024 extends BaseClass {
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
 
-
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);
@@ -76,11 +74,12 @@ public class TC024 extends BaseClass {
             logger.info("Clicked Save button");
             logger.info("Requirement successfully added");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();;
             addRequirementPage.clickClose();
             logger.info("Clicked on Close button");
             addRequirementPage.ClickYesPopup();
 
+            WaitUtils.waitFor2000Milliseconds();;
             int countAfter = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count after adding: " + countAfter);
 //            Assert.assertEquals(countAfter, countBefore + 1, "Requirement count did not increase by 1");

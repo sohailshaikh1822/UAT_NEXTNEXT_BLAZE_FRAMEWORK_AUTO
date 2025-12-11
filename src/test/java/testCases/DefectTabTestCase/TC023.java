@@ -32,29 +32,29 @@ public class TC023 extends BaseClass {
             // Step 3: Select the project and click on create defect button to open new defect form.
             defectLandingPage.selectProject(project);
             logger.info("project selected");
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Test Case Button");
 
             // Step 4: Fill the mandatory fields only and create the defect.
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             createDefectPage.enterSummary(summary);
             logger.info("Summary Entered");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 //            createDefectPage.selectStatus(status);
             createDefectPage.selectStatusByIndex(1);
             logger.info("Defect status selected");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             createDefectPage.enterDescription(description);
             logger.info("Description Added");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             createDefectPage.scrollUp();
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
             createDefectPage.clickSave();
             logger.info("Save Button Clicked");
             Assert.assertTrue(createDefectPage.verifySuccessMessage("Defect created successfully."), "Failed to create the defect.");

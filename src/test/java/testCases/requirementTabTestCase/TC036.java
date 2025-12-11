@@ -7,6 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC036 extends BaseClass {
 
@@ -30,7 +31,7 @@ public class TC036 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
