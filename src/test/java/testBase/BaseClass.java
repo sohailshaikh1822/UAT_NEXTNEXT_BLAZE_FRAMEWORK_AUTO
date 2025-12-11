@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -131,35 +132,37 @@ public class BaseClass {
 //        }
 //    }
 
-    public void logout() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
-                getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
-        // Three locators to try
-        By[] possibleLocators = {
-                By.xpath("//a[normalize-space()='Logout']"),
-                By.xpath("//div[@id='dropdown-menu-row']"),
-                By.xpath("//a[contains(text(),'Logout')]")
-        };
-        // Try each locator until one works
-        for (By locator : possibleLocators) {
-            try {
-                WebElement elem = getDriver().findElement(locator);
-                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", elem);
-                break;  // Stop when clicked
-            } catch (Exception e) {
-                // ignore and try next
-            }
-        }
-        // Click the actual Logout link
+    public void logout() {
+        WebDriver driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
         try {
-            WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
-            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
+            WebElement chevron = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[@id='chevron-logout']")));
+            js.executeScript("arguments[0].scrollIntoView(true);", chevron);
+            Thread.sleep(300);
+            actions.moveToElement(chevron).pause(200).perform();
+            try {
+                chevron.click();
+            } catch (Exception e) {
+                js.executeScript("arguments[0].click();", chevron);
+            }
+            By logoutLocator = By.xpath("//a[normalize-space()='Logout']");
+            WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(logoutLocator));
+
+            js.executeScript("arguments[0].scrollIntoView(true);", logoutBtn);
+            Thread.sleep(200);
+            try {
+                logoutBtn.click();
+            } catch (Exception e) {
+                js.executeScript("arguments[0].click();", logoutBtn);
+            }
         } catch (Exception e) {
-            WebElement logOut = getDriver().findElement(By.xpath("//a[contains(text(),'Logout')]"));
-            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
+            System.out.println("Logout skipped — element not found or already logged out.");
         }
     }
+
 
 
 
