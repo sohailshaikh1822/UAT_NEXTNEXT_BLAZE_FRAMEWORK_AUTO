@@ -20,6 +20,7 @@ public class TC036 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
