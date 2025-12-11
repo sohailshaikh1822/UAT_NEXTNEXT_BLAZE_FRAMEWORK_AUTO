@@ -23,8 +23,13 @@ public class TC005 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickProjectName();
-            logger.info("Clicked on project: " + ProjectName);
+//            requirementTabPage.clickProjectName();
+//            logger.info("Clicked on project: " + ProjectName);
+
+
+            requirementTabPage.clickArrowRightPointingForExpandModule(ProjectName);
+            logger.info("Clicked on the project");
+
 
             String isProjectVisible = requirementTabPage.getProjectNameText();
             Assert.assertTrue(!(isProjectVisible.equals(null)), "Project name is not visible beside the label");

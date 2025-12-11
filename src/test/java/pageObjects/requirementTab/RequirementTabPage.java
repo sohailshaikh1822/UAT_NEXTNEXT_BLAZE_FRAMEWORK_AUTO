@@ -31,7 +31,7 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Open Sidebar']")
     WebElement openSideBar;
 
-    @FindBy(xpath = "//span[@title='<p></p>']")
+    @FindBy(xpath = "(//i[@class='fa-solid tree-arrow fa-caret-right'])[1]")
     WebElement leftPanelProjectName;
     @FindBy(xpath = "//span[@class='entry-info']")
     WebElement totalEntriesRqCount;
@@ -203,14 +203,14 @@ public class RequirementTabPage extends BasePage {
 
     public List<String> getRequirementIDs() {
         List<WebElement> rows = getRequirementsFromModuleTable();
-        return rows.stream().map(row -> row.findElement(By.cssSelector("div.testlistcell a.text-wrapper-14")).getText())
+        return rows.stream().map(row -> row.findElement(By.cssSelector(".pid-col a.text-wrapper-14")).getText())
                 .toList();
     }
 
     public List<WebElement> getRequirementsFromModuleTable() {
         WebElement tableContainer = wait
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("existingTestCasesInnerTable"))));
-        return tableContainer.findElements(By.cssSelector("div.testlistrow"));
+        return tableContainer.findElements(By.cssSelector("#existingTestCasesInnerTable .requirements-list-row"));
     }
 
     public boolean isRequirementVisible(String requirementId) {
