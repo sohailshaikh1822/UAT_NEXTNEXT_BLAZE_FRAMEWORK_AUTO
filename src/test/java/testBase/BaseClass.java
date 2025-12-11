@@ -97,7 +97,7 @@ public class BaseClass {
     }
 
     public void logout() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();
+        Thread.sleep(3000);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
                 getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
         WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
@@ -111,7 +111,7 @@ public class BaseClass {
         getDriver().findElement(By.xpath("//input[@type='email']")).sendKeys(p.getProperty("email"));
         getDriver().findElement(By.xpath("//input[@type='submit']")).click();
 
-        WaitUtils.waitFor2000Milliseconds();;
+        Thread.sleep(3000);
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='password']")));
         getDriver().findElement(By.xpath("//input[@type='password']")).sendKeys(p.getProperty("password"));
@@ -121,9 +121,9 @@ public class BaseClass {
 
         WebElement clickToYes = wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
         clickToYes.click();
-        WaitUtils.waitFor3000Milliseconds();;
+        Thread.sleep(6000);
         getDriver().navigate().refresh();
-        WaitUtils.waitFor2000Milliseconds();
+        Thread.sleep(2000);
     }
 
     // Capture screenshot (Thread-safe)
