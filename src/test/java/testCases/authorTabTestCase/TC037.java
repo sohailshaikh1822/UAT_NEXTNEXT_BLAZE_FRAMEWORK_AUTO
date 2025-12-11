@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC037 extends BaseClass {
 
@@ -28,6 +29,7 @@ public class TC037 extends BaseClass {
             logger.info("Selected the feature");
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked on requirement id " + requirementId);
+            WaitUtils.waitFor2000Milliseconds();;
             Assert.assertTrue(authorTestCasePage.isAllTestIdSorted());
             logger.info("Verified Successfully");
 

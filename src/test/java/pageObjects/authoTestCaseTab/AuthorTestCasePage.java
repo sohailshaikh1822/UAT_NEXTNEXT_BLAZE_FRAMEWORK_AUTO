@@ -419,7 +419,7 @@ public class AuthorTestCasePage extends BasePage {
         WaitUtils.waitFor2000Milliseconds();;
         List<String> name1 = new ArrayList<>();
         for (WebElement ele : linkAllTestCaseId) {
-            name1.add(ele.getText().trim()); // trim in case of extra spaces
+            name1.add(ele.getText().trim());
         }
 
         // Make a copy and sort it
@@ -427,10 +427,7 @@ public class AuthorTestCasePage extends BasePage {
         Collections.sort(sortedList);
 
         // Check if original == sorted
-        if (name1.equals(sortedList)) {
-            return true;
-        }
-        return false;
+        return name1.equals(sortedList);
     }
 
     public void searchRq(String Rq) {
