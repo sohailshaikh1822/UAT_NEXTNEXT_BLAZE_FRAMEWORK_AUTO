@@ -56,6 +56,7 @@ public class TC028 extends BaseClass {
 
             addRequirementPage.clickClose();
             logger.info("clicked on close button");
+            addRequirementPage.ClickYesPopup();
 
             req.clickRequirement(serq2);
             logger.info("Again clicked on the same req" + serq2);

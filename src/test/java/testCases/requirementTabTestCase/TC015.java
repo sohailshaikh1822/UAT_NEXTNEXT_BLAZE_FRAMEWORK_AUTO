@@ -32,6 +32,8 @@ public class TC015 extends BaseClass {
             addRequirementPage.clickAddRequirementBtn();
             logger.info("Clicked on Add Requirement button");
 
+            addRequirementPage.clearRequirementName();
+
             addRequirementPage.clickSave();
             logger.info("Clicked Save with name field left blank");
 
