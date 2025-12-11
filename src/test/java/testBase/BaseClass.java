@@ -108,28 +108,60 @@ public class BaseClass {
 //        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
 //    }
 
-    public void logout() {
-        WebDriver driver = getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+//    public void logout() {
+//        WebDriver driver = getDriver();
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        WebElement chevron = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//img[@id='chevron-logout']"))
+//        );
+//        try {
+//            chevron.click();
+//        } catch (Exception e) {
+//            js.executeScript("arguments[0].click();", chevron);
+//        }
+//        WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//a[normalize-space()='Logout']"))
+//        );
+//        try {
+//            logoutBtn.click();
+//        } catch (Exception e) {
+//            js.executeScript("arguments[0].click();", logoutBtn);
+//        }
+//    }
 
-        WebElement chevron = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//img[@id='chevron-logout']"))
-        );
-        try {
-            chevron.click();
-        } catch (Exception e) {
-            js.executeScript("arguments[0].click();", chevron);
+    public void logout() throws InterruptedException {
+        WaitUtils.waitFor2000Milliseconds();
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
+                getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
+        // Three locators to try
+        By[] possibleLocators = {
+                By.xpath("//a[normalize-space()='Logout']"),
+                By.xpath("//div[@id='dropdown-menu-row']"),
+                By.xpath("//a[contains(text(),'Logout')]")
+        };
+        // Try each locator until one works
+        for (By locator : possibleLocators) {
+            try {
+                WebElement elem = getDriver().findElement(locator);
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", elem);
+                break;  // Stop when clicked
+            } catch (Exception e) {
+                // ignore and try next
+            }
         }
-        WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//a[normalize-space()='Logout']"))
-        );
+        // Click the actual Logout link
         try {
-            logoutBtn.click();
+            WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
         } catch (Exception e) {
-            js.executeScript("arguments[0].click();", logoutBtn);
+            WebElement logOut = getDriver().findElement(By.xpath("//a[contains(text(),'Logout')]"));
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
         }
     }
+
+
 
     public void login() throws InterruptedException {
 
