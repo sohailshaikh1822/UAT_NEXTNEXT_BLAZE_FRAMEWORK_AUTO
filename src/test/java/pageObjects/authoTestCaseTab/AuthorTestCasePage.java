@@ -12,8 +12,6 @@ import java.time.Duration;
 import java.util.*;
 import utils.WaitUtils;
 
-import static testBase.BaseClass.getDriver;
-
 public class AuthorTestCasePage extends BasePage {
     public AuthorTestCasePage(WebDriver driver) {
         super(driver);
@@ -418,19 +416,19 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public boolean isAllTestIdSorted() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        List<String> originalList = new ArrayList<>();
+        WaitUtils.waitFor2000Milliseconds();;
+        List<String> name1 = new ArrayList<>();
         for (WebElement ele : linkAllTestCaseId) {
-            js.executeScript("arguments[0].scrollIntoView(true);", ele);
-            WaitUtils.waitFor500Milliseconds();
-            originalList.add(ele.getText().trim());
+            name1.add(ele.getText().trim());
         }
-        List<String> sortedList = new ArrayList<>(originalList);
-        Collections.sort(sortedList);
-        return originalList.equals(sortedList);
-    }
 
+        // Make a copy and sort it
+        List<String> sortedList = new ArrayList<>(name1);
+        Collections.sort(sortedList);
+
+        // Check if original == sorted
+        return name1.equals(sortedList);
+    }
 
     public void searchRq(String Rq) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
