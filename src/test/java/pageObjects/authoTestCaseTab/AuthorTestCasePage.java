@@ -421,11 +421,9 @@ public class AuthorTestCasePage extends BasePage {
         WaitUtils.waitFor2000Milliseconds();
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         List<String> originalList = new ArrayList<>();
-
         for (WebElement ele : linkAllTestCaseId) {
             js.executeScript("arguments[0].scrollIntoView(true);", ele);
             WaitUtils.waitFor500Milliseconds();
-
             originalList.add(ele.getText().trim());
         }
         List<String> sortedList = new ArrayList<>(originalList);
