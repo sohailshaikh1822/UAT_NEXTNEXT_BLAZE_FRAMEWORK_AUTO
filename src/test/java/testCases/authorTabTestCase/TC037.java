@@ -12,9 +12,9 @@ public class TC037 extends BaseClass {
 
     @Test(dataProvider = "AddTest", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyTestCaseCreation(
-            String epic, String feature, String requirementId,
-            String testCaseName, String description, String priority,
-            String QA
+            String epic,
+            String feature,
+            String requirementId
     ) throws InterruptedException {
         logger.info("****** Starting the Log in Test Case *****************");
         try {
