@@ -107,6 +107,8 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
+
+
     // Actions
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -130,6 +132,7 @@ public class RequirementTabPage extends BasePage {
          WaitUtils.waitFor1000Milliseconds();
 
     }
+
 
     public void setModuleName(String moduleName) {
         textModuleName.clear();
@@ -203,14 +206,14 @@ public class RequirementTabPage extends BasePage {
 
     public List<String> getRequirementIDs() {
         List<WebElement> rows = getRequirementsFromModuleTable();
-        return rows.stream().map(row -> row.findElement(By.cssSelector("div.testlistcell a.text-wrapper-14")).getText())
+        return rows.stream().map(row -> row.findElement(By.cssSelector(".pid-col a.text-wrapper-14")).getText())
                 .toList();
     }
 
     public List<WebElement> getRequirementsFromModuleTable() {
         WebElement tableContainer = wait
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("existingTestCasesInnerTable"))));
-        return tableContainer.findElements(By.cssSelector("div.testlistrow"));
+        return tableContainer.findElements(By.cssSelector("#existingTestCasesInnerTable .requirements-list-row"));
     }
 
     public boolean isRequirementVisible(String requirementId) {
@@ -306,5 +309,7 @@ public class RequirementTabPage extends BasePage {
         buttonYesConfirmDelete.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
+
+
 
 }

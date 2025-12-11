@@ -54,8 +54,10 @@ public class TC011 extends BaseClass {
             logger.info("Close button clicked");
 
             req.clickRequirement(rq);
+            logger.info("click req" );
             req.setPriority(pri1);
             req.clickSave();
+            req.ClickYesPopup();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
