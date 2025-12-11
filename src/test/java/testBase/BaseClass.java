@@ -96,16 +96,39 @@ public class BaseClass {
         }
     }
 
+//    public void logout() {
+//        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+//        WebElement chevron = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//img[@id='chevron-logout']")
+//        ));
+//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", chevron);
+//        WebElement logOut = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//a[normalize-space()='Logout']")
+//        ));
+//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
+//    }
+
     public void logout() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriver driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
         WebElement chevron = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//img[@id='chevron-logout']")
-        ));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", chevron);
-        WebElement logOut = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//a[normalize-space()='Logout']")
-        ));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
+                By.xpath("//img[@id='chevron-logout']"))
+        );
+        try {
+            chevron.click();
+        } catch (Exception e) {
+            js.executeScript("arguments[0].click();", chevron);
+        }
+        WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//a[normalize-space()='Logout']"))
+        );
+        try {
+            logoutBtn.click();
+        } catch (Exception e) {
+            js.executeScript("arguments[0].click();", logoutBtn);
+        }
     }
 
     public void login() throws InterruptedException {
