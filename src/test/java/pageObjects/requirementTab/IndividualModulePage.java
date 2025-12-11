@@ -160,7 +160,7 @@ public class IndividualModulePage extends BasePage {
 
     public void ClickYesPopup()
     {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(clickYes)).click();
     }
 

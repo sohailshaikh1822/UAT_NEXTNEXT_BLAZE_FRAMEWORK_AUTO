@@ -8,6 +8,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC027 extends BaseClass {
 
@@ -34,8 +35,7 @@ public class TC027 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
-
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
 
@@ -47,21 +47,18 @@ public class TC027 extends BaseClass {
 
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
-
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
 
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
-
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
-
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);
@@ -69,12 +66,11 @@ public class TC027 extends BaseClass {
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
             logger.info("Requirement successfully added");
-
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
             addRequirementPage.clickClose();
             logger.info("Clicked on Close button");
-
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
+            addRequirementPage.ClickYesPopup();
             int countAfter = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count after attempting to add without name: " + countAfter);
 

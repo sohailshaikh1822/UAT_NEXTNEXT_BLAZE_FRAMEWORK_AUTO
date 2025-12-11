@@ -8,6 +8,8 @@ import pageObjects.requirementTab.RequirementTabPage;
 import pageObjects.requirementTab.AddRequirementPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 import java.util.List;
 public class TC025 extends BaseClass {
 
@@ -40,7 +42,7 @@ public class TC025 extends BaseClass {
             }
             WebElement countBeforeAdd = getDriver().findElement(By.xpath("//span[@class='entry-info']"));
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
            
             int beforeCount = Integer.parseInt(countBeforeAdd.getText().replaceAll("[^0-9]", ""));
             logger.info("Initial requirement count: " + beforeCount);
@@ -50,15 +52,19 @@ public class TC025 extends BaseClass {
             addRequirementPage.setRequirementId(newRequirementName);
             addRequirementPage.clickSave();
 
-            Thread.sleep(2000);
+            addRequirementPage.ClickYesPopup();
+
+
+            WaitUtils.waitFor1000Milliseconds();
             addRequirementPage.clickClose();
-            Thread.sleep(4000);
+            logger.info("closed");
+            WaitUtils.waitFor1000Milliseconds();
 
             if (individualModulePage.isClickableNextArrow()) {
                 individualModulePage.clickLastPageArrowBtn();
             }
             RequirementTabPage requirementTabPage1 = new RequirementTabPage(getDriver());
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             List<String> afterAddList = requirementTabPage1.getRequirementIDs();
             WebElement countAfterAdd = getDriver().findElement(By.xpath("//span[@class='entry-info']"));
             int afterAddCount = Integer.parseInt(countAfterAdd.getText().replaceAll("[^0-9]", ""));
@@ -68,8 +74,7 @@ public class TC025 extends BaseClass {
             logger.info("Newly linked requirement ID: " + newRequirementId);
             requirementTabPage1.unlinkRequirementById(newRequirementId, afterAddCount);
             logger.info("Unlinked requirement: " + newRequirementId);
-            Thread.sleep(3000);
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
            
             int afterRemoveCount = Integer.parseInt(countAfterAdd.getText().replaceAll("[^0-9]", ""));
 

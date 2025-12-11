@@ -53,6 +53,7 @@ public class TC011 extends BaseClass {
             req.clickCloseButton();
             logger.info("Close button clicked");
 
+
             req.clickRequirement(rq);
             logger.info("click req" );
             req.setPriority(pri1);

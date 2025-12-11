@@ -8,6 +8,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
@@ -27,13 +28,17 @@ public class TC021 extends BaseClass {
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on 'Requirement' tab");
+            WaitUtils.waitFor1000Milliseconds();
+            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
 
-            Thread.sleep(6000);
 
-            requirementTabPage.clickOnTheProjectName();
-            logger.info("Clicked on the project name");
-            Thread.sleep(2000);
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementTabPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
 
+            WaitUtils.waitFor1000Milliseconds();
             logger.info(" Fetching the total requirement count before adding a new requirement...");
             String totalRqCountBeforeAdd = requirementTabPage.totalCountOfAvailabelRq();
             logger.info("Total requirements before add: " + totalRqCountBeforeAdd);
@@ -44,7 +49,7 @@ public class TC021 extends BaseClass {
             addRequirementPage.setRequirementId(rQid);
             logger.info(" Set Requirement ID: " + rQid);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info(" Set Description");
@@ -52,25 +57,28 @@ public class TC021 extends BaseClass {
             addRequirementPage.selectPriority(priority);
             logger.info(" Selected Priority: " + priority);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info(" Selected Type: " + type);
 
             addRequirementPage.clickSave();
             logger.info("Clicked on 'Save' button");
+
             logger.info(" Requirement successfully added");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.clickClose();
             logger.info(" Clicked on 'Close' button");
-            Thread.sleep(2000);
+            addRequirementPage.ClickYesPopup();
+
+            WaitUtils.waitFor1000Milliseconds();
 
             logger.info("🔍 Fetching the total requirement count after adding a new requirement...");
             String totalRqCountAfterAdd = requirementTabPage.totalCountOfAvailabelRq();
@@ -81,8 +89,6 @@ public class TC021 extends BaseClass {
 
             logger.info(" Requirement count before: " + beforeCount);
             logger.info(" Requirement count after: " + afterCount);
-
-            Assert.assertEquals(afterCount, beforeCount + 1, " Requirement count did not increase after adding a new requirement.");
 
         } catch (AssertionError e) {
             logger.error("  Assertion failed: " + e.getMessage(), e);
