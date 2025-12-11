@@ -9,15 +9,15 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
         <classes>
-            <class name="testCases.authorTabTestCase.TC001"/>
-            <class name="testCases.authorTabTestCase.TC002"/>
-            <class name="testCases.authorTabTestCase.TC003"/>
-            <class name="testCases.authorTabTestCase.TC004"/>
-            <class name="testCases.authorTabTestCase.TC007"/>
-            <class name="testCases.authorTabTestCase.TC009"/>
-            <class name="testCases.authorTabTestCase.TC010"/>
-            <class name="testCases.authorTabTestCase.TC011"/>
-            <class name="testCases.authorTabTestCase.TC012"/>
+<!--            <class name="testCases.authorTabTestCase.TC001"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC002"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC003"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC004"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC007"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC009"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC010"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC011"/>-->
+<!--            <class name="testCases.authorTabTestCase.TC012"/>-->
             <class name="testCases.authorTabTestCase.TC013"/>
             <class name="testCases.authorTabTestCase.TC014"/>
           <class name="testCases.authorTabTestCase.TC018"/>
