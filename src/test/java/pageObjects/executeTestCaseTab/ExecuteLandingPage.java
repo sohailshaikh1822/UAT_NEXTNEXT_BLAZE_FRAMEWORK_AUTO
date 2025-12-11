@@ -187,9 +187,9 @@ public class ExecuteLandingPage extends BasePage {
     }
 
     public void clickExecuteTab() throws InterruptedException {
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(tabexceute)).click();
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
     }
 
     public void clickArrowRightToExpandModule(String moduleName) {
@@ -219,7 +219,8 @@ public class ExecuteLandingPage extends BasePage {
 
     public void clickArrowRightPointingForExpandModule(String moduleName) throws InterruptedException {
         arrowRightToExpand(moduleName).click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();
+        ;
     }
 
     public WebElement selectedModuleOrReleaseName(String name) {
@@ -321,7 +322,8 @@ public class ExecuteLandingPage extends BasePage {
     }
 
     public void clickTestRunById(String testRunId) throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();
+        ;
         WebDriverWait localWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement testRun = testRunLinks.stream()
                 .filter(e -> e.getText().trim().equals(testRunId))
@@ -460,9 +462,10 @@ public class ExecuteLandingPage extends BasePage {
     }
 
     public void clickPlayActionById(String tcIO) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
+        ;
         new Actions(driver).moveToElement(buttonActionPlay(tcIO)).perform();
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
         buttonActionPlay(tcIO).click();
     }
 
@@ -471,7 +474,8 @@ public class ExecuteLandingPage extends BasePage {
 
     public void clickOnAnyPlayButton() throws InterruptedException {
         new Actions(driver).moveToElement(playButton).perform();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
+        ;
         wait.until(ExpectedConditions.elementToBeClickable(playButton)).click();
     }
 
@@ -500,12 +504,13 @@ public class ExecuteLandingPage extends BasePage {
         WebElement table = driver.findElement(tableContainer);
 
         js.executeScript("arguments[0].scrollLeft = arguments[0].scrollWidth;", table);
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
 
         List<WebElement> statusElements = driver.findElements(statusCells);
         for (WebElement cell : statusElements) {
             js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", cell);
-            Thread.sleep(200);
+            WaitUtils.waitFor200Milliseconds();
+            ;
             statuses.add(cell.getText().trim());
         }
 
@@ -518,7 +523,8 @@ public class ExecuteLandingPage extends BasePage {
             WebElement paginationText = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//p[@class='pagination-text']")));
             new Actions(driver).moveToElement(paginationText).perform();
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();
+            ;
             String text = paginationText.getText().trim(); // e.g. "Showing 1 to 10 of 27 entries"
 
             if (text.isEmpty() || text.contains("No entries")) {

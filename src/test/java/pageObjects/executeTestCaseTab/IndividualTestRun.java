@@ -11,6 +11,7 @@ import java.util.List;
 
 import java.time.Duration;
 import java.util.regex.Pattern;
+import utils.WaitUtils;
 
 public class IndividualTestRun extends BasePage {
     public IndividualTestRun(WebDriver driver) {
@@ -322,7 +323,7 @@ public class IndividualTestRun extends BasePage {
             while (true) {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;",
                         tableContainer);
-                Thread.sleep(500);
+                WaitUtils.waitFor500Milliseconds();;
 
                 long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return arguments[0].scrollHeight;",
                         tableContainer);

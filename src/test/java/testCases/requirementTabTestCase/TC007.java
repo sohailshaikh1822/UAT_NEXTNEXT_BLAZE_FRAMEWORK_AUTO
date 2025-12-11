@@ -33,8 +33,7 @@ public class TC007 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor1000Milliseconds();
-
+            WaitUtils.waitFor3000Milliseconds();;
             requirementTabPage.clickOnTheProjectName();
             logger.info("Clicked on the Project Name");
 
@@ -44,7 +43,7 @@ public class TC007 extends BaseClass {
             addRequirementPage.setRequirementId(rQid);
             logger.info("Set Requirement ID: " + rQid);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
@@ -52,12 +51,12 @@ public class TC007 extends BaseClass {
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);

@@ -54,6 +54,11 @@ public class WaitUtils {
         sleep(2000);
     }
 
+    public static void waitFor3000Milliseconds()
+    {
+        sleep(3000);
+    }
+
     private static void sleep(long millis) {
         try {
             Thread.sleep(millis);

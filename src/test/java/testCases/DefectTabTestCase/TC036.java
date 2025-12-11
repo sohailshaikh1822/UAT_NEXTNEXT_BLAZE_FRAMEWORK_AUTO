@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC036 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -19,7 +20,7 @@ public class TC036 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             waitForPageLoad();
 
@@ -29,7 +30,7 @@ public class TC036 extends BaseClass {
             getDriver().navigate().forward();
             logger.info("Clicked on browser forward button");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             String actualUrl = getDriver().getCurrentUrl();
             String expectedUrlAfterClick = "https://webapp-stg-testnext.azurewebsites.net/defect";

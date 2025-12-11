@@ -29,7 +29,7 @@ public class TC008 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
             requirementTabPage.clickOnTheProjectName();
             logger.info("Clicked on the Project Name");
 
@@ -38,18 +38,18 @@ public class TC008 extends BaseClass {
 
             addRequirementPage.setRequirementId(rQid);
             logger.info("Set Requirement ID: " + rQid);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
 
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);

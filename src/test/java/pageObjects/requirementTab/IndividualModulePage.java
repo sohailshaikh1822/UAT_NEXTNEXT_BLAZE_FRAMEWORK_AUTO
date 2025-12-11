@@ -154,7 +154,7 @@ public class IndividualModulePage extends BasePage {
     }
 
     public String getModuleName() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.visibilityOf(inputTitle)).getAttribute("value").trim();
     }
@@ -219,7 +219,7 @@ public class IndividualModulePage extends BasePage {
         descriptionAfterClick.sendKeys(Keys.BACK_SPACE);
         descriptionAfterClick.clear();
         inputTitle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickInputTitle() {
@@ -242,13 +242,13 @@ public class IndividualModulePage extends BasePage {
     }
 
     public void clickDeleteRequirement(String reqID) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         deleteRequirementIcon(reqID).click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String showPaginationOfRequirement() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return divRequirementPagination.getText();
     }
 
@@ -430,7 +430,7 @@ public class IndividualModulePage extends BasePage {
     }
 
     public String getDeleteConfirmationMessage() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement modal = wait.until(ExpectedConditions.visibilityOfElementLocated(actionDialog));
         return modal.findElement(By.id("actionDialog-message")).getText().trim();
@@ -447,7 +447,7 @@ public class IndividualModulePage extends BasePage {
     public void confirmDelete() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        Thread.sleep(4000);
+        WaitUtils.waitFor2000Milliseconds();;
 
         try {
             WebElement dialog = wait.until(driver -> driver.findElement(By.id("actionDialog")));

@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC013 extends BaseClass {
     @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class)
@@ -23,24 +24,24 @@ public class TC013 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectAffectedReleaseByIndex(Integer.parseInt(affectedRelease));
             logger.info("Status Selected from Dropdown");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.selectAssignToByIndex(Integer.parseInt(assignTo));
             logger.info("Filled the Summary field");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.selectSeverityByIndex(Integer.parseInt(severity));
             logger.info("Filled the Summary field");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.clickSave();
             logger.info("Clicked the save button");
 

@@ -30,12 +30,12 @@ public class TC007 extends BaseClass {
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to the expected Defect Page URL.");
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Successfully navigated to create Defect page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");
@@ -51,19 +51,19 @@ public class TC007 extends BaseClass {
 
             createDefectPage.clickReasonDropdown();
             logger.info("Reason dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickCategoryDropdown();
             logger.info("Category dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickTargetReleaseDropdown();
             logger.info("Target Release dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickStatusDropdown();
             logger.info("Status dropdown expanded successfully.");
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickPriorityDropdown();
             logger.info("Priority dropdown expanded successfully.");

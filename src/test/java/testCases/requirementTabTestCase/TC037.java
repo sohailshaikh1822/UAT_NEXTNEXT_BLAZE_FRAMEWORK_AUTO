@@ -6,6 +6,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC037 extends BaseClass {
 
@@ -26,7 +27,7 @@ public class TC037 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on the 'Requirement' tab");
 
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(mainProject);
             logger.info("Expanded the main project: " + mainProject);
@@ -34,14 +35,14 @@ public class TC037 extends BaseClass {
             requirementTabPage.clickOnModule(module);
             logger.info("Clicked on the module: " + module);
 
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             requirementTabPage.setModuleName("");
             logger.info("Entered module name: " + " ");
 
             individualModulePage.clickSave();
             logger.info("Clicked the 'Save' button");
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             individualModulePage.clickCloseBtnOfALertModuleName();
             logger.info("Successfully Click the close button");
