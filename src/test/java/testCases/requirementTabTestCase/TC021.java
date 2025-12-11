@@ -53,7 +53,7 @@ public class TC021 extends BaseClass {
             addRequirementPage.selectPriority(priority);
             logger.info(" Selected Priority: " + priority);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);

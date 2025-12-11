@@ -7,7 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-
+import utils.WaitUtils;
 public class TC035 extends BaseClass {
 
     @Test(dataProvider = "tc035", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -47,7 +47,7 @@ public class TC035 extends BaseClass {
 
             Assert.assertEquals(Actual_Warning, "Deleting a module will also delete its associated requirements and test cases. Are you sure you want to delete?");
             logger.info("Assertion has done user can see the warning message");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             requirementTabPage.clickNoBtn();
 
         } catch (AssertionError e) {

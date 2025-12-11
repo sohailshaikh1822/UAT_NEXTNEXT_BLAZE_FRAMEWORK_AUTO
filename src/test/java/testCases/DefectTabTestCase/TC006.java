@@ -26,7 +26,7 @@ public class TC006 extends BaseClass {
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             // Step 3: Assert current URL contains expected Defect page URL
             String actualUrl = getDriver().getCurrentUrl();
@@ -36,7 +36,7 @@ public class TC006 extends BaseClass {
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");

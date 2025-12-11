@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC033 extends BaseClass {
     @Test(dataProvider = "tc033", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -24,7 +25,7 @@ public class TC033 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             logger.info("Defect Page loaded and form fields are visible.");
             defectLandingPage.clickCreateTestCaseButton();
@@ -32,7 +33,7 @@ public class TC033 extends BaseClass {
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
 
@@ -40,17 +41,17 @@ public class TC033 extends BaseClass {
 
             createDefectPage.selectStatusByIndex(Integer.parseInt(status));
             logger.info("status is selected");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.enterDescription(description);
             logger.info("Descrption filled:"+description);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.enterSummary(summary2);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickSearchButton();
             Thread.sleep(5000);
         } catch (AssertionError ae) {

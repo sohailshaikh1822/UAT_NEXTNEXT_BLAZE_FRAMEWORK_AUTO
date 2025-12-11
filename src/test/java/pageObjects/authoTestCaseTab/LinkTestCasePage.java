@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.BasePage;
 import org.openqa.selenium.*;
+import utils.WaitUtils;
 
 public class LinkTestCasePage extends BasePage {
 
@@ -51,7 +52,7 @@ public class LinkTestCasePage extends BasePage {
     }
 
     public boolean isTestCaseAlreadyLinked() throws InterruptedException {
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();;
         String message = getAlertMessage();
         return message.contains("This test case is already linked to the requirement.");
     }

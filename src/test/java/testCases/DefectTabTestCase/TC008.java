@@ -37,10 +37,10 @@ public class TC008 extends BaseClass {
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.selectAffectedRelease(affectedrealese);
             logger.info("Affected Release selected: {}", affectedrealese);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectSeverityByIndex(1);
 

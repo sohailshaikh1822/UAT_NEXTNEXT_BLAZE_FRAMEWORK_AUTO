@@ -518,7 +518,7 @@ public class ExecuteLandingPage extends BasePage {
             WebElement paginationText = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//p[@class='pagination-text']")));
             new Actions(driver).moveToElement(paginationText).perform();
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             String text = paginationText.getText().trim(); // e.g. "Showing 1 to 10 of 27 entries"
 
             if (text.isEmpty() || text.contains("No entries")) {

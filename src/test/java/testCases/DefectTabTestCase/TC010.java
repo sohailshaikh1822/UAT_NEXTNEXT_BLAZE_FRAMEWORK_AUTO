@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC010 extends BaseClass {
 
@@ -31,19 +32,19 @@ public class TC010 extends BaseClass {
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to expected URL.");
             logger.info("Navigated to Defect Page: " + actualUrl);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled: " + Summary);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled:\n" + Description);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             boolean isVerified = createDefectPage.verifySummaryAndDescription(Summary, Description);
             Assert.assertTrue(isVerified, "Summary or Description text validation failed.");

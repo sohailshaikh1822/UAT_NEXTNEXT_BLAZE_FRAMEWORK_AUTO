@@ -113,7 +113,7 @@ public class TestPlanLandingPage extends BasePage {
     // --- Actions ---
 
     public void clickOnReleaseOrTestCycleOrTestSuite(String releaseOrTestCycleOrTestSuite) throws InterruptedException {
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();;
         releaseTestCycleTestSuite(releaseOrTestCycleOrTestSuite).click();
 
     }

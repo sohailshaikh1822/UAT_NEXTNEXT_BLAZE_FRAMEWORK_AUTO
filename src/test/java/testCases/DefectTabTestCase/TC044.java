@@ -8,6 +8,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC044 extends BaseClass {
     @Test( retryAnalyzer = RetryAnalyzer.class)
@@ -21,34 +22,34 @@ public class TC044 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             String actualUrl = getDriver().getCurrentUrl();
             String expectedUrlAfterClick = "https://webapp-stg-testnext.azurewebsites.net/defect";
             Assert.assertEquals(actualUrl, expectedUrlAfterClick,
                     "User is not navigated to the Defect page!");
             logger.info("Defect Page loaded and form fields are visible.");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
 
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterSummary("Automation defect summary");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.selectStatus("New");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterDescription("description for defect");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             Actions actions = new Actions(getDriver());
             actions.click(createDefectPage.getDescriptionField())
                     .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
                     .keyDown(Keys.CONTROL).sendKeys("c").keyUp(Keys.CONTROL);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             actions.click(createDefectPage.getDescriptionField())
                     .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             actions.click(createDefectPage.getDescriptionField()).keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL)
                     .perform();
             logger.info("Copied & pasted Description text");

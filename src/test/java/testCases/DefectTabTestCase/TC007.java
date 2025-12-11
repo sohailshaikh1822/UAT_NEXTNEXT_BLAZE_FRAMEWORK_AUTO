@@ -35,7 +35,7 @@ public class TC007 extends BaseClass {
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Successfully navigated to create Defect page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.clickSeverityDropdown();
             logger.info("Severity dropdown expanded successfully.");

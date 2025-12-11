@@ -69,7 +69,7 @@ public class TC025 extends BaseClass {
             logger.info("Newly linked requirement ID: " + newRequirementId);
             requirementTabPage1.unlinkRequirementById(newRequirementId, afterAddCount);
             logger.info("Unlinked requirement: " + newRequirementId);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             WaitUtils.waitFor2000Milliseconds();
            
             int afterRemoveCount = Integer.parseInt(countAfterAdd.getText().replaceAll("[^0-9]", ""));

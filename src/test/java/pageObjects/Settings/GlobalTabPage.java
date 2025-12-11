@@ -195,7 +195,7 @@ public class GlobalTabPage extends BasePage {
 
     public void clickSaveButton() throws InterruptedException {
         // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();;
         Savebutton.click();
     }
 

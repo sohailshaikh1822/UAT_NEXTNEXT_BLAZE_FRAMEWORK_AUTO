@@ -48,7 +48,7 @@ public class testplan_execute_automation extends BaseClass {
             individualTestCyclePage.getTestCycleCreatedSuccessMessage();
             logger.info("Test Cycle created sucessfully");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             executeLandingPage.clickExecuteTab();
             logger.info("clicked on Executetestcase");

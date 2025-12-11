@@ -52,7 +52,7 @@ public class TC004 extends BaseClass {
             CreateDefectPage defect = new CreateDefectPage(getDriver());
 
             defect.scrollUp();
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             Assert.assertTrue(defect.buttonSaveIsDisplayed(), "Button Save is not displayed");
             logger.info("Button Save is displayed");
 
