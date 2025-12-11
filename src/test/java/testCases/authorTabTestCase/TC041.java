@@ -20,10 +20,12 @@ public class TC041 extends BaseClass {
         try {
             login();
             logger.info("Login successful.");
+            WaitUtils.waitFor1000Milliseconds();
 
             logger.info("Navigating to 'Author Test Case' tab.");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
 
             authorTestCasePage.searchRq(rqName);
             logger.info("Requirement '" + rqName + "' searched and selected.");

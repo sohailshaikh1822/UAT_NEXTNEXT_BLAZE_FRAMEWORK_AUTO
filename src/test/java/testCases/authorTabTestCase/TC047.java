@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC047 extends BaseClass {
 
@@ -17,12 +18,16 @@ public class TC047 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Navigated to Author Test Case tab");
             authorTestCasePage.clickRequirement(requirementId);
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on Add Test Case button");
+            WaitUtils.waitFor1000Milliseconds();
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
             Assert.assertTrue(addTestcasePage.isAllTypeOptionsVisible());
             logger.info("Verified Successfully....");

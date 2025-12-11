@@ -24,6 +24,7 @@ public class TC048 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Clicked On the author test case");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectEpic(epic);
             WaitUtils.waitFor1000Milliseconds();
             logger.info("Selected the epic.");
