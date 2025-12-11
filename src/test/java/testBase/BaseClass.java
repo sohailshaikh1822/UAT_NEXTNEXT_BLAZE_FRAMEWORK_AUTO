@@ -121,7 +121,7 @@ public class BaseClass {
 
         WebElement clickToYes = wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
         clickToYes.click();
-        Thread.sleep(6000);
+        WaitUtils.waitFor3000Milliseconds();;
         getDriver().navigate().refresh();
         WaitUtils.waitFor2000Milliseconds();
     }

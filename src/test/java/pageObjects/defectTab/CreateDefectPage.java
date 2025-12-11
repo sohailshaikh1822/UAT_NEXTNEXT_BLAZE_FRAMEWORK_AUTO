@@ -559,7 +559,7 @@ public class CreateDefectPage extends BasePage {
 
     public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
             throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
 
         String actualSummary = getSummary().trim();
         String actualDescription = getDescription().trim();
@@ -599,7 +599,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public boolean isSaveButtonVisible() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         try {
             return buttonSave.isDisplayed();
         } catch (Exception e) {
@@ -608,7 +608,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public boolean isSaveButtonClickable() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         try {
             return buttonSave.isEnabled();
         } catch (Exception e) {
@@ -617,7 +617,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public void clickSaveIfVisibleAndClickable() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
 
         if (buttonSave.isDisplayed() && buttonSave.isEnabled()) {
             buttonSave.click();

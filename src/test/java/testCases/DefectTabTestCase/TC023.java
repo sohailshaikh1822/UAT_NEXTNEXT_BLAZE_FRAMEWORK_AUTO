@@ -32,7 +32,7 @@ public class TC023 extends BaseClass {
             // Step 3: Select the project and click on create defect button to open new defect form.
             defectLandingPage.selectProject(project);
             logger.info("project selected");
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Test Case Button");

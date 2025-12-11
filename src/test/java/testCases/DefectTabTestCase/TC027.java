@@ -33,7 +33,7 @@ public class TC027 extends BaseClass {
             //Step 4: Click Search Button
             defectLandingPage.clickSearchButton();
             logger.info("search button clicked");
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             //Step 5: click on create new defect
             defectLandingPage.clickCreateTestCaseButton();

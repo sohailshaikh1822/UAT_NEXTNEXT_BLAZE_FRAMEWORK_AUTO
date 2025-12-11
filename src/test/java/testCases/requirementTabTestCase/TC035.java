@@ -31,7 +31,7 @@ public class TC035 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
@@ -41,7 +41,7 @@ public class TC035 extends BaseClass {
 
             requirementTabPage.clickDeleteModule();
             logger.info("Clicked Delete button");
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
             String Actual_Warning = individualModulePage.alretMeaasgeForDeletingModule();
             System.out.println(Actual_Warning);
 

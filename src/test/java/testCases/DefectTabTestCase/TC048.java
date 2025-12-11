@@ -55,7 +55,7 @@ public class TC048 extends BaseClass {
             createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
 
             try {
                 createDefect.clickSaveforNewDefect();

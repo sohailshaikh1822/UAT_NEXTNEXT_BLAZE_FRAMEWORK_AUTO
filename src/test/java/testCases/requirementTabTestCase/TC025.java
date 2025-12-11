@@ -53,7 +53,7 @@ public class TC025 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.clickClose();
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             if (individualModulePage.isClickableNextArrow()) {
                 individualModulePage.clickLastPageArrowBtn();

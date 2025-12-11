@@ -32,7 +32,7 @@ public class TC039 extends BaseClass {
             String tempSummary = "AutoTest_CancelDefect_" + System.currentTimeMillis();
             String tempDescription = "Temporary Description - Should Not Be Saved";
 
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             createDefect.enterSummary(tempSummary);
             logger.info("Entered Summary: " + tempSummary);
 
@@ -46,7 +46,7 @@ public class TC039 extends BaseClass {
             createDefect.selectPriorityByIndex(1);
             logger.info("Filled mandatory details WITHOUT saving");
 
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             createDefect.clickClose();
             logger.info("Clicked CLOSE without saving");
 
@@ -56,7 +56,7 @@ public class TC039 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.enterSummary(tempSummary);
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             defectLandingPage.clickSearchButton();
             logger.info("Searching for unsaved defect on listing page");
 

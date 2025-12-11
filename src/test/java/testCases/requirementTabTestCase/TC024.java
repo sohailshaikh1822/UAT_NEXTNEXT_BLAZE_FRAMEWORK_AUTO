@@ -35,7 +35,7 @@ public class TC024 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
@@ -74,11 +74,11 @@ public class TC024 extends BaseClass {
             logger.info("Clicked Save button");
             logger.info("Requirement successfully added");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
             addRequirementPage.clickClose();
             logger.info("Clicked on Close button");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
             int countAfter = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count after adding: " + countAfter);
             Assert.assertEquals(countAfter, countBefore + 1, "Requirement count did not increase by 1");

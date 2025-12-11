@@ -174,27 +174,27 @@ public class TestPlanLandingPage extends BasePage {
     }
 
     public void clickNewRelease() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnNewRelease.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickNewTestCycle() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnNewTestCycle.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickNewTestSuite() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnNewTestSuite.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickDelete() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnDelete.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickOnConfirmDeleteYes(String releaseCycleSuiteName) {

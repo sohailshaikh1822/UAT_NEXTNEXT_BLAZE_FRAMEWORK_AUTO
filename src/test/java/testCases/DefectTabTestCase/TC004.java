@@ -41,12 +41,12 @@ public class TC004 extends BaseClass {
             defectLandingPage.clickSearchButton();
             logger.info("Search button clicked");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
             // defectLandingPage.clickDefectByIndex(2);
             defectLandingPage.ClickDefectbyID("DF-448");
             logger.info("Create defect selected");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             // Step 5: Check all necessary fields are displayed or not
             CreateDefectPage defect = new CreateDefectPage(getDriver());

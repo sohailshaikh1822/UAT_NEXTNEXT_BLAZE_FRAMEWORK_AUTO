@@ -209,7 +209,7 @@ public class IndividualTestCasePage extends BasePage {
             clickAddTestStep();
             setStepDescription(descriptionArray[i], i + 1);
             driver.findElement(By.xpath("//div[@class='table-header-cell description']")).click();
-            Thread.sleep(1500);
+            WaitUtils.waitFor1000Milliseconds();;
             setStepExpectedResult(expectedResultArray[i], i + 1);
         }
     }

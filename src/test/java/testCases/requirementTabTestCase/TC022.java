@@ -28,7 +28,7 @@ public class TC022 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on the 'Requirement' tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(mainProject);
             logger.info("Expanded the main project: " + mainProject);

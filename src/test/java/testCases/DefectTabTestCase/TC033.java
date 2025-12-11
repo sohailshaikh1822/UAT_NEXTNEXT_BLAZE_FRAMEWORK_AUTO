@@ -37,7 +37,7 @@ public class TC033 extends BaseClass {
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.selectStatusByIndex(Integer.parseInt(status));
             logger.info("status is selected");
@@ -53,7 +53,7 @@ public class TC033 extends BaseClass {
             defectLandingPage.enterSummary(summary2);
             WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickSearchButton();
-            Thread.sleep(5000);
+            WaitUtils.waitFor2000Milliseconds();;
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;

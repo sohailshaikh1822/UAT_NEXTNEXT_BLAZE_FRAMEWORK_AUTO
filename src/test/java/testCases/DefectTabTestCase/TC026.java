@@ -44,10 +44,10 @@ public class TC026 extends BaseClass {
 //            defect.scrollUp();
 //            logger.info("Scrolled up the defect form");
 
-//            Thread.sleep(5000);
+//            WaitUtils.waitFor2000Milliseconds();;
 //            defect.clickClose();
 //            logger.info("defect closed");
-//            Thread.sleep(5000);
+//            WaitUtils.waitFor2000Milliseconds();;
 
             // Step 4: Click on create defect button to open new defect form and compare all the values with expected default values
             defectLandingPage.clickCreateTestCaseButton();

@@ -32,14 +32,14 @@ public class TC040 extends BaseClass {
             createDefect.enterSummary(" ");
             logger.info("Summary left blank");
 
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             createDefect.scrollToSaveButton();
 
-            Thread.sleep(800);
+            WaitUtils.waitFor800Milliseconds();;
             createDefect.clickSaveforNewDefect();
             logger.info("Clicked SAVE to trigger summary blank error");
 
-            Thread.sleep(1500);
+            WaitUtils.waitFor1000Milliseconds();;
             String notificationText = createDefect.getNotificationText();
             Assert.assertEquals(notificationText.trim(), "Error: Summary cannot be blank.",
                     "FAILED: Expected Summary blank error message not shown!");
@@ -59,7 +59,7 @@ public class TC040 extends BaseClass {
             createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();
-            Thread.sleep(800);
+            WaitUtils.waitFor800Milliseconds();;
 
             createDefect.clickSave();
             logger.info("Clicked SAVE after correcting summary");

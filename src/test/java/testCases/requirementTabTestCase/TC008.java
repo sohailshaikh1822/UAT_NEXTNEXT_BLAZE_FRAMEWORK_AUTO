@@ -29,7 +29,7 @@ public class TC008 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
             requirementTabPage.clickOnTheProjectName();
             logger.info("Clicked on the Project Name");
 

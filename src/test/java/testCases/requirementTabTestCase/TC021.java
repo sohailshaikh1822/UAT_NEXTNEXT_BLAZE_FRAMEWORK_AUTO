@@ -29,7 +29,7 @@ public class TC021 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on 'Requirement' tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickOnTheProjectName();
             logger.info("Clicked on the project name");
@@ -67,7 +67,7 @@ public class TC021 extends BaseClass {
             logger.info("Clicked on 'Save' button");
             logger.info(" Requirement successfully added");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.clickClose();
             logger.info(" Clicked on 'Close' button");

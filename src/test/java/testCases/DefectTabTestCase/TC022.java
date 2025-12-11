@@ -30,7 +30,7 @@ public class TC022 extends BaseClass {
 
             CreateDefectPage createPage = new CreateDefectPage(getDriver());
 
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             createPage.enterSummary("Automation defect summary");
             WaitUtils.waitFor2000Milliseconds();
 
@@ -39,7 +39,7 @@ public class TC022 extends BaseClass {
             createPage.clearDescriptionField();
             logger.info("Cleared Description field to leave it empty");
 
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
             createPage.clickSaveforNewDefect();
             logger.info("Clicked Save button");
 

@@ -411,7 +411,7 @@ public class AuthorTestCasePage extends BasePage {
             nextButton.click();
 
             // Wait for page reload before rechecking
-            Thread.sleep(1500);
+            WaitUtils.waitFor1000Milliseconds();;
         }
     }
 
@@ -545,7 +545,7 @@ public class AuthorTestCasePage extends BasePage {
 
     public void clickSubmitButtonOnAddTestCaseModal() throws InterruptedException {
         Actions a = new Actions(driver);
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         a.moveToElement(buttonSubmitTestCaseModal).perform();
         buttonSubmitTestCaseModal.click();
     }
