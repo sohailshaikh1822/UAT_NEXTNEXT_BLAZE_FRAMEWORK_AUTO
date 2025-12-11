@@ -97,7 +97,7 @@ public class BaseClass {
     }
 
     public void logout() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
                 getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
         WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
