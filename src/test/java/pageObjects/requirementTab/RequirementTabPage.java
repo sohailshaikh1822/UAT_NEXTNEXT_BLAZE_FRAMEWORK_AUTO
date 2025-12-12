@@ -31,7 +31,7 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Open Sidebar']")
     WebElement openSideBar;
 
-    @FindBy(xpath = "//span[@title='<p></p>']")
+    @FindBy(xpath = "(//i[@class='fa-solid tree-arrow fa-caret-right'])[1]")
     WebElement leftPanelProjectName;
     @FindBy(xpath = "//span[@class='entry-info']")
     WebElement totalEntriesRqCount;
@@ -120,7 +120,6 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clickOnTheProjectName() throws InterruptedException {
-
         leftPanelProjectName.click();
         wait.until(ExpectedConditions.visibilityOf(buttonSave));
 

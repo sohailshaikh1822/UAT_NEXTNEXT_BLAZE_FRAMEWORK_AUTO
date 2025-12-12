@@ -27,8 +27,14 @@ public class TC033 extends BaseClass {
             String uniqueModuleName = moduleName + "_" + System.currentTimeMillis();
             logger.info("Unique module name generated: " + uniqueModuleName);
             requirementTabPage.clickRequirementTab();
-            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickNewModule();
+//            requirementTabPage.clickOnTheProjectName();
+            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementTabPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
+//            requirementTabPage.clickNewModule();
             requirementTabPage.setModuleName(uniqueModuleName);
             requirementTabPage.saveModule();
             getDriver().navigate().refresh();
