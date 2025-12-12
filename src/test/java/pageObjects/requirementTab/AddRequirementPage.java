@@ -78,7 +78,8 @@ public class AddRequirementPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(clickNo)).click();
     }
 
-    public void setRequirementId(String id) {
+    public void setRequirementId(String id)
+    {
         textRequirementId.sendKeys(id);
     }
 

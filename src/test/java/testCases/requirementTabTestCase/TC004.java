@@ -11,8 +11,8 @@ import utils.RetryAnalyzer;
 
 public class TC004 extends BaseClass {
 
-    @Test(dataProvider = "tc004", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyUpdateDescription(String reqId, String description) throws InterruptedException {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void verifyUpdateDescription() throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
@@ -22,13 +22,19 @@ public class TC004 extends BaseClass {
             requirementsPage.clickRequirementTab();
 
             logger.info("Clicked on the Project from left panel to open the module");
-            requirementsPage.clickOnTheProjectName();
+//            requirementsPage.clickOnTheProjectName();
+            requirementsPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
+            requirementsPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementsPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             logger.info("Clicked on the Requirement ID from the requirements list");
-            individualModulePage.clickRequirement(reqId);
+            individualModulePage.clickRequirement("RQ-443");
             logger.info("Successfully navigated inside the selected Requirement");
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-            addRequirementPage.setDescription(description);
+            addRequirementPage.setDescription("Updated desc ");
             logger.info("Entered description for the requirement");
 
             addRequirementPage.clickSave();

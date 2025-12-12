@@ -81,9 +81,9 @@ public void setTestCaseName(String testCaseName) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
     Actions actions = new Actions(driver);
     By[] nameFieldLocators = {
-            By.xpath("(//table[@id='newTestCasesTable']//tbody//tr/td/input)[1]"),
-            By.xpath("//table[@id='newTestCasesTable']//thead//th[contains(normalize-space(),'Name')]/ancestor::thead/following-sibling::tbody//tr//td[1]//input"),
-            By.xpath("//input[@type='text' and @required]")
+            By.xpath("//tbody/tr/td[1]/input"),
+            By.xpath("(//td[input[@type='text']])[1]"),
+
     };
     WebElement nameField = null;
     for (By locator : nameFieldLocators) {
@@ -105,8 +105,29 @@ public void setTestCaseName(String testCaseName) {
 
 
     public void setDescription(String description) {
-        textDescription.sendKeys(description);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        Actions actions = new Actions(driver);
+
+        By[] descriptionLocators = {
+                By.xpath("//table[@id='newTestCasesTable']//tbody/tr/td[2]/input"),
+                By.xpath("(//tbody//tr//td/input[@type='text' and @required])[2]")
+        };
+        WebElement descriptionField = null;
+        for (By locator : descriptionLocators) {
+            try {
+                descriptionField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                break;
+            } catch (Exception ignored) {}
+        }
+        if (descriptionField == null) {
+            throw new RuntimeException("Description input field not found using any provided locator.");
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(descriptionField));
+        actions.moveToElement(descriptionField).pause(200).click().perform();
+        descriptionField.clear();
+        descriptionField.sendKeys(description);
     }
+
 
     public void selectPriority(String priority) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));

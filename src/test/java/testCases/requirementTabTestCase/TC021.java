@@ -34,8 +34,15 @@ public class TC021 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();;
 
-            requirementTabPage.clickOnTheProjectName();
-            logger.info("Clicked on the project name");
+//            requirementTabPage.clickOnTheProjectName();
+            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementTabPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
+//            logger.info("Clicked on the project name");
+
             WaitUtils.waitFor2000Milliseconds();
 
             WaitUtils.waitFor1000Milliseconds();

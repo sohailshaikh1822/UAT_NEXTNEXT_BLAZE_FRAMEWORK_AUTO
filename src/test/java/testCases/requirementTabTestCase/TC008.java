@@ -30,8 +30,14 @@ public class TC008 extends BaseClass {
             logger.info("Clicked on Requirement Tab");
 
             WaitUtils.waitFor3000Milliseconds();;
-            requirementTabPage.clickOnTheProjectName();
-            logger.info("Clicked on the Project Name");
+//            requirementTabPage.clickOnTheProjectName();
+            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementTabPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
+//            logger.info("Clicked on the Project Name");
 
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
