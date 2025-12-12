@@ -80,7 +80,6 @@ public class AddTestcasePage extends BasePage {
 public void setTestCaseName(String testCaseName) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
     Actions actions = new Actions(driver);
-
     By[] nameFieldLocators = {
             By.xpath("(//table[@id='newTestCasesTable']//tbody//tr/td/input)[1]"),
             By.xpath("//table[@id='newTestCasesTable']//thead//th[contains(normalize-space(),'Name')]/ancestor::thead/following-sibling::tbody//tr//td[1]//input"),
@@ -93,15 +92,15 @@ public void setTestCaseName(String testCaseName) {
             break;
         } catch (Exception ignored) {}
     }
-
     if (nameField == null) {
-        nameField = wait.until(ExpectedConditions.visibilityOf(textName));
+        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
     }
     wait.until(ExpectedConditions.elementToBeClickable(nameField));
     actions.moveToElement(nameField).pause(200).click().perform();
     nameField.clear();
     nameField.sendKeys(testCaseName);
 }
+
 
 
 
