@@ -35,8 +35,12 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[2]")
     WebElement dropDownType;
 
-    @FindBy(xpath = "(//select)[4]/option")
-    List<WebElement> optionsDropDownType;
+//    @FindBy(xpath = "(//select)[4]/option")
+//    List<WebElement> optionsDropDownType;
+
+    @FindBy(xpath = "//table[@id='newTestCasesTable']//tbody//tr/td[4]//select/option")
+    public List<WebElement> optionsDropDownType;
+
 
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[3]")
     WebElement dropDownQAUser;
@@ -175,16 +179,23 @@ public void setTestCaseName(String testCaseName) {
     }
 
     public boolean isAllTypeOptionsVisible() {
+
         List<String> actual = new ArrayList<>();
         for (WebElement ele : optionsDropDownType) {
-            actual.add(ele.getText());
+            actual.add(ele.getText().trim());
         }
-        List<String> expected = new ArrayList<>(
-                Arrays.asList("Please Select","Manual", "Automation", "Performance", "Scenario"));
+        List<String> expected = Arrays.asList(
+                "Please Select",
+                "Manual",
+                "Automation",
+                "Performance",
+                "Scenario"
+        );
         Collections.sort(actual);
         Collections.sort(expected);
         return actual.equals(expected);
     }
+
 
     public String waitForNameFieldRequiredError() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
