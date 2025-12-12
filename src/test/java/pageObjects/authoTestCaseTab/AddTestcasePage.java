@@ -60,19 +60,45 @@ public class AddTestcasePage extends BasePage {
 
     // Actions
 
-    public void setTestCaseName(String testCaseName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-        Actions actions = new Actions(driver);
+//    public void setTestCaseName(String testCaseName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+//        Actions actions = new Actions(driver);
+//
+//        WebElement nameField = wait.until(
+//                ExpectedConditions.visibilityOf(textName)
+//        );
+//        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+//        actions.moveToElement(nameField).perform();
+//        actions.click(nameField).perform();
+//        nameField.clear();
+//        nameField.sendKeys(testCaseName);
+//    }
+public void setTestCaseName(String testCaseName) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+    Actions actions = new Actions(driver);
 
-        WebElement nameField = wait.until(
-                ExpectedConditions.visibilityOf(textName)
-        );
-        wait.until(ExpectedConditions.elementToBeClickable(nameField));
-        actions.moveToElement(nameField).perform();
-        actions.click(nameField).perform();
-        nameField.clear();
-        nameField.sendKeys(testCaseName);
+    By[] nameFieldLocators = {
+            By.xpath("(//table[@id='newTestCasesTable']//tbody//tr/td/input)[1]"),
+            By.xpath("//table[@id='newTestCasesTable']//thead//th[contains(normalize-space(),'Name')]/ancestor::thead/following-sibling::tbody//tr//td[1]//input"),
+            By.xpath("//input[@type='text' and @required]")
+    };
+    WebElement nameField = null;
+    for (By locator : nameFieldLocators) {
+        try {
+            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            break;
+        } catch (Exception ignored) {}
     }
+
+    if (nameField == null) {
+        nameField = wait.until(ExpectedConditions.visibilityOf(textName));
+    }
+    wait.until(ExpectedConditions.elementToBeClickable(nameField));
+    actions.moveToElement(nameField).pause(200).click().perform();
+    nameField.clear();
+    nameField.sendKeys(testCaseName);
+}
+
 
 
     public void setDescription(String description) {
