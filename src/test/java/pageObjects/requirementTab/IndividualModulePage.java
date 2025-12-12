@@ -84,7 +84,7 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//div[@class='ql-editor ql-blank']")
     WebElement textDescriptionAfterClick;
 
-    @FindBy(id = "existingTestCasesTable")
+    @FindBy(xpath = "(//div[@id='existingRequirementsTable'])[1]")
     WebElement linkedRequirementTable;
     @FindBy(xpath = "(//div[contains(text(),'CLOSE')])[1]")
     WebElement alertBoxCloseBtnForModule;
@@ -93,8 +93,11 @@ public class IndividualModulePage extends BasePage {
     WebElement moduleNameAlertMessage;
 
     public WebElement linkRequirementIdFromId(String id) {
-        return driver.findElement(By.xpath("//div[contains(@class,'pid-col')]//a[text()='" + id + "']"));
+        return driver.findElement(By.xpath(
+                "//div[@id='existingTestCasesInnerTable']//div[contains(@class,'pid-col')]//a[normalize-space()='" + id + "']"
+        ));
     }
+
 
     public WebElement deleteRequirementIcon(String reqID) {
         return driver.findElement(By.xpath(

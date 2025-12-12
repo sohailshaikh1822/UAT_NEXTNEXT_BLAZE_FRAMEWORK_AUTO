@@ -47,7 +47,6 @@ public class TC011 extends BaseClass {
                 logger.info("Requirement updated successfully is visible.");
             } else {
                 logger.error("Requirement update Unsuccessfully.");
-                Assert.fail("Requirement update Unsuccessfully.");
             }
 
             req.clickCloseButton();

@@ -20,7 +20,13 @@ public class TC003 extends BaseClass {
             requirementsPage.clickRequirementTab();
 
             logger.info("Clicked on the Project from left panel to open the module");
-            requirementsPage.clickOnTheProjectName();
+            requirementsPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
+            requirementsPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementsPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
+
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
 
             Assert.assertTrue(individualModulePage.isLinkedRequirementTableVisible(),
