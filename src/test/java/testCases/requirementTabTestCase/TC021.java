@@ -64,7 +64,6 @@ public class TC021 extends BaseClass {
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
-
             WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
