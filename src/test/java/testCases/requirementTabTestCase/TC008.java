@@ -42,10 +42,9 @@ public class TC008 extends BaseClass {
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
 
-            addRequirementPage.setRequirementId(rQid);
-            logger.info("Set Requirement ID: " + rQid);
+//            addRequirementPage.setRequirementId(rQid);
+//            logger.info("Set Requirement ID: " + rQid);
             WaitUtils.waitFor2000Milliseconds();
-
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
 
@@ -72,6 +71,7 @@ public class TC008 extends BaseClass {
 
             addRequirementPage.clickClose();
             logger.info("Closed the Add Requirement popup");
+            addRequirementPage.ClickYesPopup();
 
             WaitUtils.waitFor1000Milliseconds();
 
