@@ -61,103 +61,37 @@ public class AddTestcasePage extends BasePage {
     // Actions
 
 
-//public void setTestCaseName(String testCaseName) {
-//    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-//    Actions actions = new Actions(driver);
-//    By[] nameFieldLocators = {
-//            By.xpath("//tbody/tr/td[1]/input"),
-//            By.xpath("(//td[input[@type='text']])[1]"),
-//
-//    };
-//    WebElement nameField = null;
-//    for (By locator : nameFieldLocators) {
-//        try {
-//            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//            break;
-//        } catch (Exception ignored) {}
-//    }
-//    if (nameField == null) {
-//        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
-//    }
-//    wait.until(ExpectedConditions.elementToBeClickable(nameField));
-//    actions.moveToElement(nameField).pause(200).click().perform();
-//    nameField.clear();
-//    nameField.sendKeys(testCaseName);
-//}
+public void setTestCaseName(String testCaseName) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+    Actions actions = new Actions(driver);
+    By[] nameFieldLocators = {
+            By.xpath("//tbody/tr/td[1]/input"),
+            By.xpath("(//td[input[@type='text']])[1]"),
 
-    public void setTestCaseName(String testCaseName) {
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(40))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotInteractableException.class);
-        By[] nameFieldLocators = {
-                By.xpath("//tbody/tr/td[1]/input"),
-                By.xpath("(//td[input[@type='text']])[1]")
-        };
-        WebElement nameField = null;
-        for (By locator : nameFieldLocators) {
-            try {
-                nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-                break;
-            } catch (Exception ignored) {}
-        }
-        if (nameField == null) {
-            throw new RuntimeException("Test Case Name input field not found using any locator.");
-        }
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
-                nameField
-        );
-        wait.until(ExpectedConditions.elementToBeClickable(nameField));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='';", nameField);
-        WebElement finalNameField = nameField;
-        wait.until(driver1 -> {
-            try {
-                finalNameField.sendKeys(testCaseName);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        });
+    };
+    WebElement nameField = null;
+    for (By locator : nameFieldLocators) {
+        try {
+            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            break;
+        } catch (Exception ignored) {}
     }
+    if (nameField == null) {
+        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
+    }
+    wait.until(ExpectedConditions.elementToBeClickable(nameField));
+    actions.moveToElement(nameField).pause(200).click().perform();
+    nameField.clear();
+    nameField.sendKeys(testCaseName);
+}
 
 
 
-
-
-//    public void setDescription(String description) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-//        Actions actions = new Actions(driver);
-//
-//        By[] descriptionLocators = {
-//                By.xpath("//table[@id='newTestCasesTable']//tbody/tr/td[2]/input"),
-//                By.xpath("(//tbody//tr//td/input[@type='text' and @required])[2]")
-//        };
-//        WebElement descriptionField = null;
-//        for (By locator : descriptionLocators) {
-//            try {
-//                descriptionField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//                break;
-//            } catch (Exception ignored) {}
-//        }
-//        if (descriptionField == null) {
-//            throw new RuntimeException("Description input field not found using any provided locator.");
-//        }
-//        wait.until(ExpectedConditions.elementToBeClickable(descriptionField));
-//        actions.moveToElement(descriptionField).pause(200).click().perform();
-//        descriptionField.clear();
-//        descriptionField.sendKeys(description);
-//    }
 
     public void setDescription(String description) {
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(40))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(ElementNotInteractableException.class)
-                .ignoring(NoSuchElementException.class);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        Actions actions = new Actions(driver);
+
         By[] descriptionLocators = {
                 By.xpath("//table[@id='newTestCasesTable']//tbody/tr/td[2]/input"),
                 By.xpath("(//tbody//tr//td/input[@type='text' and @required])[2]")
@@ -170,13 +104,14 @@ public class AddTestcasePage extends BasePage {
             } catch (Exception ignored) {}
         }
         if (descriptionField == null) {
-            throw new RuntimeException("Description input field not found using any locator.");
+            throw new RuntimeException("Description input field not found using any provided locator.");
         }
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", descriptionField);
         wait.until(ExpectedConditions.elementToBeClickable(descriptionField));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value='';", descriptionField);
+        actions.moveToElement(descriptionField).pause(200).click().perform();
+        descriptionField.clear();
         descriptionField.sendKeys(description);
     }
+
 
 
 
