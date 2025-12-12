@@ -12,6 +12,8 @@ import java.time.Duration;
 import java.util.*;
 import utils.WaitUtils;
 
+import static testBase.BaseClass.getDriver;
+
 public class AuthorTestCasePage extends BasePage {
     public AuthorTestCasePage(WebDriver driver) {
         super(driver);
@@ -167,11 +169,33 @@ public class AuthorTestCasePage extends BasePage {
         return headingRequirement.getText();
     }
 
+//    public void clickAddTestcase() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.elementToBeClickable(buttonAddTestCase));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("arguments[0].click();", buttonAddTestCase);
+//    }
+
     public void clickAddTestcase() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(buttonAddTestCase));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", buttonAddTestCase);
+        Actions actions = new Actions(driver);
+        By[] addTestCaseLocators = {
+                By.id("createTestCaseButton"),
+                By.xpath("//button[.//div[contains(normalize-space(),'ADD TESTCASE')]]"),
+                By.xpath("//button[contains(@class,'button')]//div[contains(normalize-space(),'ADD TESTCASE')]")
+        };
+        WebElement addBtn = null;
+        for (By locator : addTestCaseLocators) {
+            try {
+                addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                break;
+            } catch (Exception ignored) {}
+        }
+        if (addBtn == null) {
+            addBtn = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(addBtn));
+        actions.moveToElement(addBtn).pause(200).click().perform();
     }
 
 
@@ -416,22 +440,19 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public boolean isAllTestIdSorted() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();;
-        List<String> name1 = new ArrayList<>();
+        WaitUtils.waitFor2000Milliseconds();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        List<String> originalList = new ArrayList<>();
         for (WebElement ele : linkAllTestCaseId) {
-            name1.add(ele.getText().trim()); // trim in case of extra spaces
+            js.executeScript("arguments[0].scrollIntoView(true);", ele);
+            WaitUtils.waitFor500Milliseconds();
+            originalList.add(ele.getText().trim());
         }
-
-        // Make a copy and sort it
-        List<String> sortedList = new ArrayList<>(name1);
+        List<String> sortedList = new ArrayList<>(originalList);
         Collections.sort(sortedList);
-
-        // Check if original == sorted
-        if (name1.equals(sortedList)) {
-            return true;
-        }
-        return false;
+        return originalList.equals(sortedList);
     }
+
 
     public void searchRq(String Rq) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));

@@ -35,8 +35,12 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[2]")
     WebElement dropDownType;
 
-    @FindBy(xpath = "(//select)[4]/option")
-    List<WebElement> optionsDropDownType;
+//    @FindBy(xpath = "(//select)[4]/option")
+//    List<WebElement> optionsDropDownType;
+
+    @FindBy(xpath = "//table[@id='newTestCasesTable']//tbody//tr/td[4]//select/option")
+    public List<WebElement> optionsDropDownType;
+
 
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[3]")
     WebElement dropDownQAUser;
@@ -60,19 +64,44 @@ public class AddTestcasePage extends BasePage {
 
     // Actions
 
-    public void setTestCaseName(String testCaseName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-        Actions actions = new Actions(driver);
-
-        WebElement nameField = wait.until(
-                ExpectedConditions.visibilityOf(textName)
-        );
-        wait.until(ExpectedConditions.elementToBeClickable(nameField));
-        actions.moveToElement(nameField).perform();
-        actions.click(nameField).perform();
-        nameField.clear();
-        nameField.sendKeys(testCaseName);
+//    public void setTestCaseName(String testCaseName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+//        Actions actions = new Actions(driver);
+//
+//        WebElement nameField = wait.until(
+//                ExpectedConditions.visibilityOf(textName)
+//        );
+//        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+//        actions.moveToElement(nameField).perform();
+//        actions.click(nameField).perform();
+//        nameField.clear();
+//        nameField.sendKeys(testCaseName);
+//    }
+public void setTestCaseName(String testCaseName) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+    Actions actions = new Actions(driver);
+    By[] nameFieldLocators = {
+            By.xpath("(//table[@id='newTestCasesTable']//tbody//tr/td/input)[1]"),
+            By.xpath("//table[@id='newTestCasesTable']//thead//th[contains(normalize-space(),'Name')]/ancestor::thead/following-sibling::tbody//tr//td[1]//input"),
+            By.xpath("//input[@type='text' and @required]")
+    };
+    WebElement nameField = null;
+    for (By locator : nameFieldLocators) {
+        try {
+            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            break;
+        } catch (Exception ignored) {}
     }
+    if (nameField == null) {
+        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
+    }
+    wait.until(ExpectedConditions.elementToBeClickable(nameField));
+    actions.moveToElement(nameField).pause(200).click().perform();
+    nameField.clear();
+    nameField.sendKeys(testCaseName);
+}
+
+
 
 
     public void setDescription(String description) {
@@ -149,16 +178,23 @@ public class AddTestcasePage extends BasePage {
     }
 
     public boolean isAllTypeOptionsVisible() {
+
         List<String> actual = new ArrayList<>();
         for (WebElement ele : optionsDropDownType) {
-            actual.add(ele.getText());
+            actual.add(ele.getText().trim());
         }
-        List<String> expected = new ArrayList<>(
-                Arrays.asList("Please Select","Manual", "Automation", "Performance", "Scenario"));
+        List<String> expected = Arrays.asList(
+                "Please Select",
+                "Manual",
+                "Automation",
+                "Performance",
+                "Scenario"
+        );
         Collections.sort(actual);
         Collections.sort(expected);
         return actual.equals(expected);
     }
+
 
     public String waitForNameFieldRequiredError() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC046 extends BaseClass {
 
@@ -23,25 +24,26 @@ public class TC046 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
-
+            WaitUtils.waitFor1000Milliseconds();
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickEpic();
             logger.info("Clicked on Epic Drop Down");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectEpic(epicName);
             logger.info("Selected Epic: " + epicName);
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectFeature(featureName);
             logger.info("Selected Feature: " + featureName);
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickRequirement(rq_id);
             logger.info("Selected Requirement: " + rq_id);
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
-
+            WaitUtils.waitFor1000Milliseconds();
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
 
             if (addTestcasePage.isDescriptionDisplayed()) {
@@ -51,7 +53,7 @@ public class TC046 extends BaseClass {
                 logger.error("Description field not displayed");
                 Assert.fail("Description field not displayed");
             }
-
+            WaitUtils.waitFor1000Milliseconds();
             if (addTestcasePage.isQAUserDropdownDisplayed()) {
                 addTestcasePage.selectQaUser(Qauser);
                 logger.info("User able to select QA User from dropdown: " + Qauser);
