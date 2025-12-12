@@ -81,9 +81,9 @@ public void setTestCaseName(String testCaseName) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
     Actions actions = new Actions(driver);
     By[] nameFieldLocators = {
-            By.xpath("(//table[@id='newTestCasesTable']//tbody//tr/td/input)[1]"),
-            By.xpath("//table[@id='newTestCasesTable']//thead//th[contains(normalize-space(),'Name')]/ancestor::thead/following-sibling::tbody//tr//td[1]//input"),
-            By.xpath("//input[@type='text' and @required]")
+            By.xpath("//tbody/tr/td[1]/input"),
+            By.xpath("(//td[input[@type='text']])[1]"),
+
     };
     WebElement nameField = null;
     for (By locator : nameFieldLocators) {

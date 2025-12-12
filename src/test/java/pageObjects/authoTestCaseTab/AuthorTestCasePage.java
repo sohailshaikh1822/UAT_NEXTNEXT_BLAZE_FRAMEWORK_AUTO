@@ -349,15 +349,19 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public boolean isCreateTextHeadingVisible() {
-        String xpath = "//h3[normalize-space()='Create Test Cases']";
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        By modalLocator = By.xpath("//div[contains(@class,'table-container') and contains(@class,'new-steps-container')]");
+        By headingLocator = By.xpath("//h3[contains(normalize-space(),'Create Test Cases')]");
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            return element.isDisplayed();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(modalLocator));
+            WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(headingLocator));
+            return heading.isDisplayed();
         } catch (Exception e) {
             return false;
         }
     }
+
 
 
     public void clickCollapseToggle() throws InterruptedException {
