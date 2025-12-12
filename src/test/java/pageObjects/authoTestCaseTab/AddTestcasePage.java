@@ -1,13 +1,9 @@
 package pageObjects.authoTestCaseTab;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import pageObjects.BasePage;
 
 import java.time.Duration;
@@ -64,19 +60,7 @@ public class AddTestcasePage extends BasePage {
 
     // Actions
 
-//    public void setTestCaseName(String testCaseName) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-//        Actions actions = new Actions(driver);
-//
-//        WebElement nameField = wait.until(
-//                ExpectedConditions.visibilityOf(textName)
-//        );
-//        wait.until(ExpectedConditions.elementToBeClickable(nameField));
-//        actions.moveToElement(nameField).perform();
-//        actions.click(nameField).perform();
-//        nameField.clear();
-//        nameField.sendKeys(testCaseName);
-//    }
+
 public void setTestCaseName(String testCaseName) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
     Actions actions = new Actions(driver);
@@ -127,6 +111,8 @@ public void setTestCaseName(String testCaseName) {
         descriptionField.clear();
         descriptionField.sendKeys(description);
     }
+
+
 
 
     public void selectPriority(String priority) {
