@@ -107,6 +107,8 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
+
+
     // Actions
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -129,6 +131,7 @@ public class RequirementTabPage extends BasePage {
          WaitUtils.waitFor1000Milliseconds();
 
     }
+
 
     public void setModuleName(String moduleName) {
         textModuleName.clear();
@@ -305,5 +308,7 @@ public class RequirementTabPage extends BasePage {
         buttonYesConfirmDelete.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
+
+
 
 }

@@ -8,6 +8,8 @@ import pageObjects.requirementTab.RequirementTabPage;
 import pageObjects.requirementTab.AddRequirementPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 import java.util.List;
 import utils.WaitUtils;
 public class TC025 extends BaseClass {
