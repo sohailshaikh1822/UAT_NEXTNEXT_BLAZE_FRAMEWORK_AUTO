@@ -85,29 +85,31 @@ public class AddTestcasePage extends BasePage {
 //}
 
     public void setTestCaseName(String testCaseName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Actions actions = new Actions(driver);
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//div[contains(@class,'modal')]")
-        ));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[contains(@class,'modal') and contains(@class,'show')]")
+                By.id("createTestCasesModal")
         ));
 
-        By nameFieldLocator = By.xpath(
-                "//div[contains(@class,'modal') and contains(@class,'show')]" +
-                        "//table[@id='newTestCasesTable']//input[@type='text']"
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.id("newTestCasesTable")
+        ));
+
+        By testCaseNameInput = By.xpath(
+                "//div[@id='createTestCasesModal' and contains(@class,'show')]" +
+                        "//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"
         );
 
         WebElement nameField = wait.until(
-                ExpectedConditions.elementToBeClickable(nameFieldLocator)
+                ExpectedConditions.elementToBeClickable(testCaseNameInput)
         );
-        actions.moveToElement(nameField).click().perform();
-        nameField.clear();
-        nameField.sendKeys(testCaseName);
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", nameField);
+        js.executeScript("arguments[0].value='';", nameField);
+        js.executeScript("arguments[0].value=arguments[1];", nameField, testCaseName);
     }
+
 
 
     public void setDescription(String description) {

@@ -176,27 +176,38 @@ public class AuthorTestCasePage extends BasePage {
 //        js.executeScript("arguments[0].click();", buttonAddTestCase);
 //    }
 
+//    public void clickAddTestcase() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        Actions actions = new Actions(driver);
+//        By[] addTestCaseLocators = {
+//                By.id("createTestCaseButton"),
+//                By.xpath("//button[.//div[contains(normalize-space(),'ADD TESTCASE')]]"),
+//                By.xpath("//button[contains(@class,'button')]//div[contains(normalize-space(),'ADD TESTCASE')]")
+//        };
+//        WebElement addBtn = null;
+//        for (By locator : addTestCaseLocators) {
+//            try {
+//                addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//                break;
+//            } catch (Exception ignored) {}
+//        }
+//        if (addBtn == null) {
+//            addBtn = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
+//        }
+//        wait.until(ExpectedConditions.elementToBeClickable(addBtn));
+//        actions.moveToElement(addBtn).pause(200).click().perform();
+//    }
+
     public void clickAddTestcase() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        Actions actions = new Actions(driver);
-        By[] addTestCaseLocators = {
-                By.id("createTestCaseButton"),
-                By.xpath("//button[.//div[contains(normalize-space(),'ADD TESTCASE')]]"),
-                By.xpath("//button[contains(@class,'button')]//div[contains(normalize-space(),'ADD TESTCASE')]")
-        };
-        WebElement addBtn = null;
-        for (By locator : addTestCaseLocators) {
-            try {
-                addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-                break;
-            } catch (Exception ignored) {}
-        }
-        if (addBtn == null) {
-            addBtn = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
-        }
-        wait.until(ExpectedConditions.elementToBeClickable(addBtn));
-        actions.moveToElement(addBtn).pause(200).click().perform();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By addBtn = By.id("createTestCaseButton");
+        WebElement button = wait.until(
+                ExpectedConditions.elementToBeClickable(addBtn)
+        );
+        js.executeScript("arguments[0].click();", button);
     }
+
 
 
     public void clickAuthorTestcase() {
