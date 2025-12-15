@@ -47,7 +47,7 @@ public class TC025 extends BaseClass {
            
             int beforeCount = Integer.parseInt(countBeforeAdd.getText().replaceAll("[^0-9]", ""));
             logger.info("Initial requirement count: " + beforeCount);
-            addRequirementPage.ClickYesPopup();
+//            addRequirementPage.ClickYesPopup();
             addRequirementPage.clickAddRequirementBtn();
             String newRequirementName = "Test_Sohail";
             addRequirementPage.setRequirementId(newRequirementName);

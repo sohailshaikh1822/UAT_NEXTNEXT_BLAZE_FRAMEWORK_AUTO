@@ -51,7 +51,7 @@ public class TC010 extends BaseClass {
             wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='notification']")));
             logger.info("Success msg appears");
             addRequirementPage.clickClose();
-            addRequirementPage.ClickYesPopup();
+//            addRequirementPage.ClickYesPopup();
             logger.info("Fields have been verified and the requirement has been save successfully");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

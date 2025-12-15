@@ -79,7 +79,7 @@ public class TC021 extends BaseClass {
             addRequirementPage.clickClose();
             logger.info(" Clicked on 'Close' button");
             WaitUtils.waitFor1000Milliseconds();
-            addRequirementPage.ClickYesPopup();
+//            addRequirementPage.ClickYesPopup();
 
 
             logger.info("🔍 Fetching the total requirement count after adding a new requirement...");

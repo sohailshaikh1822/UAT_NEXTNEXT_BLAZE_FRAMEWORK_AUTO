@@ -31,7 +31,7 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//input[@class='supporting-text']")
     WebElement inputTitle;
 
-    @FindBy(xpath = "(//input[@class='testcase-select value'])[2]")
+    @FindBy(xpath = "(//input[@type='text'])[1]")
     WebElement inputName;
 
     @FindBy(xpath = "//div[@class='test-execution-label-3' and text()='SAVE']")

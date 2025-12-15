@@ -77,7 +77,7 @@ public class TC024 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();;
             addRequirementPage.clickClose();
             logger.info("Clicked on Close button");
-            addRequirementPage.ClickYesPopup();
+//            addRequirementPage.ClickYesPopup();
 
             WaitUtils.waitFor2000Milliseconds();;
             int countAfter = individualModulePage.getRequirementCountFromFooter();
