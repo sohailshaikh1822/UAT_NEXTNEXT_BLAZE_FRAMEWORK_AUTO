@@ -65,9 +65,8 @@ public void setTestCaseName(String testCaseName) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
     Actions actions = new Actions(driver);
     By[] nameFieldLocators = {
-            By.xpath("//tbody/tr/td[1]/input"),
-            By.xpath("(//td[input[@type='text']])[1]"),
-
+            By.xpath("//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"),
+            By.xpath("//table[@id='newTestCasesTable']//td//input[@type='text' and @maxlength='500']"),
     };
     WebElement nameField = null;
     for (By locator : nameFieldLocators) {
@@ -80,12 +79,10 @@ public void setTestCaseName(String testCaseName) {
         throw new RuntimeException("Test Case Name input field not found using any provided locator.");
     }
     wait.until(ExpectedConditions.elementToBeClickable(nameField));
-    actions.moveToElement(nameField).pause(200).click().perform();
+    actions.moveToElement(nameField).click().perform();
     nameField.clear();
     nameField.sendKeys(testCaseName);
 }
-
-
 
 
     public void setDescription(String description) {
