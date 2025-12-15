@@ -176,48 +176,26 @@ public class AuthorTestCasePage extends BasePage {
 //        js.executeScript("arguments[0].click();", buttonAddTestCase);
 //    }
 
-//    public void clickAddTestcase() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//        Actions actions = new Actions(driver);
-//        By[] addTestCaseLocators = {
-//                By.id("createTestCaseButton"),
-//                By.xpath("//button[.//div[contains(normalize-space(),'ADD TESTCASE')]]"),
-//                By.xpath("//button[contains(@class,'button')]//div[contains(normalize-space(),'ADD TESTCASE')]")
-//        };
-//        WebElement addBtn = null;
-//        for (By locator : addTestCaseLocators) {
-//            try {
-//                addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//                break;
-//            } catch (Exception ignored) {}
-//        }
-//        if (addBtn == null) {
-//            addBtn = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
-//        }
-//        wait.until(ExpectedConditions.elementToBeClickable(addBtn));
-//        actions.moveToElement(addBtn).pause(200).click().perform();
-//    }
-
-    public void waitForUiToBeReady() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.id("loading-spinner")
-        ));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.id("actionDialog")
-        ));
-    }
-
-
     public void clickAddTestcase() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement btn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                        By.id("createTestCaseButton")
-                )
-        );
-        js.executeScript("arguments[0].click();", btn);
+        Actions actions = new Actions(driver);
+        By[] addTestCaseLocators = {
+                By.id("createTestCaseButton"),
+                By.xpath("//button[.//div[contains(normalize-space(),'ADD TESTCASE')]]"),
+                By.xpath("//button[contains(@class,'button')]//div[contains(normalize-space(),'ADD TESTCASE')]")
+        };
+        WebElement addBtn = null;
+        for (By locator : addTestCaseLocators) {
+            try {
+                addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                break;
+            } catch (Exception ignored) {}
+        }
+        if (addBtn == null) {
+            addBtn = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(addBtn));
+        actions.moveToElement(addBtn).pause(200).click().perform();
     }
 
 
