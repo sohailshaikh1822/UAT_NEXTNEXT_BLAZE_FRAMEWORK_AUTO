@@ -88,13 +88,13 @@ public class AddTestcasePage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.id("createTestCasesModal")
-        ));
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.id("newTestCasesTable")
-        ));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.id("createTestCasesModal")
+//        ));
+//
+//        wait.until(ExpectedConditions.presenceOfElementLocated(
+//                By.id("newTestCasesTable")
+//        ));
 
         By testCaseNameInput = By.xpath(
                 "//div[@id='createTestCasesModal' and contains(@class,'show')]" +
