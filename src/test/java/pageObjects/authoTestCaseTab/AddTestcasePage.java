@@ -84,32 +84,38 @@ public class AddTestcasePage extends BasePage {
 //    nameField.sendKeys(testCaseName);
 //}
 
-    public void setTestCaseName(String testCaseName) {
+    public void waitForUiToBeReady() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                By.id("createTestCasesModal")
-//        ));
-//
-//        wait.until(ExpectedConditions.presenceOfElementLocated(
-//                By.id("newTestCasesTable")
-//        ));
-
-        By testCaseNameInput = By.xpath(
-                "//div[@id='createTestCasesModal' and contains(@class,'show')]" +
-                        "//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"
-        );
-
-        WebElement nameField = wait.until(
-                ExpectedConditions.elementToBeClickable(testCaseNameInput)
-        );
-
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", nameField);
-        js.executeScript("arguments[0].value='';", nameField);
-        js.executeScript("arguments[0].value=arguments[1];", nameField, testCaseName);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.id("loading-spinner")
+        ));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.id("actionDialog")
+        ));
     }
 
+    public void setTestCaseName(String testCaseName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        waitForUiToBeReady();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id("createTestCasesModal")
+        ));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.id("newTestCasesTable")
+        ));
+        By nameInput = By.xpath(
+                "//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"
+        );
+        WebElement input = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(nameInput)
+        );
+
+        js.executeScript("arguments[0].focus();", input);
+        js.executeScript("arguments[0].value = arguments[1];", input, testCaseName);
+    }
 
 
     public void setDescription(String description) {

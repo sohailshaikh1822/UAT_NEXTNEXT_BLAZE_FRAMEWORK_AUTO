@@ -198,16 +198,27 @@ public class AuthorTestCasePage extends BasePage {
 //        actions.moveToElement(addBtn).pause(200).click().perform();
 //    }
 
+    public void waitForUiToBeReady() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.id("loading-spinner")
+        ));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.id("actionDialog")
+        ));
+    }
+
+
     public void clickAddTestcase() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        By addBtn = By.id("createTestCaseButton");
-        WebElement button = wait.until(
-                ExpectedConditions.elementToBeClickable(addBtn)
+        WebElement btn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.id("createTestCaseButton")
+                )
         );
-        js.executeScript("arguments[0].click();", button);
+        js.executeScript("arguments[0].click();", btn);
     }
-
 
 
     public void clickAuthorTestcase() {
