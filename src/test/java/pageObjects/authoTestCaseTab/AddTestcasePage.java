@@ -85,31 +85,29 @@ public class AddTestcasePage extends BasePage {
 //}
 
     public void setTestCaseName(String testCaseName) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Actions actions = new Actions(driver);
 
-        // Wait for modal to appear
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//div[contains(@class,'modal')]")
+        ));
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.id("createTestCasesModal")
+                By.xpath("//div[contains(@class,'modal') and contains(@class,'show')]")
         ));
 
         By nameFieldLocator = By.xpath(
-                "//div[@id='createTestCasesModal' and contains(@class,'show')]" +
-                        "//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"
+                "//div[contains(@class,'modal') and contains(@class,'show')]" +
+                        "//table[@id='newTestCasesTable']//input[@type='text']"
         );
 
         WebElement nameField = wait.until(
                 ExpectedConditions.elementToBeClickable(nameFieldLocator)
         );
-
         actions.moveToElement(nameField).click().perform();
         nameField.clear();
         nameField.sendKeys(testCaseName);
     }
-
-
-
 
 
     public void setDescription(String description) {
