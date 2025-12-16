@@ -30,7 +30,7 @@ public class TC019 extends BaseClass {
             requirementTabPage.clickOnModule(epic);
             logger.info("clicked on specific epic");
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
-            individualModulePage.enterDescription(description);
+            individualModulePage.setActualDescription(description);
             logger.info("entered the description");
             individualModulePage.enterName(name);
             logger.info("added the name");
