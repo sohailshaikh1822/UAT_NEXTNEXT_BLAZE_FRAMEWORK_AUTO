@@ -31,7 +31,7 @@ public class TC004 extends BaseClass {
             logger.info("clicked on specific module");
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             logger.info("Clicked on the Requirement ID from the requirements list");
-            individualModulePage.clickRequirement("RQ-443");
+            individualModulePage.clickRequirement("RQ-470");
             logger.info("Successfully navigated inside the selected Requirement");
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             addRequirementPage.setDescription("Updated desc ");

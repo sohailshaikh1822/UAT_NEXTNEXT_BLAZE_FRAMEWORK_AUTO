@@ -67,11 +67,12 @@ public class TC008 extends BaseClass {
             String newRqIdText = addRequirementPage.getRequirementIdName();
             logger.info("Captured new Requirement ID from popup: " + newRqIdText);
 
+
             WaitUtils.waitFor1000Milliseconds();
 
             addRequirementPage.clickClose();
             logger.info("Closed the Add Requirement popup");
-            addRequirementPage.ClickYesPopup();
+//            addRequirementPage.ClickYesPopup();
 
             WaitUtils.waitFor1000Milliseconds();
 
@@ -87,6 +88,8 @@ public class TC008 extends BaseClass {
                             + "'");
 
             logger.info("Requirement ID successfully verified: " + newRqIdText);
+
+
 
         } catch (AssertionError e) {
             logger.error("❌ Assertion failed: " + e.getMessage(), e);
