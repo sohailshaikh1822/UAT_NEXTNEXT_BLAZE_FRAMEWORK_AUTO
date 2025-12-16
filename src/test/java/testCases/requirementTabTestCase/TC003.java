@@ -22,9 +22,9 @@ public class TC003 extends BaseClass {
             logger.info("Clicked on the Project from left panel to open the module");
             requirementsPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
-            requirementsPage.clickArrowRightPointingForExpandModule("Epic 12");
+            requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");
-            requirementsPage.clickOnModule("feature 12");
+            requirementsPage.clickOnModule("feature 039");
             logger.info("clicked on specific module");
 
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());

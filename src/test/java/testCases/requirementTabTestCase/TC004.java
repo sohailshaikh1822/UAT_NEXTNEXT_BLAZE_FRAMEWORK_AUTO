@@ -25,7 +25,7 @@ public class TC004 extends BaseClass {
 //            requirementsPage.clickOnTheProjectName();
             requirementsPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
-            requirementsPage.clickArrowRightPointingForExpandModule("Epic 039");
+            requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");
             requirementsPage.clickOnModule("feature 039");
             logger.info("clicked on specific module");
