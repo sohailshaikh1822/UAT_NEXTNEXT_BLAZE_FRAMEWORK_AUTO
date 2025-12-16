@@ -141,22 +141,52 @@ public class AuthorTestCasePage extends BasePage {
 
     // actions
 
+//    public void selectEpic(String epicName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+//        Select select = new Select(dropdownEpic);
+//        select.selectByVisibleText(epicName);
+//    }
+
     public void selectEpic(String epicName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
-        Select select = new Select(dropdownEpic);
-        select.selectByVisibleText(epicName);
+        dropdownEpic.click();
+        List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
+        for (WebElement option : options) {
+            if (option.isDisplayed() && option.getText().trim().equals(epicName)) {
+                option.click();
+                return;
+            }
+        }
+        throw new RuntimeException("Epic not found or not visible: " + epicName);
     }
 
+
+//
+//    public void selectFeature(String featureName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownFeature));
+//        Select select = new Select(dropdownFeature);
+//        select.selectByVisibleText(featureName);
+//    }
 
     public void selectFeature(String featureName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownFeature));
-        Select select = new Select(dropdownFeature);
-        select.selectByVisibleText(featureName);
+        dropdownFeature.click();
+        List<WebElement> options = dropdownFeature.findElements(By.tagName("option"));
+        for (WebElement option : options) {
+            if (option.isDisplayed() && option.getText().trim().equals(featureName)) {
+                option.click();
+                return;
+            }
+        }
+        throw new RuntimeException("Feature not found or not visible: " + featureName);
     }
+
 
 
     public void clickRequirement(String requirementId) throws InterruptedException {
