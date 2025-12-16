@@ -220,4 +220,21 @@ public void setTestCaseName(String testCaseName) {
         return textName.getAttribute("value");
     }
 
+    public String waitAndGetAddTestCaseHeader() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        By modalLocator = By.id("createTestCasesModal");
+        By formLocator = By.id("createTestCasesForm");
+        By headerLocator = By.xpath(".//h3");
+        WebElement modal = wait.until(ExpectedConditions.presenceOfElementLocated(modalLocator));
+        wait.until(driver -> modal.isDisplayed());
+        WebElement form = wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(
+                modal, formLocator
+        ));
+        WebElement header = wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(
+                form, headerLocator
+        ));
+        return header.getText().trim();
+    }
+
+
 }

@@ -151,17 +151,18 @@ public class AuthorTestCasePage extends BasePage {
 
     public void selectEpic(String epicName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
         dropdownEpic.click();
         List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
         for (WebElement option : options) {
-            if (option.isDisplayed() && option.getText().trim().equals(epicName)) {
+            if (option.getText().trim().equals(epicName)) {
                 option.click();
                 return;
             }
         }
-        throw new RuntimeException("Epic not found or not visible: " + epicName);
+        throw new RuntimeException("Epic not found: " + epicName);
     }
+
 
 
 //
@@ -377,21 +378,6 @@ public class AuthorTestCasePage extends BasePage {
             return false;
         }
     }
-
-    public boolean isCreateTextHeadingVisible() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-        By modalLocator = By.xpath("//div[contains(@class,'table-container') and contains(@class,'new-steps-container')]");
-        By headingLocator = By.xpath("//h3[contains(normalize-space(),'Create Test Cases')]");
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(modalLocator));
-            WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(headingLocator));
-            return heading.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
 
 
     public void clickCollapseToggle() throws InterruptedException {
