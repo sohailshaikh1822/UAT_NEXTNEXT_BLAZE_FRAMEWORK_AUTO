@@ -666,4 +666,33 @@ public void selectEpic(String epicName) {
             return false;
         }
     }
+    public void clickAddTestCaseAndEnterName(String testCaseName) {
+        try {
+            Thread.sleep(2000);
+
+            WebElement addBtn = driver.findElement(By.id("createTestCaseButton"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addBtn);
+
+            Thread.sleep(2000);
+
+            By modal = By.id("createTestCasesModal");
+            By nameField = By.xpath(
+                    "//div[@id='createTestCasesModal']//table[@id='newTestCasesTable']//tbody//tr//td[1]//input[@type='text' and @maxlength='500']"
+            );
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(modal));
+
+            WebElement input = wait.until(ExpectedConditions.elementToBeClickable(nameField));
+            input.click();
+            input.clear();
+            input.sendKeys(testCaseName);
+
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
