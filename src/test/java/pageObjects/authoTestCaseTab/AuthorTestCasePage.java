@@ -141,27 +141,27 @@ public class AuthorTestCasePage extends BasePage {
 
     // actions
 
-//    public void selectEpic(String epicName) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
-//        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
-//        Select select = new Select(dropdownEpic);
-//        select.selectByVisibleText(epicName);
-//    }
-
     public void selectEpic(String epicName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
         wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
-        dropdownEpic.click();
-        List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
-        for (WebElement option : options) {
-            if (option.getText().trim().equals(epicName)) {
-                option.click();
-                return;
-            }
-        }
-        throw new RuntimeException("Epic not found: " + epicName);
+        Select select = new Select(dropdownEpic);
+        select.selectByVisibleText(epicName);
     }
+
+//    public void selectEpic(String epicName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+//        dropdownEpic.click();
+//        List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
+//        for (WebElement option : options) {
+//            if (option.getText().trim().equals(epicName)) {
+//                option.click();
+//                return;
+//            }
+//        }
+//        throw new RuntimeException("Epic not found: " + epicName);
+//    }
 
 
 
