@@ -19,10 +19,15 @@ public class AddTestcasePage extends BasePage {
 
     // locators
 
-    @FindBy(xpath = "(//input[@type='text'])[1]")
+//    @FindBy(xpath = "(//input[@type='text'])[1]")
+//    WebElement textName;
+    @FindBy(xpath = "//table[@id='newTestCasesTable']//tbody//tr//td[1]//input[@type='text' and @maxlength='500']")
     WebElement textName;
 
-    @FindBy(xpath = "(//input[@type='text'])[2]")
+//    @FindBy(xpath = "(//input[@type='text'])[2]")
+//    WebElement textDescription;
+
+    @FindBy(xpath = "(//tbody//tr//td/input[@type='text' and @required])[2]")
     WebElement textDescription;
 
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[1]")
