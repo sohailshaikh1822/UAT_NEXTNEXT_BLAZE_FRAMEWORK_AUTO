@@ -74,10 +74,13 @@ public class TC027 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();;
             addRequirementPage.clickClose();
             logger.info("Clicked on Close button");
+            addRequirementPage.clickClose();
 
             WaitUtils.waitFor2000Milliseconds();;
             int countAfter = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count after attempting to add without name: " + countAfter);
+
+
 
             Assert.assertEquals(countAfter, countBefore,
                     "Requirement without name should not be saved in the table");
