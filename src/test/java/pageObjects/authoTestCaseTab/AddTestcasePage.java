@@ -61,28 +61,52 @@ public class AddTestcasePage extends BasePage {
     // Actions
 
 
-public void setTestCaseName(String testCaseName) {
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-    Actions actions = new Actions(driver);
-    By[] nameFieldLocators = {
-            By.xpath("//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"),
-            By.xpath("//table[@id='newTestCasesTable']//td//input[@type='text' and @maxlength='500']"),
-    };
-    WebElement nameField = null;
-    for (By locator : nameFieldLocators) {
+//public void setTestCaseName(String testCaseName) {
+//    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+//    Actions actions = new Actions(driver);
+//    By[] nameFieldLocators = {
+//            By.xpath("//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"),
+//            By.xpath("//table[@id='newTestCasesTable']//td//input[@type='text' and @maxlength='500']"),
+//    };
+//    WebElement nameField = null;
+//    for (By locator : nameFieldLocators) {
+//        try {
+//            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//            break;
+//        } catch (Exception ignored) {}
+//    }
+//    if (nameField == null) {
+//        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
+//    }
+//    wait.until(ExpectedConditions.elementToBeClickable(nameField));
+//    actions.moveToElement(nameField).click().perform();
+//    nameField.clear();
+//    nameField.sendKeys(testCaseName);
+//}
+
+    public void setTestCaseName(String testCaseName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        By testCaseNameInput = By.xpath(
+                "//table[@id='newTestCasesTable']//tbody//tr//td[1]//input[@type='text' and @maxlength='500']"
+        );
+
+        WebElement nameField = wait.until(ExpectedConditions.presenceOfElementLocated(testCaseNameInput));
+        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+
         try {
-            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-            break;
-        } catch (Exception ignored) {}
+            nameField.click();
+            nameField.clear();
+            nameField.sendKeys(testCaseName);
+        } catch (Exception e) {
+            // JS fallback for CI / headless failures
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].value='';", nameField);
+            js.executeScript("arguments[0].value=arguments[1];", nameField, testCaseName);
+        }
     }
-    if (nameField == null) {
-        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
-    }
-    wait.until(ExpectedConditions.elementToBeClickable(nameField));
-    actions.moveToElement(nameField).click().perform();
-    nameField.clear();
-    nameField.sendKeys(testCaseName);
-}
+
 
 
     public void setDescription(String description) {
