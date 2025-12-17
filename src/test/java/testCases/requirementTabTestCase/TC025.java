@@ -1,32 +1,38 @@
 package testCases.requirementTabTestCase;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
-import pageObjects.requirementTab.AddRequirementPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-import utils.WaitUtils;
 
+import java.time.Duration;
 import java.util.List;
-import utils.WaitUtils;
+
 public class TC025 extends BaseClass {
 
-    @Test(dataProvider = "tc025", dataProviderClass = DataProviders.RequirementDataProvider.class, description = "Verify linked requirement count increases and decreases", retryAnalyzer = RetryAnalyzer.class)
-    public void verifyLinkedRequirementCountIncreasesAndDecreases(String projectName, String moduleName)
-            throws InterruptedException {
-        logger.info(
-                "************ Starting Test Case: Verify linked requirement count increases and decreases *****************");
+    @Test(
+            dataProvider = "tc025",
+            dataProviderClass = DataProviders.RequirementDataProvider.class,
+            retryAnalyzer = RetryAnalyzer.class
+    )
+    public void verifyLinkedRequirementCountIncreasesAndDecreases(
+            String projectName, String moduleName) throws InterruptedException {
+
+        logger.info("************ Starting Test Case: Verify linked requirement count increases and decreases *****************");
 
         try {
-
             login();
             logger.info("Logged in successfully");
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
+            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
@@ -37,50 +43,92 @@ public class TC025 extends BaseClass {
             requirementTabPage.clickOnModule(moduleName);
             logger.info("Opened module: " + moduleName);
 
-            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             if (individualModulePage.isClickableNextArrow()) {
                 individualModulePage.clickLastPageArrowBtn();
             }
-            WebElement countBeforeAdd = getDriver().findElement(By.xpath("//span[@class='entry-info']"));
 
-            WaitUtils.waitFor2000Milliseconds();
-           
-            int beforeCount = Integer.parseInt(countBeforeAdd.getText().replaceAll("[^0-9]", ""));
+            // -------- COUNT BEFORE ADD --------
+            WebElement countBeforeAddElement =
+                    getDriver().findElement(By.xpath("//span[@class='entry-info']"));
+            int beforeCount = Integer.parseInt(
+                    countBeforeAddElement.getText().replaceAll("[^0-9]", "")
+            );
             logger.info("Initial requirement count: " + beforeCount);
-//            addRequirementPage.ClickYesPopup();
-            addRequirementPage.clickAddRequirementBtn();
-            String newRequirementName = "Test_Sohail";
-            addRequirementPage.setRequirementId(newRequirementName);
-            addRequirementPage.clickSave();
 
-            WaitUtils.waitFor2000Milliseconds();
+            // -------- ADD REQUIREMENT --------
+            addRequirementPage.clickAddRequirementBtn();
+            logger.info("Clicked Add Requirement");
+
+//            addRequirementPage.setRequirementId("Test_Sohail");
+            addRequirementPage.clickSave();
+            logger.info("save");
+//            addRequirementPage.ClickYesPopup();
+            logger.info("popup");
             addRequirementPage.clickClose();
-            WaitUtils.waitFor2000Milliseconds();;
+            logger.info("close");
 
             if (individualModulePage.isClickableNextArrow()) {
                 individualModulePage.clickLastPageArrowBtn();
             }
-            RequirementTabPage requirementTabPage1 = new RequirementTabPage(getDriver());
-            WaitUtils.waitFor2000Milliseconds();
-            List<String> afterAddList = requirementTabPage1.getRequirementIDs();
-            WebElement countAfterAdd = getDriver().findElement(By.xpath("//span[@class='entry-info']"));
-            int afterAddCount = Integer.parseInt(countAfterAdd.getText().replaceAll("[^0-9]", ""));
+            addRequirementPage.clickClose();
+
+            // -------- WAIT FOR COUNT TO INCREASE --------
+            new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+                    .until(driver -> {
+                        String text = driver.findElement(
+                                By.xpath("//span[@class='entry-info']")
+                        ).getText();
+                        int count = Integer.parseInt(text.replaceAll("[^0-9]", ""));
+                        return count == beforeCount + 1;
+                    });
+
+            WebElement countAfterAddElement =
+                    getDriver().findElement(By.xpath("//span[@class='entry-info']"));
+            int afterAddCount = Integer.parseInt(
+                    countAfterAddElement.getText().replaceAll("[^0-9]", "")
+            );
+
             logger.info("Requirement count after adding: " + afterAddCount);
-            Assert.assertEquals(afterAddCount, beforeCount + 1, "Requirement count did not increase after adding");
-            String newRequirementId = afterAddList.getLast();
+            Assert.assertEquals(
+                    afterAddCount,
+                    beforeCount + 1,
+                    "Requirement count did not increase after adding"
+            );
+
+            // -------- GET NEW REQUIREMENT ID --------
+            List<String> requirementIds = requirementTabPage.getRequirementIDs();
+            String newRequirementId = requirementIds.get(requirementIds.size() - 1);
             logger.info("Newly linked requirement ID: " + newRequirementId);
-            requirementTabPage1.unlinkRequirementById(newRequirementId, afterAddCount);
+
+            requirementTabPage.unlinkRequirementById(newRequirementId);
             logger.info("Unlinked requirement: " + newRequirementId);
-            WaitUtils.waitFor2000Milliseconds();;
-            WaitUtils.waitFor2000Milliseconds();
-           
-            int afterRemoveCount = Integer.parseInt(countAfterAdd.getText().replaceAll("[^0-9]", ""));
+
+            // -------- WAIT FOR COUNT TO DECREASE --------
+            new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+                    .until(driver -> {
+                        String text = driver.findElement(
+                                By.xpath("//span[@class='entry-info']")
+                        ).getText();
+                        int count = Integer.parseInt(text.replaceAll("[^0-9]", ""));
+                        return count == beforeCount;
+                    });
+
+            WebElement countAfterRemoveElement =
+                    getDriver().findElement(By.xpath("//span[@class='entry-info']"));
+            int afterRemoveCount = Integer.parseInt(
+                    countAfterRemoveElement.getText().replaceAll("[^0-9]", "")
+            );
 
             logger.info("Requirement count after unlink: " + afterRemoveCount);
 
-            Assert.assertEquals(afterRemoveCount, beforeCount, "Requirement count did not decrease after unlinking");
+            Assert.assertEquals(
+                    afterRemoveCount,
+                    beforeCount,
+                    "Requirement count did not decrease after unlinking"
+            );
 
-            logger.info("Verified requirement count increases by 1 after link and decreases by 1 after unlink");
+            logger.info("Verified requirement count increases and decreases correctly");
+
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
