@@ -141,13 +141,26 @@ public class AuthorTestCasePage extends BasePage {
 
     // actions
 
-    public void selectEpic(String epicName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+//    public void selectEpic(String epicName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+//        Select select = new Select(dropdownEpic);
+//        select.selectByVisibleText(epicName);
+//    }
+public void selectEpic(String epicName) {
+    try {
+        Thread.sleep(3000);
+        dropdownEpic.click();
+        Thread.sleep(3000);
         Select select = new Select(dropdownEpic);
         select.selectByVisibleText(epicName);
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
     }
+}
+
 
 //    public void selectEpic(String epicName) {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
