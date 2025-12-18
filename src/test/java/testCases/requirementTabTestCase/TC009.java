@@ -45,6 +45,7 @@ public class TC009 extends BaseClass {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='notification']")));
             logger.info("Success msg appears");
             addRequirementPage.clickClose();
+//            addRequirementPage.ClickYesPopup();
             boolean requirementVisible = wait.until(webDriver -> requirementTabPage.isRequirementVisible(reqId));
             Assert.assertTrue(requirementVisible, "newly created requirement is visble");
             logger.info("verified the requirement");

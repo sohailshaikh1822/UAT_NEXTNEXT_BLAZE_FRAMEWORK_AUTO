@@ -7,6 +7,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC010 extends BaseClass {
 
@@ -16,8 +17,7 @@ public class TC010 extends BaseClass {
             String ReleaseName,
             String CycleName,
             String SuiteName,
-            String TR
-    ) throws InterruptedException {
+            String TR) throws InterruptedException {
 
         logger.info("****** Starting Test Case 010: verify the visibilty of test run details *****************");
 
@@ -29,7 +29,7 @@ public class TC010 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -38,16 +38,16 @@ public class TC010 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             boolean allVisible = individualTestrun.areAllElementsVisible();
             if (allVisible) {

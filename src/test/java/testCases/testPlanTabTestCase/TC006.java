@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 import java.util.Random;
 
@@ -44,7 +45,7 @@ public class TC006 extends BaseClass {
             testPlanPage.clickOnConfirmDeleteYes(releaseName);
             logger.info("Confirmed delete action for release: " + releaseName);
 
-            Thread.sleep(1000); // Wait for deletion to process
+             WaitUtils.waitFor1000Milliseconds(); // Wait for deletion to process
 
             Assert.assertFalse(testPlanPage.isReleasePresentInList(releaseName),
                     "Release still present in the list after deletion!");

@@ -6,6 +6,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
@@ -25,7 +26,7 @@ public class TC021 extends BaseClass {
             globalTab.clickCurrentUserAndGoToSettings();
             logger.info("Clicked on Settings option from user dropdown");
 
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
             otherTab.clickRequirement();
             logger.info("Navigated to Requirement section");
 

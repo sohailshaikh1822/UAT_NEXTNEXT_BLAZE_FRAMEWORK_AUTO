@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
+import utils.WaitUtils;
 
 public class OtherTabPage extends BasePage {
 
@@ -93,7 +94,7 @@ public class OtherTabPage extends BasePage {
     }
 
     public void clickTestSuite() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.elementToBeClickable(testSuite)).click();
     }
 
@@ -270,7 +271,7 @@ public class OtherTabPage extends BasePage {
     // wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
     // } catch (Exception firstAttempt) {
     // try {
-    // Thread.sleep(1000);
+    // WaitUtils.waitFor1000Milliseconds();
     // ((JavascriptExecutor)
     // driver).executeScript("arguments[0].scrollIntoView({block: 'center'});",
     // editBtn);
@@ -291,7 +292,8 @@ public class OtherTabPage extends BasePage {
 
         try {
             js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();
+            ;
             boolean inView = (Boolean) js.executeScript(
                     "var rect = arguments[0].getBoundingClientRect();" +
                             "return (rect.top >= 0 && rect.left >= 0 && " +
@@ -306,9 +308,10 @@ public class OtherTabPage extends BasePage {
 
         } catch (Exception e1) {
             try {
-                Thread.sleep(1000);
+                WaitUtils.waitFor1000Milliseconds();
                 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editBtn);
-                Thread.sleep(500);
+                WaitUtils.waitFor500Milliseconds();
+                ;
                 wait.until(ExpectedConditions.elementToBeClickable(editBtn)).click();
             } catch (Exception e2) {
                 js.executeScript("arguments[0].click();", editBtn);
@@ -456,7 +459,8 @@ public class OtherTabPage extends BasePage {
 
     public void deleteCustomFieldAndVerify(String fieldName) throws InterruptedException {
         clickOnDelete(fieldName);
-        Thread.sleep(500);
+        WaitUtils.waitFor500Milliseconds();
+        ;
         clickYesDefaultValueDelete();
 
         boolean isDeleted = waitUntilCustomFieldIsDeleted(fieldName, 10);
@@ -469,7 +473,8 @@ public class OtherTabPage extends BasePage {
             if (!isCustomFieldPresent(fieldName)) {
                 return true;
             }
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();
+            ;
             waited += 500;
         }
         return false;

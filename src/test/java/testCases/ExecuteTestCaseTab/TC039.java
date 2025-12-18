@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC039 extends BaseClass {
 
@@ -21,7 +22,7 @@ public class TC039 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(parentModule);
+            executeLandingPage.clickToSelectProject(parentModule);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + parentModule);
@@ -29,7 +30,7 @@ public class TC039 extends BaseClass {
             executeLandingPage.expandRelease(releaseName);
             Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
             logger.info("Expanded Release module: " + releaseName);
-            Thread.sleep(4000);
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

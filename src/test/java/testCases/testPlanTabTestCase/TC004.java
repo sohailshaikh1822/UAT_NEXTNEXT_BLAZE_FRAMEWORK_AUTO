@@ -29,7 +29,7 @@ public class TC004 extends BaseClass {
             testPlanPage.expandSidebarIfCollapsed();
             logger.info("Sidebar expanded if it was collapsed");
 
-            testPlanPage.expandProjectSTG("STG- PulseCodeOnAzureCloud");
+            testPlanPage.expandProjectSTG("STG- SPARK Modernization");
             logger.info("Expanded STG Project");
 
             testPlanPage.expandRelease(ReleaseName);

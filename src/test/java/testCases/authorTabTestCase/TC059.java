@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.authoTestCaseTab.IndividualTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC059 extends BaseClass {
 
@@ -24,7 +25,7 @@ public class TC059 extends BaseClass {
             authorTestCasePage.searchRq(rqName);
             logger.info("Requirement '" + rqName + "' found. Clicking on it.");
             authorTestCasePage.clickRequirement(rqName);
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickTestCasesId(tcId);
             logger.info("Clicked on Test Case ID: " + tcId);
             logger.info("Clicking on 'Add Called Test Case' button.");

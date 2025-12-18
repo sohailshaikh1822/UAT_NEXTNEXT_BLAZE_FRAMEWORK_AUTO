@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC012 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -23,20 +24,21 @@ public class TC012 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Summary"),
+            Assert.assertTrue(createDefectPage.isSummaryMandatoryStarVisible(),
                     "Summary mandatory star not visible");
 
-            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Description"),
+            Assert.assertTrue(createDefectPage.isDescriptionMandatoryStarVisible(),
                     "Description mandatory star not visible");
 
-            Assert.assertTrue(createDefectPage.isMandatoryStarVisible("Status"),
+            Assert.assertTrue(createDefectPage.isStatusMandatoryStarVisible(),
                     "Status mandatory star not visible");
 
         } catch (AssertionError ae) {

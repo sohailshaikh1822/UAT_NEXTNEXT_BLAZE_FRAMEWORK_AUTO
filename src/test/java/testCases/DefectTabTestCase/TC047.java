@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC047 extends BaseClass {
 
@@ -14,7 +15,7 @@ public class TC047 extends BaseClass {
     public void VerifyThatInvalidCharactersAreRestrictedOrAllowed(
             String expectedUrlAfterClick,
             String Summary,
-            String status,String description
+            String status, String description
 
     ) throws InterruptedException {
 
@@ -26,7 +27,7 @@ public class TC047 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
-            Thread.sleep(3000);
+            WaitUtils.waitFor3000Milliseconds();;
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertNotNull(actualUrl);
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
@@ -38,21 +39,19 @@ public class TC047 extends BaseClass {
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterSummary(Summary);
-            logger.info("Summary filled:"+Summary);
-            Thread.sleep(3000);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("status is selected");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.enterDescription(description);
             logger.info("Description filled");
+            WaitUtils.waitFor2000Milliseconds();
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
-
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

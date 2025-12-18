@@ -6,6 +6,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC015 extends BaseClass {
 
@@ -31,7 +32,7 @@ public class TC015 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -39,7 +40,7 @@ public class TC015 extends BaseClass {
 
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
 
@@ -47,13 +48,13 @@ public class TC015 extends BaseClass {
             logger.info("Clicked on Test Run ID: " + TR);
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
             logger.info("Entered actual desc:" + actual_result + "->in:" + stepno);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.clickSaveButton();
 
             individualTestrun.clickCloseButton();

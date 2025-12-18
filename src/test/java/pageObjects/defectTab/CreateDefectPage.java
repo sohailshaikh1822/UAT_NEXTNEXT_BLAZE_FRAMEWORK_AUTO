@@ -10,6 +10,7 @@ import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import utils.WaitUtils;
 
 public class CreateDefectPage extends BasePage {
 
@@ -22,10 +23,13 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//button[contains(., 'SAVE')]")
     WebElement buttonSave;
 
+    @FindBy(id = "updateDefect")
+    WebElement buttonSaveForUpdateDefect;
+
     @FindBy(id = "createDefect")
     WebElement buttonSavefornewDefect;
 
-    @FindBy(id = "closeButton")
+    @FindBy(xpath = "//button[@id='closeButton']")
     WebElement buttonClose;
 
     // Summary
@@ -67,7 +71,7 @@ public class CreateDefectPage extends BasePage {
     WebElement dropdownAssignTo;
 
     // Description
-    @FindBy(xpath = "//textarea[@rows='8']")
+    @FindBy(xpath = "//textarea[@class='defect-text-wrapper-5']")
     WebElement textAreaDescription;
 
     // Attachments
@@ -87,6 +91,19 @@ public class CreateDefectPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(),'Summary cannot be blank')]")
     WebElement msgSummaryCannotBeBlank;
 
+    @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
+    WebElement popupYes;
+
+    // Popup Buttons
+    @FindBy(id = "confirmBtn")
+    WebElement popupYesButton;
+
+    @FindBy(id = "cancelBtn")
+    WebElement popupNoButton;
+
+    @FindBy(xpath = "//div[contains(@class,'unsaved-button-container')]")
+    WebElement unsavedPopupContainer;
+
     // ACTION OBJECTS
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
@@ -95,7 +112,7 @@ public class CreateDefectPage extends BasePage {
     // METHODS
 
     // ------------------PAGE SCROLLING METHODS------------------
-    public void scrollUp(){
+    public void scrollUp() {
         By containerLocator = By.xpath("//div[@class='test-execution-frame-2']");
         WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated(containerLocator));
         js.executeScript("arguments[0].scrollTop = 0;", container);
@@ -103,9 +120,11 @@ public class CreateDefectPage extends BasePage {
 
     // ---------- Summary ----------
     public void enterSummary(String summary) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(textAreaSummary));
-        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();",
-                element);
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaSummary));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        js.executeScript("arguments[0].scrollIntoView(true); arguments[0].focus();", element);
         element.clear();
         for (char c : summary.toCharArray()) {
             element.sendKeys(String.valueOf(c));
@@ -142,8 +161,18 @@ public class CreateDefectPage extends BasePage {
     }
 
     // ---------- Generic Dropdown Selector ----------
+    // private void selectDropdown(WebElement dropdown, String visibleText) {
+    // Select select = new
+    // Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+    // select.selectByVisibleText(visibleText);
+    // }
+
     private void selectDropdown(WebElement dropdown, String visibleText) {
-        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(dropdown)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+        Select select = new Select(dropdown);
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath(".//option[normalize-space()='" + visibleText + "']")));
         select.selectByVisibleText(visibleText);
     }
 
@@ -245,6 +274,10 @@ public class CreateDefectPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
     }
 
+    public void selectYes() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYes)).click();
+    }
+
     public void clickSaveforNewDefect() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonSavefornewDefect)).click();
     }
@@ -306,14 +339,44 @@ public class CreateDefectPage extends BasePage {
                 .isDisplayed();
     }
 
-    public boolean isMandatoryStarVisible(String fieldName) {
-        String dynamicXpath = "//span[normalize-space(text())='" + fieldName + "']"
-                + "/following-sibling::span[normalize-space(text())='*']";
+    public boolean isSummaryMandatoryStarVisible() {
+        String xpath = "//p[contains(@class,'defect-p')]"
+                + "//span[normalize-space(text())='Summary']"
+                + "/following-sibling::span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
 
-        WebElement mandatoryStar = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicXpath)));
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
 
-        return mandatoryStar.isDisplayed();
+    public boolean isDescriptionMandatoryStarVisible() {
+        String xpath = "//div[contains(@class,'defect-text-4')][contains(normalize-space(.),'Description')]"
+                + "//span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
+
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    public boolean isStatusMandatoryStarVisible() {
+        String xpath = "//div[contains(@class,'defect-text-wrapper-4')][contains(normalize-space(.),'Status')]"
+                + "//span[@class='defect-text-wrapper-2' and normalize-space(text())='*']";
+
+        try {
+            WebElement star = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            return star.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     public void verifyStatusIsDefault() {
@@ -460,6 +523,12 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
+    public void selectCategoryByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownCategory));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
     public void clickStatusDropdown() {
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
         dropdown.click();
@@ -490,7 +559,7 @@ public class CreateDefectPage extends BasePage {
 
     public boolean verifySummaryAndDescription(String expectedSummary, String expectedDescription)
             throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
 
         String actualSummary = getSummary().trim();
         String actualDescription = getDescription().trim();
@@ -515,7 +584,6 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getSuccessNotificationText() throws InterruptedException {
-        Thread.sleep(2000);
         return successNotification.getText().trim();
     }
 
@@ -530,9 +598,8 @@ public class CreateDefectPage extends BasePage {
         }
     }
 
-
     public boolean isSaveButtonVisible() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         try {
             return buttonSave.isDisplayed();
         } catch (Exception e) {
@@ -541,7 +608,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public boolean isSaveButtonClickable() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         try {
             return buttonSave.isEnabled();
         } catch (Exception e) {
@@ -550,7 +617,7 @@ public class CreateDefectPage extends BasePage {
     }
 
     public void clickSaveIfVisibleAndClickable() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
 
         if (buttonSave.isDisplayed() && buttonSave.isEnabled()) {
             buttonSave.click();
@@ -564,24 +631,106 @@ public class CreateDefectPage extends BasePage {
     }
 
     public String getRawSummary() {
-    return textAreaSummary.getAttribute("value");
-}
+        return textAreaSummary.getAttribute("value");
+    }
 
-    public String getSuccessNotificationMessage() {
+    public void getSuccessNotificationMessage() {
         WebElement element = wait.until(
-                ExpectedConditions.visibilityOf(successNotification)
-        );
-        return element.getText().trim();
+                ExpectedConditions.visibilityOf(successNotification));
+        String actualMessage = element.getText().trim();
+        boolean isValid = actualMessage.equals("Defect created successfully.") ||
+                actualMessage.equals("Defect updated successfully.");
+        Assert.assertTrue(isValid,
+                "FAILED: Unexpected success message. Actual: " + actualMessage);
     }
 
-    public void verifySuccessNotificationMessage(String expectedMessage) {
-        String actualMessage = getSuccessNotificationMessage();
-        Assert.assertEquals(
-                actualMessage,
-                expectedMessage,
-                "FAILED: Success notification message mismatch."
-        );
+    public void verifySuccessNotification() throws InterruptedException {
+        WaitUtils.waitFor2000Milliseconds();
+        String actualMessage = successNotification.getText().trim();
+        Assert.assertEquals(actualMessage, "Defect created successfully.",
+                "FAILED: Success notification text mismatch.");
     }
 
+    public boolean isUnsavedPopupVisible() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(unsavedPopupContainer));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickPopupYes() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupYesButton)).click();
+    }
+
+    public void clickPopupNo() {
+        wait.until(ExpectedConditions.elementToBeClickable(popupNoButton)).click();
+    }
+
+    public void clearDescriptionField() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(textAreaDescription));
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        try {
+            element.clear();
+        } catch (Exception e) {
+            js.executeScript("arguments[0].value='';", element);
+        }
+        wait.until(driver -> element.getAttribute("value").isEmpty());
+        Assert.assertEquals(element.getAttribute("value"), "", "FAILED: Description field was not cleared.");
+    }
+
+    // New implementations for selecting by index
+    public void selectPriorityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownPriority));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectAssignToByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAssignTo));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectTypeByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownType));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectStatusByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownStatus));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectSeverityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownSeverity));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectModuleByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownModule));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectReasonByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownReason));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectTargetReleaseByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownTargetRelease));
+    }
+
+    public void selectAffectedReleaseByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(dropdownAffectedRelease));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
 
 }

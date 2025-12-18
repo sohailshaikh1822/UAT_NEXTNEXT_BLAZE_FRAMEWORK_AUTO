@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC002 extends BaseClass {
 
@@ -17,9 +18,10 @@ public class TC002 extends BaseClass {
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
-            executeLandingPage.clickExecuteTab();
-            executeLandingPage.clickExecuteTab();
+//            executeLandingPage.clickExecuteTab();
+//            executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
+            WaitUtils.waitFor3000Milliseconds();
 
             Assert.assertTrue(executeLandingPage.isMentionedProjectNameVisible(projectName));
             logger.info("Verified Successfully");

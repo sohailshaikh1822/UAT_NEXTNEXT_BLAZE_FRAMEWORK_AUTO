@@ -6,10 +6,11 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC011 extends BaseClass {
     @Test(dataProvider = "tc011", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyNavigationToDefectPage(String status, String summary) throws InterruptedException {
+    public void verifyTextInSummaryField(String status, String summary) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
@@ -23,19 +24,20 @@ public class TC011 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(Integer.parseInt(status));
             logger.info("Status Selected from Dropdown");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterSummary(summary);
             logger.info("Filled the Summary field");
-
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.clickSave();
             logger.info("Clicked the save button");
 

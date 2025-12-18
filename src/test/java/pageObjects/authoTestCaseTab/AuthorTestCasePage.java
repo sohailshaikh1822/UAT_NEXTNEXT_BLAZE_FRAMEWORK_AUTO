@@ -10,6 +10,9 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.*;
+import utils.WaitUtils;
+
+import static testBase.BaseClass.getDriver;
 
 public class AuthorTestCasePage extends BasePage {
     public AuthorTestCasePage(WebDriver driver) {
@@ -17,7 +20,7 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     // locators
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]")
+    @FindBy(xpath = "//*[normalize-space()='Epic']/following::select[1]")
     WebElement dropdownEpic;
 
     @FindBy(xpath = "//span[normalize-space()='Epic']")
@@ -26,10 +29,10 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]/option")
     List<WebElement> optionsEpic;
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[2]/option")
+    @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]/option")
     List<WebElement> optionsFeatures;
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[2]")
+    @FindBy(xpath = "//*[normalize-space()='Epic']/following::select[2]")
     WebElement dropdownFeature;
 
     public WebElement linkRequirement(String reqId) {
@@ -39,7 +42,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//p[@class='supporting-text']")
     WebElement headingRequirement;
 
-    @FindBy(xpath = "//button[@id='createTestCaseButton']/div")
+    @FindBy(xpath = "//div[normalize-space()='ADD TESTCASE']")
     WebElement buttonAddTestCase;
 
     @FindBy(xpath = "//span[@id='author']")
@@ -63,7 +66,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//img[@alt='First Page']")
     WebElement firstPageArrowBtn;
 
-    @FindBy(xpath = "//h3[text()='Create Test Cases']")
+    @FindBy(xpath = "//h3[normalize-space()='Create Test Cases']")
     WebElement headingCreateTestCases;
 
     @FindBy(xpath = "//button[normalize-space(text())='SAVE']")
@@ -138,30 +141,94 @@ public class AuthorTestCasePage extends BasePage {
 
     // actions
 
+//    public void selectEpic(String epicName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+//        Select select = new Select(dropdownEpic);
+//        select.selectByVisibleText(epicName);
+//    }
+
     public void selectEpic(String epicName) {
-        Select s = new Select(dropdownEpic);
-        s.selectByVisibleText(epicName);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+        dropdownEpic.click();
+        List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
+        for (WebElement option : options) {
+            if (option.getText().trim().equals(epicName)) {
+                option.click();
+                return;
+            }
+        }
+        throw new RuntimeException("Epic not found: " + epicName);
     }
+
+
+
+//
+//    public void selectFeature(String featureName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownFeature));
+//        Select select = new Select(dropdownFeature);
+//        select.selectByVisibleText(featureName);
+//    }
 
     public void selectFeature(String featureName) {
-        Select s = new Select(dropdownFeature);
-        s.selectByVisibleText(featureName);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
+        dropdownFeature.click();
+        List<WebElement> options = dropdownFeature.findElements(By.tagName("option"));
+        for (WebElement option : options) {
+            if (option.isDisplayed() && option.getText().trim().equals(featureName)) {
+                option.click();
+                return;
+            }
+        }
+        throw new RuntimeException("Feature not found or not visible: " + featureName);
     }
 
+
+
     public void clickRequirement(String requirementId) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         linkRequirement(requirementId).click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String showRequirementHeader() {
         return headingRequirement.getText();
     }
 
+//    public void clickAddTestcase() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.elementToBeClickable(buttonAddTestCase));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("arguments[0].click();", buttonAddTestCase);
+//    }
+
     public void clickAddTestcase() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", buttonAddTestCase);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        Actions actions = new Actions(driver);
+        By[] addTestCaseLocators = {
+                By.id("createTestCaseButton"),
+                By.xpath("//button[.//div[contains(normalize-space(),'ADD TESTCASE')]]"),
+                By.xpath("//button[contains(@class,'button')]//div[contains(normalize-space(),'ADD TESTCASE')]")
+        };
+        WebElement addBtn = null;
+        for (By locator : addTestCaseLocators) {
+            try {
+                addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                break;
+            } catch (Exception ignored) {}
+        }
+        if (addBtn == null) {
+            addBtn = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(addBtn));
+        actions.moveToElement(addBtn).pause(200).click().perform();
     }
+
 
     public void clickAuthorTestcase() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tabAuthorTestcase);
@@ -169,9 +236,9 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public void clickActionIcon(String testCaseId) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         actionIconForTestcase(testCaseId).click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String getEpicLabelName() {
@@ -182,13 +249,15 @@ public class AuthorTestCasePage extends BasePage {
         return dropdownEpic.isDisplayed();
     }
 
-    public int getCountInEpic() throws InterruptedException {
-        Thread.sleep(2000);
+    public int getCountInEpic() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfAllElements(optionsEpic));
         return optionsEpic.size();
     }
 
+
     public List<WebElement> getAllEpics() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return optionsEpic;
     }
 
@@ -207,17 +276,25 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public String getSelectedEpic() {
-        Select s = new Select(dropdownEpic);
-        return s.getFirstSelectedOption().getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownEpic));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+        Select select = new Select(dropdownEpic);
+        return select.getFirstSelectedOption().getText();
     }
+
 
     public String getSelectedFeature() {
-        Select s = new Select(dropdownFeature);
-        return s.getFirstSelectedOption().getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropdownFeature));
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownFeature));
+        Select select = new Select(dropdownFeature);
+        return select.getFirstSelectedOption().getText();
     }
 
+
     public int getCountRQInFeature() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return rqCountWrapper.size();
     }
 
@@ -276,7 +353,7 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public String showPaginationOfRequirement() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return divRequirementPagination.getText();
     }
 
@@ -285,7 +362,7 @@ public class AuthorTestCasePage extends BasePage {
         divRequirementPagination.click();
         new Actions(driver).moveToElement(arrowForwardNextPagination);
         arrowForwardNextPagination.click();
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();;
     }
 
     public void clickPreviousArrow() {
@@ -302,43 +379,34 @@ public class AuthorTestCasePage extends BasePage {
         }
     }
 
-    public boolean isCreateTextHeadingVisible() {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOf(headingCreateTestCases));
-            return element.isDisplayed();
-        } catch (TimeoutException e) {
-            return false; // element not visible within wait time
-        }
-    }
 
     public void clickCollapseToggle() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonCollapseToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickExpandToggle() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonExpandToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clicklinktestcase() throws InterruptedException {
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();;
         LinkTestcase.click();
     }
 
     public void confirmUnlink() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonYes.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void cancelUnlink() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         buttonNo.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public boolean isRowDeleted(String testcaseId) {
@@ -383,31 +451,28 @@ public class AuthorTestCasePage extends BasePage {
                 System.out.println("Reached last page. Test case not found: " + tcID);
                 break;
             }
-            Thread.sleep(1000);
+             WaitUtils.waitFor1000Milliseconds();
             nextButton.click();
 
             // Wait for page reload before rechecking
-            Thread.sleep(1500);
+            WaitUtils.waitFor1000Milliseconds();;
         }
     }
 
     public boolean isAllTestIdSorted() throws InterruptedException {
-        Thread.sleep(3000);
-        List<String> name1 = new ArrayList<>();
+        WaitUtils.waitFor2000Milliseconds();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        List<String> originalList = new ArrayList<>();
         for (WebElement ele : linkAllTestCaseId) {
-            name1.add(ele.getText().trim()); // trim in case of extra spaces
+            js.executeScript("arguments[0].scrollIntoView(true);", ele);
+            WaitUtils.waitFor500Milliseconds();
+            originalList.add(ele.getText().trim());
         }
-
-        // Make a copy and sort it
-        List<String> sortedList = new ArrayList<>(name1);
+        List<String> sortedList = new ArrayList<>(originalList);
         Collections.sort(sortedList);
-
-        // Check if original == sorted
-        if (name1.equals(sortedList)) {
-            return true;
-        }
-        return false;
+        return originalList.equals(sortedList);
     }
+
 
     public void searchRq(String Rq) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -521,7 +586,7 @@ public class AuthorTestCasePage extends BasePage {
 
     public void clickSubmitButtonOnAddTestCaseModal() throws InterruptedException {
         Actions a = new Actions(driver);
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         a.moveToElement(buttonSubmitTestCaseModal).perform();
         buttonSubmitTestCaseModal.click();
     }
@@ -571,7 +636,7 @@ public class AuthorTestCasePage extends BasePage {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
             wait.until(ExpectedConditions.visibilityOf(divRequirementPagination));
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             List<WebElement> paginationElements = divRequirementPagination.findElements(By.xpath(".//*"));
             if (paginationElements.isEmpty()) {
                 return false;

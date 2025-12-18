@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC041 extends BaseClass {
 
@@ -19,9 +20,9 @@ public class TC041 extends BaseClass {
             String TR,
             String summary,
             String status,
-            String fileAddress
-    ) throws InterruptedException {
-        logger.info("****** Starting Test Case 041: Verify that files up to 5MB can be uploaded as defect attachments inside the defect *****************");
+            String fileAddress) throws InterruptedException {
+        logger.info(
+                "****** Starting Test Case 041: Verify that files up to 5MB can be uploaded as defect attachments inside the defect *****************");
 
         try {
             login();
@@ -31,7 +32,7 @@ public class TC041 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -40,10 +41,10 @@ public class TC041 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
@@ -69,7 +70,8 @@ public class TC041 extends BaseClass {
             linkDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            boolean popupVisible = linkDefectPage.isNotificationPopupDisplayed("Defect created and linked successfully.");
+            boolean popupVisible = linkDefectPage
+                    .isNotificationPopupDisplayed("Defect created and linked successfully.");
             if (popupVisible) {
                 logger.info("Notification popup displayed successfully.");
             } else {

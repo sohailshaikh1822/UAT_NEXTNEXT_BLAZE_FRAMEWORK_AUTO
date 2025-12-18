@@ -27,7 +27,7 @@ public class TC043 extends BaseClass {
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(release);
+            executeLandingPage.expandRelease(release);
             logger.info("Expanded the release {}", release);
 
             executeLandingPage.clickArrowRightToExpandModule(cycle);

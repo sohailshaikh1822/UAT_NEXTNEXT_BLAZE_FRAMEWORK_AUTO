@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
@@ -30,7 +31,7 @@ public class TC024 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projName);
+            executeLandingPage.clickToSelectProject(projName);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + projName);
@@ -45,6 +46,7 @@ public class TC024 extends BaseClass {
             individualTestrun.clickLinkDefect();
             logger.info("clicked on linkdefect button");
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.clickNew();
             logger.info("clicked on new defect button");
             linkDefectPage.enterSummary(defSummary);
@@ -53,10 +55,10 @@ public class TC024 extends BaseClass {
             logger.info("Select status");
             linkDefectPage.enterDescription(description);
             logger.info("Entered description ");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.uploadFile("uploadInDefect.png");
             logger.info("Defect has successfully created");
-            Thread.sleep(6000);
+            WaitUtils.waitFor1000Milliseconds();
 
             linkDefectPage.clickSave();
             logger.info("New Defect has been created with evidence");

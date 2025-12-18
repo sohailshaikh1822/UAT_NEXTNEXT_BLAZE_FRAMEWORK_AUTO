@@ -16,6 +16,7 @@ import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import utils.WaitUtils;
 
 public class LinkDefectPage extends BasePage {
 
@@ -70,7 +71,7 @@ public class LinkDefectPage extends BasePage {
     List<WebElement> allDefectId;
     // locators for creating a new bug
 
-    @FindBy(xpath = "//textarea[@id='DefSummary']")
+    @FindBy(xpath = "//input[@id='DefSummary']")
     WebElement summaryInput;
 
     @FindBy(xpath = "//select[@id='SeverityDropdown']")
@@ -272,7 +273,7 @@ public class LinkDefectPage extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(browseFileBtn));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", browseFileBtn);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             StringSelection selection = new StringSelection(filePath);
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);

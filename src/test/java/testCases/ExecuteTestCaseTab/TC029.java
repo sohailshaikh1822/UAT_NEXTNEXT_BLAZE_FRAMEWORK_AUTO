@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC029 extends BaseClass {
 
@@ -26,13 +28,13 @@ public class TC029 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded the Release dropdown from left panel");
 
             executeLandingPage.clickRelease(releaseName1);
             logger.info("Selected release with less than 10 test runs");
 
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
 
             int totalEntriesFirst = executeLandingPage.getTotalEntriesCount();
             logger.info("Total entries in first release: " + totalEntriesFirst);
@@ -43,15 +45,15 @@ public class TC029 extends BaseClass {
             logger.info("Next page button clickable for first release: " + isNextButtonClickableFirst);
             Assert.assertFalse(isNextButtonClickableFirst,
                     "Next button should be disabled when test runs are less than 10");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickRelease(releaseName2);
             logger.info("Selected release with more than 10 test runs");
-            Thread.sleep(10000);
+            WaitUtils.waitFor1000Milliseconds();;
             int totalEntriesSecond = new ExecuteLandingPage(getDriver()).getTotalEntriesCount();
             logger.info("Total entries in second release: " + totalEntriesSecond);
             Assert.assertTrue(totalEntriesSecond > 10,
                     "Expected more than 10 test runs in second release but found " + totalEntriesSecond);
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
 
             boolean isNextButtonClickableSecond = executeLandingPage.checkIfNextButtonIsClickable();
             logger.info("Next page button clickable for second release: " + isNextButtonClickableSecond);

@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC008 extends BaseClass {
 
@@ -31,43 +32,42 @@ public class TC008 extends BaseClass {
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertTrue(actualUrl.contains(expectedUrlAfterClick),
                     "User did not navigate to the expected Defect Page URL.");
+        WaitUtils.waitFor2000Milliseconds();;
 
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             defectLandingPage.ClickDefectbyID(defectID);
             logger.info("Successfully navigated to Defect details page");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.selectAffectedRelease(affectedrealese);
             logger.info("Affected Release selected: {}", affectedrealese);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectSeverity(severity);
-            logger.info("Severity selected: {}", severity);
+            createDefectPage.selectSeverityByIndex(1);
 
             createDefectPage.selectFixedRelease(fixedRelease);
-            logger.info("Fixed Release selected: {}", fixedRelease);
 
-            createDefectPage.selectType(type);
-            logger.info("Type selected: {}", type);
+            createDefectPage.selectTypeByIndex(1);
+            WaitUtils.waitFor2000Milliseconds();
 
-            createDefectPage.selectModule(module);
-            logger.info("Module selected: {}", module);
+            createDefectPage.selectModuleByIndex(1);
+            WaitUtils.waitFor2000Milliseconds();
 
-            createDefectPage.selectReason(reason);
-            logger.info("Reason selected: {}", reason);
+            createDefectPage.selectReasonByIndex(1);
+            WaitUtils.waitFor2000Milliseconds();
 
-            createDefectPage.selectCategory(category);
-            logger.info("Category selected: {}", category);
+            createDefectPage.selectCategoryByIndex(1);
+            WaitUtils.waitFor2000Milliseconds();
 
-            createDefectPage.selectAssignTo(assignTo);
-            logger.info("Assigned To selected: {}", assignTo);
+            createDefectPage.selectAssignToByIndex(2);
 
+            WaitUtils.waitFor2000Milliseconds();
 
-            createDefectPage.selectTargetRelease(targetRealse);
-            logger.info("Target Release selected: {}", targetRealse);
+            createDefectPage.selectTargetReleaseByIndex(1);
 
-            createDefectPage.selectStatus(status);
+            createDefectPage.selectStatusByIndex(1);
             logger.info("Status selected: {}", status);
 
-            createDefectPage.selectPriority(priority);
+            createDefectPage.selectPriorityByIndex(1);
             logger.info("Priority selected: {}", priority);
 
 

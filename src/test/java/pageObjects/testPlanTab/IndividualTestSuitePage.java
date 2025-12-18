@@ -111,7 +111,7 @@ public class IndividualTestSuitePage extends BasePage {
 
     public String getTargetRelease() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // Thread.sleep(1000);
+        //  WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.attributeToBeNotEmpty(targetReleaseInput, "title"));
         return targetReleaseInput.getAttribute("value");
     }

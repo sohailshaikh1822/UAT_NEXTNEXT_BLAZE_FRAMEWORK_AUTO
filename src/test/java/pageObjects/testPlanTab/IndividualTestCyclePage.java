@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
 import java.time.Duration;
+import utils.WaitUtils;
 
 public class IndividualTestCyclePage extends BasePage {
     public IndividualTestCyclePage(WebDriver driver) {
@@ -48,7 +49,7 @@ public class IndividualTestCyclePage extends BasePage {
     }
 
     public void setTestCycleName(String cycleName) throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         testCycleNameInput.clear(); // as input not div
         testCycleNameInput.sendKeys(cycleName);
     }

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-
     <listeners>
         <listener class-name="utils.ExtentReportManager"/>
         <listener class-name="utils.ExtentSuiteListener"/>
     </listeners>
-
     <test verbose="2" preserve-order="true" name="Defect Test Suite">
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
-
         <classes>
             <class name="testCases.DefectTabTestCase.TC001"/>
             <class name="testCases.DefectTabTestCase.TC003"/>
@@ -36,12 +33,20 @@
             <class name="testCases.DefectTabTestCase.TC027"/>
             <class name="testCases.DefectTabTestCase.TC029"/>
             <class name="testCases.DefectTabTestCase.TC030"/>
+            <class name="testCases.DefectTabTestCase.TC033"/>
+            <class name="testCases.DefectTabTestCase.TC035"/>
             <class name="testCases.DefectTabTestCase.TC036"/>
             <class name="testCases.DefectTabTestCase.TC037"/>
             <class name="testCases.DefectTabTestCase.TC039"/>
             <class name="testCases.DefectTabTestCase.TC040"/>
+            <class name="testCases.DefectTabTestCase.TC041"/>
+            <class name="testCases.DefectTabTestCase.TC042"/>
+            <class name="testCases.DefectTabTestCase.TC043"/>
+            <class name="testCases.DefectTabTestCase.TC044"/>
+            <class name="testCases.DefectTabTestCase.TC046"/>
+            <class name="testCases.DefectTabTestCase.TC047"/>
             <class name="testCases.DefectTabTestCase.TC048"/>
+
         </classes>
     </test>
-
 </suite>

@@ -7,6 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC007 extends BaseClass {
 
@@ -32,9 +33,15 @@ public class TC007 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
-            requirementTabPage.clickOnTheProjectName();
-            logger.info("Clicked on the Project Name");
+            WaitUtils.waitFor3000Milliseconds();;
+//            requirementTabPage.clickOnTheProjectName();
+            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            logger.info("Navigate to the project");
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementTabPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
+//            logger.info("Clicked on the Project Name");
 
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
@@ -42,7 +49,7 @@ public class TC007 extends BaseClass {
             addRequirementPage.setRequirementId(rQid);
             logger.info("Set Requirement ID: " + rQid);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
@@ -50,12 +57,12 @@ public class TC007 extends BaseClass {
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);

@@ -6,6 +6,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC035 extends BaseClass {
 
@@ -41,7 +42,7 @@ public class TC035 extends BaseClass {
             otherTab.clickcreatefieldButton();
             logger.info("clicked on create field button#");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             otherTab.clickOnDelete(fieldName1);
             logger.info("Clicked Delete icon for the field: " + fieldName1);

@@ -5,11 +5,9 @@
         <listener class-name="utils.ExtentReportManager"/>
         <listener class-name="utils.ExtentSuiteListener"/>
     </listeners>
-
     <test verbose="2" preserve-order="true" name="Execute Test Suite">
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
-
         <classes>
             <class name="testCases.ExecuteTestCaseTab.TC001"/>
             <class name="testCases.ExecuteTestCaseTab.TC002"/>
@@ -52,7 +50,6 @@
             <class name="testCases.ExecuteTestCaseTab.TC043"/>
             <class name="testCases.ExecuteTestCaseTab.TC044"/>
             <class name="testCases.ExecuteTestCaseTab.TC045"/>
-
             <class name="testCases.ExecuteTestCaseTab.TC046"/>
             <class name="testCases.ExecuteTestCaseTab.TC047"/>
             <class name="testCases.ExecuteTestCaseTab.TC048"/>

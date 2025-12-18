@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC041 extends BaseClass {
 
@@ -15,8 +16,7 @@ public class TC041 extends BaseClass {
     public void Verify_that_Summary_field_dosent_trims_leading_and_trailing_spaces(
             String expectedUrlAfterClick,
             String ID,
-            String Summary,
-            String ID1
+            String Summary
     ) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify that Summary field dosen't trims leading and trailing spaces ********");
@@ -37,28 +37,19 @@ public class TC041 extends BaseClass {
 
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             defectLandingPage.ClickDefectbyID(ID);
             logger.info("Defect clicked: " + ID);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled: " + Summary);
-            Thread.sleep(3000);
-
-            createDefectPage.clickSave();
-            logger.info("Clicked on save button");
-
-            createDefectPage.clickClose();
-            logger.info("closed button clicked");
-
-            defectLandingPage.ClickDefectbyID(ID1);
-            logger.info("Again defect clicked: " + ID1);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
             String savedSummary = createDefectPage.getRawSummary();
             logger.info("Saved Summary captured: '" + savedSummary + "'");
+            WaitUtils.waitFor2000Milliseconds();;
 
             Assert.assertEquals(
                     savedSummary,

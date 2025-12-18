@@ -1,9 +1,6 @@
 package pageObjects.requirementTab;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -60,9 +57,29 @@ public class AddRequirementPage extends BasePage {
     @FindBy(id = "notification")
     WebElement errorNotification;
 
+    @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
+    WebElement clickYes;
+
+    @FindBy(xpath = "(//div[normalize-space()='NO'])[1]")
+    WebElement clickNo;
+
+
     // actions
 
-    public void setRequirementId(String id) {
+    public void ClickYesPopup()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(clickYes)).click();
+    }
+
+    public void ClickNoPopup()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(clickNo)).click();
+    }
+
+    public void setRequirementId(String id)
+    {
         textRequirementId.sendKeys(id);
     }
 
@@ -70,7 +87,7 @@ public class AddRequirementPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(textRequirementDescriptionBeforeClick));
         textRequirementDescriptionBeforeClick.click();
-        // Thread.sleep(1000);
+        //  WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(textRequirementDescriptionAfterClick));
         ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';",
                 textRequirementDescriptionAfterClick);
@@ -154,6 +171,14 @@ public class AddRequirementPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement editableField = wait.until(ExpectedConditions.visibilityOf(textRequirementDescriptionBeforeClick));
         return editableField.getText();
+    }
+    public void clearRequirementName()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement nameInput = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("testCaseName"))
+        );
+        nameInput.clear();
     }
 
     public void clickOnRequirementIdLabel() {

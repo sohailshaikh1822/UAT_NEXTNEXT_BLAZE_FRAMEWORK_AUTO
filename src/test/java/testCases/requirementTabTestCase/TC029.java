@@ -33,7 +33,7 @@ public class TC029 extends BaseClass {
             logger.info("Description is added ....");
             requirementTabPage.clickOnModule(epic2);
             logger.info("Clicked on another module without saving it");
-            individualModulePage.clickButtonConfirmationYesForUnsavedChanges();
+//            individualModulePage.ClickYesPopup();
             logger.info("Clicked yes in the alert");
 
             Assert.assertEquals(individualModulePage.getModuleName(), epic2);

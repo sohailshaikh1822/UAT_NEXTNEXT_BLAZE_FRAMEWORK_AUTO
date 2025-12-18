@@ -28,7 +28,7 @@ public class TC007 extends BaseClass {
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(release);
+            executeLandingPage.clickArrowRightToExpandModule(release);
             logger.info("Expanded the release {}", release);
 
             executeLandingPage.clickArrowRightToExpandModule(cycle);

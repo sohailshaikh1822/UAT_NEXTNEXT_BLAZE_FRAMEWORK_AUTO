@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC048 extends BaseClass {
 
@@ -22,11 +23,13 @@ public class TC048 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("Navigated to Defect Landing Page");
 
+            WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Opened Create Defect page");
 
             CreateDefectPage createDefect = new CreateDefectPage(getDriver());
 
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(createDefect.textAreaSummaryIsDisplayed(),
                     "Summary field is NOT visible!");
             Assert.assertTrue(createDefect.dropdownSeverityIsDisplayed(),
@@ -45,11 +48,14 @@ public class TC048 extends BaseClass {
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
-            createDefect.selectStatus("Closed");
-            createDefect.selectPriority("Medium");
+            WaitUtils.waitFor1000Milliseconds();
+            createDefect.selectStatusByIndex(1);
+
+            WaitUtils.waitFor1000Milliseconds();
+            createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();
-            Thread.sleep(500);
+            WaitUtils.waitFor500Milliseconds();;
 
             try {
                 createDefect.clickSaveforNewDefect();
@@ -58,7 +64,7 @@ public class TC048 extends BaseClass {
                 Assert.fail("FAILED: SAVE button was NOT clickable after idle time!", e);
             }
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             String notificationText = createDefect.getNotificationText();
 

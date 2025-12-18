@@ -5,6 +5,7 @@ import pageObjects.Settings.GlobalTabPage;
 import pageObjects.Settings.OtherTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC013 extends BaseClass {
 
@@ -29,11 +30,11 @@ public class TC013 extends BaseClass {
             globalTab.clickonSelectAll();
             logger.info("Clicked on Select All Button ");
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             globalTab.clickonClearAll();
             logger.info("Clicked on Clear All Button");
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;

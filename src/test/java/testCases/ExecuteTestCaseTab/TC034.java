@@ -6,6 +6,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC034 extends BaseClass {
 
@@ -19,10 +20,10 @@ public class TC034 extends BaseClass {
             String status,
             String stepno,
             String actual_result,
-            String step
-    ) throws InterruptedException {
+            String step) throws InterruptedException {
 
-        logger.info("****** Starting Test Case 034: Verify behavior when an extremely long actual result is entered. *****************");
+        logger.info(
+                "****** Starting Test Case 034: Verify behavior when an extremely long actual result is entered. *****************");
 
         try {
             login();
@@ -32,7 +33,7 @@ public class TC034 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -40,7 +41,7 @@ public class TC034 extends BaseClass {
 
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
 
@@ -48,7 +49,7 @@ public class TC034 extends BaseClass {
             logger.info("Clicked on Test Run ID: " + TR);
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
@@ -57,7 +58,7 @@ public class TC034 extends BaseClass {
 
             String actualFieldValue = individualTestrun.getActualResultOfStep(Integer.parseInt(step));
             logger.info("Fetched actual result value from field: " + actualFieldValue);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.clickSaveButton();
             individualTestrun.clickCloseButton();
 

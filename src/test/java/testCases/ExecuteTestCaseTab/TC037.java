@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC037 extends BaseClass {
 
@@ -26,7 +27,7 @@ public class TC037 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(parentModule);
+            executeLandingPage.clickToSelectProject(parentModule);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + parentModule);
@@ -41,7 +42,7 @@ public class TC037 extends BaseClass {
 
             executeLandingPage.expandTestSuit(subTestsuit);
             logger.info("TestSuit visible");
-
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.ClickViewAllRadioButton();
             logger.info("Clicked on View All Radio Button");
 

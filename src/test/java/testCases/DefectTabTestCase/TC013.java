@@ -7,41 +7,41 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC013 extends BaseClass {
-    @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyNavigationToDefectPage(String affectedRelease, String module, String severity) throws InterruptedException {
+    @Test(dataProvider = "tc013", dataProviderClass = DefectTabTestCaseDataProvider.class)
+    public void verifyNavigationToDefectPage(String affectedRelease, String assignTo, String severity) throws InterruptedException {
 
         logger.info("****** Starting Test Case: Verify Navigation to Defect Page ********");
 
         try {
-            // Step 1: Login
             login();
             logger.info("Logged in successfully and dashboard loaded");
 
-            // Step 2: Navigate to Defect Tab
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
 
             defectLandingPage.clickDefectTab();
             logger.info("Clicked on Defect Tab");
 
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectAffectedRelease(affectedRelease);
+            createDefectPage.selectAffectedReleaseByIndex(Integer.parseInt(affectedRelease));
             logger.info("Status Selected from Dropdown");
-            Thread.sleep(3000);
-            createDefectPage.selectModule(module);
+            WaitUtils.waitFor2000Milliseconds();;
+            createDefectPage.selectAssignToByIndex(Integer.parseInt(assignTo));
             logger.info("Filled the Summary field");
 
-            Thread.sleep(3000);
-            createDefectPage.selectSeverity(severity);
+            WaitUtils.waitFor2000Milliseconds();;
+            createDefectPage.selectSeverityByIndex(Integer.parseInt(severity));
             logger.info("Filled the Summary field");
-
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.clickSave();
             logger.info("Clicked the save button");
 

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC052 extends BaseClass {
 
@@ -19,11 +20,11 @@ public class TC052 extends BaseClass {
 
             logger.info("Navigating to 'Author Test Case' tab.");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-
+            WaitUtils.waitFor1000Milliseconds();
             // Search by RQ ID
             authorTestCasePage.searchRq(rqName);
             logger.info("Searched using RQ ID: " + rqName);
-
+            WaitUtils.waitFor1000Milliseconds();
             String expectedRQId = authorTestCasePage.getRQId();
             Assert.assertEquals(expectedRQId, rqName, "Mismatch in RQ ID after search.");
             logger.info("Successfully verified RQ ID: " + expectedRQId);
@@ -31,7 +32,7 @@ public class TC052 extends BaseClass {
             // Search by RQ Title
             logger.info("Starting search using RQ Title: " + rqTitle);
             authorTestCasePage.searchRq(rqTitle);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             String expectedRQTitle = authorTestCasePage.getRQTitle();
             Assert.assertEquals(expectedRQTitle, rqTitle, "Mismatch in RQ Title after search.");
             logger.info("Successfully verified RQ Title: " + expectedRQTitle);

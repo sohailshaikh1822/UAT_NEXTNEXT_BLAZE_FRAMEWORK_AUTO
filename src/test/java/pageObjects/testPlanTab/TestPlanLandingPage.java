@@ -10,6 +10,7 @@ import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import utils.WaitUtils;
 
 public class TestPlanLandingPage extends BasePage {
     public TestPlanLandingPage(WebDriver driver) {
@@ -96,6 +97,11 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//div[@class='project-dropdown-menu']")
     private WebElement projectDropdownMenu;
 
+    @FindBy(xpath = "//div[@class='frame']")
+    private WebElement testPlanIframe;
+
+
+
     public WebElement releaseTestCycleTestSuite(String releaseOrTestCycleOrTestSuite) {
         return driver.findElement(By.xpath("//div[text()='" + releaseOrTestCycleOrTestSuite + "']"));
     }
@@ -107,7 +113,7 @@ public class TestPlanLandingPage extends BasePage {
     // --- Actions ---
 
     public void clickOnReleaseOrTestCycleOrTestSuite(String releaseOrTestCycleOrTestSuite) throws InterruptedException {
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();;
         releaseTestCycleTestSuite(releaseOrTestCycleOrTestSuite).click();
 
     }
@@ -118,9 +124,9 @@ public class TestPlanLandingPage extends BasePage {
 
     public void selectTestPlanTab() throws InterruptedException {
         driver.manage().window().setSize(new Dimension(1920, 1080));
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         tabTestPlan.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void expandSidebarIfCollapsed() {
@@ -130,15 +136,15 @@ public class TestPlanLandingPage extends BasePage {
     }
 
     public void clickCollapseToggle() throws InterruptedException {
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         buttonCollapseToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickExpandToggle() throws InterruptedException {
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         buttonExpandToggle.click();
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public boolean getSidebarVisibility() {
@@ -146,7 +152,17 @@ public class TestPlanLandingPage extends BasePage {
     }
 
     public void expandProjectSTG(String projectName) {
-        expandArrow(projectName).click();
+
+        WebElement arrow = expandArrow(projectName);
+        String rotateStyle = arrow.getAttribute("style");
+
+        if (rotateStyle == null || !rotateStyle.contains("rotate(90deg)")) {
+            arrow.click();
+            System.out.println("Expanded project: " + projectName);
+        } else {
+            System.out.println("Project '" + projectName + "' is already expanded.");
+        }
+
     }
 
     public void expandRelease(String releaseName) {
@@ -158,27 +174,27 @@ public class TestPlanLandingPage extends BasePage {
     }
 
     public void clickNewRelease() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnNewRelease.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickNewTestCycle() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnNewTestCycle.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickNewTestSuite() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnNewTestSuite.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickDelete() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         btnDelete.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickOnConfirmDeleteYes(String releaseCycleSuiteName) {
@@ -212,7 +228,7 @@ public class TestPlanLandingPage extends BasePage {
         for (WebElement project : allProjects) {
             if (project.getText().trim().equalsIgnoreCase(projectName)) {
                 project.click();
-                Thread.sleep(1000);
+                WaitUtils.waitFor1000Milliseconds();
                 String classAttr = project.getAttribute("class");
                 return classAttr.contains("active");
             }
@@ -292,7 +308,7 @@ public class TestPlanLandingPage extends BasePage {
     public void clickSaveRelease() throws InterruptedException {
         btnSaveRelease.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOf(notification));
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
     }
 
     public void clickOnTheProjectName() {
@@ -403,5 +419,15 @@ public class TestPlanLandingPage extends BasePage {
         //
         // }
         return expectedProjects;
+    }
+    //iframe
+    public void switchToIFrame() {
+        try {
+            driver.switchTo().frame(testPlanIframe);
+            System.out.println("Switched to Test Plan iframe successfully");
+        } catch (Exception e) {
+            System.out.println("Failed to switch to Test Plan iframe: " + e.getMessage());
+            throw e;
+        }
     }
 }

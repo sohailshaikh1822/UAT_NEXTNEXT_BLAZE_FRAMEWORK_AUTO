@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC045 extends BaseClass {
 
@@ -25,7 +26,7 @@ public class TC045 extends BaseClass {
             page.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
-            page.clickArrowRightPointingForExpandModule(projectname);
+            page.clickToSelectProject(projectname);
             Assert.assertTrue(page.selectedModuleOrReleaseName(projectname).isDisplayed(), "Project not visible");
             logger.info("Expanded project: " + projectname);
 
@@ -43,14 +44,14 @@ public class TC045 extends BaseClass {
             page.clickCreateTestRunButton();
             logger.info("Clicked 'Create New Test Run'");
 
-            Thread.sleep(200);
+            WaitUtils.waitFor200Milliseconds();
 
             page.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
 
             page.selectTestCaseCheckbox(testCaseID);
             logger.info("Selected test case ID: " + testCaseID);
-            Thread.sleep(200);
+            WaitUtils.waitFor200Milliseconds();
 
             Assert.assertTrue(page.isSaveButtonVisible(), "Save button did not appear after selecting test case");
             Assert.assertTrue(page.isCancelButtonVisible(), "Cancel button did not appear after selecting test case");

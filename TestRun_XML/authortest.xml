@@ -4,10 +4,7 @@
     <listeners>
         <listener class-name="utils.ExtentReportManager"/>
         <listener class-name="utils.ExtentSuiteListener"/>
-
     </listeners>
-
-
     <test verbose="2" preserve-order="true" name="Author Test Suite">
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
@@ -23,7 +20,7 @@
             <class name="testCases.authorTabTestCase.TC012"/>
             <class name="testCases.authorTabTestCase.TC013"/>
             <class name="testCases.authorTabTestCase.TC014"/>
-            <class name="testCases.authorTabTestCase.TC018"/>
+          <class name="testCases.authorTabTestCase.TC018"/>
             <class name="testCases.authorTabTestCase.TC027"/>
             <class name="testCases.authorTabTestCase.TC028"/>
             <class name="testCases.authorTabTestCase.TC029"/>

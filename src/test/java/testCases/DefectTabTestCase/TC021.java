@@ -7,6 +7,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
@@ -44,6 +45,11 @@ public class TC021 extends BaseClass {
             defectPage.clickClose();
             logger.info("Defect page closed successfully");
 
+            defectPage.clickPopupYes();
+            logger.info("Confirmed closing the defect page");
+
+            WaitUtils.waitFor2000Milliseconds(); // Wait for 2 seconds to ensure the defect is closed properly
+
             landingPage.ClickDefectbyID(defectId);
             logger.info("Re-opened defect with ID: " + defectId);
             logger.info("Verified multiline description is retained after re-opening the defect");
@@ -56,6 +62,6 @@ public class TC021 extends BaseClass {
             throw e;
         }
 
-        logger.info("************ TC019 Finished *************************");
+        logger.info("************ TC021 Finished *************************");
     }
 }

@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.authoTestCaseTab.IndividualTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC062 extends BaseClass {
 
@@ -21,7 +22,7 @@ public class TC062 extends BaseClass {
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
             authorTestCasePage.linkTestCaseIdFromId(TestcaseId).click();
-            Thread.sleep(5000);
+            WaitUtils.waitFor1000Milliseconds();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
 
             individualTestCasePage.clickAddTestStep();

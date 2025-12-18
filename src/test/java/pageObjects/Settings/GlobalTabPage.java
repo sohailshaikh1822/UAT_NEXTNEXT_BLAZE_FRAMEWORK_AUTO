@@ -1,7 +1,9 @@
 package pageObjects.Settings;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.Select;
 import java.util.List;
+import utils.WaitUtils;
 
 public class GlobalTabPage extends BasePage {
     public GlobalTabPage(WebDriver driver) {
@@ -62,15 +65,49 @@ public class GlobalTabPage extends BasePage {
 
     // Actions
 
+    // public void clickCurrentUserAndGoToSettings() {
+    // WaitUtils.waitFor500Milliseconds();
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    // WebElement currentUserDropdown =
+    // wait.until(ExpectedConditions.visibilityOf(dropdowncurrentuser));
+    // Actions actions = new Actions(driver);
+    // actions.moveToElement(currentUserDropdown).perform();
+    // wait.until(ExpectedConditions.elementToBeClickable(currentUserDropdown)).click();
+    // WebElement settingsOption =
+    // wait.until(ExpectedConditions.visibilityOf(setting));
+    // actions.moveToElement(settingsOption).perform();
+    // wait.until(ExpectedConditions.elementToBeClickable(settingsOption)).click();
+    // }
+
     public void clickCurrentUserAndGoToSettings() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement currentUserDropdown = wait.until(ExpectedConditions.visibilityOf(dropdowncurrentuser));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(currentUserDropdown).perform();
-        wait.until(ExpectedConditions.elementToBeClickable(currentUserDropdown)).click();
-        WebElement settingsOption = wait.until(ExpectedConditions.visibilityOf(setting));
-        actions.moveToElement(settingsOption).perform();
-        wait.until(ExpectedConditions.elementToBeClickable(settingsOption)).click();
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            try {
+                WebElement currentUserDropdown = wait
+                        .until(ExpectedConditions.elementToBeClickable(dropdowncurrentuser));
+                hoverIfNeeded(currentUserDropdown);
+                WaitUtils.waitFor200Milliseconds();
+                currentUserDropdown.click();
+                WebElement settingsOption = wait.until(ExpectedConditions.elementToBeClickable(setting));
+                hoverIfNeeded(settingsOption);
+                WaitUtils.waitFor200Milliseconds();
+                settingsOption.click();
+                return;
+            } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
+                System.out.println("Retry " + attempt + " due to: " + e.getClass().getSimpleName());
+                WaitUtils.waitFor500Milliseconds();
+            }
+        }
+        throw new RuntimeException("Failed to click Current User → Settings after 3 attempts.");
+    }
+
+    private void hoverIfNeeded(WebElement element) {
+        try {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element).pause(Duration.ofMillis(200)).perform();
+        } catch (Exception ignored) {
+            // If hover not needed or fails, don't block the test
+        }
     }
 
     public void clickonAddGlobalField() {
@@ -194,7 +231,8 @@ public class GlobalTabPage extends BasePage {
 
     public void clickSaveButton() throws InterruptedException {
         // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        Thread.sleep(3000);
+        WaitUtils.waitFor2000Milliseconds();
+        ;
         Savebutton.click();
     }
 
@@ -375,7 +413,7 @@ public class GlobalTabPage extends BasePage {
 
     public boolean areAllFieldsSelected() {
         try {
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
 
             List<WebElement> checkboxes = driver.findElements(
                     By.xpath(
@@ -411,7 +449,7 @@ public class GlobalTabPage extends BasePage {
 
     public boolean areAllFieldsCleared() {
         try {
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
 
             List<WebElement> checkboxes = driver.findElements(
                     By.xpath(
@@ -467,7 +505,7 @@ public class GlobalTabPage extends BasePage {
                 return 0;
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -508,7 +546,7 @@ public class GlobalTabPage extends BasePage {
 
             checkbox.click();
 
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             boolean afterClickState = checkbox.isSelected();
             System.out.println("After click checkbox state for field '" + fieldName + "': " + afterClickState);
 

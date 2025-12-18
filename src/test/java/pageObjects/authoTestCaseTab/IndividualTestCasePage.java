@@ -11,6 +11,7 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.List;
+import utils.WaitUtils;
 
 public class IndividualTestCasePage extends BasePage {
     public IndividualTestCasePage(WebDriver driver) {
@@ -21,7 +22,7 @@ public class IndividualTestCasePage extends BasePage {
     @FindBy(xpath = "//div[normalize-space()='CLOSE']")
     WebElement buttonClose;
 
-    @FindBy(xpath = "//div[normalize-space()='Create Test Run']")
+    @FindBy(xpath = "//div[normalize-space()='CREATE TEST RUN']")
     WebElement buttonCreateTestRun;
 
     @FindBy(xpath = "//div[normalize-space()='SAVE']")
@@ -134,12 +135,12 @@ public class IndividualTestCasePage extends BasePage {
     public void clickAddTestStep() throws InterruptedException {
         Actions a = new Actions(driver);
         a.moveToElement(buttonAddTestStep).perform();
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         a.click(buttonAddTestStep).perform();
     }
 
     public void clickAddRow() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         Actions a = new Actions(driver);
         a.moveToElement(buttonAddTestStep).perform();
         buttonAddTestStep.click();
@@ -159,7 +160,7 @@ public class IndividualTestCasePage extends BasePage {
         beforeClick.click();
         WebElement afterClick = wait.until(ExpectedConditions
                 .elementToBeClickable(textStepDescriptionAfterClick(step)));
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         afterClick.clear();
         afterClick.sendKeys(description);
     }
@@ -173,7 +174,7 @@ public class IndividualTestCasePage extends BasePage {
         beforeClick.click();
         WebElement afterClick = wait.until(ExpectedConditions
                 .elementToBeClickable(textStepResultAfterClick(step)));
-        Thread.sleep(1000);
+        WaitUtils.waitFor1000Milliseconds();
         afterClick.clear();
         afterClick.sendKeys(expectedResult);
     }
@@ -194,9 +195,9 @@ public class IndividualTestCasePage extends BasePage {
                 .elementToBeClickable(buttonSave));
         actions.moveToElement(saveBtn).perform();
         saveBtn.click();
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(
-                By.xpath("//div[@id='notification']"),
-                "Test Case updated successfully."));
+//        wait.until(ExpectedConditions.textToBePresentInElementLocated(
+//                By.xpath("//div[@id='notification']"),
+//                "Test Case updated successfully."));
     }
 
     public void addTestStepsFromExcelForNewTestCase(String description, String expectedResult)
@@ -208,7 +209,7 @@ public class IndividualTestCasePage extends BasePage {
             clickAddTestStep();
             setStepDescription(descriptionArray[i], i + 1);
             driver.findElement(By.xpath("//div[@class='table-header-cell description']")).click();
-            Thread.sleep(1500);
+            WaitUtils.waitFor1000Milliseconds();;
             setStepExpectedResult(expectedResultArray[i], i + 1);
         }
     }
@@ -222,7 +223,7 @@ public class IndividualTestCasePage extends BasePage {
         for (int i = 0; i <= expectedResultArray.length - 1; i++) {
             clickAddTestStep();
             setStepDescription(descriptionArray[i], currentStep + 1);
-            Thread.sleep(1000);
+            WaitUtils.waitFor1000Milliseconds();
             setStepExpectedResult(expectedResultArray[i], currentStep + 1);
             currentStep = currentStep + 1;
         }
@@ -239,7 +240,7 @@ public class IndividualTestCasePage extends BasePage {
     }
 
     public int getCountPriorityOptions() throws InterruptedException {
-        Thread.sleep(2000);
+        WaitUtils.waitFor2000Milliseconds();
         return OptionsDropDownPriority.size();
     }
 

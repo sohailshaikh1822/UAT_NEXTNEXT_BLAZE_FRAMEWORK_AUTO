@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
+import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
@@ -37,6 +38,10 @@ public class TC030 extends BaseClass {
             requirementTabPage.clickOnModule(feature);
             logger.info("clicked on specific module");
             IndividualModulePage indivisualModulePage = new IndividualModulePage(getDriver());
+            indivisualModulePage.clickAddRequirement();
+            AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
+            addRequirementPage.setRequirementId(requiName);
+            logger.info("Set Requirement ID: " + requiName);
             indivisualModulePage.clickDeleteRequirement(requiName);
             WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
             wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='partialTestCaseContainer']//p[@id='actionDialog-message']")));

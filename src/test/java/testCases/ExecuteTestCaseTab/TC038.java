@@ -7,6 +7,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC038 extends BaseClass {
 
@@ -29,7 +30,7 @@ public class TC038 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -38,14 +39,14 @@ public class TC038 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.selectStatus(status);
             logger.info("Selected status filter: " + status);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();
 
             for (String actualStatus : executeLandingPage.getAllDisplayedStatuses()) {
                 logger.info("Captured status: " + actualStatus);

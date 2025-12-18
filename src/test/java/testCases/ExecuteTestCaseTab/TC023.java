@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC023 extends BaseClass {
 
@@ -26,7 +27,7 @@ public class TC023 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(parentModule);
+            executeLandingPage.clickToSelectProject(parentModule);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + parentModule);
@@ -40,7 +41,7 @@ public class TC023 extends BaseClass {
             individualTestRun.clickSearchButton();
             logger.info("Clicked on the Search button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Waited for 2 seconds for search results to load");
 
             boolean found = individualTestRun.isTestRunVisible(searchTestRunName);

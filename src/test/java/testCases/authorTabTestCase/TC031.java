@@ -17,7 +17,6 @@ public class TC031 extends BaseClass {
 
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
 
-            // Call the method (just for logging, not asserting)
             String cursorStyle = authorTestCasePage.checkIfPreviousButtonIsClickable();
             logger.info("Cursor style of Previous button: " + cursorStyle);
 

@@ -11,8 +11,7 @@ public class TC028 extends BaseClass {
 
     @Test(dataProvider = "tc028", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyDefaultPagePagination(
-            String expectedPagination
-    ) throws InterruptedException {
+            String expectedPagination) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();

@@ -11,6 +11,7 @@ import java.util.List;
 
 import java.time.Duration;
 import java.util.regex.Pattern;
+import utils.WaitUtils;
 
 public class IndividualTestRun extends BasePage {
     public IndividualTestRun(WebDriver driver) {
@@ -34,7 +35,7 @@ public class IndividualTestRun extends BasePage {
     @FindBy(xpath = "//div[@class='test-run-name']")
     WebElement headingTestRunName;
 
-    @FindBy(xpath = "//div[@class='test-run-form-text-field']//select[@class='test-run-text select-dropdown']")
+    @FindBy(xpath = "//select[@class='test-run-text select-dropdown']")
     WebElement dropdownStatus;
 
     @FindBy(xpath = "//button[@id='submitButton']")
@@ -322,7 +323,7 @@ public class IndividualTestRun extends BasePage {
             while (true) {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight;",
                         tableContainer);
-                Thread.sleep(500);
+                WaitUtils.waitFor500Milliseconds();;
 
                 long newHeight = (long) ((JavascriptExecutor) driver).executeScript("return arguments[0].scrollHeight;",
                         tableContainer);

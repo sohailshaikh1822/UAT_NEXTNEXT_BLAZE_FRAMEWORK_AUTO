@@ -7,18 +7,15 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
 
 public class TC017 extends BaseClass {
+
     @Test(dataProvider = "tc017", dataProviderClass = DefectTabTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_success_message_content_after_save(
             String expectedUrlAfterClick,
             String Summary,
-            String Severity,
-            String Type,
-            String Category,
-            String Priority,
-            String Status,
-            String AssignTo,
             String Description
     ) throws InterruptedException {
 
@@ -36,44 +33,40 @@ public class TC017 extends BaseClass {
                     "User did not navigate to the expected Defect Page URL.");
             logger.info("Successfully navigated to Defect Page. Current URL: " + actualUrl);
             logger.info("Defect Page loaded and form fields are visible.");
+            WaitUtils.waitFor2000Milliseconds();;
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("clicked on Create Defect Button");
 
             CreateDefectPage createDefectPage = new CreateDefectPage(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             createDefectPage.enterSummary(Summary);
             logger.info("Summary filled:"+Summary);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectSeverity(Severity);
-            logger.info("Severity selected:"+Severity);
+            createDefectPage.selectCategoryByIndex(1);
+            logger.info("Category selected:"+1);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectType(Type);
-            logger.info("Severity selected:"+Type);
+            createDefectPage.selectPriorityByIndex(2);
+            logger.info("Priority selected:"+2);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectCategory(Category);
-            logger.info("Category selected:"+Category);
+            createDefectPage.selectStatusByIndex(1);
+            logger.info("Status selected:"+1);
+            WaitUtils.waitFor2000Milliseconds();;
 
-            createDefectPage.selectPriority(Priority);
-            logger.info("Priority selected:"+Priority);
-
-            createDefectPage.selectStatus(Status);
-            logger.info("Status selected:"+Status);
-
-            createDefectPage.selectAssignTo(AssignTo);
-            logger.info("Assign To selected:"+AssignTo);
+            createDefectPage.selectAssignToByIndex(12);
+            logger.info("Assign To selected:"+12);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.enterDescription(Description);
             logger.info("Description filled:"+Description);
+            WaitUtils.waitFor2000Milliseconds();;
 
             createDefectPage.clickSave();
             logger.info("Clicked on save button");
 
-            String actualMsg = createDefectPage.getSuccessNotificationText();
-            Assert.assertEquals(actualMsg, "Defect created successfully.",
-                    "Success message mismatch!");
-            logger.info("Success message verified: " + actualMsg);
-
-
+            createDefectPage.verifySuccessNotification();
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

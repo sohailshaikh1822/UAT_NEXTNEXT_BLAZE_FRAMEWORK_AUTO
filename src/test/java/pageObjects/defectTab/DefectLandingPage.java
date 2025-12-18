@@ -1,6 +1,7 @@
 package pageObjects.defectTab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
+import utils.WaitUtils;
 
 public class DefectLandingPage extends BasePage {
 
@@ -66,17 +68,18 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Next']")
     WebElement arrowForwardNextPagination;
 
-    @FindBy(id = "createTestCaseButton")
+    @FindBy(xpath = "//button[@id='createTestCaseButton']")
     WebElement createTestCaseButton;
 
     @FindBy(xpath = "//p[@class='pagination-text']")
     WebElement totalDefectEntryCount;
 
     // ================= ACTIONS =================
-    public void clickDefectTab() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(defectTab));
-        defectTab.click();
+    public void clickDefectTab() throws InterruptedException {
+         WaitUtils.waitFor1000Milliseconds();
+        wait.until(ExpectedConditions.elementToBeClickable(defectTab)).click();
+         WaitUtils.waitFor1000Milliseconds();
+
     }
 
     public void enterSummary(String text) {
@@ -116,10 +119,26 @@ public class DefectLandingPage extends BasePage {
         arrowForwardNextPagination.click();
     }
 
+    // public void clickCreateTestCaseButton() {
+    // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    // WebElement button =
+    // wait.until(ExpectedConditions.visibilityOf(createTestCaseButton));
+    // wait.until(ExpectedConditions.elementToBeClickable(button));
+    // if (button.isDisplayed() && button.isEnabled()) {
+    // button.click();
+    // }
+    // }
+
     public void clickCreateTestCaseButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(createTestCaseButton));
-        createTestCaseButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        try {
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(createTestCaseButton));
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+            button.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", createTestCaseButton);
+        }
     }
 
     public String getTotalDefectEntryCount() {
@@ -169,12 +188,10 @@ public class DefectLandingPage extends BasePage {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement defectElement = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
-        );
+                ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
         defectElement.click();
     }
-
 
     public void resizeColumn(String columnName, int offsetX) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -198,6 +215,7 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(helpBtn)).click();
 
     }
+
     public void clickStatusDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(statusDropdown)).click();
     }
@@ -217,5 +235,37 @@ public class DefectLandingPage extends BasePage {
     public void clickAffectedReleaseDropdown() {
         wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown)).click();
     }
-    
+
+    public void selectSeverityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(severityDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectPriorityByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(priorityDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectAssignToByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(assignToDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectAffectedReleaseByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(affectedReleaseDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+    public void selectStatusByIndex(int index) {
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(statusDropdown));
+        Select select = new Select(dropdown);
+        select.selectByIndex(index);
+    }
+
+
+
 }

@@ -7,6 +7,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC050 extends BaseClass {
 
@@ -32,7 +33,7 @@ public class TC050 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -41,7 +42,7 @@ public class TC050 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
 
@@ -49,10 +50,10 @@ public class TC050 extends BaseClass {
             logger.info("Clicked on Test Run ID: " + TR);
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.clickTabExecutionHistory();
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             int initialCount = individualTestrun.getExecutionHistoryCount();
             logger.info("Initial Execution History Count: " + initialCount);
 
@@ -62,18 +63,18 @@ public class TC050 extends BaseClass {
             individualTestrun.clickCreateTestLog();
             logger.info("Clicked on Create Test Log Button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
             logger.info("Entered actual result: " + actual_result + " in step: " + stepno);
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.clickSaveButton();
             logger.info("Clicked on Save Button");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
             boolean notificationDisplayed = individualTestrun.isTestLogCreatedDisplayed();
             Assert.assertTrue(notificationDisplayed, "Test log creation notification was not displayed!");
             logger.info("Verified: 'Test log created successfully' notification displayed");
@@ -85,7 +86,7 @@ public class TC050 extends BaseClass {
             boolean countIncreased = false;
 
             for (int i = 0; i < 5; i++) {
-                Thread.sleep(2000);
+                WaitUtils.waitFor2000Milliseconds();
                 updatedCount = individualTestrun.getExecutionHistoryCount();
                 if (updatedCount > initialCount) {
                     countIncreased = true;

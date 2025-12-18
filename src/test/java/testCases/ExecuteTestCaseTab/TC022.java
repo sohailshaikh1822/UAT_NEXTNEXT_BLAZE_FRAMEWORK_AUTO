@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 public class TC022 extends BaseClass {
@@ -29,7 +30,7 @@ public class TC022 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projName);
+            executeLandingPage.clickToSelectProject(projName);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + projName);
@@ -41,7 +42,11 @@ public class TC022 extends BaseClass {
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             executeLandingPage.clickPlayActionById(testRun);
             logger.info("clicked on Action Play button");
+            WaitUtils.waitFor1000Milliseconds();
+
             individualTestrun.clickLinkDefect();
+            WaitUtils.waitFor1000Milliseconds();
+
             logger.info("clicked on linkdefect button");
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
             linkDefectPage.clickNew();

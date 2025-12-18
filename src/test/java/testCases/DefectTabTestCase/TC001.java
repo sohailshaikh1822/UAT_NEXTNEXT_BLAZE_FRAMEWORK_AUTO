@@ -5,8 +5,9 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
-public class TC001 extends BaseClass{
+public class TC001 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyNavigationToDefectPage() throws InterruptedException {
@@ -23,8 +24,9 @@ public class TC001 extends BaseClass{
 
             String actualUrl = getDriver().getCurrentUrl();
             String expectedUrlAfterClick = "https://webapp-stg-testnext.azurewebsites.net/defect";
-            Assert.assertEquals(actualUrl, expectedUrlAfterClick,
-                    "User is not navigated to the Defect page!");
+
+            WaitUtils.waitFor1000Milliseconds();
+            Assert.assertEquals(actualUrl, expectedUrlAfterClick, "User is not navigated to the Defect page!");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;

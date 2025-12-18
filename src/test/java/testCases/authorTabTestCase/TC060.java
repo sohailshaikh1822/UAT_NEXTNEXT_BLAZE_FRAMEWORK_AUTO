@@ -6,11 +6,13 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.authoTestCaseTab.IndividualTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC060 extends BaseClass {
 
     @Test(dataProvider = "tc059", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyDialogBoxAfterClickingAddCalledTestcaseButton(String rqName, String tcId) throws InterruptedException {
+    public void verifyDialogBoxAfterClickingAddCalledTestcaseButton(String rqName, String tcId)
+            throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
@@ -22,7 +24,7 @@ public class TC060 extends BaseClass {
             authorTestCasePage.searchRq(rqName);
             logger.info("Requirement '" + rqName + "' found. Clicking on it.");
             authorTestCasePage.clickRequirement(rqName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickTestCasesId(tcId);
             logger.info("Clicked on Test Case ID: " + tcId);
             logger.info("Clicking on 'Add Called Test Case' button.");

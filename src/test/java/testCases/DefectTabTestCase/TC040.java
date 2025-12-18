@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC040 extends BaseClass {
 
@@ -21,6 +22,7 @@ public class TC040 extends BaseClass {
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
             logger.info("Navigated to Defect Landing Page");
+            WaitUtils.waitFor2000Milliseconds();
 
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect button");
@@ -30,14 +32,14 @@ public class TC040 extends BaseClass {
             createDefect.enterSummary(" ");
             logger.info("Summary left blank");
 
+            WaitUtils.waitFor500Milliseconds();;
             createDefect.scrollToSaveButton();
-            Thread.sleep(800);
 
+            WaitUtils.waitFor800Milliseconds();;
             createDefect.clickSaveforNewDefect();
             logger.info("Clicked SAVE to trigger summary blank error");
 
-            Thread.sleep(1500);
-
+            WaitUtils.waitFor1000Milliseconds();;
             String notificationText = createDefect.getNotificationText();
             Assert.assertEquals(notificationText.trim(), "Error: Summary cannot be blank.",
                     "FAILED: Expected Summary blank error message not shown!");
@@ -53,16 +55,16 @@ public class TC040 extends BaseClass {
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
-            createDefect.selectStatus("Closed");
-            createDefect.selectPriority("Medium");
+            createDefect.selectStatusByIndex(1);
+            createDefect.selectPriorityByIndex(1);
 
             createDefect.scrollToSaveButton();
-            Thread.sleep(800);
+            WaitUtils.waitFor800Milliseconds();;
 
             createDefect.clickSave();
             logger.info("Clicked SAVE after correcting summary");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor2000Milliseconds();
 
             String notificationAfterFix = createDefect.getSuccessNotificationText();
 

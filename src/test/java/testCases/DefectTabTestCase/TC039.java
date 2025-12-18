@@ -6,6 +6,7 @@ import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC039 extends BaseClass {
 
@@ -22,6 +23,7 @@ public class TC039 extends BaseClass {
             defectLandingPage.clickDefectTab();
             logger.info("User navigated to Defect Landing Page");
 
+            WaitUtils.waitFor1000Milliseconds();
             defectLandingPage.clickCreateTestCaseButton();
             logger.info("Clicked Create Defect");
 
@@ -30,37 +32,41 @@ public class TC039 extends BaseClass {
             String tempSummary = "AutoTest_CancelDefect_" + System.currentTimeMillis();
             String tempDescription = "Temporary Description - Should Not Be Saved";
 
+            WaitUtils.waitFor500Milliseconds();;
             createDefect.enterSummary(tempSummary);
             logger.info("Entered Summary: " + tempSummary);
 
             createDefect.enterDescription(tempDescription);
             logger.info("Entered Description");
 
-            createDefect.selectSeverity("Minor");
-            createDefect.selectPriority("Medium");
+            WaitUtils.waitFor1000Milliseconds();
+            createDefect.selectSeverityByIndex(1);
 
+            WaitUtils.waitFor1000Milliseconds();
+            createDefect.selectPriorityByIndex(1);
             logger.info("Filled mandatory details WITHOUT saving");
 
+            WaitUtils.waitFor500Milliseconds();;
             createDefect.clickClose();
             logger.info("Clicked CLOSE without saving");
 
-            Thread.sleep(2000);
+            WaitUtils.waitFor1000Milliseconds();
+            createDefect.clickPopupYes();
+            logger.info("Confirmed to close without saving");
 
+            WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.enterSummary(tempSummary);
+            WaitUtils.waitFor500Milliseconds();;
             defectLandingPage.clickSearchButton();
             logger.info("Searching for unsaved defect on listing page");
 
-            Thread.sleep(2000);
-
+            WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.clickLastPageArrow();
             logger.info("Navigated to last page of defect listing");
 
-            Thread.sleep(2000);
-
+            WaitUtils.waitFor2000Milliseconds();
             String pageText = getDriver().getPageSource();
-
             boolean defectFound = pageText.contains(tempSummary);
-
             Assert.assertFalse(defectFound,
                     "FAILED Defect was found even after cancelling! SUMMARY: " + tempSummary);
 

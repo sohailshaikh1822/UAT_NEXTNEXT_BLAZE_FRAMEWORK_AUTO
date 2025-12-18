@@ -7,7 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
-
+import utils.WaitUtils;
 public class TC035 extends BaseClass {
 
     @Test(dataProvider = "tc035", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -31,7 +31,7 @@ public class TC035 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            Thread.sleep(6000);
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickArrowRightPointingForExpandModule(project);
             logger.info("Selected project" + project);
@@ -41,13 +41,13 @@ public class TC035 extends BaseClass {
 
             requirementTabPage.clickDeleteModule();
             logger.info("Clicked Delete button");
-            Thread.sleep(4000);
+            WaitUtils.waitFor2000Milliseconds();;
             String Actual_Warning = individualModulePage.alretMeaasgeForDeletingModule();
             System.out.println(Actual_Warning);
 
             Assert.assertEquals(Actual_Warning, "Deleting a module will also delete its associated requirements and test cases. Are you sure you want to delete?");
             logger.info("Assertion has done user can see the warning message");
-            Thread.sleep(3000);
+            WaitUtils.waitFor2000Milliseconds();;
             requirementTabPage.clickNoBtn();
 
         } catch (AssertionError e) {

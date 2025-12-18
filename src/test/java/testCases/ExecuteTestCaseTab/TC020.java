@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC020 extends BaseClass {
 
@@ -18,10 +19,10 @@ public class TC020 extends BaseClass {
             String CycleName,
             String SuiteName,
             String TR,
-            String defid
-    ) throws InterruptedException {
+            String defid) throws InterruptedException {
 
-        logger.info("****** Starting Test Case 020: verify the user is able to click on the linked defect and see the details *****************");
+        logger.info(
+                "****** Starting Test Case 020: verify the user is able to click on the linked defect and see the details *****************");
 
         try {
             login();
@@ -31,7 +32,7 @@ public class TC020 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -40,16 +41,16 @@ public class TC020 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            Thread.sleep(3000);
+            WaitUtils.waitFor1000Milliseconds();
 
             boolean defectPresent = individualTestrun.isDefectPresent();
             if (defectPresent) {

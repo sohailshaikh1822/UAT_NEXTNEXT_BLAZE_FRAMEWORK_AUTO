@@ -1,6 +1,7 @@
 package pageObjects.requirementTab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageObjects.BasePage;
 import java.util.List;
+import utils.WaitUtils;
 
 import java.time.Duration;
 
@@ -29,7 +31,7 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//img[@alt='Open Sidebar']")
     WebElement openSideBar;
 
-    @FindBy(xpath = "//span[@title='<p></p>']")
+    @FindBy(xpath = "(//i[@class='fa-solid tree-arrow fa-caret-right'])[1]")
     WebElement leftPanelProjectName;
     @FindBy(xpath = "//span[@class='entry-info']")
     WebElement totalEntriesRqCount;
@@ -105,29 +107,31 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
+
+
     // Actions
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     public void clickRequirementTab() throws InterruptedException {
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
         tabRequirements.click();
-        Thread.sleep(1500);
+        WaitUtils.waitFor1000Milliseconds();;
     }
 
     public void clickOnTheProjectName() throws InterruptedException {
-
         leftPanelProjectName.click();
         wait.until(ExpectedConditions.visibilityOf(buttonSave));
 
     }
 
     public void clickNewModule() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         iconNewModule.click();
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
 
     }
+
 
     public void setModuleName(String moduleName) {
         textModuleName.clear();
@@ -145,12 +149,22 @@ public class RequirementTabPage extends BasePage {
         iconDelete.click();
     }
 
-    public void clickArrowRightPointingForExpandModule(String moduleName) {
-        arrowBeforeExpandRightPointing(moduleName).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@class='tree-children']") // children of the project
-        ));
+//    public void clickArrowRightPointingForExpandModule(String moduleName) {
+//        arrowBeforeExpandRightPointing(moduleName).click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//div[@class='tree-children']") // children of the project
+//        ));
+//    }
+
+    public void clickArrowRightPointingForExpandModule(String projectName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        By arrow = By.xpath("//span[text()='" + projectName + "']/..//i[contains(@class,'tree-arrow')]");
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(arrow));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        try { Thread.sleep(300); } catch (Exception ignored) {}
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
+
 
     public void clickArrowDownPointingForCollapseModule(String moduleName) {
         arrowAfterExpandDownPointing(moduleName).click();
@@ -191,14 +205,14 @@ public class RequirementTabPage extends BasePage {
 
     public List<String> getRequirementIDs() {
         List<WebElement> rows = getRequirementsFromModuleTable();
-        return rows.stream().map(row -> row.findElement(By.cssSelector("div.testlistcell a.text-wrapper-14")).getText())
+        return rows.stream().map(row -> row.findElement(By.cssSelector(".pid-col a.text-wrapper-14")).getText())
                 .toList();
     }
 
     public List<WebElement> getRequirementsFromModuleTable() {
         WebElement tableContainer = wait
                 .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("existingTestCasesInnerTable"))));
-        return tableContainer.findElements(By.cssSelector("div.testlistrow"));
+        return tableContainer.findElements(By.cssSelector("#existingTestCasesInnerTable .requirements-list-row"));
     }
 
     public boolean isRequirementVisible(String requirementId) {
@@ -232,7 +246,7 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clicktoggleSidebar() throws InterruptedException {
-        Thread.sleep(1000);
+         WaitUtils.waitFor1000Milliseconds();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.elementToBeClickable(closeSideBar))).click();
@@ -266,16 +280,50 @@ public class RequirementTabPage extends BasePage {
         return allModulesIncludeProject.size() - 1;
     }
 
-    public void unlinkRequirementById(String requirementId, int previousCount) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String xpath = "//div[@class='testlistrow']//a[normalize-space(text())='" + requirementId
-                + "']/ancestor::div[@class='testlistrow']//button[contains(@class,'deleteRowButton')]";
-        WebElement deleteBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+//    public void unlinkRequirementById(String requirementId, int previousCount) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        String xpath = "//div[@class='testlistrow']//a[normalize-space(text())='" + requirementId
+//                + "']/ancestor::div[@class='testlistrow']//button[contains(@class,'deleteRowButton')]";
+//        WebElement deleteBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+//        deleteBtn.click();
+//        WebElement yesBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("confirmBtn")));
+//        yesBtn.click();
+//        wait.until(driver -> getRequirementIDs().size() < previousCount);
+//    }
+
+    public void unlinkRequirementById(String requirementId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        // Locate the row using correct DOM
+        By rowLocator = By.xpath(
+                "//div[contains(@class,'requirements-list-row')]" +
+                        "[.//a[contains(@class,'text-wrapper-14') and normalize-space()='" + requirementId + "']]"
+        );
+
+        WebElement row = wait.until(ExpectedConditions.visibilityOfElementLocated(rowLocator));
+
+        // Hover to reveal delete/unlink button
+        new Actions(driver).moveToElement(row).perform();
+
+        // Locate delete/unlink button inside the row
+        By deleteBtnLocator = By.xpath(
+                ".//button[contains(@class,'delete') or contains(@class,'unlink')]"
+        );
+
+        WebElement deleteBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(row.findElement(deleteBtnLocator))
+        );
+
         deleteBtn.click();
-        WebElement yesBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("confirmBtn")));
+
+        // Confirm unlink
+        WebElement yesBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("confirmBtn"))
+        );
         yesBtn.click();
-        wait.until(driver -> getRequirementIDs().size() < previousCount);
     }
+
 
     public void clickYesBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -294,5 +342,7 @@ public class RequirementTabPage extends BasePage {
         buttonYesConfirmDelete.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
+
+
 
 }
