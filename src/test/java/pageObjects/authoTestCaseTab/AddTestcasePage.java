@@ -1,13 +1,9 @@
 package pageObjects.authoTestCaseTab;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import pageObjects.BasePage;
 
 import java.time.Duration;
@@ -35,8 +31,12 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[2]")
     WebElement dropDownType;
 
-    @FindBy(xpath = "(//select)[4]/option")
-    List<WebElement> optionsDropDownType;
+//    @FindBy(xpath = "(//select)[4]/option")
+//    List<WebElement> optionsDropDownType;
+
+    @FindBy(xpath = "//table[@id='newTestCasesTable']//tbody//tr/td[4]//select/option")
+    public List<WebElement> optionsDropDownType;
+
 
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[3]")
     WebElement dropDownQAUser;
@@ -60,24 +60,81 @@ public class AddTestcasePage extends BasePage {
 
     // Actions
 
-    public void setTestCaseName(String testCaseName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-        Actions actions = new Actions(driver);
 
-        WebElement nameField = wait.until(
-                ExpectedConditions.visibilityOf(textName)
+//public void setTestCaseName(String testCaseName) {
+//    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+//    Actions actions = new Actions(driver);
+//    By[] nameFieldLocators = {
+//            By.xpath("//table[@id='newTestCasesTable']//tbody/tr[1]/td[1]//input[@type='text']"),
+//            By.xpath("//table[@id='newTestCasesTable']//td//input[@type='text' and @maxlength='500']"),
+//    };
+//    WebElement nameField = null;
+//    for (By locator : nameFieldLocators) {
+//        try {
+//            nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//            break;
+//        } catch (Exception ignored) {}
+//    }
+//    if (nameField == null) {
+//        throw new RuntimeException("Test Case Name input field not found using any provided locator.");
+//    }
+//    wait.until(ExpectedConditions.elementToBeClickable(nameField));
+//    actions.moveToElement(nameField).click().perform();
+//    nameField.clear();
+//    nameField.sendKeys(testCaseName);
+//}
+
+    public void setTestCaseName(String testCaseName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        By testCaseNameInput = By.xpath(
+                "//table[@id='newTestCasesTable']//tbody//tr//td[1]//input[@type='text' and @maxlength='500']"
         );
+
+        WebElement nameField = wait.until(ExpectedConditions.presenceOfElementLocated(testCaseNameInput));
         wait.until(ExpectedConditions.elementToBeClickable(nameField));
-        actions.moveToElement(nameField).perform();
-        actions.click(nameField).perform();
-        nameField.clear();
-        nameField.sendKeys(testCaseName);
+
+        try {
+            nameField.click();
+            nameField.clear();
+            nameField.sendKeys(testCaseName);
+        } catch (Exception e) {
+            // JS fallback for CI / headless failures
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].value='';", nameField);
+            js.executeScript("arguments[0].value=arguments[1];", nameField, testCaseName);
+        }
     }
+
 
 
     public void setDescription(String description) {
-        textDescription.sendKeys(description);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        Actions actions = new Actions(driver);
+
+        By[] descriptionLocators = {
+                By.xpath("//table[@id='newTestCasesTable']//tbody/tr/td[2]/input"),
+                By.xpath("(//tbody//tr//td/input[@type='text' and @required])[2]")
+        };
+        WebElement descriptionField = null;
+        for (By locator : descriptionLocators) {
+            try {
+                descriptionField = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                break;
+            } catch (Exception ignored) {}
+        }
+        if (descriptionField == null) {
+            throw new RuntimeException("Description input field not found using any provided locator.");
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(descriptionField));
+        actions.moveToElement(descriptionField).pause(200).click().perform();
+        descriptionField.clear();
+        descriptionField.sendKeys(description);
     }
+
+
+
 
     public void selectPriority(String priority) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -149,16 +206,23 @@ public class AddTestcasePage extends BasePage {
     }
 
     public boolean isAllTypeOptionsVisible() {
+
         List<String> actual = new ArrayList<>();
         for (WebElement ele : optionsDropDownType) {
-            actual.add(ele.getText());
+            actual.add(ele.getText().trim());
         }
-        List<String> expected = new ArrayList<>(
-                Arrays.asList("Please Select","Manual", "Automation", "Performance", "Scenario"));
+        List<String> expected = Arrays.asList(
+                "Please Select",
+                "Manual",
+                "Automation",
+                "Performance",
+                "Scenario"
+        );
         Collections.sort(actual);
         Collections.sort(expected);
         return actual.equals(expected);
     }
+
 
     public String waitForNameFieldRequiredError() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -179,5 +243,22 @@ public class AddTestcasePage extends BasePage {
         textName.sendKeys(longName);
         return textName.getAttribute("value");
     }
+
+    public String waitAndGetAddTestCaseHeader() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        By modalLocator = By.id("createTestCasesModal");
+        By formLocator = By.id("createTestCasesForm");
+        By headerLocator = By.xpath(".//h3");
+        WebElement modal = wait.until(ExpectedConditions.presenceOfElementLocated(modalLocator));
+        wait.until(driver -> modal.isDisplayed());
+        WebElement form = wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(
+                modal, formLocator
+        ));
+        WebElement header = wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(
+                form, headerLocator
+        ));
+        return header.getText().trim();
+    }
+
 
 }

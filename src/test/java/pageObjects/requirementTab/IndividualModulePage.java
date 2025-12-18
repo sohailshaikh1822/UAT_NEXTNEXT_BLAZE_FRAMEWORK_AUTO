@@ -31,7 +31,7 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//input[@class='supporting-text']")
     WebElement inputTitle;
 
-    @FindBy(xpath = "(//input[@class='testcase-select value'])[2]")
+    @FindBy(xpath = "(//input[@type='text'])[1]")
     WebElement inputName;
 
     @FindBy(xpath = "//div[@class='test-execution-label-3' and text()='SAVE']")
@@ -84,7 +84,7 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//div[@class='ql-editor ql-blank']")
     WebElement textDescriptionAfterClick;
 
-    @FindBy(id = "existingTestCasesTable")
+    @FindBy(xpath = "(//div[@id='existingRequirementsTable'])[1]")
     WebElement linkedRequirementTable;
     @FindBy(xpath = "(//div[contains(text(),'CLOSE')])[1]")
     WebElement alertBoxCloseBtnForModule;
@@ -93,8 +93,11 @@ public class IndividualModulePage extends BasePage {
     WebElement moduleNameAlertMessage;
 
     public WebElement linkRequirementIdFromId(String id) {
-        return driver.findElement(By.xpath("//div[@class='testlistcell']/a[text()='" + id + "']"));
+        return driver.findElement(By.xpath(
+                "//div[@id='existingTestCasesInnerTable']//div[contains(@class,'pid-col')]//a[normalize-space()='" + id + "']"
+        ));
     }
+
 
     public WebElement deleteRequirementIcon(String reqID) {
         return driver.findElement(By.xpath(
@@ -111,7 +114,7 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "(//select[@class='testcase-select value'])[3]")
     WebElement type;
 
-    @FindBy(xpath = "//div[@class='requirements testcase-text-6']")
+    @FindBy(xpath = "(//div[@class='empty-requirement-cell'])[1]")
     WebElement noLinkedRequirement;
 
     @FindBy(xpath = "//span[@class='entry-info']")
@@ -142,6 +145,11 @@ public class IndividualModulePage extends BasePage {
 
     private By inputTitleLocator = By.xpath("//input[@class='supporting-text']");
 
+    @FindBy(xpath = "(//div[normalize-space()='YES'])[1]")
+    WebElement clickYes;
+
+    @FindBy(xpath = "(//div[normalize-space()='NO'])[1]")
+    WebElement clickNo;
     // Actions
 
     public void clickAddRequirement() {
@@ -151,6 +159,18 @@ public class IndividualModulePage extends BasePage {
     public void enterTitle(String title) {
         inputTitle.clear();
         inputTitle.sendKeys(title);
+    }
+
+    public void ClickYesPopup()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(clickYes)).click();
+    }
+
+    public void ClickNoPopup()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(clickNo)).click();
     }
 
     public String getModuleName() throws InterruptedException {

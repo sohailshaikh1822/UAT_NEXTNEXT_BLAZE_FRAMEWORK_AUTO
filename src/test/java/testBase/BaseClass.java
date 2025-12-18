@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -96,22 +97,81 @@ public class BaseClass {
         }
     }
 
-    public void logout() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
-                getDriver().findElement(By.xpath("//img[@id='chevron-logout']")));
-        WebElement logOut = getDriver().findElement(By.xpath("//a[normalize-space()='Logout']"));
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
+//    public void logout() {
+//        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+//        WebElement chevron = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//img[@id='chevron-logout']")
+//        ));
+//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", chevron);
+//        WebElement logOut = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.xpath("//a[normalize-space()='Logout']")
+//        ));
+//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", logOut);
+//    }
 
+//    public void logout() {
+//        WebDriver driver = getDriver();
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        WebElement chevron = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//img[@id='chevron-logout']"))
+//        );
+//        try {
+//            chevron.click();
+//        } catch (Exception e) {
+//            js.executeScript("arguments[0].click();", chevron);
+//        }
+//        WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//a[normalize-space()='Logout']"))
+//        );
+//        try {
+//            logoutBtn.click();
+//        } catch (Exception e) {
+//            js.executeScript("arguments[0].click();", logoutBtn);
+//        }
+//    }
+
+    public void logout() {
+        WebDriver driver = getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+        try {
+            WebElement chevron = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[@id='chevron-logout']")));
+            js.executeScript("arguments[0].scrollIntoView(true);", chevron);
+            Thread.sleep(300);
+            actions.moveToElement(chevron).pause(200).perform();
+            try {
+                chevron.click();
+            } catch (Exception e) {
+                js.executeScript("arguments[0].click();", chevron);
+            }
+            By logoutLocator = By.xpath("//a[normalize-space()='Logout']");
+            WebElement logoutBtn = wait.until(ExpectedConditions.elementToBeClickable(logoutLocator));
+
+            js.executeScript("arguments[0].scrollIntoView(true);", logoutBtn);
+            Thread.sleep(200);
+            try {
+                logoutBtn.click();
+            } catch (Exception e) {
+                js.executeScript("arguments[0].click();", logoutBtn);
+            }
+        } catch (Exception e) {
+            System.out.println("Logout skipped — element not found or already logged out.");
+        }
     }
 
-    // log in to site
+
+
+
     public void login() throws InterruptedException {
 
         getDriver().findElement(By.xpath("//input[@type='email']")).sendKeys(p.getProperty("email"));
         getDriver().findElement(By.xpath("//input[@type='submit']")).click();
 
-        WaitUtils.waitFor2000Milliseconds();;
+        Thread.sleep(3000);
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='password']")));
         getDriver().findElement(By.xpath("//input[@type='password']")).sendKeys(p.getProperty("password"));
@@ -121,9 +181,9 @@ public class BaseClass {
 
         WebElement clickToYes = wait.until(ExpectedConditions.elementToBeClickable(By.id("idSIButton9")));
         clickToYes.click();
-        WaitUtils.waitFor3000Milliseconds();;
+        Thread.sleep(6000);
         getDriver().navigate().refresh();
-        WaitUtils.waitFor2000Milliseconds();
+        Thread.sleep(2000);
     }
 
     // Capture screenshot (Thread-safe)
