@@ -56,7 +56,7 @@ public class testplan_execute_automation extends BaseClass {
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule("New Release 12-09-2025");
+            executeLandingPage.expandRelease("New Release 12-09-2025");
             logger.info("Expanded the release:" + "New Release 12-09-2025");
 
             executeLandingPage.clickTestCycle("Testing 30-10-2025");

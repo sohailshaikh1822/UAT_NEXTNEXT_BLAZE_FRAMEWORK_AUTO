@@ -19,8 +19,7 @@ public class TC001 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
-            logger.info("Expanded the Release dropdown from left panel");
+            executeLandingPage.clickToSelectProject(projectName);
 
             executeLandingPage.clickRelease(releaseName);
             logger.info("Clicked on the desired release from the dropdown");

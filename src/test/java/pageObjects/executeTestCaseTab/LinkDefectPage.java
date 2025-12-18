@@ -71,7 +71,7 @@ public class LinkDefectPage extends BasePage {
     List<WebElement> allDefectId;
     // locators for creating a new bug
 
-    @FindBy(xpath = "//textarea[@id='DefSummary']")
+    @FindBy(xpath = "//input[@id='DefSummary']")
     WebElement summaryInput;
 
     @FindBy(xpath = "//select[@id='SeverityDropdown']")

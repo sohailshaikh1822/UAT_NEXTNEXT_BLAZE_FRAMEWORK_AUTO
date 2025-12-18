@@ -33,7 +33,7 @@ public class TC050 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);

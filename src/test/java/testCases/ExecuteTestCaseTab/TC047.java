@@ -34,7 +34,7 @@ public class TC047 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -43,7 +43,7 @@ public class TC047 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
             WaitUtils.waitFor1000Milliseconds();;
@@ -55,7 +55,7 @@ public class TC047 extends BaseClass {
             logger.info("Clicked on Create Test Run Button");
 
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.selectEpic(Epic);
             logger.info("Epic selected from dropdown:" + Epic);
 
@@ -64,7 +64,7 @@ public class TC047 extends BaseClass {
 
             authorTestCasePage.clickRequirement(rq);
             logger.info("Requirement selected :" + rq);
-
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.selectTestCaseCheckbox(Tc_ID);
             logger.info("Selected Test Case ID:" + Tc_ID);
 

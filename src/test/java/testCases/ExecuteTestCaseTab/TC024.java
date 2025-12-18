@@ -31,7 +31,7 @@ public class TC024 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projName);
+            executeLandingPage.clickToSelectProject(projName);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + projName);
@@ -46,6 +46,7 @@ public class TC024 extends BaseClass {
             individualTestrun.clickLinkDefect();
             logger.info("clicked on linkdefect button");
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.clickNew();
             logger.info("clicked on new defect button");
             linkDefectPage.enterSummary(defSummary);

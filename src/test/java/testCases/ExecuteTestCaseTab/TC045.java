@@ -26,7 +26,7 @@ public class TC045 extends BaseClass {
             page.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
-            page.clickArrowRightPointingForExpandModule(projectname);
+            page.clickToSelectProject(projectname);
             Assert.assertTrue(page.selectedModuleOrReleaseName(projectname).isDisplayed(), "Project not visible");
             logger.info("Expanded project: " + projectname);
 

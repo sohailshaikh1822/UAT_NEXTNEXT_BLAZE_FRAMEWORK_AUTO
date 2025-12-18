@@ -28,7 +28,7 @@ public class TC032 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projName);
+            executeLandingPage.clickToSelectProject(projName);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + projName);
