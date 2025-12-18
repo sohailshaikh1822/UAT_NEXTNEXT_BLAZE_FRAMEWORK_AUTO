@@ -11,7 +11,7 @@ import utils.RetryAnalyzer;
 
 public class TC017 extends BaseClass {
 
-    @Test(dataProvider = "tc007", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc017", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyFunctionalityOfDefectButton(String projectName,
             String release,
             String cycle,
@@ -30,7 +30,7 @@ public class TC017 extends BaseClass {
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(release);
+            executeLandingPage.expandRelease(release);
             logger.info("Expanded the release {}", release);
 
             executeLandingPage.clickArrowRightToExpandModule(cycle);

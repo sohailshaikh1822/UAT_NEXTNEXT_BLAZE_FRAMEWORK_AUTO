@@ -19,7 +19,7 @@ public class AddTestcasePage extends BasePage {
 
     // locators
 
-    @FindBy(xpath = "(//input[@type='text'])[1]")
+    @FindBy(xpath = "//tbody/tr/td[1]")
     WebElement textName;
 
     @FindBy(xpath = "(//input[@type='text'])[2]")

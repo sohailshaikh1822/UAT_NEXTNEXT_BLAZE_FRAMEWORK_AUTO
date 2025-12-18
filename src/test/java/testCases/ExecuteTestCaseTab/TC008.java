@@ -20,18 +20,20 @@ public class TC008 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded the Release dropdown from left panel");
 
             executeLandingPage.clickRelease(releaseName);
             logger.info("Clicked on the desired release from the dropdown");
+            WaitUtils.waitFor2000Milliseconds();
+
             String currentPageBefore = executeLandingPage.getCurrentPageNumber();
             logger.info("Current page before clicking next arrow: " + currentPageBefore);
 
             executeLandingPage.clickNextArrow();
             logger.info("Clicked the next arrow button to go to the next page");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             String currentPageAfter = executeLandingPage.getCurrentPageNumber();
             logger.info("Current page after clicking next arrow: " + currentPageAfter);

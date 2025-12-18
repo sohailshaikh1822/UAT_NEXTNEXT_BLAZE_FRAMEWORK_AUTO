@@ -30,7 +30,7 @@ public class TC038 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -46,7 +46,7 @@ public class TC038 extends BaseClass {
             executeLandingPage.selectStatus(status);
             logger.info("Selected status filter: " + status);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             for (String actualStatus : executeLandingPage.getAllDisplayedStatuses()) {
                 logger.info("Captured status: " + actualStatus);

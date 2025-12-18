@@ -33,7 +33,7 @@ public class TC052 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projectName);
+            executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
@@ -66,6 +66,16 @@ public class TC052 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
+
+             individualTestrun.clickSaveButton();
+            WaitUtils.waitFor1000Milliseconds();
+
+            individualTestrun.clickCloseButton();
+            WaitUtils.waitFor1000Milliseconds();
+
+            executeLandingPage.clickTestRunById(TR);
+
+            individualTestrun.clickTabExecutionHistory();
 
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
             logger.info("Entered actual result: " + actual_result + " in step: " + stepno);

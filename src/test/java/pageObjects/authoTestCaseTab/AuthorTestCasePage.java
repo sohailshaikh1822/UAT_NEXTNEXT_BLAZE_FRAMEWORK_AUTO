@@ -20,7 +20,7 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     // locators
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[2]")
+    @FindBy(xpath = "//*[normalize-space()='Epic']/following::select[1]")
     WebElement dropdownEpic;
 
     @FindBy(xpath = "//span[normalize-space()='Epic']")
@@ -32,7 +32,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]/option")
     List<WebElement> optionsFeatures;
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]")
+    @FindBy(xpath = "//*[normalize-space()='Epic']/following::select[2]")
     WebElement dropdownFeature;
 
     public WebElement linkRequirement(String reqId) {

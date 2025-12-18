@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 @Test(retryAnalyzer = RetryAnalyzer.class)
 public class TC030 extends BaseClass {
@@ -17,6 +18,7 @@ public class TC030 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickHelpBtn();
             logger.info("Clicked on the Help Btn");
 

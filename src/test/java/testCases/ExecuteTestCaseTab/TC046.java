@@ -26,7 +26,7 @@ public class TC046 extends BaseClass {
             page.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
-            page.clickArrowRightPointingForExpandModule(projectname);
+            page.clickToSelectProject(projectname);
             Assert.assertTrue(page.selectedModuleOrReleaseName(projectname).isDisplayed(), "Project not visible");
             logger.info("Expanded project: " + projectname);
 
@@ -44,14 +44,14 @@ public class TC046 extends BaseClass {
             page.clickCreateTestRunButton();
             logger.info("Clicked 'Create New Test Run'");
 
-            WaitUtils.waitFor200Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             page.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
 
             page.selectTestCaseCheckbox(testCaseID);
             logger.info("Selected test case ID: " + testCaseID);
-            WaitUtils.waitFor200Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             page.clickCancelInPopup();
             logger.info("Verified that Save and Cancel buttons appear after selecting a test case.");

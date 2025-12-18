@@ -1,6 +1,7 @@
 package testCases.ExecuteTestCaseTab;
 
 import DataProviders.ExecuteTestCaseDataProvider;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
@@ -29,7 +30,9 @@ public class TC021 extends BaseClass {
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
-            executeLandingPage.clickArrowRightPointingForExpandModule(projName);
+            executeLandingPage.clickToSelectProject(projName);
+            WaitUtils.waitFor2000Milliseconds();
+
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + projName);
@@ -45,10 +48,12 @@ public class TC021 extends BaseClass {
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             individualTestRun.clickLinkDefect();
             logger.info("Clicked on link defect ");
+            WaitUtils.waitFor1000Milliseconds();
 
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
             linkDefectPage.enterDefectSearch(defectID.replaceAll("[^0-9]", ""));
             logger.info("Entered the defect defect id");
+            WaitUtils.waitFor2000Milliseconds();
 
             linkDefectPage.clickSearchButton();
             logger.info("Searched the defect");
@@ -57,10 +62,11 @@ public class TC021 extends BaseClass {
             logger.info("clicked on defect id {}", defectID);
 
             linkDefectPage.clickLink();
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             logger.info("defect is linked successfully");
 
             individualTestrun.clickLinkDefect();
+            WaitUtils.waitFor1000Milliseconds();
 
             linkDefectPage.clickUnlinkButtonByDefectId(defectID);
             logger.info("Defect is unlinked successfully");

@@ -31,7 +31,7 @@ public class ExecuteLandingPage extends BasePage {
     @FindBy(xpath = "//div[@class='project ']")
     List<WebElement> allProjects;
 
-    @FindBy(xpath = "//div[@class='project ']")
+    @FindBy(xpath = "//select[@class='text select-dropdown']")
     WebElement labelProjectName;
 
     @FindBy(xpath = "//div[contains(@class,'project')]//i[contains(@class,'fa-caret-right') and contains(@class,'toggle-icon')]")
@@ -212,15 +212,21 @@ public class ExecuteLandingPage extends BasePage {
     }
 
     public void clickOnProject() {
-        driver.findElement(By.xpath("//div[@class='project ']")).click();
+        driver.findElement(By.xpath("//select[@class='text select-dropdown']")).click();
     }
 
     // ================= METHODS =================
 
-    public void clickArrowRightPointingForExpandModule(String moduleName) throws InterruptedException {
-        arrowRightToExpand(moduleName).click();
-        WaitUtils.waitFor1000Milliseconds();
-        ;
+    public void clickToSelectProject(String moduleName) throws InterruptedException {
+      //  arrowRightToExpand(moduleName).click();
+
+      //  WaitUtils.waitFor1000Milliseconds();
+
+        WebElement dropdown = driver.findElement(By.xpath("//select[@class='text select-dropdown']"));
+
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(moduleName);
+
     }
 
     public WebElement selectedModuleOrReleaseName(String name) {
@@ -469,7 +475,7 @@ public class ExecuteLandingPage extends BasePage {
         buttonActionPlay(tcIO).click();
     }
 
-    @FindBy(xpath = "//button[@class='cell-4 runButton']")
+    @FindBy(xpath = "(//button[@class='cell-4 runButton '])[1]")
     WebElement playButton;
 
     public void clickOnAnyPlayButton() throws InterruptedException {
