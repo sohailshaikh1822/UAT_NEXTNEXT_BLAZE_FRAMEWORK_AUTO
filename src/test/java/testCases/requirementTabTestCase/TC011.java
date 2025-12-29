@@ -1,12 +1,12 @@
 package testCases.requirementTabTestCase;
 
 import DataProviders.RequirementDataProvider;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.requirementTab.RequirementTabPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC011 extends BaseClass {
 
@@ -27,9 +27,11 @@ public class TC011 extends BaseClass {
             reqPage.clickRequirementTab();
             logger.info("clicked on requirement tab");
 
-            reqPage.clickArrowRightPointingForExpandModule(project);
+            reqPage.clickDropdownToSelectProject(project);
             logger.info("Selected project" + project);
 
+            reqPage.clickArrowRightPointingForExpandModule(epic);
+            WaitUtils.waitFor2000Milliseconds();
             reqPage.clickOnModule(epic);
             logger.info("Selected epic" + epic);
 

@@ -7,6 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC001 extends BaseClass {
 
@@ -23,11 +24,14 @@ public class TC001 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-            requirementTabPage.clickArrowRightPointingForExpandModule(project);
+            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigated to the project");
+            WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Navigated to Module");
             requirementTabPage.clickOnModule(feature);
             logger.info("clicked on specific module");

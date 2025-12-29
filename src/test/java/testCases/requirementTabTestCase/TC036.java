@@ -33,7 +33,7 @@ public class TC036 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();;
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(project);
+            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Selected project" + project);
 
             requirementTabPage.clickOnModule(epic);

@@ -7,6 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC028 extends BaseClass {
 
@@ -28,9 +29,11 @@ public class TC028 extends BaseClass {
             reqPage.clickRequirementTab();
             logger.info("clicked on requirement tab");
 
-            reqPage.clickArrowRightPointingForExpandModule(project);
+            reqPage.clickDropdownToSelectProject(project);
             logger.info("Selected project" + project);
 
+            reqPage.clickArrowRightPointingForExpandModule(epic);
+            WaitUtils.waitFor2000Milliseconds();
             reqPage.clickOnModule(epic);
             logger.info("Selected epic" + epic);
 

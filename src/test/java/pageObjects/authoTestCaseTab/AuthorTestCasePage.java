@@ -36,7 +36,7 @@ public class AuthorTestCasePage extends BasePage {
     WebElement dropdownFeature;
 
     public WebElement linkRequirement(String reqId) {
-        return driver.findElement(By.xpath("//div[text()='" + reqId + "']"));
+        return driver.findElement(By.xpath("//*[starts-with(@class,'text-wrapper') and normalize-space()='"+reqId+"']"));
     }
 
     @FindBy(xpath = "//p[@class='supporting-text']")
@@ -574,7 +574,7 @@ public class AuthorTestCasePage extends BasePage {
 
     public void clickCloseButtonOnEditModal() {
         WebElement closeBtn = driver
-                .findElement(By.xpath("//button[@id='closeButton' or contains(@class,'close-button')]"));
+                .findElement(By.xpath("//button[@class='testcase-close-button']"));
         closeBtn.click();
     }
 

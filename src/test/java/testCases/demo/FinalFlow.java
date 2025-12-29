@@ -67,7 +67,7 @@ public class FinalFlow extends BaseClass {
             individualTestCasePage.clickSaveButton();
             RequirementTabPage requirementTabPage1 = new RequirementTabPage(getDriver());
             requirementTabPage1.clickRequirementTab();
-            requirementTabPage1.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloud");
+            requirementTabPage1.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloud");
             requirementTabPage1.clickOnModule("Epic Mayukhjit");
             requirementTabPage1.clickDeleteModule();
             requirementTabPage1.clickConfirmDelete();
@@ -89,7 +89,7 @@ public class FinalFlow extends BaseClass {
         if (check) {
             RequirementTabPage requirementTabPage1 = new RequirementTabPage(getDriver());
             requirementTabPage1.clickRequirementTab();
-            requirementTabPage1.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloud");
+            requirementTabPage1.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloud");
             requirementTabPage1.clickOnModule("Epic Mayukhjit");
             requirementTabPage1.clickDeleteModule();
             requirementTabPage1.clickConfirmDelete();

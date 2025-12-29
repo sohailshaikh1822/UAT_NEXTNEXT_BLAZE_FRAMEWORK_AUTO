@@ -1,9 +1,6 @@
 package pageObjects.requirementTab;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,6 +21,9 @@ public class RequirementTabPage extends BasePage {
 
     @FindBy(xpath = "//span[@id='requirements']")
     WebElement tabRequirements;
+
+    @FindBy(xpath = "//div[normalize-space()='ADD TESTCASE']")
+    WebElement buttonAddTestCase;
 
     @FindBy(xpath = "//img[@alt='Close Sidebar']")
     WebElement closeSideBar;
@@ -110,6 +110,15 @@ public class RequirementTabPage extends BasePage {
 
 
     // Actions
+    public boolean isAddTestCaseButtonVisible1() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement element = wait.until(ExpectedConditions.visibilityOf(buttonAddTestCase));
+            return element.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -149,16 +158,20 @@ public class RequirementTabPage extends BasePage {
         iconDelete.click();
     }
 
-//    public void clickArrowRightPointingForExpandModule(String moduleName) {
-//        arrowBeforeExpandRightPointing(moduleName).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                By.xpath("//div[@class='tree-children']") // children of the project
-//        ));
-//    }
-
-    public void clickArrowRightPointingForExpandModule(String projectName) {
+    public void clickArrowRightPointingForExpandModule(String moduleName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        By arrow = By.xpath("//span[text()='" + projectName + "']/..//i[contains(@class,'tree-arrow')]");
+        // //span[text()='STG- SPARK Modernization']//preceding-sibling::span[2]//i (
+        By arrow = By.xpath("//span[text()='" + moduleName + "']//preceding-sibling::span[2]//i");
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(arrow));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        try { Thread.sleep(300); } catch (Exception ignored) {}
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    public void clickDropdownToSelectProject(String projectName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        // //span[text()='STG- SPARK Modernization']//preceding-sibling::span[2]//i (
+        By arrow = By.xpath("//option[text()='" + projectName + "']/parent::select");
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(arrow));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
         try { Thread.sleep(300); } catch (Exception ignored) {}

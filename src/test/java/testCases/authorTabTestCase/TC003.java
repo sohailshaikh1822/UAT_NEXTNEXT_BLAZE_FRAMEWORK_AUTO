@@ -23,7 +23,7 @@ public class TC003 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-            requirementTabPage.clickArrowRightPointingForExpandModule(projectName);
+            requirementTabPage.clickDropdownToSelectProject(projectName);
             logger.info("Navigated to the project");
             int expectedEpic = requirementTabPage.getAllModulesOnly();
             authorTestCasePage.clickAuthorTestcase();

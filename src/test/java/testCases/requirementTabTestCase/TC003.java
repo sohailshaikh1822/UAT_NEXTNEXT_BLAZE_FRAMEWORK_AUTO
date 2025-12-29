@@ -20,7 +20,7 @@ public class TC003 extends BaseClass {
             requirementsPage.clickRequirementTab();
 
             logger.info("Clicked on the Project from left panel to open the module");
-            requirementsPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            requirementsPage.clickDropdownToSelectProject("STG- SPARK Modernization");
             logger.info("Navigate to the project");
             requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");

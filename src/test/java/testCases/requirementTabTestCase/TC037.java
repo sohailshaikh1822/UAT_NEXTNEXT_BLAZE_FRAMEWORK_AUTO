@@ -29,7 +29,7 @@ public class TC037 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();;
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(mainProject);
+            requirementTabPage.clickDropdownToSelectProject(mainProject);
             logger.info("Expanded the main project: " + mainProject);
 
             requirementTabPage.clickOnModule(module);

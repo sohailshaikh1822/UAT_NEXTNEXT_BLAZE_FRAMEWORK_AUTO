@@ -27,7 +27,7 @@ public class TC032 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(projectName);
+            requirementTabPage.clickDropdownToSelectProject(projectName);
             logger.info("Expanded project: " + projectName);
 
             requirementTabPage.clickOnModule(moduleName);

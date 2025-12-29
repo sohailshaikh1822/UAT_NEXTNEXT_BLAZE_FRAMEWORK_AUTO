@@ -31,7 +31,7 @@ public class TC008 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();;
 //            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");

@@ -1,6 +1,5 @@
 package testCases.requirementTabTestCase;
 
-import DataProviders.RequirementDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.requirementTab.AddRequirementPage;
@@ -23,7 +22,7 @@ public class TC004 extends BaseClass {
 
             logger.info("Clicked on the Project from left panel to open the module");
 //            requirementsPage.clickOnTheProjectName();
-            requirementsPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            requirementsPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
             requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");
