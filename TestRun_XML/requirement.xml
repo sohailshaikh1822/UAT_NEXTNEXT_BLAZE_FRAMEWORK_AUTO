@@ -46,6 +46,7 @@
             <class name="testCases.requirementTabTestCase.TC048"/>
             <class name="testCases.requirementTabTestCase.TC049"/>
             <class name="testCases.requirementTabTestCase.TC050"/>
+            <class name="testCases.requirementTabTestCase.TC051"/>
         </classes>
     </test>
 </suite>
