@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC035 extends BaseClass {
 
@@ -19,6 +20,7 @@ public class TC035 extends BaseClass {
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
             boolean isButtonVisible = authorTestCasePage.isAddTestCaseButtonVisible1();
             Assert.assertTrue(isButtonVisible, "Add test case button is visible in the testcases section");

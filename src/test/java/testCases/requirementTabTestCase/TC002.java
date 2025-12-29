@@ -26,7 +26,7 @@ public class TC002 extends BaseClass {
             logger.info("Navigated to Requirement page");
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             for (int i = 0; i <= 1; i++) {
-                requirementTabPage.clickArrowRightPointingForExpandModule(project);
+                requirementTabPage.clickDropdownToSelectProject(project);
                 logger.info("Navigated to the project");
                 requirementTabPage.clickArrowRightPointingForExpandModule(epic);
                 logger.info("Navigated to Module");

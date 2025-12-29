@@ -44,7 +44,7 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//input[@type='text'])[3]")
     WebElement textPrecondition;
 
-    @FindBy(xpath = "//button[normalize-space()='SAVE']")
+    @FindBy(xpath = "//button[contains(text(),'SAVE')]")
     WebElement buttonSave;
 
     @FindBy(xpath = "//div[contains(text(), 'Error: Name is required.')]")
@@ -169,8 +169,8 @@ public class AddTestcasePage extends BasePage {
 
     public void clickSave() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(buttonSave).perform();
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(buttonSave).perform();
         wait.until(ExpectedConditions.visibilityOf(buttonSave));
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave));
         buttonSave.click();

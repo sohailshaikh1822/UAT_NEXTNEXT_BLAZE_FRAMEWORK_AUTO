@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC018 extends BaseClass {
 
@@ -19,9 +20,10 @@ public class TC018 extends BaseClass {
             logger.info("Logged in successfully");
 
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickEpic();
             logger.info("Navigated to Author Test Case tab");
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectEpic(epic);
             logger.info("selected the Epic");
 

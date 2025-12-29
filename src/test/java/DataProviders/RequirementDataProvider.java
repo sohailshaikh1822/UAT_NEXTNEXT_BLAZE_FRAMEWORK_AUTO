@@ -146,9 +146,64 @@ public class RequirementDataProvider {
         return ExcelDataProviders.getExcelDataForRequirement("tc037");
     }
 
-    @DataProvider(name = "tc036")
-    public static Object[][] getDataTC036() throws IOException {
-        return ExcelDataProviders.getExcelDataForRequirement("tc036");
+    @DataProvider(name = "tc038")
+    public static Object[][] getDataTC038() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc038");
+    }
+    @DataProvider(name = "tc039")
+    public static Object[][] getDataTC039() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc039");
+    }
+    @DataProvider(name = "tc040")
+    public static Object[][] getDataTC040() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc040");
+    }
+    @DataProvider(name = "tc041")
+    public static Object[][] getDataTC041() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc041");
+    }
+    @DataProvider(name = "tc042")
+    public static Object[][] getDataTC042() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc042");
+    }
+    @DataProvider(name = "tc043")
+    public static Object[][] getDataTC043() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc043");
+    }
+    @DataProvider(name = "tc044")
+    public static Object[][] getDataTC044() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc044");
+    }
+    @DataProvider(name = "tc045")
+    public static Object[][] getDataTC045() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc045");
+    }
+    @DataProvider(name = "tc046")
+    public static Object[][] getDataTC046() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc046");
+    }
+    @DataProvider(name = "tc047")
+    public static Object[][] getDataTC047() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc047");
+    }
+    @DataProvider(name = "tc048")
+    public static Object[][] getDataTC048() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc048");
+    }
+    @DataProvider(name = "tc049")
+    public static Object[][] getDataTC049() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc049");
+    }  @DataProvider(name = "tc050")
+    public static Object[][] getDataTC050() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc050");
+    }
+    @DataProvider(name = "tc051")
+    public static Object[][] getDataTC051() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc051");
+    }
+    @DataProvider(name = "tc052")
+    public static Object[][] getDataTC052() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc052");
     }
 
 }

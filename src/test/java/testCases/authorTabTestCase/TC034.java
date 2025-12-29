@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import DataProviders.AuthorTestCaseDataProvider;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC034 extends BaseClass {
 
@@ -24,9 +25,10 @@ public class TC034 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
-
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickEpic();
             logger.info("Clicked on Epic Drop Down");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectEpic(epicName);
             logger.info("Selected Epic: " + epicName);
 

@@ -1,7 +1,6 @@
 package testCases.requirementTabTestCase;
 
 import DataProviders.RequirementDataProvider;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
@@ -29,7 +28,7 @@ public class TC021 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on 'Requirement' tab");
             WaitUtils.waitFor1000Milliseconds();
-            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
 
             WaitUtils.waitFor3000Milliseconds();;

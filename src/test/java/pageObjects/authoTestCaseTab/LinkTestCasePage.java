@@ -26,6 +26,10 @@ public class LinkTestCasePage extends BasePage {
     @FindBy(xpath = "//p[@id='actionDialogtp-message']")
     WebElement alert;
 
+    @FindBy(xpath = "//div[@id='notification']")
+    WebElement LinkingTcNotification;
+
+
     // Actions
     public void enterSearchText(String tcName) {
         searchTC.clear();
@@ -56,4 +60,9 @@ public class LinkTestCasePage extends BasePage {
         String message = getAlertMessage();
         return message.contains("This test case is already linked to the requirement.");
     }
+    public String getAlertMessageWhileLinkingNewTc() {
+        return LinkingTcNotification.getText();
+    }
+
+
 }

@@ -10,6 +10,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 import java.time.Duration;
 import java.util.List;
@@ -37,9 +38,11 @@ public class TC025 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(projectName);
+            requirementTabPage.clickDropdownToSelectProject(projectName);
             logger.info("Expanded project: " + projectName);
 
+            requirementTabPage.clickArrowRightPointingForExpandModule(moduleName);
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(moduleName);
             logger.info("Opened module: " + moduleName);
 

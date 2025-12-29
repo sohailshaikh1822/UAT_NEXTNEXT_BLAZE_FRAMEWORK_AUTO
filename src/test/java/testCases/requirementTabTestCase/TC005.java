@@ -26,7 +26,7 @@ public class TC005 extends BaseClass {
 //            requirementTabPage.clickProjectName();
 //            logger.info("Clicked on project: " + ProjectName);
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(ProjectName);
+            requirementTabPage.clickDropdownToSelectProject(ProjectName);
             logger.info("Clicked on the project");
 
 

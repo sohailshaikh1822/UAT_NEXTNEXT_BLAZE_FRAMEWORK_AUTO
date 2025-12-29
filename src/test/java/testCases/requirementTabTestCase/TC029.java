@@ -7,6 +7,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC029 extends BaseClass {
 
@@ -24,8 +25,10 @@ public class TC029 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-            requirementTabPage.clickArrowRightPointingForExpandModule(project);
+            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigated to the project");
+            requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+            WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             logger.info("clicked on specific epic");
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
@@ -39,7 +42,7 @@ public class TC029 extends BaseClass {
             Assert.assertEquals(individualModulePage.getModuleName(), epic2);
             logger.info("Verified successfully that we can navigate ");
             getDriver().navigate().refresh();
-            requirementTabPage.clickArrowRightPointingForExpandModule(project);
+            requirementTabPage.clickDropdownToSelectProject(project);
             requirementTabPage.clickOnModule(epic);
             logger.info("Clicked on that epic again");
             individualModulePage.setActualDescription(description);

@@ -20,8 +20,10 @@ public class TC073 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Clicked Author Testcase tab");
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.selectEpic("Epic Mohit");
             logger.info("Selected epic");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectFeature("Mohit Feature");
             logger.info("Selected feature");
             String reqId = "RQ-489";

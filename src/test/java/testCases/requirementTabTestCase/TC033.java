@@ -28,7 +28,7 @@ public class TC033 extends BaseClass {
             logger.info("Unique module name generated: " + uniqueModuleName);
             requirementTabPage.clickRequirementTab();
 //            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickArrowRightPointingForExpandModule("STG- PulseCodeOnAzureCloude");
+            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
             logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
             logger.info("Navigated to Module");
@@ -41,7 +41,7 @@ public class TC033 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(projectName);
+            requirementTabPage.clickDropdownToSelectProject(projectName);
             logger.info("Expanded project: " + projectName);
 
             requirementTabPage.clickOnModule(uniqueModuleName);
