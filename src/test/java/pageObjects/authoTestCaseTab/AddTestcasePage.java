@@ -19,10 +19,15 @@ public class AddTestcasePage extends BasePage {
 
     // locators
 
-    @FindBy(xpath = "//tbody/tr/td[1]")
+//    @FindBy(xpath = "(//input[@type='text'])[1]")
+//    WebElement textName;
+    @FindBy(xpath = "//table[@id='newTestCasesTable']//tbody//tr//td[1]//input[@type='text' and @maxlength='500']")
     WebElement textName;
 
-    @FindBy(xpath = "(//input[@type='text'])[2]")
+//    @FindBy(xpath = "(//input[@type='text'])[2]")
+//    WebElement textDescription;
+
+    @FindBy(xpath = "(//tbody//tr//td/input[@type='text' and @required])[2]")
     WebElement textDescription;
 
     @FindBy(xpath = "(//select[@class='priorityDropdown testcase-text-wrapper-15 testcase-select'])[1]")
@@ -44,7 +49,7 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//input[@type='text'])[3]")
     WebElement textPrecondition;
 
-    @FindBy(xpath = "//button[contains(text(),'SAVE')]")
+    @FindBy(xpath = "//button[normalize-space()='SAVE']")
     WebElement buttonSave;
 
     @FindBy(xpath = "//div[contains(text(), 'Error: Name is required.')]")
@@ -169,8 +174,8 @@ public class AddTestcasePage extends BasePage {
 
     public void clickSave() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(buttonSave).perform();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(buttonSave).perform();
         wait.until(ExpectedConditions.visibilityOf(buttonSave));
         wait.until(ExpectedConditions.elementToBeClickable(buttonSave));
         buttonSave.click();
