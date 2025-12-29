@@ -49,7 +49,7 @@ public class AddTestcasePage extends BasePage {
     @FindBy(xpath = "(//input[@type='text'])[3]")
     WebElement textPrecondition;
 
-    @FindBy(xpath = "//button[normalize-space()='SAVE']")
+    @FindBy(xpath = "//button[@type='button' and contains(@class,'testcase-button') and normalize-space()='SAVE']")
     WebElement buttonSave;
 
     @FindBy(xpath = "//div[contains(text(), 'Error: Name is required.')]")
