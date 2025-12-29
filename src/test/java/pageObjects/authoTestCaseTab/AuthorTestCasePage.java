@@ -148,20 +148,33 @@ public class AuthorTestCasePage extends BasePage {
 //        Select select = new Select(dropdownEpic);
 //        select.selectByVisibleText(epicName);
 //    }
-
-    public void selectEpic(String epicName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+public void selectEpic(String epicName) {
+    try {
+        Thread.sleep(3000);
         dropdownEpic.click();
-        List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
-        for (WebElement option : options) {
-            if (option.getText().trim().equals(epicName)) {
-                option.click();
-                return;
-            }
-        }
-        throw new RuntimeException("Epic not found: " + epicName);
+        Thread.sleep(3000);
+        Select select = new Select(dropdownEpic);
+        select.selectByVisibleText(epicName);
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
     }
+}
+
+
+//    public void selectEpic(String epicName) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropdownEpic));
+//        dropdownEpic.click();
+//        List<WebElement> options = dropdownEpic.findElements(By.tagName("option"));
+//        for (WebElement option : options) {
+//            if (option.getText().trim().equals(epicName)) {
+//                option.click();
+//                return;
+//            }
+//        }
+//        throw new RuntimeException("Epic not found: " + epicName);
+//    }
 
 
 
@@ -653,4 +666,33 @@ public class AuthorTestCasePage extends BasePage {
             return false;
         }
     }
+    public void clickAddTestCaseAndEnterName(String testCaseName) {
+        try {
+            Thread.sleep(2000);
+
+            WebElement addBtn = driver.findElement(By.id("createTestCaseButton"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addBtn);
+
+            Thread.sleep(2000);
+
+            By modal = By.id("createTestCasesModal");
+            By nameField = By.xpath(
+                    "//div[@id='createTestCasesModal']//table[@id='newTestCasesTable']//tbody//tr//td[1]//input[@type='text' and @maxlength='500']"
+            );
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(modal));
+
+            WebElement input = wait.until(ExpectedConditions.elementToBeClickable(nameField));
+            input.click();
+            input.clear();
+            input.sendKeys(testCaseName);
+
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

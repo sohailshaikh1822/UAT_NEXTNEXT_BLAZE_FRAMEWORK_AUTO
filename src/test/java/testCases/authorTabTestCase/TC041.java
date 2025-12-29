@@ -40,10 +40,11 @@ public class TC041 extends BaseClass {
 
             int before = authorTestCasePage.extractNumber(totalCountBeforeAddTestcase);
             WaitUtils.waitFor1000Milliseconds();
-            authorTestCasePage.clickAddTestcase();
-            logger.info("Clicked 'Add Test Case' button.");
-            WaitUtils.waitFor1000Milliseconds();
-            addTestcasePage.setTestCaseName(tcName);
+//            authorTestCasePage.clickAddTestcase();
+//            logger.info("Clicked 'Add Test Case' button.");
+//            WaitUtils.waitFor1000Milliseconds();
+//            addTestcasePage.setTestCaseName(tcName);
+            authorTestCasePage.clickAddTestCaseAndEnterName(tcName);
             logger.info("Test case name set to: " + tcName);
             WaitUtils.waitFor1000Milliseconds();
             addTestcasePage.setDescription(description);
