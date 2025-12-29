@@ -89,6 +89,14 @@ public class RequirementTabPage extends BasePage {
     @FindBy(id = "cancelBtn")
     WebElement btnNoInDeleteNotification;
 
+    @FindBy(xpath = "//i[@class='fa-solid tree-arrow fa-caret-right']")
+    List<WebElement> epicArrowRight;
+
+    @FindBy(xpath = "//i[@class='fa-solid tree-arrow fa-caret-down']")
+    List<WebElement> epicArrowDown;
+
+
+
     public WebElement leftModuleNameByName(String name) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -108,8 +116,19 @@ public class RequirementTabPage extends BasePage {
     List<WebElement> allModulesIncludeProject;
 
 
-
     // Actions
+
+    public void clickEpicDropdown() {
+        if (!epicArrowRight.isEmpty()) {
+            WebElement arrow = epicArrowRight.get(0);
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", arrow);
+            js.executeScript("arguments[0].click();", arrow);
+        }
+        // If arrow-down is present, Epic is already expanded
+    }
+
+
     public boolean isAddTestCaseButtonVisible1() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -355,6 +374,8 @@ public class RequirementTabPage extends BasePage {
         buttonYesConfirmDelete.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
+
+
 
 
 
