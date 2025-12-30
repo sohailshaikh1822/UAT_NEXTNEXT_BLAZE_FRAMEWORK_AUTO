@@ -148,6 +148,15 @@ public class IndividualTestCasePage extends BasePage {
         return confirmationMessage.getText();
     }
 
+    public boolean isApproveBtnDisplayed() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            return wait.until(ExpectedConditions.visibilityOf(approveBtn)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public boolean isModelDisplayed() {
         try {
