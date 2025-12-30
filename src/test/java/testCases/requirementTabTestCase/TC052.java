@@ -11,15 +11,16 @@ import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
-@Test(dataProvider = "tc042", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
-public class TC042 extends BaseClass {
+@Test(dataProvider = "tc052", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
-    public void VerifyPreventionOfDuplicateLinking(
+public class TC052 extends BaseClass {
+    public void VerifyUserCanCreateNewTcInDifferentReq(
             String mainProject,
             String epic,
             String requirementId,
-            String tcName
+            String tcName, String description,
+            String priority, String type, String qaUser, String preCondition
     ) throws InterruptedException {
 
         logger.info("****** Starting the Log in Test Case *****************");
@@ -27,10 +28,7 @@ public class TC042 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
-
             WaitUtils.waitFor1000Milliseconds();
-
-
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -39,38 +37,43 @@ public class TC042 extends BaseClass {
             authorTestCasePage.clickAuthorTestcase();
             WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
-
             requirementTabPage.clickDropdownToSelectProject(mainProject);
             logger.info("Expanded the main project: " + mainProject);
-
             WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             WaitUtils.waitFor1000Milliseconds();
-
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked on requirement id " + requirementId);
             WaitUtils.waitFor1000Milliseconds();
-
-            authorTestCasePage.clicklinktestcase();
-            logger.info("Clicked on LinkTestcase Button");
-            linkTestCasePage.searchTestCase(tcName);
-            logger.info("Searched with TcName");
-
-            linkTestCasePage.clickSearch();
-            logger.info("Clicked Search Button");
-            linkTestCasePage.clickPid(tcName);
-            logger.info("Clicked Searched TestCasename");
+            authorTestCasePage.clickAddTestcase();
+            logger.info("Clicked 'Add Test Case' button.");
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.setTestCaseName(tcName);
+            logger.info("Test case name set to: " + tcName);
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.setDescription(description);
+            logger.info("Test case description set.");
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.selectPriority(priority);
+            logger.info("Priority set to: " + priority);
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.selectType(type);
+            logger.info("Type set to: " + type);
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.selectQaUser(qaUser);
+            logger.info("QA user assigned: " + qaUser);
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.setPrecondition(preCondition);
+            logger.info("Precondition set.");
             WaitUtils.waitFor3000Milliseconds();
-            //Test case linked successfully.
-            String expectedMessage = "This test case is already linked to the requirement.";
-            String actualMessage = linkTestCasePage.getAlertMessage();
+            addTestcasePage.clickSave();
+            logger.info("New test case saved successfully.");
+            String expectedMessage = "Test case linked successfully.";
+            String actualMessage = linkTestCasePage.getAlertMessageWhileLinkingNewTc();
             Assert.assertEquals(actualMessage, expectedMessage);
             logger.info("Linked Test Cases screen displayed successfully");
-            WaitUtils.waitFor3000Milliseconds();
-
-
         } catch (Exception | AssertionError e) {
             logger.error("Test case failed ...", e);
             throw e;

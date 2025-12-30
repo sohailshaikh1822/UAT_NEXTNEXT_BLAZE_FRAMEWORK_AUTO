@@ -10,7 +10,7 @@ import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
-@Test(dataProvider = "tc039", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+@Test(dataProvider = "tc038", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
 public class TC038 extends BaseClass {
     public void VerifyVisiblityOfAddTestCaseButton(String mainProject,String epic,

@@ -11,7 +11,7 @@ import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
-@Test(dataProvider = "tc041", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+@Test(dataProvider = "tc045", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
 public class TC045 extends BaseClass {
 

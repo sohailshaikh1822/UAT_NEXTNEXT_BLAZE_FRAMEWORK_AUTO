@@ -11,26 +11,19 @@ import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
-@Test(dataProvider = "tc042", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+@Test(dataProvider = "tc054", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
-public class TC042 extends BaseClass {
+public class TC054 extends BaseClass {
 
-    public void VerifyPreventionOfDuplicateLinking(
-            String mainProject,
-            String epic,
-            String requirementId,
-            String tcName
-    ) throws InterruptedException {
 
-        logger.info("****** Starting the Log in Test Case *****************");
-
+    public void verifyMaxLengthOfTcName(  String mainProject,
+                                          String epic,
+                                          String requirementId) throws InterruptedException {
+        logger.info("****** Starting the Test Case *****************");
         try {
             login();
             logger.info("Logged in successfully");
-
             WaitUtils.waitFor1000Milliseconds();
-
-
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
@@ -39,42 +32,35 @@ public class TC042 extends BaseClass {
             authorTestCasePage.clickAuthorTestcase();
             WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
-
             requirementTabPage.clickDropdownToSelectProject(mainProject);
             logger.info("Expanded the main project: " + mainProject);
-
             WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             WaitUtils.waitFor1000Milliseconds();
-
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked on requirement id " + requirementId);
             WaitUtils.waitFor1000Milliseconds();
+            authorTestCasePage.clickAddTestcase();
+            logger.info("Clicked 'Add Test Case' button.");
+            WaitUtils.waitFor1000Milliseconds();
+            logger.info("Entering a long name (600 chars) to verify max length enforcement...");
+            String actualEnteredName = addTestcasePage.verifyTestCaseNameMaxLength();
+            logger.info("Length of entered name: " + actualEnteredName.length());
+            Assert.assertTrue(actualEnteredName.length() >= 500,
+                    "Test case name field accepted more than 500 characters! Length: " + actualEnteredName.length());
+            logger.info("Verified that name field does not accept more than 500 characters");
 
-            authorTestCasePage.clicklinktestcase();
-            logger.info("Clicked on LinkTestcase Button");
-            linkTestCasePage.searchTestCase(tcName);
-            logger.info("Searched with TcName");
+            addTestcasePage.clickSave();
+            logger.info("Clicked the save button");
 
-            linkTestCasePage.clickSearch();
-            logger.info("Clicked Search Button");
-            linkTestCasePage.clickPid(tcName);
-            logger.info("Clicked Searched TestCasename");
-            WaitUtils.waitFor3000Milliseconds();
-            //Test case linked successfully.
-            String expectedMessage = "This test case is already linked to the requirement.";
-            String actualMessage = linkTestCasePage.getAlertMessage();
-            Assert.assertEquals(actualMessage, expectedMessage);
-            logger.info("Linked Test Cases screen displayed successfully");
-            WaitUtils.waitFor3000Milliseconds();
-
-
-        } catch (Exception | AssertionError e) {
-            logger.error("Test case failed ...", e);
+        } catch (Exception e) {
+            logger.error("Exception occurred: " + e.getMessage(), e);
             throw e;
         }
+
         logger.info("************ Test Case Finished *************************");
+
     }
 }
