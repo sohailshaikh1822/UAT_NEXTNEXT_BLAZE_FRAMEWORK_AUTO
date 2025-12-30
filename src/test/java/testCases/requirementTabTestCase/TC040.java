@@ -10,10 +10,10 @@ import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
-@Test(dataProvider = "tc039", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+@Test(dataProvider = "tc040", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
 public class TC040 extends BaseClass {
-    public void VerifyAvailableTestcasesAreListedIntheSelectionview(
+    public void VerifyAvailableTestcasesAreListedInTheSelectionView(
             String mainProject,
             String epic,
             String requirementId
