@@ -81,6 +81,19 @@ public class IndividualTestCasePage extends BasePage {
 
     @FindBy(xpath = "//span[@class='step-number']")
     List<WebElement> allSteps;
+// New Locator
+
+    @FindBy(xpath = "//div[contains (text(),'APPROVE')]")
+    WebElement approveBtn;
+
+    @FindBy(xpath = "//div[@id='version']")
+    WebElement version;
+
+    @FindBy(xpath = "//div[@id='notification']")
+    WebElement confirmationMessage;
+
+
+
 
     public WebElement labelStepNo(String s) {
         return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + s + "']"));
@@ -122,6 +135,19 @@ public class IndividualTestCasePage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
     }
+    public void clickApproveButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(approveBtn)).click();
+    }
+
+    public String getVersion(String s) {
+        return version.getText();
+    }
+
+    public String getConfirmationMessage(String s) {
+        return confirmationMessage.getText();
+    }
+
 
     public boolean isModelDisplayed() {
         try {
