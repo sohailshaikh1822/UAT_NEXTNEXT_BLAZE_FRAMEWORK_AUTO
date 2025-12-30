@@ -115,6 +115,9 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
+    @FindBy(xpath = "(//i[@class='fa-solid fa-download'])[1]")
+    List<WebElement> downloadAttachement;
+
 
     // Actions
 
@@ -145,6 +148,16 @@ public class RequirementTabPage extends BasePage {
         WaitUtils.waitFor1000Milliseconds();;
         tabRequirements.click();
         WaitUtils.waitFor1000Milliseconds();;
+    }
+
+    public void clickDownloadAttachementButton(int index) {
+        if (index < downloadAttachement.size()){
+            WebElement downloadIcon = downloadAttachement.get(index);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", downloadIcon);
+            downloadIcon.click();
+        } else {
+            System.out.println("Invalid index: " + index);
+        }
     }
 
     public void clickOnTheProjectName() throws InterruptedException {
