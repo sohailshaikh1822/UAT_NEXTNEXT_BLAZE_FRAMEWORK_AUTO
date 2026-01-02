@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="Author Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="headed"/>
         <classes>
             <class name="testCases.authorTabTestCase.TC001"/>
             <class name="testCases.authorTabTestCase.TC002"/>
@@ -62,6 +62,9 @@
             <class name="testCases.authorTabTestCase.TC071"/>
             <class name="testCases.authorTabTestCase.TC072"/>
             <class name="testCases.authorTabTestCase.TC073"/>
+            <class name="testCases.authorTabTestCase.TC074"/>
+            <class name="testCases.authorTabTestCase.TC075"/>
+            <class name="testCases.authorTabTestCase.TC076"/>
         </classes>
     </test>
 </suite>
