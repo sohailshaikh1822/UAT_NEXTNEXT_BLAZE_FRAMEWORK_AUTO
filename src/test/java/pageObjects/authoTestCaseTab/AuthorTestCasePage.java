@@ -438,7 +438,7 @@ public void selectEpic(String epicName) {
 
         while (true) {
             // Re-fetch the test case elements each time (to avoid stale elements)
-            List<WebElement> allCases = driver.findElements(By.xpath("//div[@class='testlistcell']/a"));
+            List<WebElement> allCases = driver.findElements(By.xpath("//div[@class='testlisttable']//a"));
 
             boolean found = false;
             for (WebElement ele : allCases) {

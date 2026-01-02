@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
@@ -140,18 +141,18 @@ public class IndividualTestCasePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(approveBtn)).click();
     }
 
-    public String getVersion(String s) {
+    public String getVersion() {
         return version.getText();
     }
 
-    public String getConfirmationMessage(String s) {
+    public String getConfirmationMessage() {
         return confirmationMessage.getText();
     }
 
     public boolean isApproveBtnDisplayed() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            return wait.until(ExpectedConditions.visibilityOf(approveBtn)).isDisplayed();
+            return wait.until(ExpectedConditions.visibilityOf(buttonSave)).isDisplayed();
         } catch (Exception e) {
             return false;
         }
@@ -223,17 +224,38 @@ public class IndividualTestCasePage extends BasePage {
         deleteButton.click();
     }
 
-    public void clickSaveButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        Actions actions = new Actions(driver);
-        WebElement saveBtn = wait.until(ExpectedConditions
-                .elementToBeClickable(buttonSave));
-        actions.moveToElement(saveBtn).perform();
-        saveBtn.click();
-//        wait.until(ExpectedConditions.textToBePresentInElementLocated(
-//                By.xpath("//div[@id='notification']"),
-//                "Test Case updated successfully."));
+//
+public void clickSaveButton() {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    Actions actions = new Actions(driver);
+
+    List<WebElement> saveButtons = wait.until(
+            ExpectedConditions.presenceOfAllElementsLocatedBy(
+                    By.xpath("//div[normalize-space()='SAVE']")
+            )
+    );
+
+    int attempts = Math.min(3, saveButtons.size());
+
+    for (int i = 0; i < attempts; i++) {
+        try {
+            WebElement saveBtn = wait.until(
+                    ExpectedConditions.elementToBeClickable(saveButtons.get(i))
+            );
+
+            actions.moveToElement(saveBtn).pause(Duration.ofMillis(300)).perform();
+            saveBtn.click();
+
+            return;
+
+        } catch (Exception e) {
+            System.out.println("SAVE button attempt " + (i + 1) + " failed, trying next...");
+        }
     }
+
+    throw new RuntimeException("Unable to click any SAVE button after 3 attempts");
+}
+
 
     public void addTestStepsFromExcelForNewTestCase(String description, String expectedResult)
             throws InterruptedException {
@@ -323,6 +345,10 @@ public class IndividualTestCasePage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonClose)).click();
     }
+    public void clickCreateTestRunButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonCreateTestRun)).click();
+    }
 
     public boolean verifyTestCaseDetailsVisible() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -382,4 +408,12 @@ public class IndividualTestCasePage extends BasePage {
         }
     }
 
+
+    public void selectPriority(String priority) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(dropDownPriority));
+        wait.until(ExpectedConditions.elementToBeClickable(dropDownPriority));
+        Select select = new Select(dropDownPriority);
+        select.selectByVisibleText(priority);
+    }
 }
