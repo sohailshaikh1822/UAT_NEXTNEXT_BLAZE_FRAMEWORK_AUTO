@@ -12,6 +12,8 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import utils.WaitUtils;
 
 public class IndividualTestCasePage extends BasePage {
@@ -41,8 +43,12 @@ public class IndividualTestCasePage extends BasePage {
     @FindBy(xpath = "//textarea[@id='precondition']")
     WebElement textPrecondition;
 
-    @FindBy(xpath = "//div[@id='priority']//select[@class='testcase-select value']")
+//    @FindBy(xpath = "//div[@id='priority']//select[@class='testcase-select value']")
+//    WebElement dropDownPriority;
+
+    @FindBy(xpath = "//div[@id='priority']//select")
     WebElement dropDownPriority;
+
 
     @FindBy(xpath = "//div[@id='priority']//select[@class='testcase-select value']/option")
     List<WebElement> OptionsDropDownPriority;
@@ -409,11 +415,57 @@ public void clickSaveButton() {
     }
 
 
+//    public void selectPriority(String priority) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        wait.until(ExpectedConditions.visibilityOf(dropDownPriority));
+//        wait.until(ExpectedConditions.elementToBeClickable(dropDownPriority));
+//        Select select = new Select(dropDownPriority);
+//        select.selectByVisibleText(priority);
+//    }
+
+
+
     public void selectPriority(String priority) {
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(dropDownPriority));
         wait.until(ExpectedConditions.elementToBeClickable(dropDownPriority));
+
         Select select = new Select(dropDownPriority);
-        select.selectByVisibleText(priority);
+
+        switch (priority.trim().toLowerCase()) {
+            case "undecided":
+                select.selectByValue("721");
+                break;
+            case "low":
+                select.selectByValue("722");
+                break;
+            case "medium":
+                select.selectByValue("723");
+                break;
+            case "high":
+                select.selectByValue("724");
+                break;
+            case "urgent":
+                select.selectByValue("725");
+                break;
+            default:
+                throw new NoSuchElementException("Invalid priority: " + priority);
+        }
     }
+
+
+
+    public String getTestCaseVersion() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By versionLocator = By.xpath("//div[@id='version' and contains(@class,'testcase-input')]");
+
+        WebElement versionElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(versionLocator)
+        );
+
+        return versionElement.getText().trim();
+    }
+
 }

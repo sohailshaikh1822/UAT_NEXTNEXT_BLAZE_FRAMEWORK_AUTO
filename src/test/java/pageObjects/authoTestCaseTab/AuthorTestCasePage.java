@@ -569,6 +569,18 @@ public void selectEpic(String epicName) {
         }
     }
 
+    public void openTestCaseById(String testCaseId) {
+        String xpath =
+                "//div[@id='existingTestCasesInnerTable']" +
+                        "//div[contains(@class,'testlistrow')]" +
+                        "[.//a[normalize-space(text())='" + testCaseId + "']]" +
+                        "//a";
+
+        WebElement tcLink = driver.findElement(By.xpath(xpath));
+        tcLink.click();
+    }
+
+
     public String getFirstLinkedTestCaseName() {
         WebElement nameCell = driver.findElement(By.xpath("//table[@id='existingTestCasesTable']//tr[2]/td[2]"));
         return nameCell.getText().trim();
@@ -694,5 +706,34 @@ public void selectEpic(String epicName) {
             e.printStackTrace();
         }
     }
+
+    public void openNewlyCreatedTestCase() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+
+        By lastRowLocator = By.xpath(
+                "//div[@id='existingTestCasesInnerTable']//div[contains(@class,'testlistrow')][last()]"
+        );
+
+        WebElement lastRow = wait.until(
+                ExpectedConditions.presenceOfElementLocated(lastRowLocator)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", lastRow);
+
+        WebElement tcIdLink = lastRow.findElement(
+                By.xpath(".//a | .//div[contains(@class,'tc-id')]")
+        );
+
+        wait.until(ExpectedConditions.elementToBeClickable(tcIdLink));
+        tcIdLink.click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.id("rightPanel")
+        ));
+    }
+
 
 }
