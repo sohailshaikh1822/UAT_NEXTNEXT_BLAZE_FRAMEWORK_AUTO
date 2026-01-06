@@ -67,6 +67,8 @@
             <class name="testCases.authorTabTestCase.TC076"/>
             <class name="testCases.authorTabTestCase.TC082"/>
             <class name="testCases.authorTabTestCase.TC083"/>
+            <class name="testCases.authorTabTestCase.TC084"/>
+            <class name="testCases.authorTabTestCase.TC085"/>
         </classes>
     </test>
 </suite>
