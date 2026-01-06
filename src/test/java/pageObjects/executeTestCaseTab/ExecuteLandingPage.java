@@ -598,4 +598,19 @@ public class ExecuteLandingPage extends BasePage {
         }
     }
 
+    private void validateHighlightedNode(String nodeName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By highlightedNode = By.xpath(
+                "//div[contains(@class,'active') and .//text()[contains(normalize-space(.),'" + nodeName + "')]]"
+        );
+
+        WebElement node = wait.until(ExpectedConditions.visibilityOfElementLocated(highlightedNode));
+
+        if (!node.isDisplayed()) {
+            throw new AssertionError("Node not highlighted: " + nodeName);
+        }
+    }
+
+
 }
