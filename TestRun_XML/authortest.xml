@@ -20,7 +20,7 @@
             <class name="testCases.authorTabTestCase.TC012"/>
             <class name="testCases.authorTabTestCase.TC013"/>
             <class name="testCases.authorTabTestCase.TC014"/>
-          <class name="testCases.authorTabTestCase.TC018"/>
+            <class name="testCases.authorTabTestCase.TC018"/>
             <class name="testCases.authorTabTestCase.TC027"/>
             <class name="testCases.authorTabTestCase.TC028"/>
             <class name="testCases.authorTabTestCase.TC029"/>
@@ -65,6 +65,7 @@
             <class name="testCases.authorTabTestCase.TC074"/>
             <class name="testCases.authorTabTestCase.TC075"/>
             <class name="testCases.authorTabTestCase.TC076"/>
+            <class name="testCases.authorTabTestCase.TC082"/>
         </classes>
     </test>
 </suite>
