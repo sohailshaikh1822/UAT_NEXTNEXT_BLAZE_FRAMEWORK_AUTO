@@ -221,4 +221,14 @@ public class AuthorTestCaseDataProvider {
     public static Object[][] getDataTC083() throws IOException {
         return ExcelDataProviders.getExcelData("tc083");
     }
+
+    @DataProvider(name = "tc084")
+    public static Object[][] getDataTC084() throws IOException {
+        return ExcelDataProviders.getExcelData("tc084");
+    }
+
+    @DataProvider(name = "tc085")
+    public static Object[][] getDataTC085() throws IOException {
+        return ExcelDataProviders.getExcelData("tc085");
+    }
 }
