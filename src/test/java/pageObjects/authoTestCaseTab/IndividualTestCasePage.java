@@ -1,6 +1,7 @@
 package pageObjects.authoTestCaseTab;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,6 +14,7 @@ import pageObjects.BasePage;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import utils.WaitUtils;
 
@@ -415,15 +417,6 @@ public void clickSaveButton() {
     }
 
 
-//    public void selectPriority(String priority) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//        wait.until(ExpectedConditions.visibilityOf(dropDownPriority));
-//        wait.until(ExpectedConditions.elementToBeClickable(dropDownPriority));
-//        Select select = new Select(dropDownPriority);
-//        select.selectByVisibleText(priority);
-//    }
-
-
 
     public void selectPriority(String priority) {
 
@@ -467,5 +460,77 @@ public void clickSaveButton() {
 
         return versionElement.getText().trim();
     }
+
+//    public void selectReleaseAndClickSave(String releaseName) {
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        WebElement sidebar = wait.until(
+//                ExpectedConditions.visibilityOfElementLocated(By.id("sidebar"))
+//        );
+//
+//        By releaseLocator = By.xpath(
+//                ".//div[contains(@class,'releases')][.//text()[normalize-space(.)='" + releaseName + "']]"
+//        );
+//
+//        WebElement releaseElement = wait.until(
+//                ExpectedConditions.elementToBeClickable(
+//                        sidebar.findElement(releaseLocator)
+//                )
+//        );
+//
+//        js.executeScript("arguments[0].scrollIntoView({block:'center'});", releaseElement);
+//        js.executeScript("arguments[0].click();", releaseElement);
+//
+//        By saveButton = By.xpath(
+//                "//div[contains(@class,'test-run-popup-text-wrapper-5') and normalize-space()='SAVE']"
+//        );
+//
+//        WebElement saveElement = wait.until(
+//                ExpectedConditions.elementToBeClickable(saveButton)
+//        );
+//
+//        js.executeScript("arguments[0].click();", saveElement);
+//    }
+
+    public void selectReleaseAndClickSave(String releaseName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        WebElement sidebar = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("sidebar"))
+        );
+
+        By releaseLocator = By.xpath(
+                ".//div[contains(@class,'releases')][.//text()[normalize-space(.)='" + releaseName.trim() + "']]"
+        );
+
+        WebElement releaseElement = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        sidebar.findElement(releaseLocator)
+                )
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", releaseElement);
+        js.executeScript("arguments[0].click();", releaseElement);
+
+        wait.until(driver ->
+                Objects.requireNonNull(releaseElement.getAttribute("class")).contains("active")
+                        || Objects.requireNonNull(releaseElement.getAttribute("class")).contains("selected")
+        );
+
+        By saveButton = By.xpath(
+                "//div[contains(@class,'test-run-popup-text-wrapper-5') and normalize-space()='SAVE']"
+        );
+
+        WebElement saveElement = wait.until(
+                ExpectedConditions.elementToBeClickable(saveButton)
+        );
+
+        js.executeScript("arguments[0].click();", saveElement);
+    }
+
 
 }
