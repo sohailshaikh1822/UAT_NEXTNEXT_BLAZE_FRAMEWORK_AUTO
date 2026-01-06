@@ -878,5 +878,71 @@ public void selectEpic(String epicName) {
     }
 
 
+    public void verifyTestCaseApproveNotification(String tcId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("notification")));
+
+        String approverName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        boolean approveFound = false;
+        long endTime = System.currentTimeMillis() + 15000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            List<WebElement> notificationElements = driver.findElements(allNotifications);
+
+            for (WebElement element : notificationElements) {
+                String text = element.getText().trim();
+
+                if (text.contains(tcId) && text.contains("approved by")) {
+
+                    String expectedRegex =
+                            "'" + tcId + "' approved by "
+                                    + approverName.replace(" ", "\\s+")
+                                    + "\\.";
+
+                    if (!text.matches(expectedRegex)) {
+                        throw new AssertionError(
+                                "Approve notification format mismatch.\nExpected: "
+                                        + expectedRegex +
+                                        "\nActual: " + text
+                        );
+                    }
+
+                    approveFound = true;
+                    System.out.println("Approve notification verified successfully: " + text);
+                    break;
+                }
+            }
+
+            if (approveFound) {
+                break;
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        if (!approveFound) {
+            throw new AssertionError(
+                    "Approve notification not found for Test Case: " + tcId
+            );
+        }
+    }
+
+
+
 
 }
