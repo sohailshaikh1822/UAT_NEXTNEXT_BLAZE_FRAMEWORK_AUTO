@@ -58,7 +58,6 @@ public class WaitUtils {
     {
         sleep(3000);
     }
-
     public static void waitFor9000Milliseconds()
     {
         sleep(9000);
