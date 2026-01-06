@@ -877,7 +877,6 @@ public void selectEpic(String epicName) {
         }
     }
 
-
     public void verifyTestCaseApproveNotification(String tcId) {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -941,8 +940,5 @@ public void selectEpic(String epicName) {
             );
         }
     }
-
-
-
 
 }
