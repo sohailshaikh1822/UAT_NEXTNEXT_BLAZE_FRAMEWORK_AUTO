@@ -821,5 +821,62 @@ public void selectEpic(String epicName) {
         System.out.println("Notification verified successfully: " + actualText);
     }
 
+    public void verifyTestCaseUpdateNotification(String tcId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("notification")));
+
+        String updaterName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        // Open notification panel
+        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        // Get all notification texts
+        List<WebElement> notificationElements = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+        );
+
+        boolean updateFound = false;
+
+        for (WebElement element : notificationElements) {
+            String text = element.getText().trim();
+
+            if (text.contains(tcId) && text.contains("updated by")) {
+
+                String expectedRegex =
+                        "'" + tcId + "' updated by "
+                                + updaterName.replace(" ", "\\s+")
+                                + "\\.";
+
+                if (!text.matches(expectedRegex)) {
+                    throw new AssertionError(
+                            "Update notification format mismatch.\nExpected: "
+                                    + expectedRegex +
+                                    "\nActual: " + text
+                    );
+                }
+
+                updateFound = true;
+                System.out.println("Update notification verified successfully: " + text);
+                break;
+            }
+        }
+
+        if (!updateFound) {
+            throw new AssertionError(
+                    "Update notification not found for Test Case: " + tcId
+            );
+        }
+    }
+
+
 
 }
