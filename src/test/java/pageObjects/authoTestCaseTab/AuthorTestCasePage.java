@@ -735,5 +735,91 @@ public void selectEpic(String epicName) {
         ));
     }
 
+    public String getNewlyCreatedTestCaseId() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By lastRowLocator = By.xpath(
+                "//div[@id='existingTestCasesInnerTable']//div[contains(@class,'testlistrow')][last()]"
+        );
+
+        WebElement lastRow = wait.until(
+                ExpectedConditions.presenceOfElementLocated(lastRowLocator)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", lastRow);
+
+        WebElement tcIdElement = lastRow.findElement(
+                By.xpath(".//a[contains(text(),'TC-')] | .//div[contains(@class,'tc-id')]")
+        );
+
+        return tcIdElement.getText().trim();
+    }
+
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+
+
+    public void verifyTestCaseCreationNotificationForNewTC() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("notification")));
+
+        String newlyCreatedTcId = getNewlyCreatedTestCaseId();
+        String creatorName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By latestNotificationText = By.xpath(
+                "(//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')])[1]"
+        );
+
+        WebElement bell = wait.until(
+                ExpectedConditions.elementToBeClickable(notificationBell)
+        );
+        js.executeScript("arguments[0].click();", bell);
+
+
+        WebElement notifElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(latestNotificationText)
+        );
+
+        String actualText = notifElement.getText().trim();
+
+        String expectedRegex =
+                "'" + newlyCreatedTcId + "' created by "
+                        + creatorName.replace(" ", "\\s+")
+                        + "\\.";
+
+        if (!actualText.matches(expectedRegex)) {
+            throw new AssertionError(
+                    "Notification format mismatch.\nExpected: "
+                            + expectedRegex +
+                            "\nActual: " + actualText
+            );
+        }
+
+        System.out.println("Notification verified successfully: " + actualText);
+    }
+
 
 }
