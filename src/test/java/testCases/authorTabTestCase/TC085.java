@@ -9,10 +9,9 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC084 extends BaseClass {
-
-    @Test(dataProvider = "tc084", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void Verifying_the_notification_message_after_approving_a_new_Test_Case(
+public class TC085 extends BaseClass {
+    @Test(dataProvider = "tc085", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void Verifying_the_notification_message_after_creating_a_new_Test_Run(
             String epicName,
             String featureName,
             String rq_id,
@@ -20,9 +19,9 @@ public class TC084 extends BaseClass {
             String desc,
             String Type,
             String Qauser,
-            String Prior
+            String release
     ) throws InterruptedException {
-        logger.info("****** Starting TC084: Verifying the notification message after approving a new  Test Case ******");
+        logger.info("****** Starting TC085: Verifying the notification message after creating a new Test Run ******");
 
         try {
             login();
@@ -58,27 +57,26 @@ public class TC084 extends BaseClass {
             addTestcasePage.clickSave();
             logger.info("clicked on save button");
 
-
             WaitUtils.waitFor3000Milliseconds();
             String tcId = authorTestCasePage.getNewlyCreatedTestCaseId();
 
             authorTestCasePage.openNewlyCreatedTestCase();
             WaitUtils.waitFor3000Milliseconds();
 
-            individualTestCasePage.selectPriority(Prior);
-            logger.info("Selected priority: " + Prior);
-
+            individualTestCasePage.clickCreateTestRunButton();
+            logger.info("Clicked on Create Test Run Button");
             WaitUtils.waitFor3000Milliseconds();
-            individualTestCasePage.clickSaveButton();
-            logger.info("Clicked Save button after update");
+
+            individualTestCasePage.selectReleaseAndClickSave(release);
+            logger.info("Release selected for TR: " + release);
+
             WaitUtils.waitFor9000Milliseconds();
 
-            individualTestCasePage.clickApproveButton();
-            logger.info("Clicked on Approve button");
+            authorTestCasePage.verifyTestRunCreatedNotification(
+                    authorTestCasePage.getLoggedInUserName()
+            );
 
-            WaitUtils.waitFor3000Milliseconds();
-            authorTestCasePage.verifyTestCaseApproveNotification(tcId);
-            logger.info("Test Case approved notification verified successfully");
+            logger.info("Test Run Created notification verified successfully");
 
 
         } catch (AssertionError e) {
@@ -89,6 +87,6 @@ public class TC084 extends BaseClass {
             throw e;
         }
 
-        logger.info("************ TC084 Finished ************");
+        logger.info("************ TC085 Finished ************");
     }
 }
