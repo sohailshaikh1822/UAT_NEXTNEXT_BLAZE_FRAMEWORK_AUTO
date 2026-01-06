@@ -36,8 +36,8 @@ public class TC024 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();;
 
-            requirementTabPage.clickDropdownToSelectProject(project);
-            logger.info("Selected project" + project);
+//            requirementTabPage.clickDropdownToSelectProject(project);
+//            logger.info("Selected project" + project);
 
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor1000Milliseconds();

@@ -22,7 +22,7 @@ public class TC017 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-            requirementTabPage.clickDropdownToSelectProject(project);
+//            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             logger.info("Navigated to Module");

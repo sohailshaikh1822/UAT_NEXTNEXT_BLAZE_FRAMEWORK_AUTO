@@ -10,6 +10,7 @@ import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 import java.time.Duration;
 
@@ -29,11 +30,17 @@ public class TC009 extends BaseClass {
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             requirementTabPage.clickRequirementTab();
-            logger.info("Navigated to Requirement page");
-            requirementTabPage.clickDropdownToSelectProject(project);
-            logger.info("Navigate to the project");
+            logger.info("Clicked on Requirements tab");
+
+            WaitUtils.waitFor2000Milliseconds();
+//            requirementTabPage.clickDropdownToSelectProject(project);
+            logger.info("Expanded project: " + project);
+
+            requirementTabPage.clickOnModule(epic);
+            logger.info("Opened module: " + epic);
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
-            logger.info("Navigated to Module");
+
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(feature);
             logger.info("clicked on specific module");
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());

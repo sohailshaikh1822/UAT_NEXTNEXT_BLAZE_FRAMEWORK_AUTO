@@ -29,8 +29,8 @@ public class TC028 extends BaseClass {
             reqPage.clickRequirementTab();
             logger.info("clicked on requirement tab");
 
-            reqPage.clickDropdownToSelectProject(project);
-            logger.info("Selected project" + project);
+//            reqPage.clickDropdownToSelectProject(project);
+//            logger.info("Selected project" + project);
 
             reqPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor2000Milliseconds();
