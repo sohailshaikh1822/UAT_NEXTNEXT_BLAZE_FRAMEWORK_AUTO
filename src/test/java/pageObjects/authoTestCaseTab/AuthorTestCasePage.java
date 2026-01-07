@@ -1061,14 +1061,13 @@ public void selectEpic(String epicName) {
                     }
                 }
 
-                // Scroll to load older notifications (flood handling)
                 js.executeScript(
                         "arguments[0].scrollTop = arguments[0].scrollHeight",
                         body
                 );
 
             } catch (StaleElementReferenceException ignored) {
-                // DOM refreshed, retry
+
             }
 
             try {
