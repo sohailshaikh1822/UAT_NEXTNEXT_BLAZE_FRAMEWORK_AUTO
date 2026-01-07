@@ -466,4 +466,81 @@ public class RequirementTabPage extends BasePage {
         throw new AssertionError(" Delete notification not found for: " + entityId);
     }
 
+    public void verifyRequirementCreationNotification(String rqId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String creatorName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + rqId + "' created by "
+                        + creatorName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                int limit = Math.min(10, notifications.size());
+
+                for (int i = 0; i < limit; i++) {
+                    String text = notifications.get(i).getText().trim();
+
+                    if (text.contains(rqId) && text.contains("created by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Requirement creation notification format mismatch.\nExpected: "
+                                            + expectedRegex +
+                                            "\nActual: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Requirement creation notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Requirement creation notification not found for Requirement: " + rqId
+        );
+    }
+
+
 }
