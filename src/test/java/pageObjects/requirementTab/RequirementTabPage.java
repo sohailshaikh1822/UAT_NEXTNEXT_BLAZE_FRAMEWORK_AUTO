@@ -388,6 +388,7 @@ public class RequirementTabPage extends BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
 
+    //Notification
     public String getLoggedInUserName() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -407,23 +408,19 @@ public class RequirementTabPage extends BasePage {
         return fullName;
     }
 
+    public void verifyDeleteNotification(String entityId) {
 
-    public void verifyRequirementCreationNotification(String rqId) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        String creatorName = getLoggedInUserName();
-
         By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
         By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
-        By allNotifications = By.xpath(
-                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
-        );
+        By notificationItems = By.xpath("//div[contains(@class,'notification-item')]");
+        By notificationText = By.xpath(".//span[contains(@class,'notif-text')]");
+        String deleterName = getLoggedInUserName();
 
         String expectedRegex =
-                "'" + rqId + "' created by "
-                        + creatorName.replace(" ", "\\s+")
+                "'" + entityId + "' deleted by "
+                        + deleterName.replace(" ", "\\s+")
                         + "\\.";
 
         long endTime = System.currentTimeMillis() + 20000;
@@ -431,58 +428,42 @@ public class RequirementTabPage extends BasePage {
         while (System.currentTimeMillis() < endTime) {
 
             try {
+
                 WebElement bell = wait.until(
-                        ExpectedConditions.elementToBeClickable(notificationBell)
-                );
+                        ExpectedConditions.elementToBeClickable(notificationBell));
                 js.executeScript("arguments[0].click();", bell);
 
                 WebElement body = wait.until(
-                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
-                );
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody));
 
-                List<WebElement> notifications = wait.until(
-                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
-                );
+                List<WebElement> items = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationItems));
 
-                for (WebElement element : notifications) {
-                    String text = element.getText().trim();
+                for (WebElement item : items) {
 
-                    if (text.contains(rqId) && text.contains("created by")) {
+                    String text = item.findElement(notificationText).getText().trim();
+
+                    if (text.contains(entityId) && text.contains("deleted by")) {
 
                         if (!text.matches(expectedRegex)) {
                             throw new AssertionError(
-                                    "Requirement creation notification format mismatch.\nExpected: "
-                                            + expectedRegex +
-                                            "\nActual: " + text
-                            );
+                                    "Delete notification format mismatch.\nExpected: "
+                                            + expectedRegex + "\nActual: " + text);
                         }
 
-                        System.out.println(
-                                "Requirement creation notification verified successfully: " + text
-                        );
+                        System.out.println("Delete notification verified successfully: " + text);
                         return;
                     }
                 }
 
-                js.executeScript(
-                        "arguments[0].scrollTop = arguments[0].scrollHeight",
-                        body
-                );
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
 
             } catch (StaleElementReferenceException ignored) {}
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
         }
 
-        throw new AssertionError(
-                "Requirement creation notification not found for RQ: " + rqId
-        );
+        throw new AssertionError(" Delete notification not found for: " + entityId);
     }
-
-
-
-
 
 }
