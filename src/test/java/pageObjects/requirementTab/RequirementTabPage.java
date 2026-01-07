@@ -388,8 +388,82 @@ public class RequirementTabPage extends BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(notificationPopUp));
     }
 
+    //Notification
+    public String getLoggedInUserName() {
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
 
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+    public void verifyDeleteNotification(String entityId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By notificationItems = By.xpath("//div[contains(@class,'notification-item')]");
+        By notificationText = By.xpath(".//span[contains(@class,'notif-text')]");
+        String deleterName = getLoggedInUserName();
+
+        String expectedRegex =
+                "'" + entityId + "' deleted by "
+                        + deleterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> items = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationItems));
+
+                for (WebElement item : items) {
+
+                    String text = item.findElement(notificationText).getText().trim();
+
+                    if (text.contains(entityId) && text.contains("deleted by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Delete notification format mismatch.\nExpected: "
+                                            + expectedRegex + "\nActual: " + text);
+                        }
+
+                        System.out.println("Delete notification verified successfully: " + text);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(" Delete notification not found for: " + entityId);
+    }
 
 }
