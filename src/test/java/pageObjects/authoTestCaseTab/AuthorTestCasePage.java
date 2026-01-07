@@ -777,7 +777,6 @@ public void selectEpic(String epicName) {
     }
 
 
-
     public void verifyTestCaseCreationNotificationForNewTC() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
@@ -1080,5 +1079,7 @@ public void selectEpic(String epicName) {
                 "TR Created notification not found for creator: " + expectedCreator
         );
     }
+
+
 
 }

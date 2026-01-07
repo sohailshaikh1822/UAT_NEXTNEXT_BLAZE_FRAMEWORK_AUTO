@@ -18,7 +18,7 @@ public class AddRequirementPage extends BasePage {
     @FindBy(xpath = "//div[@class='testcase-text-3']")
     WebElement getTextRequirementId;
 
-    @FindBy(xpath = "//input[@id='testCaseName']")
+    @FindBy(xpath = "(//input[@id='testCaseName'])[1]")
     WebElement textRequirementId;
 
     @FindBy(xpath = "//div[@class='testcase-prototype']")

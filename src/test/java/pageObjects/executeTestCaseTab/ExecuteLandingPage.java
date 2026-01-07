@@ -598,7 +598,7 @@ public class ExecuteLandingPage extends BasePage {
         }
     }
 
-    private void validateHighlightedNode(String nodeName) {
+    public void validateHighlightedNode(String nodeName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         By highlightedNode = By.xpath(

@@ -25,8 +25,8 @@ public class TC012 extends BaseClass {
             reqPage.clickRequirementTab();
             logger.info("clicked on requirement tab");
 
-            reqPage.clickDropdownToSelectProject(project);
-            logger.info("Selected project" + project);
+//            reqPage.clickDropdownToSelectProject(project);
+//            logger.info("Selected project" + project);
 
             reqPage.clickOnModule(epic);
             logger.info("Selected epic" + epic);

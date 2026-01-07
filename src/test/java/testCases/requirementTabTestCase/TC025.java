@@ -38,8 +38,8 @@ public class TC025 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickDropdownToSelectProject(projectName);
-            logger.info("Expanded project: " + projectName);
+//            requirementTabPage.clickDropdownToSelectProject(projectName);
+//            logger.info("Expanded project: " + projectName);
 
             requirementTabPage.clickArrowRightPointingForExpandModule(moduleName);
             WaitUtils.waitFor1000Milliseconds();

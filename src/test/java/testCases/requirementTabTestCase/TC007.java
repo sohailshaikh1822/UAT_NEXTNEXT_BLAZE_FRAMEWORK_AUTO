@@ -21,7 +21,7 @@ public class TC007 extends BaseClass {
             login();
             logger.info("Logged in successfully");
 
-            RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            RequirementTabPage requirementsPage = new RequirementTabPage(getDriver());
             logger.info("Initialized RequirementTabPage");
 
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
@@ -30,19 +30,22 @@ public class TC007 extends BaseClass {
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             logger.info("Initialized AddRequirementPage");
 
-            requirementTabPage.clickRequirementTab();
+            requirementsPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
             WaitUtils.waitFor3000Milliseconds();;
 //            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
-            logger.info("Navigate to the project");
-            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
-            logger.info("Navigated to Module");
-            requirementTabPage.clickOnModule("feature 039");
-            logger.info("clicked on specific module");
-//            logger.info("Clicked on the Project Name");
+//             logger.info("Clicked on the Project Name");
 
+            logger.info("Clicked on the Project from left panel to open the module");
+            requirementsPage.clickDropdownToSelectProject("STG- SPARK Modernization");
+            logger.info("Navigate to the project");
+            requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
+            logger.info("Navigated to Module");
+            requirementsPage.clickOnModule("feature 039");
+            logger.info("clicked on specific module");
+
+            WaitUtils.waitFor1000Milliseconds();
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
 

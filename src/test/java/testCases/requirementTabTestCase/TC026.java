@@ -30,8 +30,8 @@ public class TC026 extends BaseClass {
 
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-            requirementTabPage.clickDropdownToSelectProject(project);
-            logger.info("Navigate to the project");
+//            requirementTabPage.clickDropdownToSelectProject(project);
+//            logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             logger.info("Navigated to Module");
             requirementTabPage.clickOnModule(feature);

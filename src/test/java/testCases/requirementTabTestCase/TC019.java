@@ -26,7 +26,7 @@ public class TC019 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
 //            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickDropdownToSelectProject(project);
+//            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigated to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor1000Milliseconds();

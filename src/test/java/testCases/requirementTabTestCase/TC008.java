@@ -22,23 +22,25 @@ public class TC008 extends BaseClass {
             login();
             logger.info("Logged in successfully");
 
-            RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            RequirementTabPage requirementsPage = new RequirementTabPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
 
-            requirementTabPage.clickRequirementTab();
+            requirementsPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
             WaitUtils.waitFor3000Milliseconds();;
 //            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
+            logger.info("Clicked on the Project from left panel to open the module");
+            requirementsPage.clickDropdownToSelectProject("STG- SPARK Modernization");
             logger.info("Navigate to the project");
-            requirementTabPage.clickArrowRightPointingForExpandModule("Epic j17");
+            requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");
-            requirementTabPage.clickOnModule("feature 039");
+            requirementsPage.clickOnModule("feature 039");
             logger.info("clicked on specific module");
 //            logger.info("Clicked on the Project Name");
 
+            WaitUtils.waitFor1000Milliseconds();
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
 
@@ -80,7 +82,7 @@ public class TC008 extends BaseClass {
             logger.info("Navigated to the last page");
             WaitUtils.waitFor1000Milliseconds();
 
-            String expectedRqId = requirementTabPage.getNewCreatedRqIdText();
+            String expectedRqId = requirementsPage.getNewCreatedRqIdText();
             logger.info("Fetched last row Requirement ID: " + expectedRqId);
 
 //            Assert.assertEquals(newRqIdText, expectedRqId,
