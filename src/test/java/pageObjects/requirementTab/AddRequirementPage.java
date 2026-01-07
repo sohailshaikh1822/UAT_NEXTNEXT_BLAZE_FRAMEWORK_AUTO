@@ -80,7 +80,9 @@ public class AddRequirementPage extends BasePage {
 
     public void setRequirementId(String id)
     {
+        textRequirementId.clear();
         textRequirementId.sendKeys(id);
+
     }
 
     public void setDescription(String description) throws InterruptedException {
@@ -183,6 +185,19 @@ public class AddRequirementPage extends BasePage {
 
     public void clickOnRequirementIdLabel() {
         textRequirementId.click();
+    }
+
+    public String getRqId() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By rqIdLocator = By.xpath("//div[contains(@class,'testcase-text-3')]");
+
+        WebElement rqIdElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(rqIdLocator)
+        );
+
+        return rqIdElement.getText().trim();
     }
 
 }

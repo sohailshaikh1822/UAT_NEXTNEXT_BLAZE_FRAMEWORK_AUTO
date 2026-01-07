@@ -185,7 +185,6 @@ public class IndividualModulePage extends BasePage {
 
     public void enterName(String name) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        // Wait until the description input is clickable
         wait.until(ExpectedConditions.elementToBeClickable(inputTitle));
         inputName.sendKeys(Keys.chord(Keys.CONTROL, "A"));
         inputName.sendKeys(name);
@@ -506,4 +505,5 @@ public class IndividualModulePage extends BasePage {
     public void clickButtonConfirmationNoForUnsavedChanges() {
         buttonNoConfirmationUnsavedChanges.click();
     }
+
 }
