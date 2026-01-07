@@ -777,77 +777,6 @@ public void selectEpic(String epicName) {
     }
 
 
-//    public void verifyTestCaseCreationNotificationForNewTC() {
-//
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//
-//        String newlyCreatedTcId = getNewlyCreatedTestCaseId();
-//        String creatorName = getLoggedInUserName();
-//
-//        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
-//        By allNotifications = By.xpath(
-//                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
-//        );
-//
-//        String expectedRegex =
-//                "'" + newlyCreatedTcId + "' created by "
-//                        + creatorName.replace(" ", "\\s+")
-//                        + "\\.";
-//
-//        long endTime = System.currentTimeMillis() + 15000;
-//        boolean found = false;
-//
-//        while (System.currentTimeMillis() < endTime) {
-//
-//            try {
-//                WebElement bell = wait.until(
-//                        ExpectedConditions.elementToBeClickable(notificationBell)
-//                );
-//                js.executeScript("arguments[0].click();", bell);
-//
-//                List<WebElement> notifications = wait.until(
-//                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
-//                );
-//
-//                int limit = Math.min(10, notifications.size());
-//
-//                for (int i = 0; i < limit; i++) {
-//                    String text = notifications.get(i).getText().trim();
-//
-//                    if (text.contains(newlyCreatedTcId) && text.contains("created by")) {
-//
-//                        if (!text.matches(expectedRegex)) {
-//                            throw new AssertionError(
-//                                    "Notification format mismatch.\nExpected: "
-//                                            + expectedRegex +
-//                                            "\nActual: " + text
-//                            );
-//                        }
-//
-//                        System.out.println("Notification verified successfully: " + text);
-//                        found = true;
-//                        break;
-//                    }
-//                }
-//
-//                if (found) {
-//                    return;
-//                }
-//
-//            } catch (StaleElementReferenceException ignored) {
-//            }
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException ignored) {}
-//        }
-//
-//        throw new AssertionError(
-//                "Created Test Case notification not found for TC: " + newlyCreatedTcId
-//        );
-//    }
-
     public void verifyTestCaseCreationNotificationForNewTC() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
@@ -1004,78 +933,23 @@ public void selectEpic(String epicName) {
 
     public void verifyTestCaseApproveNotification(String tcId) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("notification")));
 
         String approverName = getLoggedInUserName();
 
         By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
         By allNotifications = By.xpath(
                 "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
         );
 
-        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
-        js.executeScript("arguments[0].click();", bell);
-
-        boolean approveFound = false;
-        long endTime = System.currentTimeMillis() + 15000;
-
-        while (System.currentTimeMillis() < endTime) {
-
-            List<WebElement> notificationElements = driver.findElements(allNotifications);
-
-            for (WebElement element : notificationElements) {
-                String text = element.getText().trim();
-
-                if (text.contains(tcId) && text.contains("approved by")) {
-
-                    String expectedRegex =
-                            "'" + tcId + "' approved by "
-                                    + approverName.replace(" ", "\\s+")
-                                    + "\\.";
-
-                    if (!text.matches(expectedRegex)) {
-                        throw new AssertionError(
-                                "Approve notification format mismatch.\nExpected: "
-                                        + expectedRegex +
-                                        "\nActual: " + text
-                        );
-                    }
-
-                    approveFound = true;
-                    System.out.println("Approve notification verified successfully: " + text);
-                    break;
-                }
-            }
-
-            if (approveFound) {
-                break;
-            }
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
-        }
-
-        if (!approveFound) {
-            throw new AssertionError(
-                    "Approve notification not found for Test Case: " + tcId
-            );
-        }
-    }
-
-    public void verifyTestRunCreatedNotification(String expectedCreator) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
-        By notificationTexts = By.xpath("//span[contains(@class,'notif-text')]");
+        String expectedRegex =
+                "'" + tcId + "' approved by "
+                        + approverName.replace(" ", "\\s+")
+                        + "\\.";
 
         long endTime = System.currentTimeMillis() + 20000;
-        boolean found = false;
 
         while (System.currentTimeMillis() < endTime) {
 
@@ -1085,31 +959,38 @@ public void selectEpic(String epicName) {
                 );
                 js.executeScript("arguments[0].click();", bell);
 
-                List<WebElement> notifications = wait.until(
-                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationTexts)
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
                 );
 
-                for (WebElement el : notifications) {
-                    String text = el.getText().trim();
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
 
-                    if (text.startsWith("'TR-") && text.contains("created by")) {
+                for (WebElement element : notifications) {
+                    String text = element.getText().trim();
 
-                        if (!text.contains(expectedCreator)) {
+                    if (text.contains(tcId) && text.contains("approved by")) {
+
+                        if (!text.matches(expectedRegex)) {
                             throw new AssertionError(
-                                    "Creator mismatch.\nExpected creator: "
-                                            + expectedCreator + "\nActual text: " + text
+                                    "Approve notification format mismatch.\nExpected: "
+                                            + expectedRegex +
+                                            "\nActual: " + text
                             );
                         }
 
-                        System.out.println("TR Created notification verified successfully: " + text);
-                        found = true;
-                        break;
+                        System.out.println(
+                                "Approve notification verified successfully: " + text
+                        );
+                        return;
                     }
                 }
 
-                if (found) {
-                    return;
-                }
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
 
             } catch (StaleElementReferenceException ignored) {
             }
@@ -1119,8 +1000,142 @@ public void selectEpic(String epicName) {
             } catch (InterruptedException ignored) {}
         }
 
-        throw new AssertionError("TR Created notification not found");
+        throw new AssertionError(
+                "Approve notification not found for Test Case: " + tcId
+        );
     }
+
+
+//    public void verifyTestRunCreatedNotification(String expectedCreator) {
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+//        By notificationTexts = By.xpath("//span[contains(@class,'notif-text')]");
+//
+//        long endTime = System.currentTimeMillis() + 20000;
+//        boolean found = false;
+//
+//        while (System.currentTimeMillis() < endTime) {
+//
+//            try {
+//                WebElement bell = wait.until(
+//                        ExpectedConditions.elementToBeClickable(notificationBell)
+//                );
+//                js.executeScript("arguments[0].click();", bell);
+//
+//                List<WebElement> notifications = wait.until(
+//                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationTexts)
+//                );
+//
+//                for (WebElement el : notifications) {
+//                    String text = el.getText().trim();
+//
+//                    if (text.startsWith("'TR-") && text.contains("created by")) {
+//
+//                        if (!text.contains(expectedCreator)) {
+//                            throw new AssertionError(
+//                                    "Creator mismatch.\nExpected creator: "
+//                                            + expectedCreator + "\nActual text: " + text
+//                            );
+//                        }
+//
+//                        System.out.println("TR Created notification verified successfully: " + text);
+//                        found = true;
+//                        break;
+//                    }
+//                }
+//
+//                if (found) {
+//                    return;
+//                }
+//
+//            } catch (StaleElementReferenceException ignored) {
+//            }
+//
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException ignored) {}
+//        }
+//
+//        throw new AssertionError("TR Created notification not found");
+//    }
+
+    public void verifyTestRunCreatedNotification(String expectedCreator) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+                    String text = element.getText().trim();
+
+                    if (text.startsWith("'TR-") && text.contains("created by")) {
+
+                        String expectedRegex =
+                                "'TR-\\d+' created by "
+                                        + expectedCreator.replace(" ", "\\s+")
+                                        + "\\.";
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "TR Created notification format mismatch.\nExpected pattern: "
+                                            + expectedRegex +
+                                            "\nActual: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "TR Created notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                // Scroll to load older notifications (flood handling)
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {
+                // DOM refreshed, retry
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "TR Created notification not found for creator: " + expectedCreator
+        );
+    }
+
 
 
 }
