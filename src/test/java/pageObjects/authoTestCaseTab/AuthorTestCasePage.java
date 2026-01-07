@@ -1006,62 +1006,6 @@ public void selectEpic(String epicName) {
     }
 
 
-//    public void verifyTestRunCreatedNotification(String expectedCreator) {
-//
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//
-//        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
-//        By notificationTexts = By.xpath("//span[contains(@class,'notif-text')]");
-//
-//        long endTime = System.currentTimeMillis() + 20000;
-//        boolean found = false;
-//
-//        while (System.currentTimeMillis() < endTime) {
-//
-//            try {
-//                WebElement bell = wait.until(
-//                        ExpectedConditions.elementToBeClickable(notificationBell)
-//                );
-//                js.executeScript("arguments[0].click();", bell);
-//
-//                List<WebElement> notifications = wait.until(
-//                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationTexts)
-//                );
-//
-//                for (WebElement el : notifications) {
-//                    String text = el.getText().trim();
-//
-//                    if (text.startsWith("'TR-") && text.contains("created by")) {
-//
-//                        if (!text.contains(expectedCreator)) {
-//                            throw new AssertionError(
-//                                    "Creator mismatch.\nExpected creator: "
-//                                            + expectedCreator + "\nActual text: " + text
-//                            );
-//                        }
-//
-//                        System.out.println("TR Created notification verified successfully: " + text);
-//                        found = true;
-//                        break;
-//                    }
-//                }
-//
-//                if (found) {
-//                    return;
-//                }
-//
-//            } catch (StaleElementReferenceException ignored) {
-//            }
-//
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException ignored) {}
-//        }
-//
-//        throw new AssertionError("TR Created notification not found");
-//    }
-
     public void verifyTestRunCreatedNotification(String expectedCreator) {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
