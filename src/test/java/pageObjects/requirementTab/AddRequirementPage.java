@@ -200,4 +200,26 @@ public class AddRequirementPage extends BasePage {
         return rqIdElement.getText().trim();
     }
 
+
+    public String getModuleId() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By moduleIdLocator = By.xpath("//div[contains(@class,'text-3')]");
+
+        WebElement moduleIdElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(moduleIdLocator)
+        );
+
+        String moduleId = moduleIdElement.getText().trim();
+
+        if (moduleId.isEmpty()) {
+            throw new AssertionError("Module ID is empty");
+        }
+
+        System.out.println("Captured Module ID: " + moduleId);
+        return moduleId;
+    }
+
+
 }
