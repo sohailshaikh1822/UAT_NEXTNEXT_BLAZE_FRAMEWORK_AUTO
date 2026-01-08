@@ -50,6 +50,7 @@
             <class name="testCases.requirementTabTestCase.TC063"/>
             <class name="testCases.requirementTabTestCase.TC064"/>
             <class name="testCases.requirementTabTestCase.TC073"/>
+            <class name="testCases.requirementTabTestCase.TC074"/>
         </classes>
     </test>
 </suite>
