@@ -2,6 +2,7 @@ package testCases.requirementTabTestCase;
 
 import DataProviders.RequirementDataProvider;
 import org.testng.annotations.Test;
+import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
@@ -9,18 +10,17 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC064 extends BaseClass {
-    @Test(dataProvider = "tc064", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void Verify_popup_notification_is_displayed_when_a_requirement_is_updated(
+public class TC073 extends BaseClass {
+    @Test(dataProvider = "tc073", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void Verify_notification_is_displayed_when_a_requirement_is_deleted(
             String moduleName,
             String Rqtitle,
             String description,
             String priority,
             String status,
-            String type,
-            String priority1)
+            String type)
             throws InterruptedException {
-        logger.info("****** Starting the TC064: Verify popup notification is displayed when a requirement is updated *****************");
+        logger.info("****** Starting the TC073: Verify notification is displayed when a requirement is deleted *****************");
         try {
             login();
             logger.info("Logged in successfully");
@@ -32,7 +32,7 @@ public class TC064 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor3000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();;
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
@@ -58,7 +58,7 @@ public class TC064 extends BaseClass {
 
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
-            WaitUtils.waitFor2000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();;
 
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
@@ -74,20 +74,23 @@ public class TC064 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();
 
-            addRequirementPage.selectPriority(priority1);
-            logger.info("Selected Priority: " + priority1);
-            WaitUtils.waitFor2000Milliseconds();
-
-            addRequirementPage.clickSave();
-            logger.info("Clicked on Save button again after changes");
-
             String rqId = addRequirementPage.getRqId();
             logger.info("Captured Requirement ID: " + rqId);
+            WaitUtils.waitFor3000Milliseconds();
+
+            addRequirementPage.clickClose();
+            logger.info("Clicked Close button");
+
+            WaitUtils.waitFor3000Milliseconds();
+
+            requirementTabPage.DeleteRequirementById(rqId);
 
             WaitUtils.waitFor9000Milliseconds();
 
-            requirementTabPage.verifyRequirementUpdateNotification(rqId);
-            logger.info("Requirement Updated notification verified successfully");
+            requirementTabPage.verifyDeleteNotification(rqId);
+            logger.info("Requirement deletion notification verified successfully");
+
+
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);
