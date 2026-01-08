@@ -661,6 +661,114 @@ public class RequirementTabPage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOf(row));
     }
 
+    public String getModuleID() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By moduleIdLocator = By.xpath("//div[contains(@class,'text-3')]");
+
+        WebElement moduleIdElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(moduleIdLocator)
+        );
+
+        String moduleId = moduleIdElement.getText().trim();
+
+        if (moduleId.isEmpty()) {
+            throw new AssertionError("Module ID is empty");
+        }
+
+        System.out.println("Captured Module ID: " + moduleId);
+        return moduleId;
+    }
+
+    public void verifyModuleCreationNotification(String moduleName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String creatorName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + moduleName + "' created by "
+                        + creatorName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+                    String text = element.getText().trim();
+
+                    if (text.contains(moduleName) && text.contains("created by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Module creation notification format mismatch.\nExpected: "
+                                            + expectedRegex +
+                                            "\nActual: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Module creation notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Created Module notification not found for module: " + moduleName
+        );
+    }
+
+    public void clickEpic() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By epicLocator = By.xpath("//span[@title='Epic']");
+
+        WebElement epicElement = wait.until(
+                ExpectedConditions.elementToBeClickable(epicLocator)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", epicElement);
+        js.executeScript("arguments[0].click();", epicElement);
+    }
 
 
 }
