@@ -2,7 +2,6 @@ package testCases.requirementTabTestCase;
 
 import DataProviders.RequirementDataProvider;
 import org.testng.annotations.Test;
-import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
@@ -29,12 +28,11 @@ public class TC064 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor3000Milliseconds();;
+            WaitUtils.waitFor3000Milliseconds();
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
@@ -90,8 +88,6 @@ public class TC064 extends BaseClass {
 
             requirementTabPage.verifyRequirementUpdateNotification(rqId);
             logger.info("Requirement Updated notification verified successfully");
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);
