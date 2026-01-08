@@ -619,5 +619,48 @@ public class RequirementTabPage extends BasePage {
     }
 
 
+    public void DeleteRequirementById(String rqId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By lastPageBtn = By.xpath("//img[@alt='Last Page' and not(contains(@class,'disabled'))]");
+
+        if (!driver.findElements(lastPageBtn).isEmpty()) {
+            WebElement lastPage = driver.findElement(lastPageBtn);
+            js.executeScript("arguments[0].click();", lastPage);
+
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                    By.id("loading-spinner")
+            ));
+        }
+
+        By requirementRow = By.xpath(
+                "//div[@id='existingRequirementsTable']//div[contains(@class,'requirements-list-row')]" +
+                        "[.//a[normalize-space()='" + rqId + "']]"
+        );
+
+        WebElement row = wait.until(
+                ExpectedConditions.presenceOfElementLocated(requirementRow)
+        );
+
+        js.executeScript(
+                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", row
+        );
+
+        js.executeScript("window.scrollBy(0,-150);");
+
+        WebElement deleteButton = row.findElement(
+                By.xpath(".//button[contains(@class,'deleteRowButton')]")
+        );
+
+        js.executeScript("arguments[0].click();", deleteButton);
+
+        clickConfirmDelete();
+
+        wait.until(ExpectedConditions.invisibilityOf(row));
+    }
+
+
 
 }
