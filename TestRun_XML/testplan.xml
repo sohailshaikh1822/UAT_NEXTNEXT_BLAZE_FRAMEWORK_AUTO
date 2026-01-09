@@ -30,6 +30,8 @@
             <class name="testCases.testPlanTabTestCase.TC019"/>
             <class name="testCases.testPlanTabTestCase.TC020"/>
             <class name="testCases.testPlanTabTestCase.TC024"/>
+            <class name="testCases.testPlanTabTestCase.TC025"/>
+            <class name="testCases.testPlanTabTestCase.TC026"/>
         </classes>
 
     </test>
