@@ -415,9 +415,7 @@ public class TestPlanLandingPage extends BasePage {
             String text = el.getText().trim();
             expectedProjects.add(text);
         }
-        // if (!text.isEmpty()) {
-        //
-        // }
+
         return expectedProjects;
     }
     //iframe
