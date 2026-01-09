@@ -13,7 +13,7 @@ public class TC075 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void VerifyNotificationIsDisplayedWhenaSubModuleisCreated()
             throws InterruptedException {
-        logger.info("****** Starting the TC078 *****************");
+        logger.info("****** Starting the TC075 *****************");
         try {
             login();
             logger.info("Logged in successfully");
