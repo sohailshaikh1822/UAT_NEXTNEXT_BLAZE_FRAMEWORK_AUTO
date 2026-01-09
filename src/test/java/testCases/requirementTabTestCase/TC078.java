@@ -1,9 +1,7 @@
 package testCases.requirementTabTestCase;
 
-import DataProviders.RequirementDataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.authoTestCaseTab.AddTestcasePage;
-import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
@@ -11,53 +9,36 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-import java.util.List;
-
-public class TC077 extends BaseClass {
+public class TC078 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyNotificationIsDisplayedWhenaSubModuleisDeleted()
+    public void VerifyNotificationIsDisplayedTheCorrectUserName()
             throws InterruptedException {
-        logger.info("****** Starting the TC077 *****************");
+        logger.info("****** Starting the TC078 *****************");
         try {
             login();
             logger.info("Logged in successfully");
-
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-
+            IndividualModulePage individualModulePage=new IndividualModulePage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
-
             WaitUtils.waitFor3000Milliseconds();;
-
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
-
             requirementTabPage.clickEpicDropdown();
             logger.info("Clicked on Epic drop down");
-
-            requirementTabPage.clickOnModule("module testing 08");
+            requirementTabPage.clickOnModule("New Epic");
             requirementTabPage.clickNewModule();
             logger.info("Clicked on create module");
-
-            requirementTabPage.setModuleName("Module for testing");
-            logger.info("Module name is set");
-
+            individualModulePage.setActualDescription("new");
             requirementTabPage.saveModule();
-            logger.info("Clciked on save button");
-
+            logger.info("Clicked on save button");
             WaitUtils.waitFor1000Milliseconds();
-
-            String rqId = addRequirementPage.getModuleId();
-
-            requirementTabPage.clickDeleteModule();
-            logger.info("deleted the module");
-
-            requirementTabPage.clickYesBtn();
-
+            String loggedUserName=requirementTabPage.getLoggedInUserName();
+            String actualUserName="Julie Kumari";
+            Assert.assertEquals(loggedUserName,actualUserName,"User Name mismatched");
             WaitUtils.waitFor9000Milliseconds();
-            requirementTabPage.verifyDeleteNotification(rqId);
-            logger.info("Delete notification verified");
+            logger.info("verified the correct user name has displayed");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);

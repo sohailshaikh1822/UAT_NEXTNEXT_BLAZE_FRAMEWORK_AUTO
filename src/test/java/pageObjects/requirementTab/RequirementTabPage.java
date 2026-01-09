@@ -95,6 +95,11 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-solid tree-arrow fa-caret-down']")
     List<WebElement> epicArrowDown;
 
+    @FindBy(xpath= "//div[@class='top-nav-bar']")
+    WebElement getnotPopUp;
+
+
+
 
 
     public WebElement leftModuleNameByName(String name) {
@@ -464,6 +469,93 @@ public class RequirementTabPage extends BasePage {
         }
 
         throw new AssertionError(" Delete notification not found for: " + entityId);
+    }
+
+
+        public  String handleToastNotification() {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            String toastMessage = " ";
+
+            try {
+                By toastLocator = By.xpath("//div[@class='toast-body']");
+
+                WebElement toast = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(toastLocator)
+                );
+
+                toastMessage = toast.getText();
+                System.out.println("Toast Message: " + toastMessage);
+
+                wait.until(
+                        ExpectedConditions.invisibilityOfElementLocated(toastLocator)
+                );
+
+            } catch (TimeoutException e) {
+                System.out.println("Toast notification not found");
+            }
+
+            return toastMessage;
+        }
+
+
+
+
+    public void verifyCreationNotification(String entityId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By notificationItems = By.xpath("//div[contains(@class,'notification-item')]");
+        By notificationText = By.xpath(".//span[contains(@class,'notif-text')]");
+        String deleterName = getLoggedInUserName();
+
+        String expectedRegex =
+                "'" + entityId + "' created by "
+                        + deleterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> items = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationItems));
+
+                for (WebElement item : items) {
+
+                    String text = item.findElement(notificationText).getText().trim();
+
+                    if (text.contains(entityId) && text.contains("created by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Create notification format mismatch.\nExpected: "
+                                            + expectedRegex + "\nActual: " + text);
+                        }
+
+                        System.out.println("Create notification verified successfully: " + text);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(" Create notification not found for: " + entityId);
     }
 
     public void verifyRequirementCreationNotification(String rqId) {
