@@ -13,11 +13,9 @@ import utils.WaitUtils;
 
 import java.util.List;
 
-public class TC077 extends BaseClass {
-    @Test(dataProvider = "tc077", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyNotificationIsDisplayedWhenaSubModuleisDeleted(
-            String mdName,
-            String setmdNAme)
+public class TC076 extends BaseClass {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyNotificationIsDisplayedWhenaModuleisDeleted()
             throws InterruptedException {
         logger.info("****** Starting the TC077 *****************");
         try {
@@ -36,15 +34,14 @@ public class TC077 extends BaseClass {
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickEpicDropdown();
-            logger.info("Clicked on Epic drop down");
-            WaitUtils.waitFor2000Milliseconds();
+            requirementTabPage.clickEpic();
+            logger.info("Clicked on Epic ");
 
-            requirementTabPage.clickOnModule(mdName);
             requirementTabPage.clickNewModule();
             logger.info("Clicked on create module");
+            WaitUtils.waitFor2000Milliseconds();
 
-            requirementTabPage.setModuleName(setmdNAme);
+            requirementTabPage.setModuleName("module created");
             logger.info("Module name is set");
 
             requirementTabPage.saveModule();
@@ -54,14 +51,15 @@ public class TC077 extends BaseClass {
 
             String rqId = individualModulePage.getModuleId();
 
+            requirementTabPage.verifyModuleCreationNotification(rqId);
+            logger.info("Module creation notification verified");
+
+            WaitUtils.waitFor1000Milliseconds();
+
             requirementTabPage.clickDeleteModule();
             logger.info("deleted the module");
 
             requirementTabPage.clickYesBtn();
-
-            WaitUtils.waitFor9000Milliseconds();
-            requirementTabPage.verifyDeleteNotification(rqId);
-            logger.info("Delete notification verified");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);
