@@ -1,34 +1,27 @@
 package testCases.requirementTabTestCase;
 
-import DataProviders.RequirementDataProvider;
+import org.apache.commons.codec.binary.Base16;
 import org.testng.annotations.Test;
-import pageObjects.authoTestCaseTab.AddTestcasePage;
-import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.AddRequirementPage;
-import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-import java.util.List;
+public class TC075 extends BaseClass {
 
-public class TC077 extends BaseClass {
-    @Test(dataProvider = "tc077", dataProviderClass = RequirementDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyNotificationIsDisplayedWhenaSubModuleisDeleted(
-            String mdName,
-            String setmdNAme)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyNotificationIsDisplayedWhenaSubModuleisCreated()
             throws InterruptedException {
-        logger.info("****** Starting the TC077 *****************");
+        logger.info("****** Starting the TC075 *****************");
         try {
             login();
             logger.info("Logged in successfully");
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
-            requirementTabPage.clickRequirementTab();
 
+            requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
             WaitUtils.waitFor3000Milliseconds();;
@@ -38,13 +31,12 @@ public class TC077 extends BaseClass {
 
             requirementTabPage.clickEpicDropdown();
             logger.info("Clicked on Epic drop down");
-            WaitUtils.waitFor2000Milliseconds();
 
-            requirementTabPage.clickOnModule(mdName);
+            requirementTabPage.clickOnModule("SET- DRIV");
             requirementTabPage.clickNewModule();
             logger.info("Clicked on create module");
 
-            requirementTabPage.setModuleName(setmdNAme);
+            requirementTabPage.setModuleName("Module for testing");
             logger.info("Module name is set");
 
             requirementTabPage.saveModule();
@@ -52,16 +44,12 @@ public class TC077 extends BaseClass {
 
             WaitUtils.waitFor1000Milliseconds();
 
-            String rqId = individualModulePage.getModuleId();
+            String rqId = addRequirementPage.getModuleId();
 
-            requirementTabPage.clickDeleteModule();
-            logger.info("deleted the module");
-
-            requirementTabPage.clickYesBtn();
 
             WaitUtils.waitFor9000Milliseconds();
-            requirementTabPage.verifyDeleteNotification(rqId);
-            logger.info("Delete notification verified");
+            requirementTabPage.verifyCreationNotification(rqId);
+            logger.info("Creation notification verified");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);
