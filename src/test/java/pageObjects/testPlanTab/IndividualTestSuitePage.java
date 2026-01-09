@@ -2,10 +2,7 @@ package pageObjects.testPlanTab;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.DateUtil;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -14,6 +11,7 @@ import pageObjects.BasePage;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.List;
 
 @Slf4j
 public class IndividualTestSuitePage extends BasePage {
@@ -63,8 +61,24 @@ public class IndividualTestSuitePage extends BasePage {
 
     // actions
     public String getTestSuiteId() {
-        return testSuiteIdText.getText();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By testSuiteIdLocator = By.xpath("//div[@class='test-plan-test-suites-text-2']");
+
+        WebElement testSuiteIdElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(testSuiteIdLocator)
+        );
+
+        String testSuiteId = testSuiteIdElement.getText().trim().replace("*", "");
+
+        if (testSuiteId.isEmpty()) {
+            throw new AssertionError("Test Suite ID is empty");
+        }
+
+        return testSuiteId;
     }
+
 
     public void enterTestSuiteName(String name) {
         testSuiteNameInput.clear();
@@ -136,4 +150,104 @@ public class IndividualTestSuitePage extends BasePage {
                 .until(ExpectedConditions.visibilityOf(testSuiteCreatedSuccessMessage));
         return testSuiteCreatedSuccessMessage.getText();
     }
+
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+    public void verifySuiteUpdateNotification(String suiteId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String updaterName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'TS-\\d+'\\s+is\\s+updated\\s+by\\s+"
+                        + updaterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement el : notifications) {
+
+                    String text = el.getText().trim();
+
+                    if (text.startsWith("'TS-") && text.contains("is updated by")) {
+
+                        if (!text.contains("'" + suiteId + "'")) {
+                            continue;
+                        }
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Suite update notification format mismatch.\nExpected Regex: "
+                                            + expectedRegex +
+                                            "\nActual Text: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Suite update notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Suite update notification not found for Suite: " + suiteId
+        );
+    }
+
 }

@@ -1,15 +1,14 @@
 package pageObjects.testPlanTab;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
 import java.time.Duration;
+import java.util.List;
+
 import utils.WaitUtils;
 
 public class IndividualTestCyclePage extends BasePage {
@@ -82,5 +81,124 @@ public class IndividualTestCyclePage extends BasePage {
                 .until(ExpectedConditions.visibilityOf(testCycleCreatedSuccessMessage));
         return testCycleCreatedSuccessMessage.getText();
     }
+
+    public String getCycleId() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By cycleIdLocator = By.xpath("//div[@class='test-plan-test-cycles-text-2']");
+
+        WebElement cycleIdElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(cycleIdLocator)
+        );
+
+        String cycleId = cycleIdElement.getText().trim().replace("*", "");
+
+        if (cycleId.isEmpty()) {
+            throw new AssertionError("Cycle ID is empty");
+        }
+
+        return cycleId;
+    }
+
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+    public void verifyCycleUpdateNotification(String cycleId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String updaterName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'CL-\\d+'\\s+is\\s+updated\\s+by\\s+"
+                        + updaterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement el : notifications) {
+
+                    String text = el.getText().trim();
+
+                    if (text.startsWith("'CL-") && text.contains("is updated by")) {
+
+                        if (!text.contains("'" + cycleId + "'")) {
+                            continue;
+                        }
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Cycle update notification format mismatch.\nExpected Regex: "
+                                            + expectedRegex +
+                                            "\nActual Text: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Cycle update notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Cycle update notification not found for Cycle: " + cycleId
+        );
+    }
+
 
 }
