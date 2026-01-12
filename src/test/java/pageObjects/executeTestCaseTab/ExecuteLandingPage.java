@@ -612,5 +612,129 @@ public class ExecuteLandingPage extends BasePage {
         }
     }
 
+    private void goToLastPageIfAvailable() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By lastPageBtn = By.xpath(
+                "//div[@id='paginationTest']//img[@alt='Last Page' and not(contains(@style,'opacity: 0.5'))]"
+        );
+
+        try {
+            WebElement lastPage = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(lastPageBtn)
+            );
+            js.executeScript("arguments[0].click();", lastPage);
+            wait.until(ExpectedConditions.stalenessOf(lastPage));
+        } catch (TimeoutException ignored) {
+        }
+    }
+
+    public void openLatestTestRunFromTable() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        goToLastPageIfAvailable();
+
+        By allTrLinks = By.xpath(
+                "//div[@class='table-content']" +
+                        "//div[@id='testRunsWithCaseDetailsTable']" +
+                        "//a[contains(@class,'text-wrapper-14') and starts-with(text(),'TR-')]"
+        );
+
+        List<WebElement> trLinks = wait.until(
+                ExpectedConditions.numberOfElementsToBeMoreThan(allTrLinks, 0)
+        );
+
+        WebElement latestTr = trLinks.get(trLinks.size() - 1);
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", latestTr);
+        wait.until(ExpectedConditions.elementToBeClickable(latestTr));
+
+        js.executeScript("arguments[0].click();", latestTr);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id("execute_rightPanel")
+        ));
+    }
+
+
+
+
+    public String getOpenedTestRunId() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By trIdLocator = By.xpath(
+                "//div[contains(@class,'test-run-text-2') and starts-with(text(),'TR-')]"
+        );
+
+        WebElement trIdElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(trIdLocator)
+        );
+
+        return trIdElement.getText().trim();
+    }
+
+
+    public void verifyTestRunCreationNotification(String trId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+
+                    String text = element.getText().trim();
+
+                    if (text.contains(trId)) {
+                        System.out.println(
+                                "Test Run notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Test Run notification not found for TR ID: " + trId
+        );
+    }
 
 }
