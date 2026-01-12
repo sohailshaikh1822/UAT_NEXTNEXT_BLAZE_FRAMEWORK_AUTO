@@ -250,4 +250,70 @@ public class IndividualTestSuitePage extends BasePage {
         );
     }
 
+    public void verifyTestSuiteDeleteNotification(String suiteId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String deleterName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'TS-\\d+'\\s+is\\s+deleted\\s+by\\s+"
+                        + deleterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> notifications =
+                        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications));
+
+                for (WebElement el : notifications) {
+
+                    String text = el.getText().trim();
+
+                    if (text.startsWith("'TS-") && text.contains("is deleted by")) {
+
+                        if (!text.contains("'" + suiteId + "'")) {
+                            continue;
+                        }
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Test Suite delete notification format mismatch.\nExpected Regex: "
+                                            + expectedRegex +
+                                            "\nActual Text: " + text
+                            );
+                        }
+
+                        System.out.println("Test Suite delete notification verified successfully: " + text);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError("Test Suite delete notification not found for Suite: " + suiteId);
+    }
+
+
 }
