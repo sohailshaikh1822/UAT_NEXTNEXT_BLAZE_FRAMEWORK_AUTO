@@ -305,9 +305,25 @@ public class ExecuteLandingPage extends BasePage {
     }
 
     public void selectStatus(String status) {
-        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(statusDropdown)));
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By statusDropdownLocator = By.xpath(
+                "//select[contains(@class,'test-run-text') and contains(@class,'select-dropdown')]"
+        );
+
+        WebElement dropdown = wait.until(
+                ExpectedConditions.presenceOfElementLocated(statusDropdownLocator)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
+        js.executeScript("arguments[0].click();", dropdown);
+
+        Select select = new Select(dropdown);
         select.selectByVisibleText(status);
     }
+
 
     public String getSelectedStatus() {
         return new Select(statusDropdown).getFirstSelectedOption().getText();
@@ -736,5 +752,100 @@ public class ExecuteLandingPage extends BasePage {
                 "Test Run notification not found for TR ID: " + trId
         );
     }
+
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+
+    public void verifyTestRunUpdateNotification(String trId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String updaterName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + trId + "'\\s+updated\\s+by\\s+"
+                        + updaterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+
+                    String text = element.getText().trim();
+
+                    if (text.contains(trId) && text.contains("updated by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Test Run update notification format mismatch.\nExpected Regex: "
+                                            + expectedRegex +
+                                            "\nActual Text: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Test Run update notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Test Run update notification not found for TR ID: " + trId
+        );
+    }
+
 
 }
