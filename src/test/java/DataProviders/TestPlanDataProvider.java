@@ -131,4 +131,18 @@ public class TestPlanDataProvider {
         return ExcelDataProviders.getExcelDataForTestPlan("tc026");
     }
 
+    @DataProvider(name = "tc027")
+    public static Object[][] getDataTC027() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc027");
+    }
+
+    @DataProvider(name = "tc028")
+    public static Object[][] getDataTC028() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc028");
+    }
+
+    @DataProvider(name = "tc029")
+    public static Object[][] getDataTC029() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc029");
+    }
 }
