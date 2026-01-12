@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="Execute Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="headed"/>
         <classes>
             <class name="testCases.ExecuteTestCaseTab.TC001"/>
             <class name="testCases.ExecuteTestCaseTab.TC002"/>
@@ -57,6 +57,7 @@
             <class name="testCases.ExecuteTestCaseTab.TC050"/>
             <class name="testCases.ExecuteTestCaseTab.TC051"/>
             <class name="testCases.ExecuteTestCaseTab.TC052"/>
+            <class name="testCases.ExecuteTestCaseTab.TC059"/>
         </classes>
     </test>
 </suite>
