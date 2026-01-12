@@ -733,4 +733,266 @@ public class CreateDefectPage extends BasePage {
         select.selectByIndex(index);
     }
 
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+    public String getDefectIdFromCreationNotification() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        WebElement bell = wait.until(
+                ExpectedConditions.elementToBeClickable(notificationBell)
+        );
+        js.executeScript("arguments[0].click();", bell);
+
+        List<WebElement> notifications = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+        );
+
+        for (WebElement element : notifications) {
+            String text = element.getText().trim();
+
+            if (text.startsWith("'DF-") && text.contains("is created by")) {
+                return text.split("'")[1];
+            }
+        }
+
+        throw new AssertionError("Defect creation notification not found to extract Defect ID");
+    }
+
+
+    public void verifyDefectCreationNotification(String defectId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String creatorName = getLoggedInUserName();
+
+        String expectedRegex =
+                "'" + defectId + "'\\s+is\\s+created\\s+by\\s+"
+                        + creatorName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+
+                    String text = element.getText().trim();
+
+                    if (text.contains(defectId) && text.contains("is created by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Defect creation notification format mismatch\nExpected: "
+                                            + expectedRegex + "\nActual: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Defect creation notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Defect creation notification not found for Defect ID: " + defectId
+        );
+    }
+
+
+    public void verifyDefectUpdateNotification(String defectId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String updaterName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + defectId + "'\\s+is\\s+updated\\s+by\\s+"
+                        + updaterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+                    String text = element.getText().trim();
+
+                    if (text.contains(defectId) && text.contains("updated by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Defect update notification format mismatch.\nExpected Regex: "
+                                            + expectedRegex +
+                                            "\nActual Text: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Defect update notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Defect update notification not found for Defect ID: " + defectId
+        );
+    }
+
+    public String getNewlyCreatedDefectId() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By lastRowLocator = By.xpath(
+                "//div[@id='execute_testrun_details']" +
+                        "//div[@class='table-content']" +
+                        "//div[@id='testRunsTable']" +
+                        "//div[contains(@class,'requirement') and contains(@class,'testlistframe-11')]" +
+                        "//div[contains(@class,'testlistrow')][last()]"
+        );
+
+        WebElement lastRow = wait.until(
+                ExpectedConditions.presenceOfElementLocated(lastRowLocator)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", lastRow);
+
+        WebElement defectIdElement = lastRow.findElement(
+                By.xpath(".//div[contains(@class,'testlistcell1')]//a")
+        );
+
+        String defectId = defectIdElement.getText().trim();
+
+        if (defectId.isEmpty()) {
+            throw new AssertionError("Newly created Defect ID is empty");
+        }
+
+        return defectId;
+    }
+
+
+
+    public void openNewlyCreatedDefect() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By lastRowLocator = By.xpath(
+                "//div[@id='execute_testrun_details']" +
+                        "//div[@class='table-content']" +
+                        "//div[@id='testRunsTable']" +
+                        "//div[contains(@class,'requirement') and contains(@class,'testlistframe-11')]" +
+                        "//div[contains(@class,'testlistrow')][last()]"
+        );
+
+        WebElement lastRow = wait.until(
+                ExpectedConditions.presenceOfElementLocated(lastRowLocator)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", lastRow);
+
+        WebElement defectLink = lastRow.findElement(
+                By.xpath(".//div[contains(@class,'testlistcell1')]//a")
+        );
+
+        wait.until(ExpectedConditions.elementToBeClickable(defectLink));
+        defectLink.click();
+
+        wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.id("execute_rightPanel"))
+        );
+    }
+
 }
