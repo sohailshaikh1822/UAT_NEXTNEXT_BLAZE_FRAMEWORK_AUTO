@@ -364,4 +364,119 @@ public class LinkDefectPage extends BasePage {
         }
     }
 
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+    public void verifyDefectLinkedPopup(String defectId, String testRunId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String userName = getLoggedInUserName();
+
+        By popupLocator = By.xpath("//div[contains(@class,'toast-body')]");
+
+        String expectedRegex =
+                "'" + defectId + "'\\s+is\\s+linked\\s+to\\s+'"
+                        + testRunId + "'\\s+by\\s+"
+                        + userName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 10000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement popup = wait.until(
+                        ExpectedConditions.presenceOfElementLocated(popupLocator)
+                );
+
+                String actualText = popup.getText().trim();
+
+                if (!actualText.contains("linked to")) {
+                    continue;
+                }
+
+                if (!actualText.matches(expectedRegex)) {
+                    throw new AssertionError(
+                            "Defect link popup format mismatch.\nExpected Regex: "
+                                    + expectedRegex +
+                                    "\nActual Text: " + actualText
+                    );
+                }
+
+                System.out.println("Defect linked popup verified successfully: " + actualText);
+                return;
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+        }
+
+        throw new AssertionError("Defect link popup not found.");
+    }
+
+    public void verifyDefectUnlinkedPopup(String defectId, String testRunId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String userName = getLoggedInUserName();
+
+        By popupLocator = By.xpath("//div[contains(@class,'toast-body')]");
+
+        String expectedRegex =
+                "'" + defectId + "'\\s+is\\s+unlinked\\s+from\\s+'"
+                        + testRunId + "'\\s+by\\s+"
+                        + userName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 10000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement popup = wait.until(
+                        ExpectedConditions.presenceOfElementLocated(popupLocator)
+                );
+
+                String actualText = popup.getText().trim();
+
+                // skip any unrelated toast
+                if (!actualText.contains("unlinked from")) {
+                    continue;
+                }
+
+                if (!actualText.matches(expectedRegex)) {
+                    throw new AssertionError(
+                            "Defect unlink popup format mismatch.\nExpected Regex: "
+                                    + expectedRegex +
+                                    "\nActual Text: " + actualText
+                    );
+                }
+
+                System.out.println("Defect unlinked popup verified successfully: " + actualText);
+                return;
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+        }
+
+        throw new AssertionError("Defect unlink popup not found.");
+    }
+
+
 }
