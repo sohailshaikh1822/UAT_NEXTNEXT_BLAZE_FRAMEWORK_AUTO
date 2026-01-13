@@ -10,14 +10,15 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC064 extends BaseClass {
+public class TC065 extends BaseClass {
 
-    @Test(dataProvider = "tc064", dataProviderClass = ExecuteTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyPopupNotificationAppearsAutomaticallyWhenaDefectIsUnlinkedInTheTestRun(
+    @Test(dataProvider = "tc065", dataProviderClass = ExecuteTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
+    public void  VerifyThataNotificationAppearsAutomaticallyWhenaDefectIsLinkedWithTheTestRun(
             String releaseName,
             String trID,
             String defectId
-    ) throws InterruptedException {
+    ) throws InterruptedException
+    {
         logger.info("****** Starting Test Case *****************");
         try {
             login();
@@ -47,9 +48,12 @@ public class TC064 extends BaseClass {
             linkDefectPage.clickRadioButtonBesideDefectId(defectId);
             linkDefectPage.clickLink();
             logger.info("Defect is linked successfully");
-
             WaitUtils.waitFor1000Milliseconds();
-            individualTestRun.clickSaveButton();
+
+            linkDefectPage.verifyDefectLinkedToTRNotification(defectId,trID);
+            logger.info("linking defect is verified successfully");
+            WaitUtils.waitFor1000Milliseconds();
+//            individualTestRun.clickSaveButton();
 
             WaitUtils.waitFor1000Milliseconds();
             individualTestRun.clickLinkDefect();
@@ -57,9 +61,6 @@ public class TC064 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
 
             linkDefectPage.isNotificationPopupDisplayed("Yes");
-            linkDefectPage.verifyDefectUnlinkedPopup(defectId,trID);
-            logger.info("Unlinking defect is verified successfully");
-            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
