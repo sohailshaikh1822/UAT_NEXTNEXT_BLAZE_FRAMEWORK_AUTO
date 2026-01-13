@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -772,7 +774,6 @@ public class ExecuteLandingPage extends BasePage {
         return fullName;
     }
 
-
     public void verifyTestRunUpdateNotification(String trId) {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
@@ -845,6 +846,53 @@ public class ExecuteLandingPage extends BasePage {
         throw new AssertionError(
                 "Test Run update notification not found for TR ID: " + trId
         );
+    }
+
+
+    public String verifyTestRunCreation_updationNotificationToast() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By toastBody = By.xpath(
+                "//div[contains(@class,'toast-notification')]//div[contains(@class,'toast-body')]"
+        );
+
+        WebElement toast = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(toastBody)
+        );
+
+        String toastText = toast.getText().trim();
+
+        if (toastText.isEmpty()) {
+            throw new AssertionError("Toast message is empty");
+        }
+
+        System.out.println("Toast notification received: " + toastText);
+
+
+        Pattern trPattern = Pattern.compile("TR-\\d+");
+        Matcher matcher = trPattern.matcher(toastText);
+
+        if (!matcher.find()) {
+            throw new AssertionError(
+                    "Toast notification does not contain a valid Test Run ID.\nActual: " + toastText
+            );
+        }
+
+        String extractedTrId = matcher.group();
+        System.out.println("Extracted Test Run ID from toast: " + extractedTrId);
+
+        if (!(toastText.contains("created") || toastText.contains("updated"))) {
+            throw new AssertionError(
+                    "Toast notification does not indicate create or update action.\nActual: "
+                            + toastText
+            );
+        }
+
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(toastBody));
+
+        return extractedTrId;
     }
 
 
