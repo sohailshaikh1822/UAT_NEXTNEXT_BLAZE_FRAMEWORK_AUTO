@@ -59,6 +59,9 @@
             <class name="testCases.ExecuteTestCaseTab.TC052"/>
             <class name="testCases.ExecuteTestCaseTab.TC059"/>
             <class name="testCases.ExecuteTestCaseTab.TC060"/>
+            <class name="testCases.ExecuteTestCaseTab.TC061"/>
+            <class name="testCases.ExecuteTestCaseTab.TC062"/>
+
         </classes>
     </test>
 </suite>
