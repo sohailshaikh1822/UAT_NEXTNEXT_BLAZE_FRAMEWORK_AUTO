@@ -455,7 +455,6 @@ public class LinkDefectPage extends BasePage {
 
                 String actualText = popup.getText().trim();
 
-                // skip any unrelated toast
                 if (!actualText.contains("unlinked from")) {
                     continue;
                 }
@@ -477,6 +476,83 @@ public class LinkDefectPage extends BasePage {
 
         throw new AssertionError("Defect unlink popup not found.");
     }
+
+    public void verifyDefectLinkedToTRNotification(String defectId, String trId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String userName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + defectId + "'\\s+is\\s+linked\\s+to\\s+'"
+                        + trId + "'\\s+by\\s+"
+                        + userName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+
+                    String text = element.getText().trim();
+
+                    if (text.contains(defectId) && text.contains(trId) && text.contains("linked to")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Defect link notification format mismatch.\nExpected: "
+                                            + expectedRegex +
+                                            "\nActual: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Defect linked notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Defect linked notification not found for Defect: "
+                        + defectId + " and TR: " + trId
+        );
+    }
+
 
 
 }
