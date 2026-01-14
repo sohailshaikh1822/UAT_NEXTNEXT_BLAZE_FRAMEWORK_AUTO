@@ -12,7 +12,7 @@ import utils.WaitUtils;
 
 public class TC081 extends BaseClass {
 
-    @Test(dataProvider = "tc056", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc081", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyConfirmationMessageWhileCreatingNewTR(
             String epicName,
             String featureName,
@@ -70,6 +70,9 @@ public class TC081 extends BaseClass {
             String expectedMessage="Test runs saved successfully.";
             Assert.assertEquals(actualMessage,expectedMessage,"Confirmation message has not matched");
             logger.info("Assertion matched");
+
+            individualTestCasePage.selectPriority("High");
+            individualTestCasePage.clickSaveButton();
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
