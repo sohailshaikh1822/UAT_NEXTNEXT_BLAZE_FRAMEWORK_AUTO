@@ -65,6 +65,11 @@
             <class name="testCases.authorTabTestCase.TC074"/>
             <class name="testCases.authorTabTestCase.TC075"/>
             <class name="testCases.authorTabTestCase.TC076"/>
+            <class name="testCases.authorTabTestCase.TC077"/>
+            <class name="testCases.authorTabTestCase.TC078"/>
+            <class name="testCases.authorTabTestCase.TC079"/>
+            <class name="testCases.authorTabTestCase.TC080"/>
+            <class name="testCases.authorTabTestCase.TC081"/>
             <class name="testCases.authorTabTestCase.TC082"/>
             <class name="testCases.authorTabTestCase.TC083"/>
             <class name="testCases.authorTabTestCase.TC084"/>

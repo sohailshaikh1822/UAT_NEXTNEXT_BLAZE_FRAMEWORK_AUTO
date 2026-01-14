@@ -52,6 +52,10 @@ public class TC076 extends BaseClass {
             logger.info("Opened Test Case: " + TC);
             WaitUtils.waitFor3000Milliseconds();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
+            individualTestCasePage.selectPriority("Medium");
+            WaitUtils.waitFor3000Milliseconds();
+            individualTestCasePage.clickSaveButton();
+            WaitUtils.waitFor3000Milliseconds();
             double currentVersion = Double.parseDouble(individualTestCasePage.getTestCaseVersion());
             logger.info("Current Version before update: " + currentVersion);
             individualTestCasePage.clickApproveButton();
@@ -59,6 +63,9 @@ public class TC076 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             double updatedVersion = Double.parseDouble(individualTestCasePage.getTestCaseVersion());
             logger.info("Updated Version after update: " + updatedVersion);
+            individualTestCasePage.selectPriority("Low");
+            WaitUtils.waitFor3000Milliseconds();
+            individualTestCasePage.clickSaveButton();
 
             Assert.assertTrue(
                     updatedVersion > currentVersion,
