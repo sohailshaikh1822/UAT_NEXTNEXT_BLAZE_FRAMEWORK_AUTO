@@ -21,7 +21,8 @@ public class TC062 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
-            authorTestCasePage.linkTestCaseIdFromId(TestcaseId).click();
+            WaitUtils.waitFor2000Milliseconds();
+            authorTestCasePage.clickTestCase(TestcaseId);
             WaitUtils.waitFor1000Milliseconds();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
 

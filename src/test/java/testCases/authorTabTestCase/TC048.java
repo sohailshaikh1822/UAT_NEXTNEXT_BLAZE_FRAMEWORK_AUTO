@@ -13,10 +13,10 @@ public class TC048 extends BaseClass {
 
     @Test(dataProvider = "tc048", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyTheSaveButton(
-            String epic, String feature, String requirementId,
-            String testCaseName, String description, String priority,
-            String QA
-    ) throws InterruptedException {
+            String epic, String requirementId,
+            String testCaseName, String description
+    )
+            throws InterruptedException {
         logger.info("****** Starting the Log in Test Case *****************");
         try {
             login();
@@ -28,9 +28,7 @@ public class TC048 extends BaseClass {
             authorTestCasePage.selectEpic(epic);
             WaitUtils.waitFor1000Milliseconds();
             logger.info("Selected the epic.");
-            authorTestCasePage.selectFeature(feature);
-            WaitUtils.waitFor1000Milliseconds();
-            logger.info("Selected the Feature");
+
             authorTestCasePage.clickRequirement(requirementId);
             WaitUtils.waitFor1000Milliseconds();
             logger.info("Clicked on the requirement ");
@@ -42,10 +40,7 @@ public class TC048 extends BaseClass {
             addTestcasePage.setTestCaseName(testCaseName);
             WaitUtils.waitFor1000Milliseconds();
             addTestcasePage.setDescription(description);
-            WaitUtils.waitFor1000Milliseconds();
-            addTestcasePage.selectPriority(priority);
-            WaitUtils.waitFor1000Milliseconds();
-            addTestcasePage.selectQaUser(QA);
+
             WaitUtils.waitFor1000Milliseconds();
             logger.info("filled the details");
             addTestcasePage.clickSave();

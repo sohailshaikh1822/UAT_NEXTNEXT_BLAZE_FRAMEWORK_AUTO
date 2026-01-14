@@ -24,10 +24,19 @@ public class TC063 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
-            authorTestCasePage.linkTestCaseIdFromId(TestcaseId).click();
+            logger.info("Clicked on any requirement");
             WaitUtils.waitFor1000Milliseconds();
+            authorTestCasePage.clickTestCase(TestcaseId);
+            logger.info("Clicked on a testcase");
+            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             individualTestCasePage.clickAddTestStep();
+            logger.info("Clicked on dd teststep button");
+            individualTestCasePage.setStepDescription("description 1",3);
+            WaitUtils.waitFor1000Milliseconds();
+
+            individualTestCasePage.clickSaveButton();
              WaitUtils.waitFor1000Milliseconds();
             int beforeCount = individualTestCasePage.getStepCountInt();
             WaitUtils.waitFor1000Milliseconds();

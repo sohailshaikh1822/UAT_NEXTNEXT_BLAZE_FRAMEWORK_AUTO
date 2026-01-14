@@ -25,7 +25,7 @@ public class TC044 extends BaseClass {
             logger.info("Navigated to Author Test Case tab");
             WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
-            WaitUtils.waitFor1000Milliseconds();
+            logger.info("Selected Requirement: " + requirementId);
             authorTestCasePage.clickAddTestcase();
             WaitUtils.waitFor1000Milliseconds();
             logger.info("Clicked on Add Test Case button");
