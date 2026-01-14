@@ -166,6 +166,16 @@ public class IndividualTestCasePage extends BasePage {
         }
     }
 
+    @FindBy(xpath = "//div[normalize-space()='APPROVE']/ancestor::button")
+    WebElement approveButton;
+
+    public boolean isApproveButtonDisabled() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(approveButton));
+        String classAttribute = approveButton.getAttribute("class");
+        return classAttribute != null && classAttribute.contains("disabled");
+    }
+
 
     public boolean isModelDisplayed() {
         try {

@@ -12,14 +12,14 @@ import utils.WaitUtils;
 
 public class TC079 extends BaseClass {
 
-    @Test(dataProvider = "tc056", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc079", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyApproveButtonDisabled(
             String epicName,
             String featureName,
             String rq_id,
             String T_id
     ) throws InterruptedException {
-        logger.info("****** Starting TC079: Verify Test Case Name field is updatable in TestCase Form ******");
+        logger.info("****** Starting TC079: Verifying the error message- \"Test case is not approved.\" while creating a new TR ******");
 
         try {
             login();
@@ -45,9 +45,14 @@ public class TC079 extends BaseClass {
             authorTestCasePage.clickTestCase(T_id);
             logger.info("Clicked on the Testcase: " + T_id);
             WaitUtils.waitFor3000Milliseconds();
-          boolean abDisabled= individualTestCasePage.isApproveBtnDisplayed();
-                 logger.info(""+abDisabled);
-            Assert.assertFalse(abDisabled, "Approve button should be disabled but it is enabled");
+            boolean isDisabled = individualTestCasePage.isApproveButtonDisabled();
+            logger.info("Is Approve button disabled: " + isDisabled);
+
+            Assert.assertTrue(
+                    isDisabled,
+                    "Approve button should be disabled, but it is enabled"
+            );
+
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
@@ -57,6 +62,6 @@ public class TC079 extends BaseClass {
             throw e;
         }
 
-        logger.info("************ TC056 Finished ************");
+        logger.info("************ TC079 Finished ************");
     }
 }
