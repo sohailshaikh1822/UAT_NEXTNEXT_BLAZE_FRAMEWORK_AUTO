@@ -447,7 +447,7 @@ public class ExecuteLandingPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         try {
-            // Try waiting for visibility
+
             wait.until(ExpectedConditions.visibilityOfElementLocated(assignedToMe));
             return allTestRunIds.size();
 
@@ -894,6 +894,5 @@ public class ExecuteLandingPage extends BasePage {
 
         return extractedTrId;
     }
-
 
 }

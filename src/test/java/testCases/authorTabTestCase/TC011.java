@@ -26,6 +26,7 @@ public class TC011 extends BaseClass {
             authorTestCasePage.selectEpic(epicName);
             logger.info("selected the epic from the dropdown");
             System.out.println(authorTestCasePage.getSelectedEpic());
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickFeature();
             logger.info("Sucessfully click the feature dropdown");
             logger.info("Verification done...");

@@ -1,35 +1,58 @@
 package testCases.authorTabTestCase;
 
 import DataProviders.AuthorTestCaseDataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC014 extends BaseClass {
 
-    @Test(dataProvider = "tc011", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyRQListBasedOnfFeature(
-            String epicName, String feature
-    ) throws InterruptedException {
-        logger.info("****** Starting the Test Case *****************");
-        try {
+    @Test(
+            dataProvider = "tc011",
+            dataProviderClass = AuthorTestCaseDataProvider.class,
+            retryAnalyzer = RetryAnalyzer.class
+    )
+    public void verifyRQListBasedOnFeature(String epicName, String feature) throws InterruptedException {
 
+        logger.info("****** Starting TC014: Verify RQ list based on Feature ******");
+
+        try {
             login();
             logger.info("Logged in successfully");
-            logger.info("Navigated to Author Test Case tab");
-            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+
+            AuthorTestCasePage authorTestCasePage =
+                    new AuthorTestCasePage(getDriver());
+
+            WaitUtils.waitFor3000Milliseconds();
+
             authorTestCasePage.clickEpic();
-            logger.info("Click on the Epic Drop Down");
+            logger.info("Clicked Epic dropdown");
+
+            WaitUtils.waitFor3000Milliseconds();
+
             authorTestCasePage.selectEpic(epicName);
-            logger.info("selected the epic from the dropdown");
-            System.out.println(authorTestCasePage.getSelectedEpic());
+            logger.info("Selected Epic: " + epicName);
+
+            WaitUtils.waitFor3000Milliseconds();
+
             authorTestCasePage.selectFeature(feature);
-            logger.info("selected the feature from the dropdown");
-            authorTestCasePage.getCountRQInFeature();
-            System.out.println(authorTestCasePage.getCountRQInFeature());
-            logger.info("Got the count of RQ in selected feature");
-            logger.info("Verification done...");
+            logger.info("Selected Feature: " + feature);
+
+            WaitUtils.waitFor3000Milliseconds();
+
+            int rqCount = authorTestCasePage.getCountRQInFeature();
+            logger.info("Requirement count for selected feature: " + rqCount);
+
+            Assert.assertTrue(
+                    rqCount > 0,
+                    "No Requirements are displayed for Feature: " + feature
+            );
+
+            logger.info("Verified Requirement list is displayed based on Feature");
+
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
@@ -37,6 +60,7 @@ public class TC014 extends BaseClass {
             logger.error("Exception occurred: {}", e.getMessage());
             throw e;
         }
-        logger.info("************ Test Case Finished *************************");
+
+        logger.info("************ TC014 Finished *************************");
     }
 }

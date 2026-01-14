@@ -18,9 +18,12 @@ public class TC042 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             AddTestcasePage addTestCase = new AddTestcasePage(getDriver());
             addTestCase.setTestCaseName("For unlink");

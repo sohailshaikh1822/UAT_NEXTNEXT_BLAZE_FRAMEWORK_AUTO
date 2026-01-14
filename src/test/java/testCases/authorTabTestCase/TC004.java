@@ -18,6 +18,7 @@ public class TC004 extends BaseClass {
             logger.info("Logged in successfully");
             logger.info("Navigated to Author Test Case tab");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickEpic();
             logger.info("Click on the Epic Drop Down");
             WaitUtils.waitFor1000Milliseconds();

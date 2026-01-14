@@ -21,29 +21,28 @@ public class TC041 extends BaseClass {
         try {
             login();
             logger.info("Login successful.");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             logger.info("Navigating to 'Author Test Case' tab.");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             authorTestCasePage.searchRq(rqName);
             logger.info("Requirement '" + rqName + "' searched and selected.");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickRequirement(rqName);
             logger.info("Requirement '" + rqName + "' clicked.");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             String totalCountBeforeAddTestcase = authorTestCasePage.totalNoOfTestcasesInsideRq();
             logger.info("Total test cases before addition: " + totalCountBeforeAddTestcase);
 
             int before = authorTestCasePage.extractNumber(totalCountBeforeAddTestcase);
-            WaitUtils.waitFor1000Milliseconds();
-//            authorTestCasePage.clickAddTestcase();
-//            logger.info("Clicked 'Add Test Case' button.");
-//            WaitUtils.waitFor1000Milliseconds();
-//            addTestcasePage.setTestCaseName(tcName);
+            WaitUtils.waitFor3000Milliseconds();
+            authorTestCasePage.clickAddTestcase();
+            logger.info("Clicked 'Add Test Case' button.");
+
             authorTestCasePage.clickAddTestCaseAndEnterName(tcName);
             logger.info("Test case name set to: " + tcName);
             WaitUtils.waitFor1000Milliseconds();
