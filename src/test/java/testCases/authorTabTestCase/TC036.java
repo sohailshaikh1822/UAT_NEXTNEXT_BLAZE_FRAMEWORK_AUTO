@@ -28,10 +28,11 @@ public class TC036 extends BaseClass {
             login();
             logger.info("Logged in successfully");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
 
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Clicked the Author test case");
@@ -41,17 +42,17 @@ public class TC036 extends BaseClass {
             authorTestCasePage.selectEpic(epic);
             logger.info("Selected the epic");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             authorTestCasePage.selectFeature(feature);
             logger.info("Selected the feature");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked on requirement id " + requirementId);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked Add test case");
