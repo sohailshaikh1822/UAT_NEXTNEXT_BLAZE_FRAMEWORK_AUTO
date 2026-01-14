@@ -26,10 +26,12 @@ public class TC042 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             AddTestcasePage addTestCase = new AddTestcasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             addTestCase.setTestCaseName("For unlink");
+            WaitUtils.waitFor3000Milliseconds();
             addTestCase.clickSave();
             String testCaseId = addTestCase.getTestcaseId("For unlink");
-             WaitUtils.waitFor1000Milliseconds();
+             WaitUtils.waitFor3000Milliseconds();
             AuthorTestCasePage authorTestCasePage1 = new AuthorTestCasePage(getDriver());
             authorTestCasePage1.clickActionIcon(testCaseId);
             logger.info("Clicked unlink icon for test case ");
