@@ -49,7 +49,7 @@ public class TC084 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
-            addTestcasePage.setTestCaseName(TCname);
+            authorTestCasePage.clickAddTestCaseAndEnterName(TCname);
             logger.info("Testcase Name"+TCname);
             addTestcasePage.setDescription(desc);
             logger.info("Testcase Description"+desc);
