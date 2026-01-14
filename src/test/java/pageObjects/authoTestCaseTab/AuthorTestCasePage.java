@@ -10,6 +10,9 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import utils.WaitUtils;
 
 import static testBase.BaseClass.getDriver;
@@ -26,8 +29,15 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//span[normalize-space()='Epic']")
     WebElement labelEpic;
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]/option")
+//    @FindBy(xpath = "(//select[@class='text select-dropdown'])[1]/option")
+//    List<WebElement> optionsEpic;
+
+    @FindBy(xpath =
+            "//span[normalize-space()='Epic']" +
+                    "/following-sibling::div//select[contains(@class,'select-dropdown')]/option"
+    )
     List<WebElement> optionsEpic;
+
 
     @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]/option")
     List<WebElement> optionsFeatures;
@@ -98,7 +108,9 @@ public class AuthorTestCasePage extends BasePage {
     }
 
     public WebElement linkTestCaseIdFromId(String id) {
-        return driver.findElement(By.xpath("//div[@class='testlistcell']/a[text()='" + id + "']"));
+        return driver.findElement(
+                By.xpath("//div[contains(@class,'requirement-testlistcell')]//a[normalize-space(text())='" + id + "']")
+        );
     }
 
     @FindBy(xpath = "//div[normalize-space()='LINK TESTCASE']")
@@ -305,11 +317,33 @@ public void selectEpic(String epicName) {
         return select.getFirstSelectedOption().getText();
     }
 
+    @FindBy(xpath = "//div[contains(@class,'pagination')]//p[contains(text(),'Total')]")
+    WebElement rqTotalCountText;
 
-    public int getCountRQInFeature() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();
-        return rqCountWrapper.size();
+
+    public int getCountRQInFeature() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement countElement = wait.until(
+                ExpectedConditions.visibilityOf(rqTotalCountText)
+        );
+
+        String countText = countElement.getText().trim();
+
+        Pattern pattern = Pattern.compile("(\\d+)");
+        Matcher matcher = pattern.matcher(countText);
+
+        if (!matcher.find()) {
+            throw new AssertionError(
+                    "Unable to extract Requirement count from text: " + countText
+            );
+        }
+
+        int rqCount = Integer.parseInt(matcher.group(1));
+        return rqCount;
     }
+
 
     public void clickLastPageArrowBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

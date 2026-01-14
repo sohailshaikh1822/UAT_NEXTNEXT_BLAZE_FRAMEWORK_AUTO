@@ -19,6 +19,7 @@ public class TC035 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);

@@ -55,7 +55,7 @@ public class TC036 extends BaseClass {
 
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked Add test case");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             String expectedHeader = "Create Test Cases";
             String actualHeader = addTestcasePage.waitAndGetAddTestCaseHeader();
             Assert.assertEquals(actualHeader, expectedHeader);

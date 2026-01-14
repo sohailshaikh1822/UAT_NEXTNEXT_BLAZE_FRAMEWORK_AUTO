@@ -31,7 +31,7 @@ public class TC034 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectEpic(epicName);
             logger.info("Selected Epic: " + epicName);
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectFeature(featureName);
             logger.info("Selected Feature: " + featureName);
 

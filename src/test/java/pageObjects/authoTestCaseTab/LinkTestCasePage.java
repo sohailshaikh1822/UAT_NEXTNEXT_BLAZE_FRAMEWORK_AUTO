@@ -3,9 +3,13 @@ package pageObjects.authoTestCaseTab;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import org.openqa.selenium.*;
 import utils.WaitUtils;
+
+import java.time.Duration;
 
 public class LinkTestCasePage extends BasePage {
 
@@ -51,15 +55,30 @@ public class LinkTestCasePage extends BasePage {
         pidElement.click();
     }
 
+    @FindBy(id = "actionDialogtp-message")
+    WebElement alertMessageLinkingTC;
+
+
     public String getAlertMessage() {
-        return alert.getText();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement message = wait.until(
+                ExpectedConditions.visibilityOf(alertMessageLinkingTC)
+        );
+
+        return message.getText().trim();
     }
 
-    public boolean isTestCaseAlreadyLinked() throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();;
+
+    public boolean isTestCaseAlreadyLinked() {
+
         String message = getAlertMessage();
-        return message.contains("This test case is already linked to the requirement.");
+        return message.equalsIgnoreCase(
+                "This test case is already linked to the requirement."
+        );
     }
+
     public String getAlertMessageWhileLinkingNewTc() {
         return LinkingTcNotification.getText();
     }

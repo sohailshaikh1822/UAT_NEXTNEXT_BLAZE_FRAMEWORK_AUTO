@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC028 extends BaseClass {
 
@@ -17,6 +18,7 @@ public class TC028 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
             Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(), expectedPagination);

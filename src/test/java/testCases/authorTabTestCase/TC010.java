@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC010 extends BaseClass {
 
@@ -16,6 +17,7 @@ public class TC010 extends BaseClass {
             logger.info("Logged in successfully");
             logger.info("Navigated to Author Test Case tab");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             boolean b = authorTestCasePage.getFeatureVisibility();
             Assert.assertTrue(b, "It is not visible..");
             logger.info("Verification successfully done");

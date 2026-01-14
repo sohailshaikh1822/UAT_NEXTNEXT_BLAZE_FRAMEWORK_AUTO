@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC029 extends BaseClass {
 
@@ -19,12 +20,16 @@ public class TC029 extends BaseClass {
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             new RequirementTabPage(getDriver()).clickRequirementTab();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
             authorTestCasePage.clickNextArrow();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickEpic();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickFeature();
             logger.info("Clicked on forward arrow in the requirement");
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickRequirementPagination();
             logger.info(authorTestCasePage.showPaginationOfRequirement());
             logger.info("Expected pagination verified ....");
