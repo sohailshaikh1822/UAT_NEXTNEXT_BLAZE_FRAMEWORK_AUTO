@@ -1,10 +1,12 @@
 package testCases.authorTabTestCase;
 
+import DataProviders.AuthorTestCaseDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC070 extends BaseClass {
 
@@ -19,6 +21,7 @@ public class TC070 extends BaseClass {
             logger.info("Clicked Author Testcase tab");
             authorTestCasePage.clickRequirement("RQ-438");
             logger.info("Selected requirement RQ-438");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked Add Testcase button");
 

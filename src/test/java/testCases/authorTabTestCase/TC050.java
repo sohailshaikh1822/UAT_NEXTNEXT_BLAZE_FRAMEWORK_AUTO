@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC050 extends BaseClass {
 
-    @Test(dataProvider = "tc040", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc050", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyMultipleRows(
             String requirementId, String TestcaseId
     ) throws InterruptedException {
@@ -20,9 +20,13 @@ public class TC050 extends BaseClass {
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
+            logger.info("clicked on author tab");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
+            logger.info("add requirement");
             WaitUtils.waitFor2000Milliseconds();;
-            authorTestCasePage.linkTestCaseIdFromId(TestcaseId).click();
+            authorTestCasePage.clickTestCase(TestcaseId);
+            logger.info("clicked on a testcase");
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             WaitUtils.waitFor2000Milliseconds();;
             individualTestCasePage.clickAddRow();
