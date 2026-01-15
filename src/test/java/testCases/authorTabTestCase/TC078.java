@@ -29,6 +29,7 @@ public class TC078 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             IndividualTestCasePage individualTestCasePage=new IndividualTestCasePage(getDriver());
             ExecuteLandingPage executeLandingPage=new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
             WaitUtils.waitFor2000Milliseconds();
