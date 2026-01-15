@@ -12,38 +12,42 @@ import utils.WaitUtils;
 
 public class TC027 extends BaseClass {
 
-    @Test(dataProvider = "tc027", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyRequirementEntriesUpdate(String project,
-            String epic, String description, String priority, String status, String type
+    @Test(
+            dataProvider = "tc027",
+            dataProviderClass = RequirementDataProvider.class,
+            retryAnalyzer = RetryAnalyzer.class
+    )
+    public void verifyRequirementSavedWithoutName(
+            String project,
+            String epic,
+            String description,
+            String priority,
+            String status,
+            String type
     ) throws InterruptedException {
-        logger.info("****** Starting the Test Case *****************");
-        try {
-            logger.info("************ Test Case Started *************************");
 
+        logger.info("************ TC027 Started: Verify requirement can be saved without name ************");
+
+        try {
             login();
             logger.info("Logged in successfully");
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-            logger.info("Initialized RequirementTabPage");
-
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
-            logger.info("Initialized IndividualModulePage");
-
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-            logger.info("Initialized AddRequirementPage");
 
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor3000Milliseconds();;
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickDropdownToSelectProject(project);
-            logger.info("Selected project" + project);
+            logger.info("Selected project: " + project);
 
-            requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor1000Milliseconds();
+            requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             requirementTabPage.clickOnModule(epic);
-            logger.info("Selected epic" + epic);
+            logger.info("Selected epic: " + epic);
 
             int countBefore = individualModulePage.getRequirementCountFromFooter();
             logger.info("Requirement count before adding: " + countBefore);
@@ -53,50 +57,48 @@ public class TC027 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
 
+            // ❗ Name is intentionally NOT set
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
 
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
 
-            WaitUtils.waitFor2000Milliseconds();;
-
+            WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
 
             WaitUtils.waitFor2000Milliseconds();
-
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);
 
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
-            logger.info("Requirement successfully added");
 
-            WaitUtils.waitFor2000Milliseconds();;
+            WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.clickClose();
-            logger.info("Clicked on Close button");
-            addRequirementPage.clickClose();
+            logger.info("Clicked Close button");
 
-            WaitUtils.waitFor2000Milliseconds();;
+            WaitUtils.waitFor2000Milliseconds();
             int countAfter = individualModulePage.getRequirementCountFromFooter();
-            logger.info("Requirement count after attempting to add without name: " + countAfter);
+            logger.info("Requirement count after adding: " + countAfter);
 
+            Assert.assertEquals(
+                    countAfter,
+                    countBefore + 1,
+                    "Requirement count should increase after saving without name"
+            );
 
-
-            Assert.assertEquals(countAfter, countBefore,
-                    "Requirement without name should not be saved in the table");
-            logger.info("Verified requirement without name is not saved, count remained same");
+            logger.info("Verified requirement saved successfully without name");
 
         } catch (AssertionError e) {
-            logger.error("❌ Assertion failed: " + e.getMessage(), e);
+            logger.error("Assertion failed: " + e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            logger.error("❌ Exception occurred: " + e.getMessage(), e);
+            logger.error("Exception occurred: " + e.getMessage(), e);
             throw e;
         }
 
-        logger.info("************ Test Case Finished *************************");
-
+        logger.info("************ TC027 Finished ************");
     }
 }

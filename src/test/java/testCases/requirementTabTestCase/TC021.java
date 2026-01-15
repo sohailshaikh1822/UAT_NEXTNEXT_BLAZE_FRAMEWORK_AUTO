@@ -30,10 +30,9 @@ public class TC021 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule("Epic requirement ");
             logger.info("Navigated to Module");
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickOnModule("feature requirement name check ");
             logger.info("clicked on specific module");
-//            logger.info("Clicked on the project name");
-
             WaitUtils.waitFor1000Milliseconds();
             logger.info(" Fetching the total requirement count before adding a new requirement...");
             String totalRqCountBeforeAdd = requirementTabPage.totalCountOfAvailabelRq();
