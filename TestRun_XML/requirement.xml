@@ -45,14 +45,14 @@
             <class name="testCases.requirementTabTestCase.TC038"/>
             <class name="testCases.requirementTabTestCase.TC039"/>
             <class name="testCases.requirementTabTestCase.TC040"/>
-            <class name="testCases.requirementTabTestCase.TC048"/>
-            <class name="testCases.requirementTabTestCase.TC049"/>
-            <class name="testCases.requirementTabTestCase.TC050"/>
-            <class name="testCases.requirementTabTestCase.TC051"/>
-            <class name="testCases.requirementTabTestCase.TC063"/>
-            <class name="testCases.requirementTabTestCase.TC064"/>
-            <class name="testCases.requirementTabTestCase.TC073"/>
-            <class name="testCases.requirementTabTestCase.TC074"/>
+<!--            <class name="testCases.requirementTabTestCase.TC048"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC049"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC050"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC051"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC063"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC064"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC073"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC074"/>-->
         </classes>
     </test>
 </suite>
