@@ -39,8 +39,10 @@ public class AuthorTestCasePage extends BasePage {
     List<WebElement> optionsEpic;
 
 
-    @FindBy(xpath = "(//select[@class='text select-dropdown'])[3]/option")
-    List<WebElement> optionsFeatures;
+    @FindBy(xpath = "//span[text()='Feature']/following::select[contains(@class,'select-dropdown')][1]")
+    WebElement  optionsFeatures;
+
+
 
     @FindBy(xpath = "//*[normalize-space()='Epic']/following::select[2]")
     WebElement dropdownFeature;
@@ -286,11 +288,31 @@ public void selectEpic(String epicName) {
         return optionsEpic;
     }
 
-    public void getAllFeatures() throws InterruptedException {
-        for (WebElement feature : optionsFeatures) {
-            System.out.println("Feature: " + feature.getText());
+    public List<String> getAllFeatures() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By featureOptionsLocator = By.xpath(
+                "//span[text()='Feature']/following::select[contains(@class,'select-dropdown')][1]/option"
+        );
+
+        List<WebElement> options = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(featureOptionsLocator)
+        );
+
+        List<String> featureNames = new ArrayList<>();
+
+        for (WebElement option : options) {
+            String text = option.getText().trim();
+            if (!text.equalsIgnoreCase("Please Select")) {
+                featureNames.add(text);
+                System.out.println("Feature: " + text);
+            }
         }
+
+        return featureNames;
     }
+
+
 
     public void clickEpic() {
         dropdownEpic.click();
