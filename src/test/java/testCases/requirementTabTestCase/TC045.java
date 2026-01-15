@@ -15,10 +15,11 @@ import utils.WaitUtils;
 
 public class TC045 extends BaseClass {
 
-    public void VerifyUnLinkingOfTestCases(
+    public void VerifyUnlinkingOfNewTestCases(
             String mainProject,
             String epic,
-            String requirementId,String tcName
+            String requirementId,
+            String tcName
     ) throws InterruptedException {
 
         logger.info("****** Starting the Log in Test Case *****************");
@@ -50,15 +51,27 @@ public class TC045 extends BaseClass {
 
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked on requirement id " + requirementId);
+            WaitUtils.waitFor1000Milliseconds();
 
+            authorTestCasePage.clicklinktestcase();
+            logger.info("Clicked on LinkTestcase Button");
+            linkTestCasePage.searchTestCase(tcName);
+            logger.info("Searched with TcName");
+
+            linkTestCasePage.clickSearch();
+            logger.info("Clicked Search Button");
+            linkTestCasePage.clickPid(tcName);
+            logger.info("Clicked Searched TestCasename");
+            WaitUtils.waitFor3000Milliseconds();
+            //Test case linked successfully.
+            String expectedMessage = "Test case linked successfully.";
+            String actualMessage = linkTestCasePage.getAlertMessageWhileLinkingNewTc();
+            Assert.assertEquals(actualMessage, expectedMessage);
+            logger.info("Linked Test Cases screen displayed successfully");
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickActionIcon(tcName);
             WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.confirmUnlink();
-            String expectedAlert = "TestCase unlinked successfully.";
-            String actualAlert = linkTestCasePage.getAlertMessageWhileLinkingNewTc();
-            Assert.assertEquals(actualAlert, expectedAlert);
-            logger.info("Successfully Unlinked the testcases");
 
         } catch (Exception | AssertionError e) {
             logger.error("Test case failed ...", e);

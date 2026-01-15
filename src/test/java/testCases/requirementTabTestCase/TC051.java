@@ -1,61 +1,69 @@
 package testCases.requirementTabTestCase;
 
+import DataProviders.RequirementDataProvider;
 import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
+
+@Test(dataProvider = "tc051", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
 public class TC051 extends BaseClass {
-    @Test(dataProvider = "tc051", dataProviderClass = DataProviders.RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void Verify_SAVE_functionality_in_Add_TestCase(
-            String moduleName,
-            String requirementId
-    ) {
-        logger.info("************ Starting Test Case: Verify SAVE functionality in Add TestCase *****************");
+
+    public void VerifyUserCanCreateNewTestCasesForTheSelectedRequirement(
+            String moduleid,
+            String rqid
+    ) throws InterruptedException {
+
+        logger.info("************ Starting TC057 ************");
 
         try {
-            logger.info("************ Test Case Started *************************");
-
             login();
             logger.info("Logged in successfully");
 
+            WaitUtils.waitFor1000Milliseconds();
+
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-            AddTestcasePage addTestCasePage = new AddTestcasePage(getDriver());
+            AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
 
-
+            authorTestCasePage.clickAuthorTestcase();
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
-            logger.info("Clicked on Requirements tab");
 
-            requirementTabPage.clickEpicDropdown();
-            logger.info("Clicked on Epic drop down");
+            requirementTabPage.clickDropdownToSelectProject("STG- SPARK Modernization");
+            logger.info("Selected project: STG- SPARK Modernization");
 
-            requirementTabPage.clickOnModule(moduleName);
-            logger.info("Opened module: " + moduleName);
+            WaitUtils.waitFor1000Milliseconds();
+            requirementTabPage.clickArrowRightPointingForExpandModule(moduleid);
+            requirementTabPage.clickOnModule(moduleid);
 
-            authorTestCasePage.clickRequirement(requirementId);
-            logger.info("Clicked on requirement id " + requirementId);
+            WaitUtils.waitFor1000Milliseconds();
+            authorTestCasePage.clickRequirement(rqid);
+            logger.info("Clicked on requirement id RQ-1599");
 
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickAddTestcase();
-            logger.info("Clicked on AddTestcase Button");
+            logger.info("Clicked on Add Test Case");
 
-            addTestCasePage.clickSave();
-            logger.info("clicked on save button");
-
-            addTestCasePage.getTcNameRequiredWarningMessage();
-
-
-
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.setTestCaseName("TC058_Long_Description_Test");
+            logger.info("Test case name entered");
+            WaitUtils.waitFor1000Milliseconds();
+            addTestcasePage.clickSave();
+            logger.info("Clicked Save button successfully");
 
         } catch (AssertionError e) {
+            logger.error("Assertion failed: " + e.getMessage());
             throw e;
         } catch (Exception e) {
-            logger.error("Exception occurred: " + e.getMessage(), e);
+            logger.error("Exception occurred: " + e.getMessage());
+            throw e;
         }
 
-        logger.info("************ Test Case Finished *************************");
-
+        logger.info("************ TC057 Finished ************");
     }
 }

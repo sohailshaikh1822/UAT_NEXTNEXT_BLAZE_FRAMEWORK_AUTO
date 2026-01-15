@@ -77,13 +77,13 @@ public class TC062 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.clickClose();
+            logger.info("closed ");
 
             individualModulePage.clickLastPageArrowBtn();
             WaitUtils.waitFor3000Milliseconds();
             String rqId = addRequirementPage.getModuleId();
            requirementsPage.verifyRequirementCreationNotification(rqId);
-
-
+           logger.info("notification");
         } catch (AssertionError e) {
             logger.error("❌ Assertion failed: " + e.getMessage(), e);
             throw e;
