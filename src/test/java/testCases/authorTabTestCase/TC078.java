@@ -28,6 +28,7 @@ public class TC078 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             IndividualTestCasePage individualTestCasePage=new IndividualTestCasePage(getDriver());
             ExecuteLandingPage executeLandingPage=new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
             WaitUtils.waitFor2000Milliseconds();
@@ -53,10 +54,7 @@ public class TC078 extends BaseClass {
            logger.info("");
             WaitUtils.waitFor3000Milliseconds();
 
-//           executeLandingPage.expandSubTestCycle("New TestCycle7");
-//            WaitUtils.waitFor3000Milliseconds();
-//
-//            executeLandingPage.expandTestSuit("New TestSuite 8");
+
            logger.info("Testsuite Expanded");
 
            individualTestCasePage.clickSaveButton();
