@@ -30,7 +30,7 @@ public class TC024 extends BaseClass {
 
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             logger.info("Initialized AddRequirementPage");
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 

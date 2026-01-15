@@ -220,18 +220,44 @@ public class RequirementTabPage extends BasePage {
         arrowAfterExpandDownPointing(moduleName).click();
     }
 
-    public void clickOnModule(String moduleName) throws InterruptedException {
-        Actions a = new Actions(driver);
-        try {
-            a.moveToElement(leftModuleNameByName(moduleName)).perform();
-            leftModuleNameByName(moduleName).click();
-        } catch (Exception e) {
-            WebElement ele = driver.findElement(By.xpath(
-                    "//div[@class='tree-node tree-node collapsed']//span[contains(text(),'" + moduleName + "')]"));
-            a.moveToElement(ele).perform();
-            ele.click();
+    public void clickOnModule(String moduleName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By moduleLabel = By.xpath(
+                "//span[contains(@class,'tree-label') and normalize-space(text())='" + moduleName + "']"
+        );
+
+        WebElement moduleElement = wait.until(
+                ExpectedConditions.presenceOfElementLocated(moduleLabel)
+        );
+
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", moduleElement);
+
+        WebElement treeRow = moduleElement.findElement(By.xpath("./ancestor::div[contains(@class,'tree-row')]"));
+
+        List<WebElement> toggleIcons = treeRow.findElements(
+                By.xpath(".//span[contains(@class,'tree-toggle')]")
+        );
+
+        if (!toggleIcons.isEmpty()) {
+            WebElement toggle = toggleIcons.getFirst();
+
+            String parentNodeClass = treeRow.findElement(
+                    By.xpath("./ancestor::div[contains(@class,'tree-node')]")
+            ).getAttribute("class");
+
+            assert parentNodeClass != null;
+            if (parentNodeClass.contains("collapsed")) {
+                toggle.click();
+            }
         }
+
+        actions.moveToElement(moduleElement).pause(Duration.ofMillis(200)).click().perform();
     }
+
 
     public String getNewCreatedRqIdText() {
         return getNewRqIdText.getText();

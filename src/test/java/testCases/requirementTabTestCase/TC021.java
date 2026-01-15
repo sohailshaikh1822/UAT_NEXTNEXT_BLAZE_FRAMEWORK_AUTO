@@ -27,16 +27,10 @@ public class TC021 extends BaseClass {
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on 'Requirement' tab");
-            WaitUtils.waitFor1000Milliseconds();
-            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
-            logger.info("Navigate to the project");
-
-            WaitUtils.waitFor3000Milliseconds();;
-
-//            requirementTabPage.clickOnTheProjectName();
-            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            WaitUtils.waitFor3000Milliseconds();
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic requirement ");
             logger.info("Navigated to Module");
-            requirementTabPage.clickOnModule("feature 039");
+            requirementTabPage.clickOnModule("feature requirement name check ");
             logger.info("clicked on specific module");
 //            logger.info("Clicked on the project name");
 

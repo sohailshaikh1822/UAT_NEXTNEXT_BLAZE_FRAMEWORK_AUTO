@@ -34,7 +34,7 @@ public class TC025 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
