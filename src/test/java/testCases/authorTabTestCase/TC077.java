@@ -16,7 +16,8 @@ public class TC077 extends BaseClass {
             String epicName,
             String featureName,
             String rq_id,
-            String T_id
+            String T_id,
+            String testname
     ) throws InterruptedException {
         logger.info("****** Starting TC056: Verify Test Case Name field is updatable in TestCase Form ******");
 
@@ -47,12 +48,12 @@ public class TC077 extends BaseClass {
 
             logger.info("Current version"+ oldVersionText);
 
-            individualTestCasePage.setTestCaseName("NewTcName");
+            individualTestCasePage.setTestCaseName(testname);
 
             individualTestCasePage.clickSaveButton();
             logger.info("Save button clicked");
             WaitUtils.waitFor3000Milliseconds();
-           String newVersionText = individualTestCasePage.getVersion();
+            String newVersionText = individualTestCasePage.getVersion();
 
             double oldVersion = Double.parseDouble(oldVersionText);
             double newVersion = Double.parseDouble(newVersionText);
