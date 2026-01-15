@@ -61,7 +61,7 @@ public class TC056 extends BaseClass {
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
             WaitUtils.waitFor1000Milliseconds();
-            requirementTabPage.clickYesBtn();
+//            requirementTabPage.clickYesBtn();
 
             addTestcasePage.setTestCaseName("Duplicate Testcase Name");
             logger.info("Test case name set to: " + "Duplicate Testcase Name");
@@ -70,7 +70,7 @@ public class TC056 extends BaseClass {
             addTestcasePage.clickSave();
             logger.info("Clicked Save button after entering the duplicate name ");
 
-            requirementTabPage.clickYesBtn();
+//            requirementTabPage.clickYesBtn();
 
 
 
