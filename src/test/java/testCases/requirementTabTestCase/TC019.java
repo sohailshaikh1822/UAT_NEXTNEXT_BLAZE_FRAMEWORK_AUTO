@@ -13,23 +13,21 @@ public class TC019 extends BaseClass {
 
     @Test(dataProvider = "tc019", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyUserCanUpdateNameAndDescription(
-            String project,
             String epic,
             String description,
-            String name
+            String name,
+            String name1
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
         try {
             login();
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-//            requirementTabPage.clickOnTheProjectName();
-//            requirementTabPage.clickDropdownToSelectProject(project);
-            logger.info("Navigated to the project");
-            requirementTabPage.clickArrowRightPointingForExpandModule(epic);
-            WaitUtils.waitFor1000Milliseconds();
+           // requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             logger.info("clicked on specific epic");
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
@@ -42,6 +40,9 @@ public class TC019 extends BaseClass {
             boolean check = individualModulePage.isModuleUpdatedSuccessfully();
             Assert.assertTrue(check);
             logger.info("Updation saved successfully...");
+            individualModulePage.enterName(name1);
+            logger.info("added the name");
+            individualModulePage.clickSave();
 
             logger.info("Module Title verified Successfully");
         } catch (AssertionError e) {

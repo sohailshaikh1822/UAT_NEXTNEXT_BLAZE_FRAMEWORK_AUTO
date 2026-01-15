@@ -21,21 +21,14 @@ public class TC036 extends BaseClass {
             logger.info("Logged in successfully");
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-            logger.info("Initialized RequirementTabPage");
-
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
-            logger.info("Initialized IndividualModulePage");
-
-            logger.info("Initialized AddRequirementPage");
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
-
-            WaitUtils.waitFor3000Milliseconds();;
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Selected project" + project);
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             logger.info("Selected epic" + epic);
             individualModulePage.clearModuleName();

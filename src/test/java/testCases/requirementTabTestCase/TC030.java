@@ -42,10 +42,11 @@ public class TC030 extends BaseClass {
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             addRequirementPage.setRequirementId(requiName);
             logger.info("Set Requirement ID: " + requiName);
+            addRequirementPage.clickClose();
             indivisualModulePage.clickDeleteRequirement(requiName);
             WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
             wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='partialTestCaseContainer']//p[@id='actionDialog-message']")));
-            logger.info("Requirement Deletion Confirmation messgae appears successfully");
+            logger.info("Requirement Deletion Confirmation message appears successfully");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC014 extends BaseClass {
 
@@ -15,6 +16,7 @@ public class TC014 extends BaseClass {
             logger.info("Logged in successfully");
 
             RequirementTabPage reqPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             reqPage.clickRequirementTab();
             logger.info("clicked on requirement tab");
 

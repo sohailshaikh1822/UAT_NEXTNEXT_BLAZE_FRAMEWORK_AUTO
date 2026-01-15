@@ -29,13 +29,14 @@ public class TC009 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
 
             WaitUtils.waitFor2000Milliseconds();
 //            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Expanded project: " + project);
-
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             logger.info("Opened module: " + epic);
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
@@ -45,12 +46,15 @@ public class TC009 extends BaseClass {
             logger.info("clicked on specific module");
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             addRequirementPage.clickAddRequirementBtn();
+            WaitUtils.waitFor3000Milliseconds();
             addRequirementPage.setRequirementId(id);
+            WaitUtils.waitFor3000Milliseconds();
             addRequirementPage.clickSave();
             logger.info("click on save btn");
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='notification']")));
             logger.info("Success msg appears");
+            WaitUtils.waitFor3000Milliseconds();
             addRequirementPage.clickClose();
 //            addRequirementPage.ClickYesPopup();
             boolean requirementVisible = wait.until(webDriver -> requirementTabPage.isRequirementVisible(reqId));

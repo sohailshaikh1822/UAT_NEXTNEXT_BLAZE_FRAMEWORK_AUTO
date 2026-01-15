@@ -9,6 +9,7 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 import java.time.Duration;
 
@@ -27,13 +28,17 @@ public class TC018 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
 //            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigate to the project");
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             logger.info("Navigated to Module");
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickOnModule(epic);
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickNewModule();
             requirementTabPage.setModuleName(feature);
             requirementTabPage.saveModule();
