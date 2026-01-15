@@ -33,6 +33,7 @@ public class RequirementTabPage extends BasePage {
 
     @FindBy(xpath = "(//i[@class='fa-solid tree-arrow fa-caret-right'])[1]")
     WebElement leftPanelProjectName;
+
     @FindBy(xpath = "//span[@class='entry-info']")
     WebElement totalEntriesRqCount;
 

@@ -17,7 +17,6 @@ public class TC026 extends BaseClass {
 
     @Test(dataProvider = "tc026", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyPlaceholderOfDescription(
-            String project,
             String epic,
             String feature,
             String descri
@@ -27,11 +26,8 @@ public class TC026 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-//            requirementTabPage.clickDropdownToSelectProject(project);
-//            logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             logger.info("Navigated to Module");
             requirementTabPage.clickOnModule(feature);

@@ -34,9 +34,6 @@ public class TC064 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();
 
-            requirementTabPage.clickRequirementTab();
-            logger.info("Clicked on Requirements tab");
-
             requirementTabPage.clickEpicDropdown();
             logger.info("Clicked on Epic drop down");
 
