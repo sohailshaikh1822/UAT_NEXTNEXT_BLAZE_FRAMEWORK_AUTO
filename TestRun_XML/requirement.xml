@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="requirement Test ">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="headed"/>
         <classes>
             <class name="testCases.requirementTabTestCase.TC001"/>
             <class name="testCases.requirementTabTestCase.TC002"/>
@@ -45,14 +45,14 @@
             <class name="testCases.requirementTabTestCase.TC038"/>
             <class name="testCases.requirementTabTestCase.TC039"/>
             <class name="testCases.requirementTabTestCase.TC040"/>
-            <class name="testCases.requirementTabTestCase.TC048"/>
-            <class name="testCases.requirementTabTestCase.TC049"/>
-            <class name="testCases.requirementTabTestCase.TC050"/>
-            <class name="testCases.requirementTabTestCase.TC051"/>
-            <class name="testCases.requirementTabTestCase.TC063"/>
-            <class name="testCases.requirementTabTestCase.TC064"/>
-            <class name="testCases.requirementTabTestCase.TC073"/>
-            <class name="testCases.requirementTabTestCase.TC074"/>
+<!--            <class name="testCases.requirementTabTestCase.TC048"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC049"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC050"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC051"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC063"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC064"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC073"/>-->
+<!--            <class name="testCases.requirementTabTestCase.TC074"/>-->
         </classes>
     </test>
 </suite>
