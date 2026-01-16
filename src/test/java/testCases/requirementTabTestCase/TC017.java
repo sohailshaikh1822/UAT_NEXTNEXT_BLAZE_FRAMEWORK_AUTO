@@ -12,7 +12,6 @@ public class TC017 extends BaseClass {
 
     @Test(dataProvider = "tc017", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifynoLinkedRequirementMessage(
-            String project,
             String epic,
             String feature) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");
@@ -22,7 +21,6 @@ public class TC017 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-//            requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             logger.info("Navigated to Module");
