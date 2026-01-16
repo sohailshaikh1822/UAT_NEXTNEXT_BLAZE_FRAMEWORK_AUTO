@@ -75,23 +75,23 @@ public class TC062 extends BaseClass {
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
 
-            WaitUtils.waitFor2000Milliseconds();
-            addRequirementPage.clickClose();
-            logger.info("closed ");
-
-            individualModulePage.clickLastPageArrowBtn();
             WaitUtils.waitFor3000Milliseconds();
-            String rqId = addRequirementPage.getModuleId();
-           requirementsPage.verifyRequirementCreationNotification(rqId);
-           logger.info("notification");
+
+            String rqId = addRequirementPage.getRqId();
+            logger.info("Captured Requirement ID: " + rqId);
+
+            WaitUtils.waitFor9000Milliseconds();
+
+            requirementsPage.verifyRequirementCreationNotification(rqId);
+            logger.info("Requirement creation notification verified successfully");
+
         } catch (AssertionError e) {
-            logger.error("❌ Assertion failed: " + e.getMessage(), e);
+            logger.error("Assertion failed: " + e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            logger.error("❌ Exception occurred: " + e.getMessage(), e);
+            logger.error("Exception occurred: " + e.getMessage(), e);
             throw e;
         }
-
         logger.info("************ Test Case Finished *************************");
 
     }
