@@ -18,7 +18,6 @@ public class TC009 extends BaseClass {
 
     @Test(dataProvider = "tc009", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementUnderModule(
-            String project,
             String epic,
             String feature,
             String id,
@@ -32,15 +31,9 @@ public class TC009 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
-
             WaitUtils.waitFor2000Milliseconds();
-//            requirementTabPage.clickDropdownToSelectProject(project);
-            logger.info("Expanded project: " + project);
-            WaitUtils.waitFor3000Milliseconds();
-            requirementTabPage.clickOnModule(epic);
-            logger.info("Opened module: " + epic);
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
-
+            logger.info("Expanded module: " + epic);
             WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(feature);
             logger.info("clicked on specific module");

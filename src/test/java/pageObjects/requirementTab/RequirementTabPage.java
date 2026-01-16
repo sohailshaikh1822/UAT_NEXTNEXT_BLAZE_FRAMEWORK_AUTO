@@ -267,15 +267,33 @@ public class RequirementTabPage extends BasePage {
     }
 
     public boolean isRequirementVisible(String requirementId) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String requirementXpath = "//p[normalize-space()='" + requirementId + "']";
+        By requirementLocator = By.xpath(requirementXpath);
+
+        By nextPageBtn = By.xpath("//img[@alt='Next' and contains(@class,'active')]");
+        By loadingSpinner = By.id("loading-spinner");
+
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            String xpath = "(//p[normalize-space()='" + requirementId + "'])[1]";
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            return true;
+            while (true) {
+                if (!driver.findElements(requirementLocator).isEmpty()) {
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(requirementLocator));
+                    return true;
+                }
+
+                if (driver.findElements(nextPageBtn).isEmpty()) {
+                    return false;
+                }
+                WebElement nextBtn = wait.until(ExpectedConditions.elementToBeClickable(nextPageBtn));
+                nextBtn.click();
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingSpinner));
+            }
         } catch (Exception e) {
             return false;
         }
     }
+
 
     public String getDeleteModuleAlertMessage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
