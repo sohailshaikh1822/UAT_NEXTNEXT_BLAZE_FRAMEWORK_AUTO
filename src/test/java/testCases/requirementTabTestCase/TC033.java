@@ -7,11 +7,14 @@ import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC033 extends BaseClass {
 
     @Test(dataProvider = "tc033", dataProviderClass = DataProviders.RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyModuleDeletionWithSuccessMessage(String projectName, String moduleName)
+    public void verifyModuleDeletionWithSuccessMessage(
+            String projectName,
+            String moduleName)
             throws InterruptedException {
         logger.info("************ Starting Test Case: Verify module deletion with success message *****************");
 
@@ -26,8 +29,9 @@ public class TC033 extends BaseClass {
 
             String uniqueModuleName = moduleName + "_" + System.currentTimeMillis();
             logger.info("Unique module name generated: " + uniqueModuleName);
+            WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
-            requirementTabPage.clickDropdownToSelectProject("STG- PulseCodeOnAzureCloude");
+            requirementTabPage.clickEpic();
             logger.info("Navigate to the project");
             requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
             logger.info("Navigated to Module");
@@ -36,31 +40,25 @@ public class TC033 extends BaseClass {
             requirementTabPage.clickNewModule();
             requirementTabPage.setModuleName(uniqueModuleName);
             requirementTabPage.saveModule();
-            getDriver().navigate().refresh();
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirements tab");
-
-            requirementTabPage.clickDropdownToSelectProject(projectName);
-            logger.info("Expanded project: " + projectName);
-
+            requirementTabPage.clickEpic();
+            requirementTabPage.clickArrowRightPointingForExpandModule("Epic 039");
+            logger.info("Navigated to Module");
+            requirementTabPage.clickArrowRightPointingForExpandModule("feature 039");
             requirementTabPage.clickOnModule(uniqueModuleName);
             logger.info("Opened module: " + uniqueModuleName);
-
             individualModulePage.clickDeleteModuleIcon();
             logger.info("Clicked on delete icon");
-
             String expectedMsg = "Deleting a module will also delete its associated requirements and test cases. Are you sure you want to delete?";
             String actualMsg = individualModulePage.getDeleteConfirmationMessage();
             Assert.assertEquals(actualMsg, expectedMsg, "Delete confirmation message mismatch!");
             logger.info("Verified confirmation popup message");
-
             individualModulePage.confirmDelete();
             logger.info("Clicked YES on confirmation popup");
-
             boolean isPageReloaded = addRequirementPage.isModulePageReopened();
             Assert.assertTrue(isPageReloaded, "Requirements page not reloaded after deletion!");
             logger.info("Verified requirements page is reloaded after deletion");
-
             String actualSuccessMsg = individualModulePage.getSuccessNotificationMessage();
             String expectedSuccessMsg = "Module deleted successfully.";
             Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg, "Success message mismatch!");
