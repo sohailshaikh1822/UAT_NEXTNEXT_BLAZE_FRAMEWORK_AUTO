@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="requirement Test ">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headed"/>
+        <parameter name="mode" value="headless"/>
         <classes>
             <class name="testCases.requirementTabTestCase.TC001"/>
             <class name="testCases.requirementTabTestCase.TC002"/>
