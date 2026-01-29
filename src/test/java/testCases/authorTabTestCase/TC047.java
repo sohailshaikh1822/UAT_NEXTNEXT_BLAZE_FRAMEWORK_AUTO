@@ -26,6 +26,7 @@ public class TC047 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Selected Requirement: " + requirementId);
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on Add Test Case button");
             WaitUtils.waitFor1000Milliseconds();

@@ -17,14 +17,17 @@ public class TC070 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Clicked Author Testcase tab");
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickRequirement("RQ-438");
             logger.info("Selected requirement RQ-438");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked Add Testcase button");
 
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickSubmitButtonOnAddTestCaseModal();
             logger.info("Clicked Save/Submit on Add Test Case modal");
 

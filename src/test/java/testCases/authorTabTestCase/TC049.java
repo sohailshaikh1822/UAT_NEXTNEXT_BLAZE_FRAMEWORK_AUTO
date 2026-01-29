@@ -1,12 +1,14 @@
 package testCases.authorTabTestCase;
 
 import DataProviders.AuthorTestCaseDataProvider;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC049 extends BaseClass {
 
@@ -21,7 +23,9 @@ public class TC049 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             authorTestCasePage.clickRequirement(requirementId);
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
+            WaitUtils.waitFor3000Milliseconds();
             AddTestcasePage addTestCase = new AddTestcasePage(getDriver());
             addTestCase.setTestCaseName("For unlink");
             addTestCase.clickSave();

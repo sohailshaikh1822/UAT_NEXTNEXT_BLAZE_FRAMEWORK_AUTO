@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.authoTestCaseTab.IndividualTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC058 extends BaseClass {
 
@@ -25,10 +26,13 @@ public class TC058 extends BaseClass {
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
+            WaitUtils.waitFor3000Milliseconds();
             logger.info("Clicked on the Author test case tab");
             authorTestCasePage.clickRequirement(requirementId);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Clicked on the Requirement");
             authorTestCasePage.clickTestCase(testCaseId);
+            WaitUtils.waitFor3000Milliseconds();
             logger.info("Clicked on the test case");
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             Assert.assertEquals(individualTestCasePage.getCountPriorityOptions(), Integer.parseInt(priority));

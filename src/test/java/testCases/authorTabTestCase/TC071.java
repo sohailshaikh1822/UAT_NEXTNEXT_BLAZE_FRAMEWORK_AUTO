@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC071 extends BaseClass {
 
@@ -15,11 +16,13 @@ public class TC071 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Clicked Author Testcase tab");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickRequirement("RQ-438");
             logger.info("Selected requirement RQ-438");
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked Add Testcase button");
 

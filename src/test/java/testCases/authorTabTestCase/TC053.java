@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC053 extends BaseClass {
 
@@ -22,12 +23,15 @@ public class TC053 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("clicked on the author test case tab");
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.selectEpic(epic);
             logger.info("selected the epic");
             authorTestCasePage.selectFeature(feature);
             logger.info("selected the feature");
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked the requirement from the grid");
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickNextArrow();
             logger.info("Clicked the next arrow");
             Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(), expectedPagination);

@@ -36,13 +36,13 @@ public class TC045 extends BaseClass {
 
             authorTestCasePage.selectFeature(featureName);
             logger.info("Selected Feature: " + featureName);
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickRequirement(rq_id);
             logger.info("Selected Requirement: " + rq_id);
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
 

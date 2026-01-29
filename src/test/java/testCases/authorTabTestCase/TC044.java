@@ -27,7 +27,7 @@ public class TC044 extends BaseClass {
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Selected Requirement: " + requirementId);
             authorTestCasePage.clickAddTestcase();
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             logger.info("Clicked on Add Test Case button");
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
             WaitUtils.waitFor1000Milliseconds();

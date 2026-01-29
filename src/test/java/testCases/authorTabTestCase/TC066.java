@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC066 extends BaseClass {
 
@@ -21,20 +22,21 @@ public class TC066 extends BaseClass {
             logger.info("Navigated to Author Test Case tab");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
-
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.searchRq(rqName);
             logger.info("Successfully searched with RQ ID: " + rqName);
-
-            authorTestCasePage.clickRequirement(rqName);
+            WaitUtils.waitFor1000Milliseconds();
+            authorTestCasePage. clickRequirement(rqName);
             logger.info("Clicked on the selected RQ");
-
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked 'Add Test Case' button");
 
             logger.info("Attempting to save without entering test case name");
+            WaitUtils.waitFor1000Milliseconds();
             addTestcasePage.clickSave();
             logger.info("Clicked the save button");
-
+            WaitUtils.waitFor2000Milliseconds();
             String actualWarning = addTestcasePage.getTcNameRequiredWarningMessage();
             String expectedWarning = "Error: Name is required.";
 
