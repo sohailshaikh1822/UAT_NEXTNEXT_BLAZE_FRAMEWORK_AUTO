@@ -20,10 +20,11 @@ public class TC062 extends BaseClass {
             logger.info("Logged in successfully");
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
             WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickTestCase(TestcaseId);
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
 
             individualTestCasePage.clickAddTestStep();

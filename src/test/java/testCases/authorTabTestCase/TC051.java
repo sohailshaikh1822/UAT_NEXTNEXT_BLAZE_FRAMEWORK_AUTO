@@ -6,6 +6,7 @@ import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC051 extends BaseClass {
 
@@ -24,8 +25,10 @@ public class TC051 extends BaseClass {
             logger.info("Sucessfully search with RQId");
             authorTestCasePage.clickRequirement(rqName);
             logger.info("Click Selected Rq");
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Click Addtestcase button");
+            WaitUtils.waitFor3000Milliseconds();
             addTestcasePage.setTestCaseName(tcName);
             logger.info("Set testcase name");
             addTestcasePage.setDescription(description);
@@ -38,6 +41,7 @@ public class TC051 extends BaseClass {
             logger.info("select QaUser");
             addTestcasePage.setPrecondition(preCondition);
             logger.info("Add Precondition");
+            WaitUtils.waitFor1000Milliseconds();
             addTestcasePage.clickSave();
             logger.info("Successfully add a New testcase");
 

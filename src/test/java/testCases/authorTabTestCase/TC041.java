@@ -42,6 +42,7 @@ public class TC041 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked 'Add Test Case' button.");
+            WaitUtils.waitFor3000Milliseconds();
 
             authorTestCasePage.clickAddTestCaseAndEnterName(tcName);
             logger.info("Test case name set to: " + tcName);

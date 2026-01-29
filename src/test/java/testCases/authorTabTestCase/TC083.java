@@ -46,17 +46,21 @@ public class TC083 extends BaseClass {
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
             WaitUtils.waitFor3000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
+
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             addTestcasePage.setTestCaseName(TCname);
             logger.info("Testcase Name"+TCname);
             addTestcasePage.setDescription(desc);
             logger.info("Testcase Description"+desc);
+            WaitUtils.waitFor3000Milliseconds();
+
+            WaitUtils.waitFor3000Milliseconds();
             addTestcasePage.selectType(Type);
             addTestcasePage.selectQaUser(Qauser);
             addTestcasePage.clickSave();
             logger.info("clicked on save button");
-
 
             WaitUtils.waitFor3000Milliseconds();
             String tcId = authorTestCasePage.getNewlyCreatedTestCaseId();

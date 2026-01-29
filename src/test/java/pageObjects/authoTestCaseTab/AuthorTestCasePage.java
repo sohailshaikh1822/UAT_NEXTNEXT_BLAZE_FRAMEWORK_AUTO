@@ -218,9 +218,7 @@ public void selectEpic(String epicName) {
 
 
     public void clickRequirement(String requirementId) throws InterruptedException {
-        WaitUtils.waitFor2000Milliseconds();
         linkRequirement(requirementId).click();
-        WaitUtils.waitFor2000Milliseconds();
     }
 
     public String showRequirementHeader() {

@@ -21,6 +21,7 @@ public class TC060 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             logger.info("Searching for Requirement: " + rqName);
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.searchRq(rqName);
             logger.info("Requirement '" + rqName + "' found. Clicking on it.");
             authorTestCasePage.clickRequirement(rqName);

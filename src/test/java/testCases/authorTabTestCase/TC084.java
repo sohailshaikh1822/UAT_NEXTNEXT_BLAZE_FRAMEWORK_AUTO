@@ -35,15 +35,18 @@ public class TC084 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickEpic();
             logger.info("Clicked on Epic Drop Down");
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectEpic(epicName);
             logger.info("Selected Epic: " + epicName);
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.selectFeature(featureName);
             logger.info("Selected Feature: " + featureName);
             WaitUtils.waitFor3000Milliseconds();
+
             authorTestCasePage.clickRequirement(rq_id);
             logger.info("Selected Requirement: " + rq_id);
             WaitUtils.waitFor3000Milliseconds();
+
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
             WaitUtils.waitFor3000Milliseconds();
@@ -53,29 +56,23 @@ public class TC084 extends BaseClass {
             logger.info("Testcase Name"+TCname);
             addTestcasePage.setDescription(desc);
             logger.info("Testcase Description"+desc);
+            WaitUtils.waitFor2000Milliseconds();
             addTestcasePage.selectType(Type);
             addTestcasePage.selectQaUser(Qauser);
             addTestcasePage.clickSave();
             logger.info("clicked on save button");
-
-
             WaitUtils.waitFor3000Milliseconds();
             String tcId = authorTestCasePage.getNewlyCreatedTestCaseId();
-
             authorTestCasePage.openNewlyCreatedTestCase();
             WaitUtils.waitFor3000Milliseconds();
-
             individualTestCasePage.selectPriority(Prior);
             logger.info("Selected priority: " + Prior);
-
             WaitUtils.waitFor3000Milliseconds();
             individualTestCasePage.clickSaveButton();
             logger.info("Clicked Save button after update");
             WaitUtils.waitFor9000Milliseconds();
-
             individualTestCasePage.clickApproveButton();
             logger.info("Clicked on Approve button");
-
             WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.verifyTestCaseApproveNotification(tcId);
             logger.info("Test Case approved notification verified successfully");

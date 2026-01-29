@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC054 extends BaseClass {
 
@@ -17,6 +18,7 @@ public class TC054 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickCollapseToggle();
             logger.info("Clicked collapse toggle icon");
             Assert.assertFalse(authorTestCasePage.getFeatureVisibility(), "Feature dropdown should not be visible after collapse");

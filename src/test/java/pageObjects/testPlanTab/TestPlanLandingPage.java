@@ -100,6 +100,97 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//div[@class='frame']")
     private WebElement testPlanIframe;
 
+    // New Locators for recycle bin functionalities
+
+    @FindBy(xpath = "//i[@title='Recycle Bin']")
+    private WebElement recycleBinButton;
+
+    @FindBy(xpath = "//option[@value='TestPlan']")
+    private WebElement menuDropdown;
+
+    @FindBy(xpath = "//option[@value='All']")
+    private WebElement objectsDropdown;
+
+    @FindBy(xpath = "//span[@class='rb-count']")
+    private WebElement getCurrentItemsAndSelectedItem;
+
+    @FindBy(xpath = "//table[@class='rb-table']/thead/tr")
+    private WebElement getHeaderAllColumnName;
+
+    @FindBy(xpath = "//button[contains(text(),'Restore')]")
+    private WebElement restoreButton;
+
+    @FindBy(xpath = "//button[contains(text(),'Close')]")
+    private WebElement closeButton;
+
+
+
+
+// Actions for the Recycle bin functionalities
+
+    public void clickRecycleBin() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(recycleBinButton)).click();
+    }
+
+    public void selectMenuOption(String value) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement dropdown = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//select[option[@value='" + value + "']]")));
+
+        Select select = new Select(dropdown);
+        select.selectByValue(value);
+    }
+
+    public void selectObjectType(String value) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement dropdown = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//select[option[@value='" + value + "']]")));
+
+        Select select = new Select(dropdown);
+        select.selectByValue(value);
+    }
+
+    public String getRecycleBinItemCount() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(getCurrentItemsAndSelectedItem)).getText();
+    }
+
+    public List<String> getAllColumnHeaders() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(getHeaderAllColumnName));
+
+        List<WebElement> headers = driver.findElements(
+                By.xpath("//table[@class='rb-table']/thead/tr/th"));
+
+        List<String> headerNames = new ArrayList<>();
+        for (WebElement header : headers) {
+            headerNames.add(header.getText().trim());
+        }
+        return headerNames;
+    }
+
+    public void clickRestoreButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(restoreButton)).click();
+    }
+    public void clickCloseButtonOfRecycleBinPage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(closeButton)).click();
+    }
+
+
+
+    public void selectRadioById(String idValue) {
+    String dynamicXpath = "//tr[.//td[normalize-space(.)='" + idValue + "']]//input[@type='radio']";
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement radioBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(dynamicXpath)));
+
+    // In case normal click fails (common in tables)
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radioBtn);
+}
+
 
 
     public WebElement releaseTestCycleTestSuite(String releaseOrTestCycleOrTestSuite) {

@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AddTestcasePage;
 import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC057 extends BaseClass {
 
@@ -27,7 +28,7 @@ public class TC057 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             authorTestCasePage.clickAuthorTestcase();
             logger.info("Navigated to Author Test Case tab");
-
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickEpic();
             logger.info("Clicked on Epic Drop Down");
             authorTestCasePage.selectEpic(epicName);
@@ -36,12 +37,14 @@ public class TC057 extends BaseClass {
             authorTestCasePage.selectFeature(featureName);
             logger.info("Selected Feature: " + featureName);
 
+            WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickRequirement(rq_id);
             logger.info("Selected Requirement: " + rq_id);
+            WaitUtils.waitFor2000Milliseconds();
 
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
-
+            WaitUtils.waitFor3000Milliseconds();
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
 
             if (addTestcasePage.isDescriptionDisplayed()) {
