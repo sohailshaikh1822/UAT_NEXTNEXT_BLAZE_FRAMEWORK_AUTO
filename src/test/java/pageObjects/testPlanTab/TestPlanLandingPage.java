@@ -110,6 +110,10 @@ public class TestPlanLandingPage extends BasePage {
             "/div[@id='sidebar']/div[@id='project']/ul[@class='sidebar-tree']/li")
     private List<WebElement> projectReleaseNodes;
 
+    //Recycle bin
+    @FindBy(xpath = "//i[@title='Recycle Bin']")
+    WebElement recyclebinIcon;
+
     // --- Actions ---
 
     public void clickOnReleaseOrTestCycleOrTestSuite(String releaseOrTestCycleOrTestSuite) throws InterruptedException {
@@ -428,4 +432,62 @@ public class TestPlanLandingPage extends BasePage {
             throw e;
         }
     }
+//Recycle bin
+
+    @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select")
+    private WebElement objectDropdown;
+
+    @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select/option")
+    private List<WebElement> objectDropdownOptions;
+
+    @FindBy(xpath = "//table//tbody//tr")
+    private List<WebElement> recycleBinRows;
+
+
+    public void clickOnRecycleBinIcon() throws InterruptedException {
+        WaitUtils.waitFor1000Milliseconds();;
+        recyclebinIcon.click();
+        WaitUtils.waitFor1000Milliseconds();;
+    }
+
+    public void clickOnObjectDropdown() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(objectDropdown))
+                .click();
+    }
+
+    public List<String> getObjectDropdownValues() {
+        Select select = new Select(objectDropdown);
+        List<String> values = new ArrayList<>();
+        for (WebElement option : select.getOptions()) {
+            values.add(option.getText().trim());
+        }
+        return values;
+    }
+
+    public void selectObjectDropdownValue(String value) {
+        Select select = new Select(objectDropdown);
+        select.selectByVisibleText(value);
+        WaitUtils.waitFor2000Milliseconds();
+    }
+
+    public boolean verifyOnlySelectedObjectDisplayed(String expectedType) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfAllElements(recycleBinRows));
+
+        for (WebElement row : recycleBinRows) {
+            String actualType = row.findElement(By.xpath("./td[2]")).getText().trim();
+
+            if (!expectedType.equalsIgnoreCase("ALL")) {
+                if (!actualType.equalsIgnoreCase(expectedType)) {
+                    System.out.println("Mismatch found. Expected: " + expectedType + " but found: " + actualType);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
 }
