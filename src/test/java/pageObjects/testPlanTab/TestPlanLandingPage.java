@@ -118,7 +118,7 @@ public class TestPlanLandingPage extends BasePage {
     private WebElement getHeaderAllColumnName;
 
     @FindBy(xpath = "//button[contains(text(),'Restore')]")
-    private WebElement restoreButton;
+    public WebElement restoreButton;
 
     @FindBy(xpath = "//button[contains(text(),'Close')]")
     private WebElement closeButton;
