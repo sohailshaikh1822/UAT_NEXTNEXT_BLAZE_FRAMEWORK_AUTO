@@ -123,7 +123,17 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Close')]")
     private WebElement closeButton;
 
+    @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select")
+    WebElement objectDropdown;
 
+    @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select/option")
+    List<WebElement> objectDropdownOptions;
+
+    @FindBy(xpath = "//table//tbody//tr")
+    public List<WebElement> recycleBinRows;
+
+    @FindBy(xpath = "//table//thead//th[normalize-space()]")
+    List<WebElement> recycleBinColumnHeaders;
 
 
 // Actions for the Recycle bin functionalities
@@ -179,8 +189,6 @@ public class TestPlanLandingPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(closeButton)).click();
     }
 
-
-
     public void selectRadioById(String idValue) {
     String dynamicXpath = "//tr[.//td[normalize-space(.)='" + idValue + "']]//input[@type='radio']";
 
@@ -191,6 +199,100 @@ public class TestPlanLandingPage extends BasePage {
     ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radioBtn);
 }
 
+    public void clickOnRecycleBinIcon() throws InterruptedException {
+        WaitUtils.waitFor1000Milliseconds();;
+        recyclebinIcon.click();
+        WaitUtils.waitFor1000Milliseconds();;
+    }
+
+    public void clickOnObjectDropdown() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(objectDropdown))
+                .click();
+    }
+
+    public List<String> getObjectDropdownValues() {
+        Select select = new Select(objectDropdown);
+        List<String> values = new ArrayList<>();
+        for (WebElement option : select.getOptions()) {
+            values.add(option.getText().trim());
+        }
+        return values;
+    }
+
+    public void selectObjectDropdownValue(String value) {
+        Select select = new Select(objectDropdown);
+        select.selectByVisibleText(value);
+        WaitUtils.waitFor2000Milliseconds();
+    }
+
+    public boolean verifyOnlySelectedObjectDisplayed(String expectedType) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfAllElements(recycleBinRows));
+
+        for (WebElement row : recycleBinRows) {
+            String actualType = row.findElement(By.xpath("./td[2]")).getText().trim();
+
+            if (!expectedType.equalsIgnoreCase("All")) {
+                if (!actualType.equalsIgnoreCase(expectedType)) {
+                    System.out.println("Mismatch found. Expected: " + expectedType + " but found: " + actualType);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    //For column header names
+    public List<String> getRecycleBinColumnHeaders() {
+        List<String> headers = new ArrayList<>();
+        for (WebElement header : recycleBinColumnHeaders) {
+            String text = header.getText().trim();
+            if (!text.isEmpty()) {
+                headers.add(text);
+            }
+        }
+        return headers;
+    }
+
+    //verifies each rows- ID, Name, Type, Deleted By, Deleted Date has valid data
+
+    public boolean validateRecycleBinGridData() {
+
+        boolean hasAtLeastOneValidRow = false;
+
+        for (WebElement row : recycleBinRows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            if (cells.size() < 6) {
+                continue;
+            }
+            String id = cells.get(1).getText().trim();
+            if (id.isEmpty()) {
+                continue;
+            }
+            hasAtLeastOneValidRow = true;
+            String name = cells.get(2).getText().trim();
+            String type = cells.get(3).getText().trim();
+            String deletedBy = cells.get(4).getText().trim();
+            String deletedDate = cells.get(5).getText().trim();
+            if (name.isEmpty()) {
+                System.out.println("Empty Name found for ID: " + id);
+                return false;
+            }
+            if (type.isEmpty()) {
+                System.out.println("Empty Type found for ID: " + id);
+                return false;
+            }
+            if (deletedDate.isEmpty()) {
+                System.out.println("Empty Deleted Date found for ID: " + id);
+                return false;
+            }
+        }
+        if (!hasAtLeastOneValidRow) {
+            System.out.println("No valid data rows found in Recycle Bin");
+            return false;
+        }
+        return true;
+    }
 
 
     public WebElement releaseTestCycleTestSuite(String releaseOrTestCycleOrTestSuite) {
@@ -523,62 +625,5 @@ public class TestPlanLandingPage extends BasePage {
             throw e;
         }
     }
-//Recycle bin
-
-    @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select")
-    private WebElement objectDropdown;
-
-    @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select/option")
-    private List<WebElement> objectDropdownOptions;
-
-    @FindBy(xpath = "//table//tbody//tr")
-    private List<WebElement> recycleBinRows;
-
-
-    public void clickOnRecycleBinIcon() throws InterruptedException {
-        WaitUtils.waitFor1000Milliseconds();;
-        recyclebinIcon.click();
-        WaitUtils.waitFor1000Milliseconds();;
-    }
-
-    public void clickOnObjectDropdown() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(objectDropdown))
-                .click();
-    }
-
-    public List<String> getObjectDropdownValues() {
-        Select select = new Select(objectDropdown);
-        List<String> values = new ArrayList<>();
-        for (WebElement option : select.getOptions()) {
-            values.add(option.getText().trim());
-        }
-        return values;
-    }
-
-    public void selectObjectDropdownValue(String value) {
-        Select select = new Select(objectDropdown);
-        select.selectByVisibleText(value);
-        WaitUtils.waitFor2000Milliseconds();
-    }
-
-    public boolean verifyOnlySelectedObjectDisplayed(String expectedType) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfAllElements(recycleBinRows));
-
-        for (WebElement row : recycleBinRows) {
-            String actualType = row.findElement(By.xpath("./td[2]")).getText().trim();
-
-            if (!expectedType.equalsIgnoreCase("ALL")) {
-                if (!actualType.equalsIgnoreCase(expectedType)) {
-                    System.out.println("Mismatch found. Expected: " + expectedType + " but found: " + actualType);
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
 
 }
