@@ -642,4 +642,27 @@ public class TestPlanLandingPage extends BasePage {
         }
     }
 
+    public boolean verifyRestoreToastMessage(String expectedId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By toastLocator = By.xpath("//div[contains(@class,'toast-body')]");
+
+        try {
+            WebElement toast = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(toastLocator)
+            );
+
+            String toastText = toast.getText().trim();
+            System.out.println("Toast message displayed: " + toastText);
+
+            return toastText.contains(expectedId)
+                    && toastText.toLowerCase().contains("restored");
+
+        } catch (TimeoutException e) {
+            System.out.println("Restore toast notification not displayed");
+            return false;
+        }
+    }
+
 }

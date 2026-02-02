@@ -1,5 +1,6 @@
 package pageObjects.testPlanTab;
 
+//import org.apache.xmlbeans.impl.logging.NoOpLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -281,6 +282,95 @@ public class IndividualReleasePage extends BasePage {
         throw new AssertionError("Release delete notification not found for Release: " + releaseId);
     }
 
+//    Recyclebin
+
+    public boolean verifyRestoreToastMessage(String expectedId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By toastLocator = By.xpath("//div[contains(@class,'toast-body')]");
+
+        try {
+            WebElement toast = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(toastLocator)
+            );
+
+            String toastText = toast.getText().trim();
+            System.out.println("Toast message displayed: " + toastText);
+
+            return toastText.contains(expectedId)
+                    && toastText.toLowerCase().contains("restored");
+
+        } catch (TimeoutException e) {
+            System.out.println("Restore toast notification not displayed");
+            return false;
+        }
+    }
+
+    public void verifyReleaseRestoreNotification(String releaseId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String restorerName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'RL-\\d+'\\s+is\\s+restored\\s+by\\s+"
+                        + restorerName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell =
+                        wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body =
+                        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> notifications =
+                        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications));
+
+
+                WebElement latestNotification = notifications.get(0);
+                String text = latestNotification.getText().trim();
+
+                if (!text.contains("'" + releaseId + "'")) {
+                    throw new AssertionError(
+                            "Latest notification does not contain Release ID. Found: " + text
+                    );
+                }
+
+                if (!text.matches(expectedRegex)) {
+                    throw new AssertionError(
+                            "Release restore notification format mismatch.\nExpected Regex: "
+                                    + expectedRegex + "\nActual Text: " + text
+                    );
+                }
+
+                System.out.println(
+                        "Release restore notification verified successfully: " + text
+                );
+                return;
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Release restore notification not found for Release: " + releaseId
+        );
+    }
 
 
 }
