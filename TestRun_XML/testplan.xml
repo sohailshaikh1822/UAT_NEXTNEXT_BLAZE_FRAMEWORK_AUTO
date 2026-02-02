@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="test plan Test ">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="head"/>
         <classes>
 <!--            <class name="testCases.testPlanTabTestCase.TC001"/>-->
 <!--            <class name="testCases.testPlanTabTestCase.TC002"/>-->
@@ -31,7 +31,9 @@
 <!--            <class name="testCases.testPlanTabTestCase.TC020"/>-->
 <!--            <class name="testCases.testPlanTabTestCase.TC024"/>-->
 <!--            <class name="testCases.testPlanTabTestCase.TC025"/>-->
-            <class name="testCases.testPlanTabTestCase.TC032"/>
+<!--            <class name="testCases.testPlanTabTestCase.TC035"/>-->
+            <class name="testCases.testPlanTabTestCase.TC037"/>
+
         </classes>
 
     </test>
