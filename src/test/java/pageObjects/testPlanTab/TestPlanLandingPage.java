@@ -129,11 +129,16 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//label[text()='Object(s)']/following-sibling::select/option")
     List<WebElement> objectDropdownOptions;
 
+
     @FindBy(xpath = "//table//tbody//tr")
     public List<WebElement> recycleBinRows;
 
     @FindBy(xpath = "//table//thead//th[normalize-space()]")
     List<WebElement> recycleBinColumnHeaders;
+
+    @FindBy(xpath = "//div[@class='rb-table-wrapper']")
+    WebElement scrollRecycleBinList;
+
 
 
 // Actions for the Recycle bin functionalities
@@ -187,6 +192,17 @@ public class TestPlanLandingPage extends BasePage {
     public void clickCloseButtonOfRecycleBinPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(closeButton)).click();
+    }
+
+    public void smoothScrollRecycleBin() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        long height = (long) js.executeScript("return arguments[0].scrollHeight;", scrollRecycleBinList);
+
+        for (int i = 0; i < height; i += 500) {
+            js.executeScript("arguments[0].scrollTop = arguments[1];", scrollRecycleBinList, i);
+            Thread.sleep(200);
+        }
     }
 
     public void selectRadioById(String idValue) {
