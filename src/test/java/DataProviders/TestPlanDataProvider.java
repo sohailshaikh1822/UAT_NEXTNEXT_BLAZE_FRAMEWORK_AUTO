@@ -145,25 +145,33 @@ public class TestPlanDataProvider {
     public static Object[][] getDataTC029() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc029");
     }
-
-    @DataProvider(name = "tc038")
-    public static Object[][] getDataTC038() throws IOException {
-        return ExcelDataProviders.getExcelDataForTestPlan("tc038");
+    @DataProvider(name = "tc035")
+    public static Object[][] getDataTC035() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc035");
+    }
+    @DataProvider(name = "tc036")
+    public static Object[][] getDataTC036() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc036");
+    }
+    @DataProvider(name = "tc037")
+    public static Object[][] getDataTC037() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc037");
     }
 
-    @DataProvider(name = "tc039")
-    public static Object[][] getDataTC039() throws IOException {
-        return ExcelDataProviders.getExcelDataForTestPlan("tc039");
+    @DataProvider(name = "tc044")
+    public static Object[][] getDataTC044() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc044");
     }
-
-    @DataProvider(name = "tc040")
-    public static Object[][] getDataTC040() throws IOException {
-        return ExcelDataProviders.getExcelDataForTestPlan("tc040");
+    @DataProvider(name = "tc045")
+    public static Object[][] getDataTC045() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc045");
     }
-
-    @DataProvider(name = "tc041")
-    public static Object[][] getDataTC041() throws IOException {
-        return ExcelDataProviders.getExcelDataForTestPlan("tc041");
+    @DataProvider(name = "tc046")
+    public static Object[][] getDataTC046() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc046");
     }
-
+    @DataProvider(name = "tc047")
+    public static Object[][] getDataTC047() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc047");
+    }
 }
