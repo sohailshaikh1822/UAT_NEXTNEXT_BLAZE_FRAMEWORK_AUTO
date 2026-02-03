@@ -102,6 +102,9 @@ public class TestPlanLandingPage extends BasePage {
 
     // New Locators for recycle bin functionalities
 
+    @FindBy(xpath = "(//input[@type='radio'])[1]")
+    private WebElement firstRadioBtnSelection;
+
     @FindBy(xpath = "//i[@title='Recycle Bin']")
     private WebElement recycleBinButton;
 
@@ -146,6 +149,10 @@ public class TestPlanLandingPage extends BasePage {
     public void clickRecycleBin() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(recycleBinButton)).click();
+    }
+    public void selectFirstRadioBtn() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(firstRadioBtnSelection)).click();
     }
 
     public void selectMenuOption(String value) {

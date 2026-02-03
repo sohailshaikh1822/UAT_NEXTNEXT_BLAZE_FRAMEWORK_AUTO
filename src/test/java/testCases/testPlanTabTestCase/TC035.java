@@ -1,7 +1,9 @@
 package testCases.testPlanTabTestCase;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
@@ -12,7 +14,7 @@ import java.util.List;
 public class TC035 extends BaseClass
 {
 
-    @Test(dataProvider = "tc005", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc035", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyDeletedReleaseRestoreSuccessFully(String projectName, String releaseName) throws InterruptedException {
         logger.info("****** Starting TC035 *****************");
@@ -20,22 +22,16 @@ public class TC035 extends BaseClass
         try {
             login();
             logger.info("Logged in successfully");
-
             TestPlanLandingPage testPlanPage = new TestPlanLandingPage(getDriver());
-
             testPlanPage.selectTestPlanTab();
             logger.info("Navigated to Test Plan tab");
-
             testPlanPage.expandSidebarIfCollapsed();
             logger.info("Sidebar expanded if it was collapsed");
-
             testPlanPage.clickOnTheProjectName();
             logger.info("Selected project: " + projectName);
-
             WaitUtils.waitFor3000Milliseconds();
             testPlanPage.clickNewRelease();
             logger.info("Clicked Add Release button, release form appeared");
-
             testPlanPage.enterReleaseName(releaseName);
             WaitUtils.waitFor2000Milliseconds();
             testPlanPage.selectReleaseStatus("Planned");
@@ -45,18 +41,19 @@ public class TC035 extends BaseClass
             testPlanPage.enterDescription(releaseDescription);
             String releaseNotes = "Test Notes for the new release";
             testPlanPage.enterReleaseNotes(releaseNotes);
-
             logger.info("Entered all release details");
-
             testPlanPage.clickSaveRelease();
             logger.info("Clicked Save button");
             WaitUtils.waitFor3000Milliseconds();
+            AddRequirementPage addRequirementPage=new AddRequirementPage(getDriver());
+            String rlId = addRequirementPage.getModuleId();
+            rlId = rlId.replaceAll("\\*$", "");
+            rlId = rlId.replace("'", "");
+            logger.info("new rl"+ rlId);
             testPlanPage.clickDelete();
             WaitUtils.waitFor1000Milliseconds();
             testPlanPage.clickOnConfirmDeleteYes(releaseName);
-
-           WaitUtils.waitFor1000Milliseconds();
-
+            WaitUtils.waitFor1000Milliseconds();
             testPlanPage.clickOnRecycleBinIcon();
             logger.info("Clicked on Recycle Bin");
             WaitUtils.waitFor2000Milliseconds();
@@ -64,11 +61,12 @@ public class TC035 extends BaseClass
             WaitUtils.waitFor3000Milliseconds();
             testPlanPage.smoothScrollRecycleBin();
             WaitUtils.waitFor3000Milliseconds();
-
-            testPlanPage.selectRadioById("RL-870");
+            testPlanPage.selectRadioById(rlId);
             WaitUtils.waitFor1000Milliseconds();
             testPlanPage.clickRestoreButton();
-
+            String actualMessage =testPlanPage.getNotificationMessage();
+            String expectedMessage="Release restored successfully.";
+            Assert.assertEquals(actualMessage,expectedMessage,"Confirmation message has not matched");
 
         } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());

@@ -58,6 +58,9 @@ public class TC083 extends BaseClass {
 
             WaitUtils.waitFor3000Milliseconds();
             addTestcasePage.selectType(Type);
+            //logger.info("clicked on save button");
+
+            WaitUtils.waitFor3000Milliseconds();
             addTestcasePage.selectQaUser(Qauser);
             addTestcasePage.clickSave();
             logger.info("clicked on save button");

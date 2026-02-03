@@ -130,32 +130,32 @@ public class AddTestcasePage extends BasePage {
     }
 
 
-//    public void selectType(String type) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//      //  wait.until(ExpectedConditions.visibilityOf(dropDownType));
-//        wait.until(ExpectedConditions.elementToBeClickable(dropDownType));
-//        Select select = new Select(dropDownType);
-//        select.selectByVisibleText(type);
-//    }
-
     public void selectType(String type) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Actions actions = new Actions(driver);
-
-        wait.until(d -> js.executeScript("return document.readyState").equals("complete"));
-
-        WebElement dropdown = wait.until(ExpectedConditions.visibilityOf(dropDownType));
-
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
-        actions.moveToElement(dropdown).pause(Duration.ofMillis(200)).click().perform();
-
-        By optionLocator = By.xpath("//body//*[normalize-space()='" + type + "']");
-        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(optionLocator));
-
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", option);
-        actions.moveToElement(option).pause(Duration.ofMillis(200)).click().perform();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+      //  wait.until(ExpectedConditions.visibilityOf(dropDownType));
+        wait.until(ExpectedConditions.elementToBeClickable(dropDownType));
+        Select select = new Select(dropDownType);
+        select.selectByVisibleText(type);
     }
+
+//    public void selectType(String type) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        Actions actions = new Actions(driver);
+//
+//        wait.until(d -> js.executeScript("return document.readyState").equals("complete"));
+//
+//        WebElement dropdown = wait.until(ExpectedConditions.visibilityOf(dropDownType));
+//
+//        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
+//        actions.moveToElement(dropdown).pause(Duration.ofMillis(200)).click().perform();
+//
+//        By optionLocator = By.xpath("//body//*[normalize-space()='" + type + "']");
+//        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(optionLocator));
+//
+//        js.executeScript("arguments[0].scrollIntoView({block:'center'});", option);
+//        actions.moveToElement(option).pause(Duration.ofMillis(200)).click().perform();
+//    }
 
 
 
