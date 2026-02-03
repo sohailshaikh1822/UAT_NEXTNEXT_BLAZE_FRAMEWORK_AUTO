@@ -266,4 +266,61 @@ public class IndividualTestCyclePage extends BasePage {
     }
 
 
+    public void verifyTestCycleRestoreNotification(String testCycleId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String userName = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + testCycleId + "'\\s+is\\s+deleted\\s+by\\s+"
+                        + userName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell =
+                        wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> notifications =
+                        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications));
+
+                for (WebElement notif : notifications) {
+                    String text = notif.getText().trim();
+
+                    if (text.matches(expectedRegex)) {
+                        System.out.println(
+                                "Test Cycle delete notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Delete notification not found for Test Cycle: " + testCycleId
+        );
+    }
+
+
+
+
+
 }
