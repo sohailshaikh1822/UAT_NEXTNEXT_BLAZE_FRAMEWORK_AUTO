@@ -158,10 +158,21 @@ public class TestPlanDataProvider {
         return ExcelDataProviders.getExcelDataForTestPlan("tc037");
     }
 
+    @DataProvider(name = "tc042")
+    public static Object[][] getDataTC042() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc042");
+    }
+
+    @DataProvider(name = "tc043")
+    public static Object[][] getDataTC043() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc043");
+    }
+
     @DataProvider(name = "tc044")
     public static Object[][] getDataTC044() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc044");
     }
+
     @DataProvider(name = "tc045")
     public static Object[][] getDataTC045() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc045");
@@ -174,4 +185,20 @@ public class TestPlanDataProvider {
     public static Object[][] getDataTC047() throws IOException {
         return ExcelDataProviders.getExcelDataForTestPlan("tc047");
     }
+
+    @DataProvider(name = "tc049")
+    public static Object[][] getDataTC049() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc049");
+    }
+
+    @DataProvider(name = "tc050")
+    public static Object[][] getDataTC050() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc050");
+    }
+
+    @DataProvider(name = "tc051")
+    public static Object[][] getDataTC051() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc051");
+    }
+
 }
