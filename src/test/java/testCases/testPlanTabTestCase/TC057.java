@@ -11,15 +11,15 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC037 extends BaseClass {
+public class TC057 extends BaseClass {
     @Test(dataProvider = "tc037", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyDeletedTestSuiteRestoreSuccessFully(String projectName, String releaseName, String suiteName,
-                                                        String testDescription,
-                                                        String startDate,
-                                                        String endDate,
-                                                        String executionType,String objectType) throws InterruptedException {
-        logger.info("****** Starting TC037 *****************");
+                                                          String testDescription,
+                                                          String startDate,
+                                                          String endDate,
+                                                          String executionType,String objectType) throws InterruptedException {
+        logger.info("****** Starting TC057 *****************");
         try {
             login();
             logger.info("Logged in successfully");
@@ -61,18 +61,9 @@ public class TC037 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
             testPlanPage.clickOnConfirmDeleteYes(suiteName);
             WaitUtils.waitFor1000Milliseconds();
-            testPlanPage.clickOnRecycleBinIcon();
-            logger.info("Clicked on Recycle Bin");
-            WaitUtils.waitFor2000Milliseconds();
-            testPlanPage.selectObjectDropdownValue(objectType);
-            WaitUtils.waitFor3000Milliseconds();
-            testPlanPage.smoothScrollRecycleBin();
-            WaitUtils.waitFor3000Milliseconds();
-            testPlanPage.selectRadioById(tsId);
-            WaitUtils.waitFor1000Milliseconds();
-            testPlanPage.clickRestoreButton();
-            String actualMessage =testPlanPage.getNotificationMessage();
-            String expectedMessage="TestSuite restored successfully.";
+
+            String actualMessage =testPlanPage.getToastNotificationMessage();
+            String expectedMessage="'" + tsId+ "' is deleted by Julie Kumari.";
             Assert.assertEquals(actualMessage,expectedMessage,"Confirmation message has not matched");
 
         } catch (Exception e) {

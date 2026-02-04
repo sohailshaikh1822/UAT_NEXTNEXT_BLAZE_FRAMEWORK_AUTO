@@ -51,6 +51,7 @@ public class TestPlanLandingPage extends BasePage {
     @FindBy(xpath = "//div[@id='notification']")
     private WebElement notification;
 
+
     public WebElement expandArrow(String name) {
         return driver.findElement(By.xpath("//div[text()='" + name + "']/span/i"));
     }
@@ -101,6 +102,10 @@ public class TestPlanLandingPage extends BasePage {
     private WebElement testPlanIframe;
 
     // New Locators for recycle bin functionalities
+
+
+    @FindBy(xpath = "//div[contains(@class,'toast-body')]")
+    private WebElement toastNotificationMessage;
 
     @FindBy(xpath = "(//input[@type='radio'])[1]")
     private WebElement firstRadioBtnSelection;
@@ -176,6 +181,11 @@ public class TestPlanLandingPage extends BasePage {
     public String getRecycleBinItemCount() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.visibilityOf(getCurrentItemsAndSelectedItem)).getText();
+    }
+
+    public String getToastNotificationMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(toastNotificationMessage)).getText();
     }
 
     public List<String> getAllColumnHeaders() {
@@ -576,6 +586,8 @@ public class TestPlanLandingPage extends BasePage {
             return null;
         }
     }
+
+
 
     public boolean isReleaseCreatedSuccessfully() {
         String message = getNotificationMessage();
