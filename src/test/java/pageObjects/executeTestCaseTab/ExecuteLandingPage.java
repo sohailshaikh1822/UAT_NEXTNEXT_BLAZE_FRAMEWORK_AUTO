@@ -806,8 +806,7 @@ public class ExecuteLandingPage extends BasePage {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {
-            }
+            } catch (InterruptedException ignored) {}
         }
 
         throw new AssertionError(
@@ -896,13 +895,11 @@ public class ExecuteLandingPage extends BasePage {
                         body
                 );
 
-            } catch (StaleElementReferenceException ignored) {
-            }
+            } catch (StaleElementReferenceException ignored) {}
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {
-            }
+            } catch (InterruptedException ignored) {}
         }
 
         throw new AssertionError(
