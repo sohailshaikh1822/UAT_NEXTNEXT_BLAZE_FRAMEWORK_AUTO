@@ -220,9 +220,9 @@ public class ExecuteLandingPage extends BasePage {
     // ================= METHODS =================
 
     public void clickToSelectProject(String moduleName) throws InterruptedException {
-      //  arrowRightToExpand(moduleName).click();
+        //  arrowRightToExpand(moduleName).click();
 
-      //  WaitUtils.waitFor1000Milliseconds();
+        //  WaitUtils.waitFor1000Milliseconds();
 
         WebElement dropdown = driver.findElement(By.xpath("//select[@class='text select-dropdown']"));
 
@@ -415,7 +415,7 @@ public class ExecuteLandingPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(searchfield));
         wait.until(ExpectedConditions.elementToBeClickable(searchfield));
-         searchfield.clear();
+        searchfield.clear();
         searchfield.sendKeys(testCaseID);
         wait.until(ExpectedConditions.elementToBeClickable(searchButton));
         searchButton.click();
@@ -679,8 +679,6 @@ public class ExecuteLandingPage extends BasePage {
     }
 
 
-
-
     public String getOpenedTestRunId() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -743,11 +741,13 @@ public class ExecuteLandingPage extends BasePage {
                         body
                 );
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -836,11 +836,13 @@ public class ExecuteLandingPage extends BasePage {
                         body
                 );
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -895,4 +897,89 @@ public class ExecuteLandingPage extends BasePage {
         return extractedTrId;
     }
 
+  //Assign to
+
+    public String getCurrentAssigneeFromTestRun(String trId) {
+
+        By assigneeLocator = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//span[contains(@class,'assign-username')]"
+        );
+
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(assigneeLocator))
+                .getText()
+                .trim();
+    }
+
+
+    public void clickEditAssigneeIcon(String trId) {
+
+        By editIcon = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//button[contains(@class,'assign-icon-button') " +
+                        "and not(contains(@class,'assign-save')) " +
+                        "and not(contains(@class,'assign-cancel'))]"
+        );
+
+        wait.until(ExpectedConditions.elementToBeClickable(editIcon)).click();
+    }
+
+    public void verifyAssignDropdownOpened(String trId)
+    {
+
+        By dropdown = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//select[contains(@class,'assign-dropdown')]"
+        );
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdown));
+    }
+
+    public void selectUserFromAssignDropdown(String trId, String userName)
+    {
+
+        By dropdown = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//select[contains(@class,'assign-dropdown')]"
+        );
+
+        WebElement selectElement =
+                wait.until(ExpectedConditions.elementToBeClickable(dropdown));
+
+        Select select = new Select(selectElement);
+        select.selectByVisibleText(userName);
+    }
+
+    public void clickCancelAssignButton(String trId)
+    {
+
+        By cancelBtn = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//button[contains(@class,'assign-cancel')]"
+        );
+
+        wait.until(ExpectedConditions.elementToBeClickable(cancelBtn)).click();
+    }
+
+    public void verifyAssigneeUnchanged(String trId, String expectedAssignee)
+    {
+
+        String actualAssignee = getCurrentAssigneeFromTestRun(trId);
+
+        if (!actualAssignee.equals(expectedAssignee)) {
+            throw new AssertionError(
+                    "Assignee changed after clicking Cancel.\nExpected: "
+                            + expectedAssignee + "\nActual: " + actualAssignee
+            );
+        }
+
+        System.out.println(
+                "Assignee unchanged for " + trId + ": " + actualAssignee
+        );
+    }
 }
