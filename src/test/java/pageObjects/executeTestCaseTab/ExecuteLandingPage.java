@@ -280,9 +280,9 @@ public class ExecuteLandingPage extends BasePage {
     // ================= METHODS =================
 
     public void clickToSelectProject(String moduleName) throws InterruptedException {
-      //  arrowRightToExpand(moduleName).click();
+        //  arrowRightToExpand(moduleName).click();
 
-      //  WaitUtils.waitFor1000Milliseconds();
+        //  WaitUtils.waitFor1000Milliseconds();
 
         WebElement dropdown = driver.findElement(By.xpath("//select[@class='text select-dropdown']"));
 
@@ -475,7 +475,7 @@ public class ExecuteLandingPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(searchfield));
         wait.until(ExpectedConditions.elementToBeClickable(searchfield));
-         searchfield.clear();
+        searchfield.clear();
         searchfield.sendKeys(testCaseID);
         wait.until(ExpectedConditions.elementToBeClickable(searchButton));
         searchButton.click();
@@ -739,8 +739,6 @@ public class ExecuteLandingPage extends BasePage {
     }
 
 
-
-
     public String getOpenedTestRunId() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -803,7 +801,8 @@ public class ExecuteLandingPage extends BasePage {
                         body
                 );
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
             try {
                 Thread.sleep(1000);
@@ -955,7 +954,7 @@ public class ExecuteLandingPage extends BasePage {
         return extractedTrId;
     }
 
-    //Assign to
+  //Assign to
 
     public String getCurrentAssigneeFromTestRun(String trId) {
 
@@ -1040,6 +1039,4 @@ public class ExecuteLandingPage extends BasePage {
                 "Assignee unchanged for " + trId + ": " + actualAssignee
         );
     }
-
-
 }
