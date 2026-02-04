@@ -123,10 +123,70 @@ public class ExecuteLandingPage extends BasePage {
     @FindBy(xpath = "//div[@id='testRunsWithCaseDetailsTable']")
     WebElement tableTestRunsWithCaseDetails;
 
+    //  Locators for assigned to functionalities
+
+    @FindBy(xpath = "//select[@class='assign-dropdown element-verify-the']")
+    WebElement dropdownAssignTo;
+
+    @FindBy(xpath = "//button[@title='Cancel']")
+    WebElement assignToCrossButton;
+
+    @FindBy(xpath = "//button[@title='Save']")
+    WebElement assignToSaveButton;
+
+
+
+
     // ================= ACTIONS =================
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     Actions actions = new Actions(driver);
+
+
+    // Action of Assign-to functionalities
+
+    public void clickEditAssigneeByTR(String trId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Locate the row using TR id
+
+        String rowXpath = String.format(
+                "//div[contains(@class,'testlistrow')][.//a[normalize-space()='%s']]",
+                trId
+        );
+
+        WebElement row = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(rowXpath))
+        );
+
+        // Locate Edit Assignee button inside that row
+
+        WebElement editButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        row.findElement(By.xpath(".//button[@title='Edit assignee']"))
+                )
+        );
+
+        editButton.click();
+        editButton.click();
+    }
+
+    public void selectAssignTo(String empName) {
+        Select s = new Select(dropdownAssignTo);
+        dropdownAssignTo.click();
+        s.selectByVisibleText(empName);
+    }
+
+    public void clickAssignToCancelButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(assignToCrossButton)).click();
+    }
+
+    public void clickAssignToSaveButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(assignToSaveButton)).click();
+    }
 
     // execute landing page
 
