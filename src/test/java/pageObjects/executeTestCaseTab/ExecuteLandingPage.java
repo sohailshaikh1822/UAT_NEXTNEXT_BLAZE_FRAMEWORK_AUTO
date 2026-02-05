@@ -1039,4 +1039,88 @@ public class ExecuteLandingPage extends BasePage {
                 "Assignee unchanged for " + trId + ": " + actualAssignee
         );
     }
+
+    public void verifySaveButtonNotVisible(String trId) {
+
+        By saveBtn = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//button[contains(@class,'assign-save')]"
+        );
+
+        List<WebElement> elements = driver.findElements(saveBtn);
+
+        if (!elements.isEmpty() && elements.get(0).isDisplayed()) {
+            throw new AssertionError("Save button is visible without selecting a user");
+        }
+
+        System.out.println("Save button is NOT visible before user selection");
+    }
+
+    public void verifySaveButtonVisible(String trId) {
+
+        By saveBtn = By.xpath(
+                "//a[normalize-space()='" + trId + "']" +
+                        "/ancestor::div[contains(@class,'testlistrow')]" +
+                        "//button[contains(@class,'assign-save')]"
+        );
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(saveBtn));
+
+        System.out.println("Save button is visible after user selection");
+    }
+
+    public void verifyTestRunAssignedPopup(String testRunId, String assignedUser) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String loggedInUser = getLoggedInUserName();
+
+        By popupLocator = By.xpath("//div[contains(@class,'toast-body')]");
+
+        String expectedRegex =
+                "'" + testRunId + "'\\s+has\\s+been\\s+assigned\\s+to\\s+"
+                        + assignedUser.replace(" ", "\\s+")
+                        + "\\s+by\\s+"
+                        + loggedInUser.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 10000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement popup = wait.until(
+                        ExpectedConditions.presenceOfElementLocated(popupLocator)
+                );
+
+                String actualText = popup.getText().trim();
+
+                // Guard condition – ensure correct popup
+                if (!actualText.contains("has been assigned")) {
+                    continue;
+                }
+
+                if (!actualText.matches(expectedRegex)) {
+                    throw new AssertionError(
+                            "Test Run assign popup format mismatch.\nExpected Regex: "
+                                    + expectedRegex +
+                                    "\nActual Text: " + actualText
+                    );
+                }
+
+                System.out.println(
+                        "Test Run assigned popup verified successfully: " + actualText
+                );
+                return;
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+        }
+
+        throw new AssertionError("Test Run assigned popup not found.");
+    }
+
+
+
 }
