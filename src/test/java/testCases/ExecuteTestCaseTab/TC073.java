@@ -62,6 +62,17 @@ public class TC073 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
             logger.info("Popup Verified");
 
+            // Step 3: Click notification bell
+            logger.info("Clicked notification bell icon");
+
+// Step 4: Verify assigned notification appears
+            executeLandingPage.verifyTestRunAssignedNotification(
+                    trId,
+                    tempUser
+            );
+            logger.info("Assigned notification verified in notification panel");
+
+
             // update the assigned to user again
 
             WaitUtils.waitFor2000Milliseconds();
