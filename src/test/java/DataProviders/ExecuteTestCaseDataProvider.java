@@ -311,4 +311,15 @@ public class ExecuteTestCaseDataProvider {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc071");
     }
 
+    @DataProvider(name = "tc072")
+    public static Object[][] getDataTC072() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc072");
+    }
+
+    @DataProvider(name = "tc073")
+    public static Object[][] getDataTC073() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc073");
+    }
+
+
 }
