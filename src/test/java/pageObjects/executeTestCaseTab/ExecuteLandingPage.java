@@ -1121,6 +1121,84 @@ public class ExecuteLandingPage extends BasePage {
         throw new AssertionError("Test Run assigned popup not found.");
     }
 
+    public void verifyTestRunAssignedNotification(String trId, String assignedToUser) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String actionUser = getLoggedInUserName();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath(
+                "//div[contains(@class,'notification-item')]//span[contains(@class,'notif-text')]"
+        );
+
+        String expectedRegex =
+                "'" + trId + "'\\s+has\\s+been\\s+assigned\\s+to\\s+"
+                        + assignedToUser.replace(" ", "\\s+")
+                        + "\\s+by\\s+"
+                        + actionUser.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell)
+                );
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody)
+                );
+
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement element : notifications) {
+
+                    String text = element.getText().trim();
+
+                    if (text.contains(trId) && text.contains("has been assigned")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Test Run assigned notification format mismatch.\nExpected: "
+                                            + expectedRegex +
+                                            "\nActual: " + text
+                            );
+                        }
+
+                        System.out.println(
+                                "Test Run assigned notification verified successfully: " + text
+                        );
+                        return;
+                    }
+                }
+
+                // Scroll to load older notifications
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Test Run assigned notification not found for TR: "
+                        + trId + " assigned to: " + assignedToUser
+        );
+    }
+
 
 
 }
