@@ -42,9 +42,11 @@ public class TC076 extends BaseClass {
 
            WaitUtils.waitFor2000Milliseconds();
            executeLandingPage.clickTestCycle(cycleName);
+           logger.info("clicked on test cycle");
 
             WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickCreateTestRunButton();
+            logger.info("create test run");
 
             WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.selectEpic(Epicname);
@@ -57,6 +59,7 @@ public class TC076 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickSaveInPopup();
+            logger.info("test run creted");
 
             WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.openLatestTestRunFromTable();
