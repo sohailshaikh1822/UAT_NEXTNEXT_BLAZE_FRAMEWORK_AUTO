@@ -381,4 +381,33 @@ public class IndividualTestRun extends BasePage {
         }
     }
 
+    public void clickCreatedTestRunNotification(String trId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationText =
+                By.xpath(
+                        "//span[contains(@class,'notif-text') " +
+                                "and contains(text(),'" + trId + "') " +
+                                "and contains(text(),'created by')]"
+                );
+
+        // Open notification panel
+        WebElement bell = wait.until(
+                ExpectedConditions.elementToBeClickable(notificationBell)
+        );
+        js.executeScript("arguments[0].click();", bell);
+
+        // Click created notification
+        WebElement notification = wait.until(
+                ExpectedConditions.elementToBeClickable(notificationText)
+        );
+        js.executeScript("arguments[0].click();", notification);
+    }
+
+
 }
