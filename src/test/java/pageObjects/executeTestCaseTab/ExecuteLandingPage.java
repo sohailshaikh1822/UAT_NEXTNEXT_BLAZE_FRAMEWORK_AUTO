@@ -642,12 +642,20 @@ public class ExecuteLandingPage extends BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement notification = wait.until(ExpectedConditions.visibilityOf(successNotification));
             String actualMessage = notification.getText().trim();
+            System.out.println("actual message "+ actualMessage);
             return actualMessage.equalsIgnoreCase(expectedMessage);
         } catch (TimeoutException e) {
             return false;
         }
     }
 
+    @FindBy(xpath = "//div[contains(@class,'toast-body')]")
+    private WebElement toastNotificationMessage;
+
+    public String getToastNotificationMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(toastNotificationMessage)).getText();
+    }
     public boolean isNoMatchingTabVisible() {
         try {
             wait.until(ExpectedConditions

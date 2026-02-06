@@ -305,6 +305,22 @@ public class ExecuteTestCaseDataProvider {
     public static Object[][] getDataTC066() throws IOException {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc066");
     }
+    @DataProvider(name = "tc067")
+    public static Object[][] getDataTC067() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc067");
+    }
+    @DataProvider(name = "tc068")
+    public static Object[][] getDataTC068() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc068");
+    }
+    @DataProvider(name = "tc069")
+    public static Object[][] getDataTC069() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc069");
+    }
+    @DataProvider(name = "tc070")
+    public static Object[][] getDataTC070() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc070");
+    }
 
     @DataProvider(name = "tc071")
     public static Object[][] getDataTC071() throws IOException {
