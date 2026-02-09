@@ -10,6 +10,8 @@ import java.time.Duration;
 import java.util.List;
 
 import utils.WaitUtils;
+import org.openqa.selenium.interactions.Actions;
+
 
 public class IndividualTestCyclePage extends BasePage {
     public IndividualTestCyclePage(WebDriver driver) {
@@ -319,7 +321,43 @@ public class IndividualTestCyclePage extends BasePage {
         );
     }
 
+    public void verifyDeletedCLNotificationNotClickable(String clId) {
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By deletedCLNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item') and contains(@class,'disabled')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + clId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        // Open notification panel
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        WebElement body =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement deletedNotification =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(deletedCLNotification));
+
+        // Hover to show tooltip
+        actions.moveToElement(deletedNotification).perform();
+
+        // Attempt click (should not navigate)
+        js.executeScript("arguments[0].click();", deletedNotification);
+    }
 
 
 

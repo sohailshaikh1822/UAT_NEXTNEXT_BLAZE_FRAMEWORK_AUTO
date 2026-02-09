@@ -24,7 +24,7 @@ public class TC075 extends BaseClass {
             String TC
     ) throws InterruptedException {
 
-        logger.info("****** Starting TC061: Verify that a notification appears automatically when a Test Run is created ******");
+        logger.info("****** Starting TC075 ******");
 
         try {
             login();

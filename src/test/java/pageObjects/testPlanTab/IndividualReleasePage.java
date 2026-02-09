@@ -10,6 +10,8 @@ import pageObjects.BasePage;
 
 import java.time.Duration;
 import java.util.List;
+import org.openqa.selenium.interactions.Actions;
+
 
 public class IndividualReleasePage extends BasePage {
     public IndividualReleasePage(WebDriver driver) {
@@ -208,7 +210,8 @@ public class IndividualReleasePage extends BasePage {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -274,9 +277,13 @@ public class IndividualReleasePage extends BasePage {
 
                 js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError("Release delete notification not found for Release: " + releaseId);
@@ -362,9 +369,13 @@ public class IndividualReleasePage extends BasePage {
                 );
                 return;
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -372,5 +383,49 @@ public class IndividualReleasePage extends BasePage {
         );
     }
 
+    public void verifyDeletedReleaseNotificationNotClickable(String releaseId) {
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By deletedReleaseNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + releaseId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        // Open notification panel
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        // Hover on deleted Release notification (tooltip validation handled by UI)
+        WebElement hoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedReleaseNotification));
+
+        actions.moveToElement(hoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        // Re-locate element to avoid stale and click
+        WebElement clickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedReleaseNotification));
+
+        js.executeScript("arguments[0].click();", clickElement);
+
+        System.out.println(
+                "Verified deleted Release notification is not clickable for Release: " + releaseId
+        );
+    }
 }

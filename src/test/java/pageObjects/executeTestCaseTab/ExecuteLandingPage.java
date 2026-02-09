@@ -1207,6 +1207,77 @@ public class ExecuteLandingPage extends BasePage {
         );
     }
 
+    public void clickAssignedTestRunNotificationFromPanel(String trId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By allNotifications =
+                By.xpath(
+                        "//div[contains(@class,'notification-item') " +
+                                "and not(contains(@class,'disabled'))]" +
+                                "//span[contains(@class,'notif-text')]"
+                );
+
+        // Step 2: Open notification panel
+        WebElement bell = wait.until(
+                ExpectedConditions.elementToBeClickable(notificationBell)
+        );
+        js.executeScript("arguments[0].click();", bell);
+
+        WebElement body = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(notificationBody)
+        );
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+                List<WebElement> notifications = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(allNotifications)
+                );
+
+                for (WebElement notification : notifications) {
+
+                    String text = notification.getText().trim();
+
+                    if (text.contains("'" + trId + "'")
+                            && text.contains("has been assigned to")) {
+
+                        js.executeScript("arguments[0].click();", notification);
+
+                        System.out.println(
+                                "Clicked assigned Test Run notification: " + text
+                        );
+                        return;
+                    }
+                }
+
+                // Scroll to load older notifications if needed
+                js.executeScript(
+                        "arguments[0].scrollTop = arguments[0].scrollHeight",
+                        body
+                );
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Assigned Test Run notification not found for TR ID: " + trId
+        );
+    }
+
 
 
 }

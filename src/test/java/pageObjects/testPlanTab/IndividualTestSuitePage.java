@@ -8,10 +8,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
+import utils.WaitUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.List;
+import org.openqa.selenium.interactions.Actions;
 
 @Slf4j
 public class IndividualTestSuitePage extends BasePage {
@@ -383,5 +385,75 @@ public class IndividualTestSuitePage extends BasePage {
         );
     }
 
+    public void verifyDeletedTestSuiteNotificationIsNotClickable(String suiteId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        By deletedSuiteNotification = By.xpath(
+                "//div[contains(@class,'notification-item') and contains(@class,'disabled')]"
+                        + "//span[contains(@class,'notif-text') and contains(text(),'" + suiteId + "')]"
+        );
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell =
+                        wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                WebElement deletedNotification =
+                        wait.until(ExpectedConditions.visibilityOfElementLocated(deletedSuiteNotification));
+
+                Actions actions = new Actions(driver);
+                actions.moveToElement(deletedNotification).perform();
+
+                WebElement parentNotification =
+                        deletedNotification.findElement(
+                                By.xpath("./ancestor::div[contains(@class,'notification-item')]")
+                        );
+
+                String tooltipText = parentNotification.getAttribute("title");
+
+                if (!"This item no longer exists".equals(tooltipText)) {
+                    throw new AssertionError(
+                            "Tooltip text mismatch.\nExpected: This item no longer exists\nActual: " + tooltipText
+                    );
+                }
+
+                String currentUrlBeforeClick = driver.getCurrentUrl();
+                deletedNotification.click();
+
+                String currentUrlAfterClick = driver.getCurrentUrl();
+
+                if (!currentUrlBeforeClick.equals(currentUrlAfterClick)) {
+                    throw new AssertionError(
+                            "User navigated away after clicking deleted Test Suite notification"
+                    );
+                }
+
+                System.out.println(
+                        "Deleted Test Suite notification is not clickable and navigation is blocked for Suite: "
+                                + suiteId
+                );
+                return;
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError(
+                "Deleted Test Suite notification not found or not validated for Suite: " + suiteId
+        );
+    }
 
 }

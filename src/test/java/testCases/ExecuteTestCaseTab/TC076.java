@@ -25,7 +25,7 @@ public class TC076 extends BaseClass {
             String secondStatus
     ) throws InterruptedException {
 
-        logger.info("****** Starting TC062: Verify Toast notification appears automatically when a Test Run is Updated ******");
+        logger.info("****** Starting TC076 ******");
 
         try {
             login();
@@ -91,6 +91,6 @@ public class TC076 extends BaseClass {
             throw e;
         }
 
-        logger.info("************ Finished TC062 *************************");
+        logger.info("************ Finished TC076 *************************");
     }
 }
