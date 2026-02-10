@@ -27,6 +27,8 @@ public class TC070 extends BaseClass {
             login();
             logger.info("Logged in successfully");
 
+            WaitUtils.waitFor2000Milliseconds();
+
             ExecuteLandingPage executeLandingPage =
                     new ExecuteLandingPage(getDriver());
 
@@ -51,14 +53,16 @@ public class TC070 extends BaseClass {
 
             executeLandingPage.selectUserFromAssignDropdown(trId, tempUser);
             logger.info("Selected user from dropdown: " + tempUser);
-            WaitUtils.waitFor2000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
+            executeLandingPage.clickAssignToSaveButton();
+            logger.info("Clicked Save button");
+
+            WaitUtils.waitFor2000Milliseconds();
             String existingAssignee =
                     executeLandingPage.getCurrentAssigneeFromTestRun(trId);
             logger.info("Existing assignee: " + existingAssignee);
 
-            executeLandingPage.clickAssignToSaveButton();
-            logger.info("Clicked Save button");
 
             WaitUtils.waitFor2000Milliseconds();
 
