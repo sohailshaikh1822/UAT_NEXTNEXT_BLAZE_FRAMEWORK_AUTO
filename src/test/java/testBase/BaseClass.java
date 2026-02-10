@@ -28,9 +28,10 @@ import java.util.Properties;
 import utils.WaitUtils;
 
 public class BaseClass {
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public Logger logger = LogManager.getLogger(this.getClass());
     public Properties p;
+
 
     // Getter for WebDriver
     public static WebDriver getDriver() {
