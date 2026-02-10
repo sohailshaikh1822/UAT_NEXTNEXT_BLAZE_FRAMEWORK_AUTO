@@ -403,22 +403,19 @@ public class IndividualReleasePage extends BasePage {
                                 + "and contains(text(),'is deleted by')]"
                 );
 
-        // Open notification panel
         WebElement bell =
                 wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
         js.executeScript("arguments[0].click();", bell);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
 
-        // Hover on deleted Release notification (tooltip validation handled by UI)
-        WebElement hoverElement =
+       WebElement hoverElement =
                 wait.until(ExpectedConditions.presenceOfElementLocated(deletedReleaseNotification));
 
         actions.moveToElement(hoverElement)
                 .pause(Duration.ofMillis(500))
                 .perform();
 
-        // Re-locate element to avoid stale and click
         WebElement clickElement =
                 wait.until(ExpectedConditions.presenceOfElementLocated(deletedReleaseNotification));
 
@@ -427,5 +424,88 @@ public class IndividualReleasePage extends BasePage {
         System.out.println(
                 "Verified deleted Release notification is not clickable for Release: " + releaseId
         );
+    }
+
+    public void verifyCreationAndDeletionReleaseNotificationsAreDisabled(String releaseId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        By createdReleaseNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + releaseId + "') "
+                                + "and contains(text(),'is created by')]"
+                );
+
+        By deletedReleaseNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + releaseId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement createdHoverElement = wait.until(ExpectedConditions.presenceOfElementLocated(createdReleaseNotification));
+
+        actions.moveToElement(createdHoverElement).pause(Duration.ofMillis(500)).perform();
+
+        WebElement createdClickElement = wait.until(ExpectedConditions.presenceOfElementLocated(createdReleaseNotification));
+
+        js.executeScript("arguments[0].click();", createdClickElement);
+
+        WebElement deletedHoverElement = wait.until(ExpectedConditions.presenceOfElementLocated(deletedReleaseNotification));
+
+        actions.moveToElement(deletedHoverElement).pause(Duration.ofMillis(500)).perform();
+
+        WebElement deletedClickElement = wait.until(ExpectedConditions.presenceOfElementLocated(deletedReleaseNotification));
+
+        js.executeScript("arguments[0].click();", deletedClickElement);
+
+        System.out.println(
+                "Verified creation and deletion notifications are disabled for Release: " + releaseId
+        );
+    }
+
+    public void verifyCreatedReleaseNotificationNotClickable(String releaseId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        By createdReleaseNotification = By.xpath("//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + releaseId + "') "
+                                + "and contains(text(),'is created by')]");
+
+        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement hoverElement = wait.until(ExpectedConditions.presenceOfElementLocated(createdReleaseNotification));
+
+        actions.moveToElement(hoverElement).pause(Duration.ofMillis(500)).perform();
+
+        WebElement clickElement = wait.until(ExpectedConditions.presenceOfElementLocated(createdReleaseNotification));
+
+        js.executeScript("arguments[0].click();", clickElement);
+
+        System.out.println("Verified created Release notification is not clickable for Release: " + releaseId);
     }
 }

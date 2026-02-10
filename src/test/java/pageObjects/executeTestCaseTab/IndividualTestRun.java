@@ -396,20 +396,14 @@ public class IndividualTestRun extends BasePage {
                                 "and contains(text(),'created by')]"
                 );
 
-        // Open notification panel
         WebElement bell = wait.until(
                 ExpectedConditions.elementToBeClickable(notificationBell)
         );
         js.executeScript("arguments[0].click();", bell);
 
-        // Click created notification
         WebElement notification = wait.until(
                 ExpectedConditions.elementToBeClickable(notificationText)
         );
         js.executeScript("arguments[0].click();", notification);
     }
-
-
-
-
 }

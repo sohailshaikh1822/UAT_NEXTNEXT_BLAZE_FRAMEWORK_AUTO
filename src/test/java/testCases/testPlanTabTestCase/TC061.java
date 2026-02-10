@@ -9,18 +9,19 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC060 extends BaseClass {
-    @Test(dataProvider = "tc060", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyDeletedReleaseNotificationIsNotClickable(
+public class TC061 extends BaseClass {
+    @Test(dataProvider = "tc061", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyBothCreationAndDeletionNotificationsAreDisabledAfterReleaseDeletion(
             String projectName,
             String releaseName
     )throws InterruptedException
     {
-        logger.info("****** Starting TC60 **********");
+        logger.info("****** Starting TC61 **********");
 
         try {
             login();
             logger.info("Logged in successfully");
+
             TestPlanLandingPage testPlanPage = new TestPlanLandingPage(getDriver());
             IndividualReleasePage individualReleasePage=new IndividualReleasePage(getDriver());
 
@@ -42,12 +43,13 @@ public class TC060 extends BaseClass {
 
             testPlanPage.clickSaveRelease();
             logger.info("Clicked Save button");
-
             WaitUtils.waitFor9000Milliseconds();
 
             String releaseId = individualReleasePage.getReleaseId();
             logger.info("Suite ID captured: " + releaseId);
-            WaitUtils.waitFor1000Milliseconds();
+
+
+            WaitUtils.waitFor2000Milliseconds();
 
             testPlanPage.clickDelete();
             logger.info("Release is deleted");
@@ -57,11 +59,12 @@ public class TC060 extends BaseClass {
 
             logger.info("Release is deleted successfully");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
+            individualReleasePage.verifyCreationAndDeletionReleaseNotificationsAreDisabled(releaseId);
+            logger.info("Successfully verified both creation and deletion notifications are disabled after Release deletion ");
+
             WaitUtils.waitFor2000Milliseconds();
 
-            individualReleasePage.verifyDeletedReleaseNotificationNotClickable(releaseId);
-            logger.info("Release Tootltip has been verified successfully");
 
             logger.info("************ Test Case Finished Successfully ***********************");
 
