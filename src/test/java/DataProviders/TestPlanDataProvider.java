@@ -232,4 +232,23 @@ public class TestPlanDataProvider {
         return ExcelDataProviders.getExcelDataForTestPlan("tc062");
     }
 
+    @DataProvider(name = "tc063")
+    public static Object[][] getDataTC063() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc063");
+    }
+
+    @DataProvider(name = "tc064")
+    public static Object[][] getDataTC064() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc064");
+    }
+
+    @DataProvider(name = "tc065")
+    public static Object[][] getDataTC065() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc065");
+    }
+
+    @DataProvider(name = "tc066")
+    public static Object[][] getDataTC066() throws IOException {
+        return ExcelDataProviders.getExcelDataForTestPlan("tc066");
+    }
 }

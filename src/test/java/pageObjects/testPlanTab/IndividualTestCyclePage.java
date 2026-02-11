@@ -341,7 +341,6 @@ public class IndividualTestCyclePage extends BasePage {
                                 + "and contains(text(),'is deleted by')]"
                 );
 
-        // Open notification panel
         WebElement bell =
                 wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
         js.executeScript("arguments[0].click();", bell);
@@ -352,13 +351,53 @@ public class IndividualTestCyclePage extends BasePage {
         WebElement deletedNotification =
                 wait.until(ExpectedConditions.visibilityOfElementLocated(deletedCLNotification));
 
-        // Hover to show tooltip
         actions.moveToElement(deletedNotification).perform();
 
-        // Attempt click (should not navigate)
         js.executeScript("arguments[0].click();", deletedNotification);
     }
 
 
+    public void verifyDeletedTestCycleNotificationNotClickable(String cycleId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By deletedCycleNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + cycleId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement hoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedCycleNotification));
+
+        actions.moveToElement(hoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        WebElement clickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedCycleNotification));
+
+        js.executeScript("arguments[0].click();", clickElement);
+
+        System.out.println(
+                "Verified deleted Test Cycle notification is not clickable for Cycle: " + cycleId
+        );
+    }
 
 }
