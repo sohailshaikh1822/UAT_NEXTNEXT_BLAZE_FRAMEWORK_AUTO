@@ -12,14 +12,14 @@ import utils.WaitUtils;
 
 import java.nio.file.LinkOption;
 
-public class TC062 extends BaseClass {
-    @Test(dataProvider = "tc062", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+public class TC063 extends BaseClass {
+    @Test(dataProvider = "tc063", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDeletionNotificationRemainsDisabledEvenAfterReleaseRestoration(
             String projectName,
             String releaseName
     )throws InterruptedException
     {
-        logger.info("****** Starting TC62 **********");
+        logger.info("****** Starting TC63 ********");
         try {
             login();
             logger.info("Logged in successfully");
@@ -49,8 +49,6 @@ public class TC062 extends BaseClass {
 
             String releaseId = individualReleasePage.getReleaseId();
             logger.info("Suite ID captured: " + releaseId);
-
-
             WaitUtils.waitFor2000Milliseconds();
 
             testPlanPage.clickDelete();
@@ -86,8 +84,8 @@ public class TC062 extends BaseClass {
             Assert.assertEquals(actualMessage,expectedMessage,"Confirmation message has not matched");
 
             WaitUtils.waitFor2000Milliseconds();
-            individualReleasePage.verifyCreatedReleaseNotificationNotClickable(releaseId);
-            logger.info("Verified that creation notification is enabled after Release is restored");
+            individualReleasePage.verifyDeletedReleaseNotificationNotClickable(releaseId);
+            logger.info("Verified that deletion notification is enabled after release is restored");
 
             logger.info("************ Test Case Finished Successfully ******************");
 

@@ -456,4 +456,110 @@ public class IndividualTestSuitePage extends BasePage {
         );
     }
 
+    public void verifyDeletedTestSuiteNotificationNotClickableAfterRestore(String suiteId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By deletedSuiteNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + suiteId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement hoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedSuiteNotification));
+
+        actions.moveToElement(hoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        WebElement clickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedSuiteNotification));
+
+        js.executeScript("arguments[0].click();", clickElement);
+
+        System.out.println(
+                "Verified deleted Test Suite notification remains not clickable after restore for Suite: "
+                        + suiteId
+        );
+    }
+
+
+    public void verifyCreationAndDeletionTestSuiteNotificationsAreDisabled(String suiteId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        By createdSuiteNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + suiteId + "') "
+                                + "and contains(text(),'is created by')]"
+                );
+
+        By deletedSuiteNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + suiteId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement createdHoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(createdSuiteNotification));
+
+        actions.moveToElement(createdHoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        WebElement createdClickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(createdSuiteNotification));
+
+        js.executeScript("arguments[0].click();", createdClickElement);
+
+        WebElement deletedHoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedSuiteNotification));
+
+        actions.moveToElement(deletedHoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        WebElement deletedClickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedSuiteNotification));
+
+        js.executeScript("arguments[0].click();", deletedClickElement);
+
+        System.out.println(
+                "Verified creation and deletion notifications are disabled for Test Suite: " + suiteId
+        );
+    }
+
+
 }
