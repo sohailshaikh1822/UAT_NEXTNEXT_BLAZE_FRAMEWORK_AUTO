@@ -194,7 +194,8 @@ public class IndividualTestCyclePage extends BasePage {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -259,9 +260,13 @@ public class IndividualTestCyclePage extends BasePage {
 
                 js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError("Test Cycle delete notification not found for Cycle: " + cycleId);
@@ -311,9 +316,13 @@ public class IndividualTestCyclePage extends BasePage {
                     }
                 }
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -400,4 +409,101 @@ public class IndividualTestCyclePage extends BasePage {
         );
     }
 
+    public void verifyCreationAndDeletionTestCycleNotificationsAreDisabled(String cycleId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Actions actions = new Actions(driver);
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        By createdTestCycleNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + cycleId + "') "
+                                + "and contains(text(),'is created by')]"
+                );
+
+        By deletedTestCycleNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + cycleId + "') "
+                                + "and contains(text(),'is deleted by')]"
+                );
+
+        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement createdHoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(createdTestCycleNotification));
+
+        actions.moveToElement(createdHoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        WebElement createdClickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(createdTestCycleNotification));
+
+        js.executeScript("arguments[0].click();", createdClickElement);
+
+        WebElement deletedHoverElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedTestCycleNotification));
+
+        actions.moveToElement(deletedHoverElement)
+                .pause(Duration.ofMillis(500))
+                .perform();
+
+        WebElement deletedClickElement =
+                wait.until(ExpectedConditions.presenceOfElementLocated(deletedTestCycleNotification));
+
+        js.executeScript("arguments[0].click();", deletedClickElement);
+
+        System.out.println(
+                "Verified creation and deletion notifications are disabled for Test Cycle: " + cycleId
+        );
+    }
+
+    public void VerifyTooltipForADisabledNotificationWhenATestCycleIsDeletedFromTestPlanTab(String cycleId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        By deletedCycleNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item') and contains(@class,'disabled') "
+                                + "and .//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + cycleId + "') "
+                                + "and contains(text(),'is deleted by')]]"
+                );
+
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement notification =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(deletedCycleNotification));
+
+        String tooltipText = notification.getAttribute("title");
+
+        if (tooltipText == null || !tooltipText.equals("This item no longer exists")) {
+            throw new AssertionError(
+                    "Tooltip text mismatch.\nExpected: This item no longer exists\nActual: "
+                            + tooltipText
+            );
+        }
+
+        System.out.println("Verified tooltip for deleted Test Cycle: " + cycleId);
+    }
 }
+
