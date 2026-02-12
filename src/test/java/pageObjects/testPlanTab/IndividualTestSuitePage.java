@@ -561,5 +561,68 @@ public class IndividualTestSuitePage extends BasePage {
         );
     }
 
+    public void verifyDeletedTestSuiteTooltip(String suiteId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String cleanSuiteId = suiteId.replace("*", "").trim();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By disabledNotifications = By.xpath(
+                "//div[contains(@class,'notification-item') and contains(@class,'disabled')]"
+        );
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> notifications =
+                        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(disabledNotifications));
+
+                for (WebElement notification : notifications) {
+
+                    String text = notification.findElement(
+                            By.xpath(".//span[contains(@class,'notif-text')]")
+                    ).getText().trim();
+
+                    if (text.contains(cleanSuiteId) && text.contains("deleted")) {
+
+                        String tooltipText = notification.getAttribute("title");
+
+                        if (tooltipText == null || tooltipText.isEmpty()) {
+                            throw new AssertionError(
+                                    "Tooltip attribute is missing for deleted Test Suite notification."
+                            );
+                        }
+
+                        if (!tooltipText.equals("This item no longer exists")) {
+                            throw new AssertionError(
+                                    "Tooltip text mismatch.\nExpected: This item no longer exists\nActual: " + tooltipText
+                            );
+                        }
+
+                        System.out.println("Deleted Test Suite tooltip verified successfully: " + tooltipText);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError("Deleted Test Suite notification not found for Suite: " + suiteId);
+    }
 
 }
