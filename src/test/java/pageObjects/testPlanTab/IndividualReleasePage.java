@@ -508,4 +508,146 @@ public class IndividualReleasePage extends BasePage {
 
         System.out.println("Verified created Release notification is not clickable for Release: " + releaseId);
     }
+
+    public void verifyDeletedReleaseTooltip(String releaseId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String cleanReleaseId = releaseId.replace("*", "").trim();
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By disabledNotifications = By.xpath(
+                "//div[contains(@class,'notification-item') and contains(@class,'disabled')]"
+        );
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> notifications =
+                        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(disabledNotifications));
+
+                for (WebElement notification : notifications) {
+
+                    String text = notification.findElement(
+                            By.xpath(".//span[contains(@class,'notif-text')]")
+                    ).getText().trim();
+
+                    if (text.contains(cleanReleaseId) && text.contains("deleted")) {
+
+                        String tooltipText = notification.getAttribute("title");
+
+                        if (tooltipText == null || tooltipText.isEmpty()) {
+                            throw new AssertionError(
+                                    "Tooltip attribute is missing for deleted Release notification."
+                            );
+                        }
+
+                        if (!tooltipText.equals("This item no longer exists")) {
+                            throw new AssertionError(
+                                    "Tooltip text mismatch.\nExpected: This item no longer exists\nActual: " + tooltipText
+                            );
+                        }
+
+                        System.out.println("Deleted Release tooltip verified successfully: " + tooltipText);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {}
+
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        }
+
+        throw new AssertionError("Deleted Release notification not found for Release: " + releaseId);
+    }
+
+
+    public void clickCreatedReleaseNotification(String releaseId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String cleanReleaseId = releaseId.replace("*", "").trim();
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By createdReleaseNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + cleanReleaseId + "') "
+                                + "and contains(text(),'is created by')]"
+                );
+
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement createdNotification =
+                wait.until(ExpectedConditions.elementToBeClickable(createdReleaseNotification));
+
+        js.executeScript("arguments[0].click();", createdNotification);
+
+        System.out.println(
+                "Clicked on created Release notification for Release: " + releaseId
+        );
+    }
+
+    public void clickUpdatedReleaseNotification(String releaseId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String cleanReleaseId = releaseId.replace("*", "").trim();
+
+        By notificationBell =
+                By.xpath("//i[contains(@class,'fa-bell')]");
+
+        By notificationBody =
+                By.xpath("//div[contains(@class,'notification-body')]");
+
+        By updatedReleaseNotification =
+                By.xpath(
+                        "//div[contains(@class,'notification-item')]"
+                                + "//span[contains(@class,'notif-text') "
+                                + "and contains(text(),'" + cleanReleaseId + "') "
+                                + "and contains(text(),'is updated by')]"
+                );
+
+        WebElement bell =
+                wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebElement updatedNotification =
+                wait.until(ExpectedConditions.elementToBeClickable(updatedReleaseNotification));
+
+        js.executeScript("arguments[0].click();", updatedNotification);
+
+        System.out.println(
+                "Clicked on updated Release notification for Release: " + releaseId
+        );
+    }
+
+
+
 }
