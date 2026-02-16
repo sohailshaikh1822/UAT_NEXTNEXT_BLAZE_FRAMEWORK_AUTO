@@ -881,5 +881,34 @@ public class RequirementTabPage extends BasePage {
         js.executeScript("arguments[0].click();", epicElement);
     }
 
+    //RecycleBin
+
+    By recycleBinButton = By.cssSelector("i.fa-dumpster[title='Recycle Bin']");
+    By recycleBinPopup = By.cssSelector("div.recycle-bin-popup");
+    By recycleBinHeader = By.xpath("//div[@class='rb-topbar' and contains(text(),'RECYCLE BIN')]");
+
+    By menuDropdown = By.xpath("//label[text()='Menu']/following-sibling::select");
+    By objectDropdown = By.xpath("//label[text()='Object(s)']/following-sibling::select");
+
+    By itemCounter = By.cssSelector("span.rb-count");
+
+    public void clickRecycleBinButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(recycleBinButton)).click();
+    }
+
+    public void verifyRecycleBinPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(recycleBinPopup));
+    }
+
+    public void verifyHeaderSectionDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(recycleBinHeader));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(menuDropdown));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(objectDropdown));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(itemCounter));
+    }
+
+    public void verifyItemCounterDisplayed() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(itemCounter));
+    }
 
 }
