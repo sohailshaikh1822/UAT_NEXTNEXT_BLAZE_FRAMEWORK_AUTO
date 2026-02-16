@@ -1,6 +1,7 @@
 package utils;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testBase.BaseClass;
@@ -56,4 +57,58 @@ public class NotificationsListener extends BaseClass {
 
 
     }
+
+    public boolean verifyNotificationHoverText(String id, String expectedTooltipText) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Dynamic notification locator
+        By notificationLocator = By.xpath(
+                "(//span[contains(@class,'notif-text') and contains(., '" + id + "')])[1]"
+        );
+
+        WebElement notification =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(notificationLocator));
+
+        // Hover action
+        Actions actions = new Actions(driver);
+        actions.moveToElement(notification).perform();
+
+        // Wait for tooltip to appear (adjust locator if needed)
+        By tooltipLocator = By.xpath("//div[@class='notification-item disabled']");
+        WebElement tooltip =
+                wait.until(ExpectedConditions.visibilityOfElementLocated(tooltipLocator));
+
+        String actualTooltipText = tooltip.getText().trim();
+        logger.info("actual result"+ actualTooltipText);
+
+        return actualTooltipText.equals(expectedTooltipText);
+    }
+
+
+    public void clickCreatedNotification(String tcId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By createdNotificationLocator = By.xpath(
+                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'is created by')]"
+        );
+
+        WebElement notification = wait.until(
+                ExpectedConditions.elementToBeClickable(createdNotificationLocator)
+        );
+
+        // Scroll into view (important if inside panel)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center'});",
+                notification
+        );
+
+        // Click using JS (more reliable for notifications)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();",
+                notification
+        );
+    }
+
 }
