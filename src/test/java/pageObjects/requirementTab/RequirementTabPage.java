@@ -11,6 +11,9 @@ import java.util.List;
 import utils.WaitUtils;
 
 import java.time.Duration;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.support.ui.Select;
 
 public class RequirementTabPage extends BasePage {
     public RequirementTabPage(WebDriver driver) {
@@ -96,11 +99,8 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-solid tree-arrow fa-caret-down']")
     List<WebElement> epicArrowDown;
 
-    @FindBy(xpath= "//div[@class='top-nav-bar']")
+    @FindBy(xpath = "//div[@class='top-nav-bar']")
     WebElement getnotPopUp;
-
-
-
 
 
     public WebElement leftModuleNameByName(String name) {
@@ -151,13 +151,15 @@ public class RequirementTabPage extends BasePage {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     public void clickRequirementTab() throws InterruptedException {
-        WaitUtils.waitFor1000Milliseconds();;
+        WaitUtils.waitFor1000Milliseconds();
+        ;
         tabRequirements.click();
-        WaitUtils.waitFor1000Milliseconds();;
+        WaitUtils.waitFor1000Milliseconds();
+        ;
     }
 
     public void clickDownloadAttachementButton(int index) {
-        if (index < downloadAttachement.size()){
+        if (index < downloadAttachement.size()) {
             WebElement downloadIcon = downloadAttachement.get(index);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", downloadIcon);
             downloadIcon.click();
@@ -173,9 +175,9 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clickNewModule() throws InterruptedException {
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
         iconNewModule.click();
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
 
     }
 
@@ -202,7 +204,10 @@ public class RequirementTabPage extends BasePage {
         By arrow = By.xpath("//span[text()='" + moduleName + "']//preceding-sibling::span[2]//i");
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(arrow));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-        try { Thread.sleep(300); } catch (Exception ignored) {}
+        try {
+            Thread.sleep(300);
+        } catch (Exception ignored) {
+        }
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
@@ -212,7 +217,10 @@ public class RequirementTabPage extends BasePage {
         By arrow = By.xpath("//option[text()='" + projectName + "']/parent::select");
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(arrow));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-        try { Thread.sleep(300); } catch (Exception ignored) {}
+        try {
+            Thread.sleep(300);
+        } catch (Exception ignored) {
+        }
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
@@ -315,7 +323,7 @@ public class RequirementTabPage extends BasePage {
     }
 
     public void clicktoggleSidebar() throws InterruptedException {
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.elementToBeClickable(closeSideBar))).click();
@@ -335,9 +343,7 @@ public class RequirementTabPage extends BasePage {
         return type.isDisplayed();
     }
 
-    public boolean isStatusFieldVisible()
-
-    {
+    public boolean isStatusFieldVisible() {
         return status.isDisplayed();
     }
 
@@ -482,41 +488,43 @@ public class RequirementTabPage extends BasePage {
 
                 js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(" Delete notification not found for: " + entityId);
     }
 
 
-        public  String handleToastNotification() {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            String toastMessage = " ";
+    public String handleToastNotification() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        String toastMessage = " ";
 
-            try {
-                By toastLocator = By.xpath("//div[@class='toast-body']");
+        try {
+            By toastLocator = By.xpath("//div[@class='toast-body']");
 
-                WebElement toast = wait.until(
-                        ExpectedConditions.visibilityOfElementLocated(toastLocator)
-                );
+            WebElement toast = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(toastLocator)
+            );
 
-                toastMessage = toast.getText();
-                System.out.println("Toast Message: " + toastMessage);
+            toastMessage = toast.getText();
+            System.out.println("Toast Message: " + toastMessage);
 
-                wait.until(
-                        ExpectedConditions.invisibilityOfElementLocated(toastLocator)
-                );
+            wait.until(
+                    ExpectedConditions.invisibilityOfElementLocated(toastLocator)
+            );
 
-            } catch (TimeoutException e) {
-                System.out.println("Toast notification not found");
-            }
-
-            return toastMessage;
+        } catch (TimeoutException e) {
+            System.out.println("Toast notification not found");
         }
 
-
+        return toastMessage;
+    }
 
 
     public void verifyCreationNotification(String entityId) {
@@ -569,9 +577,13 @@ public class RequirementTabPage extends BasePage {
 
                 js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
 
-            } catch (StaleElementReferenceException ignored) {}
+            } catch (StaleElementReferenceException ignored) {
+            }
 
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(" Create notification not found for: " + entityId);
@@ -645,7 +657,8 @@ public class RequirementTabPage extends BasePage {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -721,7 +734,8 @@ public class RequirementTabPage extends BasePage {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -858,7 +872,8 @@ public class RequirementTabPage extends BasePage {
 
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored) {
+            }
         }
 
         throw new AssertionError(
@@ -881,7 +896,7 @@ public class RequirementTabPage extends BasePage {
         js.executeScript("arguments[0].click();", epicElement);
     }
 
-    //RecycleBin
+  //Recycle Bin
 
     By recycleBinButton = By.cssSelector("i.fa-dumpster[title='Recycle Bin']");
     By recycleBinPopup = By.cssSelector("div.recycle-bin-popup");
@@ -891,6 +906,27 @@ public class RequirementTabPage extends BasePage {
     By objectDropdown = By.xpath("//label[text()='Object(s)']/following-sibling::select");
 
     By itemCounter = By.cssSelector("span.rb-count");
+    By tableRows = By.cssSelector(".rb-table tbody tr");
+    By objectDropdown1 = By.xpath("//label[text()='Object(s)']/following-sibling::select");
+
+
+    public void selectObjectFromDropdown(String value) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By objectDropdown = By.xpath("//label[text()='Object(s)']/following-sibling::select");
+
+        WebElement dropdownElement =
+                wait.until(ExpectedConditions.elementToBeClickable(objectDropdown1));
+
+        Select select = new Select(dropdownElement);
+
+        select.selectByVisibleText(value);
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.cssSelector(".rb-table tbody tr")));
+    }
+
 
     public void clickRecycleBinButton() {
         wait.until(ExpectedConditions.elementToBeClickable(recycleBinButton)).click();
@@ -900,15 +936,127 @@ public class RequirementTabPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(recycleBinPopup));
     }
 
+
     public void verifyHeaderSectionDisplayed() {
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(recycleBinHeader));
         wait.until(ExpectedConditions.visibilityOfElementLocated(menuDropdown));
         wait.until(ExpectedConditions.visibilityOfElementLocated(objectDropdown));
         wait.until(ExpectedConditions.visibilityOfElementLocated(itemCounter));
     }
 
+
     public void verifyItemCounterDisplayed() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(itemCounter));
     }
+
+    public void verifyAllFilterDisplayedCorrectly() {
+
+        List<WebElement> rows = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(tableRows)
+        );
+
+        if (rows.isEmpty()) {
+            throw new AssertionError("Recycle Bin list is empty for ALL filter");
+        }
+
+        for (WebElement row : rows) {
+
+            String text = row.getText().toLowerCase();
+
+            if (!text.contains("module") && !text.contains("requirement")) {
+                throw new AssertionError("Unexpected item type found in ALL filter");
+            }
+        }
+
+        System.out.println("ALL filter displayed valid data successfully");
+    }
+
+
+    public List<String> getObjectDropdownOptions() {
+
+        WebElement dropdown = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(objectDropdown)
+        );
+
+        Select select = new Select(dropdown);
+
+        return select.getOptions()
+                .stream()
+                .map(WebElement::getText)
+                .map(String::trim)
+                .toList();
+    }
+
+
+    public void verifyOnlyRequirementsDisplayed() {
+
+        By rowsLocator = By.cssSelector(".rb-table tbody tr");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(rowsLocator));
+
+        List<WebElement> rows = driver.findElements(rowsLocator);
+
+        if (rows.isEmpty()) {
+            throw new AssertionError("No records found for Requirement filter");
+        }
+
+        for (WebElement row : rows) {
+
+            List<WebElement> cols = row.findElements(By.tagName("td"));
+
+            if (cols.size() < 4) {
+                throw new AssertionError("Unexpected column structure");
+            }
+
+            String typeValue = cols.get(3).getText().trim();
+
+            if (!typeValue.equalsIgnoreCase("Requirement")) {
+                throw new AssertionError(
+                        "Non-requirement record found. Actual Type: " + typeValue
+                );
+            }
+        }
+
+        System.out.println("Only Requirements displayed successfully");
+    }
+
+
+    public List<String> getRecycleBinColumnHeaders() {
+
+        List<WebElement> headers = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.cssSelector(".rb-table thead th")
+                )
+        );
+
+        return headers.stream()
+                .map(WebElement::getText)
+                .map(String::trim)
+                .filter(text -> !text.isEmpty())   // removes empty checkbox column
+                .map(String::toLowerCase)
+                .toList();
+    }
+
+    public void verifyRecycleBinGridData() {
+
+        List<WebElement> rows = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.cssSelector(".rb-table tbody tr")
+                )
+        );
+
+        for (WebElement row : rows) {
+
+            List<WebElement> columns = row.findElements(By.tagName("td"));
+
+            Assert.assertFalse(columns.get(1).getText().trim().isEmpty(), "ID is empty");
+            Assert.assertFalse(columns.get(2).getText().trim().isEmpty(), "Name is empty");
+            Assert.assertFalse(columns.get(3).getText().trim().isEmpty(), "Type is empty");
+            Assert.assertFalse(columns.get(4).getText().trim().isEmpty(), "Deleted By is empty");
+            Assert.assertFalse(columns.get(5).getText().trim().isEmpty(), "Deleted Date is empty");
+        }
+    }
+
 
 }
