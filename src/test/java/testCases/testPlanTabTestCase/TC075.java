@@ -1,26 +1,28 @@
 package testCases.testPlanTabTestCase;
 
-import DataProviders.TestPlanDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.RequirementTabPage;
+import pageObjects.testPlanTab.IndividualReleasePage;
 import pageObjects.testPlanTab.IndividualTestCyclePage;
 import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
+import utils.NotificationsListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC022 extends BaseClass {
-    @Test(dataProvider = "tc022", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyNotificationPopupCreationOfNewTestCycle(
+public class TC075 extends BaseClass {
+
+    @Test(dataProvider = "tc075", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyNavigationToTestCycleDetailsPageOnClickingTestCycleCreatedNotification(
             String projectName,
             String releaseName,
             String testCycleName,
             String testDescription)
             throws InterruptedException {
         logger.info(
-                "****** Starting Test Case: Verify Release List Updates Based on Project Selection *****************");
+                "****** Starting Test Case: Verify navigation to Test cycle details page on clicking Test cycle created notification *****************");
         try {
             login();
             logger.info("Logged in successfully");
@@ -42,7 +44,7 @@ public class TC022 extends BaseClass {
             testPlanPage.clickOnTheProjectName();
             logger.info("Selected project: " + projectName);
             logger.info("Expanded STG Project");
-
+            WaitUtils.waitFor2000Milliseconds();
             testPlanPage.clickOnReleaseOrTestCycleOrTestSuite(releaseName);
             logger.info("Clicked on the module ");
 
@@ -56,7 +58,7 @@ public class TC022 extends BaseClass {
 
             individualTestCyclePage.setDescription(testDescription);
             logger.info("added the description for cycle");
-
+            WaitUtils.waitFor3000Milliseconds();
             Assert.assertEquals(individualTestCyclePage.getTargetRelease(), releaseName);
             logger.info("verified the targeted release ");
 
@@ -66,11 +68,18 @@ public class TC022 extends BaseClass {
             String expectedNotificationPopup= requirementTabPage.handleToastNotification();
             String tcId = addRequirementPage.getModuleId();
             tcId = tcId.replaceAll("\\*$", "");
-            tcId = "'" + tcId.replace("'", "") + "'";
+            tcId = tcId.replace("'", "");
 
             logger.info("new rl"+ tcId);
 
-            Assert.assertEquals(tcId +" is created by Julie Kumari.",expectedNotificationPopup,"not matched");
+
+
+            NotificationsListener notificationsListener=new NotificationsListener(getDriver());
+
+            WaitUtils.waitFor2000Milliseconds();
+            notificationsListener.clickNotificationIcon();
+            WaitUtils.waitFor2000Milliseconds();
+            notificationsListener.clickCreatedNotification(tcId);
 
 
         } catch (AssertionError e) {

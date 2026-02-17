@@ -13,7 +13,7 @@ import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
-    @Test(dataProvider = "tc005", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc021", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyNotificationPopupAfterCameAddingNewReleaseUnderProject(String projectName, String releaseName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Adding a New Release Under a Project *****************");
 
