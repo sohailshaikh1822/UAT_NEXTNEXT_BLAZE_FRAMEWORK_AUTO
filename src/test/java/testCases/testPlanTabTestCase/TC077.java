@@ -1,6 +1,5 @@
 package testCases.testPlanTabTestCase;
 
-import DataProviders.TestPlanDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.requirementTab.AddRequirementPage;
@@ -9,15 +8,16 @@ import pageObjects.testPlanTab.IndividualTestCyclePage;
 import pageObjects.testPlanTab.IndividualTestSuitePage;
 import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
+import utils.NotificationsListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class TC023 extends BaseClass {
-    @Test(dataProvider = "tc023", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void verifyNotificationPopUpWhileCreationOfTestSuite(
+public class TC077 extends BaseClass {
+    @Test(dataProvider = "tc077", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyNavigationToTestSuitDetailsPageOnClickingTestSuiteCreatedNotification(
             String projectName,
             String releaseName,
             String testCycleName,
@@ -28,7 +28,7 @@ public class TC023 extends BaseClass {
             String executionType)
             throws InterruptedException {
         logger.info(
-                "****** Starting Test Case: Verify Release List Updates Based on Project Selection *****************");
+                "****** Starting Test Case: Verify navigation to Test suit details page on clicking Test suit created notification ****************");
         try {
 
             login();
@@ -66,7 +66,7 @@ public class TC023 extends BaseClass {
 
             individualTestCyclePage.clickSave();
             logger.info("Clicked on the save button");
-             WaitUtils.waitFor2000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             testPlanPage.clickOnReleaseOrTestCycleOrTestSuite(testCycleNameWithTimestamp);
             logger.info("navigated to the created cycle");
 
@@ -93,14 +93,17 @@ public class TC023 extends BaseClass {
 
             individualTestSuitePage.clickSaveButton();
             logger.info("clicked on save button");
-            String expectedNotificationPopup= requirementTabPage.handleToastNotification();
             String tsId = addRequirementPage.getModuleId();
             tsId = tsId.replaceAll("\\*$", "");
-            tsId = "'" + tsId.replace("'", "") + "'";
-
+            tsId = tsId.replace("'", "");
             logger.info("new rl"+ tsId);
 
-            Assert.assertEquals(tsId +" is created by Julie Kumari.",expectedNotificationPopup,"not matched");
+            NotificationsListener notificationsListener=new NotificationsListener(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
+            notificationsListener.clickNotificationIcon();
+            WaitUtils.waitFor2000Milliseconds();
+            notificationsListener.clickCreatedNotification(tsId);
+
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
