@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="requirement Test ">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headles"/>
+        <parameter name="mode" value="head"/>
         <classes>
 <!--            <class name="testCases.requirementTabTestCase.TC001"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC002"/>-->
@@ -36,7 +36,7 @@
 <!--            <class name="testCases.requirementTabTestCase.TC027"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC028"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC029"/>-->
-            <class name="testCases.requirementTabTestCase.TC030"/>
+<!--            <class name="testCases.requirementTabTestCase.TC030"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC031"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC032"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC033"/>-->
@@ -82,7 +82,7 @@
 <!--            <class name="testCases.requirementTabTestCase.TC077"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC078"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC079"/>-->
-<!--            <class name="testCases.requirementTabTestCase.TC080"/>-->
+            <class name="testCases.requirementTabTestCase.TC089"/>
         </classes>
     </test>
 </suite>

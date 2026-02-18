@@ -55,7 +55,6 @@ public class NotificationsListener extends BaseClass {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
 
-
     }
 
     public boolean verifyNotificationHoverText(String id, String expectedTooltipText) {
@@ -117,6 +116,31 @@ public class NotificationsListener extends BaseClass {
 
         By createdNotificationLocator = By.xpath(
                 "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'is updated by')]"
+        );
+
+        WebElement notification = wait.until(
+                ExpectedConditions.elementToBeClickable(createdNotificationLocator)
+        );
+
+        // Scroll into view (important if inside panel)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center'});",
+                notification
+        );
+
+        // Click using JS (more reliable for notifications)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();",
+                notification
+        );
+    }
+
+    public void clickRestoredNotification(String tcId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By createdNotificationLocator = By.xpath(
+                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'is restored by')]"
         );
 
         WebElement notification = wait.until(
