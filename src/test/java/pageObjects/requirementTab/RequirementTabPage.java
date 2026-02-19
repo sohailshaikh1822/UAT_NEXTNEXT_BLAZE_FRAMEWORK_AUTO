@@ -1103,4 +1103,31 @@ public class RequirementTabPage extends BasePage {
         System.out.println("Single selection validation passed successfully.");
     }
 
+    public String getItemCountText() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement countElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector(".rb-count")));
+
+        return countElement.getText().trim();
+    }
+
+
+    public void closeRecycleBin() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement closeBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("button.rb-btn-secondary")));
+
+        closeBtn.click();
+    }
+
+    // Helper method
+    public int extractCount(String text) {
+        // Example: "699 items :: 0 selected"
+        return Integer.parseInt(text.split(" ")[0]);
+    }
 }
