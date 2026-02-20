@@ -121,8 +121,15 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
+    @FindBy(xpath = "(//div[@class='text-i'])[1]")
+    WebElement inputDescription;
     @FindBy(xpath = "(//i[@class='fa-solid fa-download'])[1]")
     List<WebElement> downloadAttachement;
+
+    @FindBy(xpath = "//button[normalize-space()='Restore']")
+    WebElement restoreButton;
+    @FindBy(xpath = "(//input[@type='radio'])[1]")
+    WebElement firstDeletedItem;
 
 
     // Actions
@@ -146,6 +153,31 @@ public class RequirementTabPage extends BasePage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    @FindBy(xpath = "//em[contains(text(),'Click to add description')]")
+    WebElement descriptionPlaceholder;
+
+    @FindBy(xpath = "//div[@contenteditable='true']")
+    WebElement descriptionEditor;
+
+    public void enterDescription(String description) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        // Step 1 – Click placeholder
+        wait.until(ExpectedConditions.elementToBeClickable(descriptionPlaceholder));
+        descriptionPlaceholder.click();
+
+        // Step 2 – Wait for editable div
+        wait.until(ExpectedConditions.visibilityOf(descriptionEditor));
+
+        // Step 3 – Clear existing content
+        descriptionEditor.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        descriptionEditor.sendKeys(Keys.DELETE);
+
+        // Step 4 – Enter description
+        descriptionEditor.sendKeys(description);
     }
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -1124,10 +1156,17 @@ public class RequirementTabPage extends BasePage {
 
         closeBtn.click();
     }
-
-    // Helper method
-    public int extractCount(String text) {
-        // Example: "699 items :: 0 selected"
+    public int extractCount(String text)
+    {
         return Integer.parseInt(text.split(" ")[0]);
+    }
+
+
+    public WebElement getRestoreButton() {
+        return restoreButton;
+    }
+
+    public void selectFirstDeletedItem() {
+        firstDeletedItem.click();
     }
 }
