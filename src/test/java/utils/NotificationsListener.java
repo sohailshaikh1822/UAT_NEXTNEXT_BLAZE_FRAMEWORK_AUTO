@@ -90,7 +90,7 @@ public class NotificationsListener extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         By createdNotificationLocator = By.xpath(
-                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'is created by')]"
+                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'created by')]"
         );
 
         WebElement notification = wait.until(
@@ -115,7 +115,7 @@ public class NotificationsListener extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         By createdNotificationLocator = By.xpath(
-                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'is updated by')]"
+                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'updated by')]"
         );
 
         WebElement notification = wait.until(
@@ -160,6 +160,27 @@ public class NotificationsListener extends BaseClass {
         );
     }
 
+    public String getRestoredNotificationText(String tcId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By deletedNotificationLocator = By.xpath(
+                "//span[@class='notif-text' and contains(text(), \"'" + tcId + "'\") and contains(text(),'is restored by')]"
+        );
+
+        WebElement notification = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(deletedNotificationLocator)
+        );
+
+        // Scroll into view (important if inside panel)
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center'});",
+                notification
+        );
+
+        // Return the captured text
+        return notification.getText();
+    }
 
 
 }

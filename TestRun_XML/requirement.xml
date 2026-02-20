@@ -82,7 +82,7 @@
 <!--            <class name="testCases.requirementTabTestCase.TC077"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC078"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC079"/>-->
-            <class name="testCases.requirementTabTestCase.TC089"/>
+            <class name="testCases.requirementTabTestCase.TC098"/>
         </classes>
     </test>
 </suite>
