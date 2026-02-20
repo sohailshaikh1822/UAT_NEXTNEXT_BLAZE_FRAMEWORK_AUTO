@@ -2,6 +2,7 @@ package testCases.requirementTabTestCase;
 
 import org.testng.annotations.Test;
 import pageObjects.requirementTab.RequirementTabPage;
+import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
@@ -14,10 +15,7 @@ public class TC090 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
-
-            RequirementTabPage requirementTabPage =
-                    new RequirementTabPage(getDriver());
-
+            RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement tab");
             WaitUtils.waitFor2000Milliseconds();
@@ -32,6 +30,9 @@ public class TC090 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.verifyItemCounterDisplayed();
             logger.info("Item counter");
+            TestPlanLandingPage testPlanPage=new TestPlanLandingPage(getDriver());
+            testPlanPage.clickCloseButtonOfRecycleBinPage();
+
             logger.info("****** TC081 Completed Successfully ********");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
