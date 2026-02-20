@@ -15,7 +15,7 @@ import utils.WaitUtils;
 
 public class TC056 extends BaseClass {
 
-    public void VerifyApplicationBehaviorwhenDuplicateTestCaseNameIsentered() throws InterruptedException {
+    public void VerifyApplicationBehaviorWhenDuplicateTestCaseNameIsEntered() throws InterruptedException {
 
         logger.info("****** Starting the Log in Test Case *****************");
 
