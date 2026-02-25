@@ -301,18 +301,14 @@ public class RequirementDataProvider {
         return ExcelDataProviders.getExcelDataForRequirement("tc099");
     }
 
-    @DataProvider(name = "tc102")
-    public static Object[][] getDataTC102() throws IOException {
-        return ExcelDataProviders.getExcelDataForRequirement("tc102");
+    @DataProvider(name = "tc100")
+    public static Object[][] getDataTC100() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc100");
     }
 
-    @DataProvider(name = "tc103")
-    public static Object[][] getDataTC103() throws IOException {
-        return ExcelDataProviders.getExcelDataForRequirement("tc103");
+    @DataProvider(name = "tc105")
+    public static Object[][] getDataTC105() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc105");
     }
 
-    @DataProvider(name = "tc104")
-    public static Object[][] getDataTC104() throws IOException {
-        return ExcelDataProviders.getExcelDataForRequirement("tc104");
-    }
 }

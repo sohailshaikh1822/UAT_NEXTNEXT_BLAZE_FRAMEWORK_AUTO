@@ -268,7 +268,7 @@ public class RequirementTabPage extends BasePage {
             leftModuleNameByName(moduleName).click();
         } catch (Exception e) {
             WebElement ele = driver.findElement(By.xpath(
-                    "//div[@class='tree-node tree-node collapsed']//span[contains(text(),'" + moduleName + "')]"));
+                    "//div[contains(@class,'tree-node') and contains(@class,'collapsed')]//span[contains(@class,'tree-label') and normalize-space()='"+moduleName+"']"));
             a.moveToElement(ele).perform();
             ele.click();
         }
@@ -533,6 +533,67 @@ public class RequirementTabPage extends BasePage {
     }
 
 
+    public void verifyCreatedDeleteNotification(String entityId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By notificationItems = By.xpath("//div[contains(@class,'notification-item')]");
+        By notificationText = By.xpath(".//span[contains(@class,'notif-text')]");
+        String deleterName = getLoggedInUserName();
+
+        String expectedRegex =
+                "'" + entityId + "' created by "
+                        + deleterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> items = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationItems));
+
+                for (WebElement item : items) {
+
+                    String text = item.findElement(notificationText).getText().trim();
+
+                    if (text.contains(entityId) && text.contains("created by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Delete notification format mismatch.\nExpected: "
+                                            + expectedRegex + "\nActual: " + text);
+                        }
+
+                        System.out.println("Delete notification verified successfully: " + text);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
+        }
+
+        throw new AssertionError(" Created Delete notification not found for: " + entityId);
+    }
     public String handleToastNotification() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String toastMessage = " ";

@@ -182,6 +182,43 @@ public class NotificationsListener extends BaseClass {
         return notification.getText();
     }
 
+    public void verifyAllUpdatedNotifications(String rqId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        String baseXpath = "//span[@class='notif-text' and contains(text(), \""
+                + rqId + "\") and contains(text(),'updated by')]";
+
+        // Wait until at least one notification is present
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(baseXpath)));
+
+        int totalNotifications = driver.findElements(By.xpath(baseXpath)).size();
+        System.out.println("Total notifications found for " + rqId + " : " + totalNotifications);
+
+        for (int i = 1; i <= totalNotifications; i++) {
+
+            By indexedNotification = By.xpath("(" + baseXpath + ")[" + i + "]");
+
+           // clickNotificationIcon();
+
+            wait.until(ExpectedConditions.elementToBeClickable(indexedNotification));
+
+            WebElement notification = driver.findElement(indexedNotification);
+
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block: 'center'});",
+                    notification
+            );
+
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].click();",
+                    notification
+            );
+            WaitUtils.waitFor3000Milliseconds();
+            clickNotificationIcon();
+
+        }
+    }
 
     public void clickUpdatedModuleNotification(String entityId) {
 
