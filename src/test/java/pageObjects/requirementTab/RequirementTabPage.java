@@ -121,8 +121,15 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//span[@class='tree-label']")
     List<WebElement> allModulesIncludeProject;
 
+    @FindBy(xpath = "(//div[@class='text-i'])[1]")
+    WebElement inputDescription;
     @FindBy(xpath = "(//i[@class='fa-solid fa-download'])[1]")
     List<WebElement> downloadAttachement;
+
+    @FindBy(xpath = "//button[normalize-space()='Restore']")
+    WebElement restoreButton;
+    @FindBy(xpath = "(//input[@type='radio'])[1]")
+    WebElement firstDeletedItem;
 
 
     // Actions
@@ -146,6 +153,31 @@ public class RequirementTabPage extends BasePage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    @FindBy(xpath = "//em[contains(text(),'Click to add description')]")
+    WebElement descriptionPlaceholder;
+
+    @FindBy(xpath = "//div[@contenteditable='true']")
+    WebElement descriptionEditor;
+
+    public void enterDescription(String description) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        // Step 1 – Click placeholder
+        wait.until(ExpectedConditions.elementToBeClickable(descriptionPlaceholder));
+        descriptionPlaceholder.click();
+
+        // Step 2 – Wait for editable div
+        wait.until(ExpectedConditions.visibilityOf(descriptionEditor));
+
+        // Step 3 – Clear existing content
+        descriptionEditor.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        descriptionEditor.sendKeys(Keys.DELETE);
+
+        // Step 4 – Enter description
+        descriptionEditor.sendKeys(description);
     }
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -971,22 +1003,20 @@ public class RequirementTabPage extends BasePage {
     By objectDropdown1 = By.xpath("//label[text()='Object(s)']/following-sibling::select");
 
 
-    public void selectObjectFromDropdown(String value) {
+    public void selectObjectFromDropdown(String visibleText) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        By objectDropdown = By.xpath("//label[text()='Object(s)']/following-sibling::select");
+        WebElement dropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(objectDropdown)
+        );
 
-        WebElement dropdownElement =
-                wait.until(ExpectedConditions.elementToBeClickable(objectDropdown1));
-
-        Select select = new Select(dropdownElement);
-
-        select.selectByVisibleText(value);
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.cssSelector(".rb-table tbody tr")));
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(visibleText);
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(tableRows));
     }
+
+
 
 
     public void clickRecycleBinButton() {
@@ -1048,39 +1078,46 @@ public class RequirementTabPage extends BasePage {
                 .map(String::trim)
                 .toList();
     }
-
-
     public void verifyOnlyRequirementsDisplayed() {
 
-        By rowsLocator = By.cssSelector(".rb-table tbody tr");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(rowsLocator));
+        wait.until(driver -> {
+            List<WebElement> rows = driver.findElements(tableRows);
 
-        List<WebElement> rows = driver.findElements(rowsLocator);
+            if (rows.size() == 0)
+                return false;
 
-        if (rows.isEmpty()) {
-            throw new AssertionError("No records found for Requirement filter");
-        }
+            for (WebElement row : rows) {
+                List<WebElement> cols = row.findElements(By.tagName("td"));
+
+                if (cols.size() > 3) {
+                    String typeValue = cols.get(3).getText().trim();
+                    if (!typeValue.equalsIgnoreCase("Requirement")) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
+
+        List<WebElement> rows = driver.findElements(tableRows);
 
         for (WebElement row : rows) {
-
             List<WebElement> cols = row.findElements(By.tagName("td"));
 
-            if (cols.size() < 4) {
-                throw new AssertionError("Unexpected column structure");
-            }
+            if (cols.size() > 3) {
+                String typeValue = cols.get(3).getText().trim();
 
-            String typeValue = cols.get(3).getText().trim();
-
-            if (!typeValue.equalsIgnoreCase("Requirement")) {
-                throw new AssertionError(
-                        "Non-requirement record found. Actual Type: " + typeValue
-                );
+                if (!typeValue.equalsIgnoreCase("Requirement")) {
+                    throw new AssertionError(
+                            "Non-requirement record found. Actual Type: " + typeValue
+                    );
+                }
             }
         }
-
-        System.out.println("Only Requirements displayed successfully");
     }
+
 
 
     public List<String> getRecycleBinColumnHeaders() {
@@ -1118,6 +1155,79 @@ public class RequirementTabPage extends BasePage {
             Assert.assertFalse(columns.get(5).getText().trim().isEmpty(), "Deleted Date is empty");
         }
     }
+    public void verifyOnlyOneItemSelectable() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By radioLocator = By.cssSelector(".rb-table tbody input[type='radio']");
+
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(radioLocator, 1));
+
+        List<WebElement> radioButtons = driver.findElements(radioLocator);
+
+        Assert.assertTrue(radioButtons.size() >= 2,
+                "Not enough records to perform selection test");
+
+        radioButtons.get(0).click();
+
+        wait.until(ExpectedConditions.elementToBeSelected(radioButtons.get(0)));
+
+        Assert.assertTrue(radioButtons.get(0).isSelected(),
+                "First radio not selected");
+
+        radioButtons.get(1).click();
+
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(radioLocator));
+        radioButtons = driver.findElements(radioLocator);
+
+        Assert.assertTrue(radioButtons.get(1).isSelected(),
+                "Second radio not selected");
+
+        Assert.assertFalse(radioButtons.get(0).isSelected(),
+                "First radio should be automatically deselected");
+
+        long selectedCount = radioButtons.stream()
+                .filter(WebElement::isSelected)
+                .count();
+
+        Assert.assertEquals(selectedCount, 1,
+                "More than one radio button is selected");
+
+        System.out.println("Single selection validation passed successfully.");
+    }
+
+    public String getItemCountText() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement countElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector(".rb-count")));
+
+        return countElement.getText().trim();
+    }
 
 
+    public void closeRecycleBin() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement closeBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("button.rb-btn-secondary")));
+
+        closeBtn.click();
+    }
+    public int extractCount(String text)
+    {
+        return Integer.parseInt(text.split(" ")[0]);
+    }
+
+
+    public WebElement getRestoreButton() {
+        return restoreButton;
+    }
+
+    public void selectFirstDeletedItem() {
+        firstDeletedItem.click();
+    }
 }

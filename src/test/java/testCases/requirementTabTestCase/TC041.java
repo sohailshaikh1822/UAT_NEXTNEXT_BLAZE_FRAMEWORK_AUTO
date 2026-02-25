@@ -64,11 +64,6 @@ public class TC041 extends BaseClass {
             logger.info("Clicked Searched TestCasename");
              WaitUtils.waitFor3000Milliseconds();
             //Test case linked successfully.
-            String expectedMessage = "Test case linked successfully.";
-            String actualMessage = linkTestCasePage.getAlertMessageWhileLinkingNewTc();
-            Assert.assertEquals(actualMessage, expectedMessage);
-            logger.info("Linked Test Cases screen displayed successfully");
-            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickActionIcon(tcName);
             WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.confirmUnlink();

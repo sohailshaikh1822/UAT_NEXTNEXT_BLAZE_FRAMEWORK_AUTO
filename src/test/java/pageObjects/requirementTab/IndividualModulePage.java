@@ -506,4 +506,112 @@ public class IndividualModulePage extends BasePage {
         buttonNoConfirmationUnsavedChanges.click();
     }
 
+    public String handleToastNotification() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        String toastMessage = "";
+
+        try {
+            By toastLocator = By.xpath("//div[contains(@class,'toast-body')]");
+
+            WebElement toast = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(toastLocator)
+            );
+
+            toastMessage = toast.getText().trim();
+            System.out.println("Toast Message: " + toastMessage);
+
+            wait.until(
+                    ExpectedConditions.invisibilityOfElementLocated(toastLocator)
+            );
+
+        } catch (TimeoutException e) {
+            System.out.println("Toast notification not found");
+        }
+
+        return toastMessage;
+    }
+
+    public String getLoggedInUserName() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By userLocator = By.xpath("//div[contains(@class,'JS') and @data-fullname]");
+
+        WebElement userElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(userLocator)
+        );
+
+        String fullName = userElement.getAttribute("data-fullname").trim();
+
+        if (fullName.isEmpty()) {
+            throw new AssertionError("Logged-in user full name is empty");
+        }
+
+        return fullName;
+    }
+
+    public void verifyUpdateNotification(String entityId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By notificationItems = By.xpath("//div[contains(@class,'notification-item')]");
+        By notificationText = By.xpath(".//span[contains(@class,'notif-text')]");
+
+        String updaterName = getLoggedInUserName();
+
+        String expectedRegex =
+                "'" + entityId + "' updated by "
+                        + updaterName.replace(" ", "\\s+")
+                        + "\\.";
+
+        long endTime = System.currentTimeMillis() + 20000;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                WebElement bell = wait.until(
+                        ExpectedConditions.elementToBeClickable(notificationBell));
+                js.executeScript("arguments[0].click();", bell);
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+                List<WebElement> items = wait.until(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(notificationItems));
+
+                for (WebElement item : items) {
+
+                    String text = item.findElement(notificationText).getText().trim();
+
+                    if (text.contains(entityId) && text.contains("updated by")) {
+
+                        if (!text.matches(expectedRegex)) {
+                            throw new AssertionError(
+                                    "Update notification format mismatch.\nExpected: "
+                                            + expectedRegex + "\nActual: " + text);
+                        }
+
+                        System.out.println("Update notification verified successfully: " + text);
+                        return;
+                    }
+                }
+
+                js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", body);
+
+            } catch (StaleElementReferenceException ignored) {
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
+        }
+
+        throw new AssertionError("Update notification not found for: " + entityId);
+    }
 }

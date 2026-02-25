@@ -220,4 +220,38 @@ public class NotificationsListener extends BaseClass {
         }
     }
 
+    public void clickUpdatedModuleNotification(String entityId) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+
+        WebElement bell = wait.until(
+                ExpectedConditions.elementToBeClickable(notificationBell)
+        );
+        js.executeScript("arguments[0].click();", bell);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        By updatedNotificationLocator = By.xpath(
+                "//span[contains(@class,'notif-text') and " +
+                        "contains(text(),\"'" + entityId + "'\") and " +
+                        "contains(text(),'updated by')]"
+        );
+
+        WebElement notification = wait.until(
+                ExpectedConditions.elementToBeClickable(updatedNotificationLocator)
+        );
+        js.executeScript(
+                "arguments[0].scrollIntoView({block: 'center'});",
+                notification
+        );
+        js.executeScript(
+                "arguments[0].click();",
+                notification
+        );
+        System.out.println("Clicked on updated notification for: " + entityId);
+    }
 }
