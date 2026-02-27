@@ -12,7 +12,7 @@ import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC106 extends BaseClass {
-    @Test(dataProvider = "tc099", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc106", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyNavigationWorksCorrectlyOrForMixedNotifications(
             String epic,
             String description,

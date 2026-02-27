@@ -12,7 +12,7 @@ import utils.WaitUtils;
 
 public class TC008 extends BaseClass {
 
-    @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc008", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyRequirementsCreation(String rQid, String description, String priority, String status, String type)
             throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");

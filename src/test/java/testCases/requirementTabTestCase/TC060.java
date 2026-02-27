@@ -14,7 +14,7 @@ public class TC060 extends BaseClass {
 
     public void VerifyThatFilesUpTo5MBCanbeuploadedAsAttachments() throws InterruptedException {
 
-        logger.info("************ Starting TC059 ************");
+        logger.info("************ Starting TC060 ************");
 
         try {
             login();

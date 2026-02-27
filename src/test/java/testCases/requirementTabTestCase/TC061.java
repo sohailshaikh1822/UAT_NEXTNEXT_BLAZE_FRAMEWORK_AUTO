@@ -14,7 +14,7 @@ import utils.WaitUtils;
 public class TC061  extends BaseClass {
 
 
-    @Test(dataProvider = "tc007", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc061", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyNotificationPopAppearingWhileRequirementCreation(String rQid, String description, String priority, String status, String type
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");

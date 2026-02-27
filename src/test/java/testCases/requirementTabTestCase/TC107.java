@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC107 extends BaseClass {
-    @Test(dataProvider = "tc073", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc107", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyBothCreationAndDeletionNotificationsDisabledAfterRequirementDeletion(
             String moduleName,
             String Rqtitle,
