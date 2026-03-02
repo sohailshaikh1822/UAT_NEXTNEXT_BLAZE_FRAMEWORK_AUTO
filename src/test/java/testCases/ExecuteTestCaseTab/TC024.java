@@ -10,11 +10,12 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-@Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+@Test(dataProvider = "tc024", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
 public class TC024 extends BaseClass {
 
-    public void verifyEvidenceAttachment(String projName,
+    public void verifyEvidenceAttachment(
+            String projName,
             String releaseName,
             String testRun,
             String defSummary,

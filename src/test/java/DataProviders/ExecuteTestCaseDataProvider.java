@@ -256,6 +256,36 @@ public class ExecuteTestCaseDataProvider {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc050");
     }
 
+    @DataProvider(name = "tc051")
+    public static Object[][] getDataTC051() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc051");
+    }
+
+    @DataProvider(name = "tc052")
+    public static Object[][] getDataTC052() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc052");
+    }
+
+    @DataProvider(name = "tc053")
+    public static Object[][] getDataTC053() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc053");
+    }
+
+    @DataProvider(name = "tc054")
+    public static Object[][] getDataTC054() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc054");
+    }
+
+    @DataProvider(name = "tc055")
+    public static Object[][] getDataTC055() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc055");
+    }
+
+    @DataProvider(name = "tc056")
+    public static Object[][] getDataTC056() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc056");
+    }
+
     @DataProvider(name = "tc057")
     public static Object[][] getDataTC057() throws IOException {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc057");
@@ -365,6 +395,11 @@ public class ExecuteTestCaseDataProvider {
     @DataProvider(name = "tc079")
     public static Object[][] getDataTC079() throws IOException {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc079");
+    }
+
+    @DataProvider(name = "tc080")
+    public static Object[][] getDataTC080() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc080");
     }
 
 }

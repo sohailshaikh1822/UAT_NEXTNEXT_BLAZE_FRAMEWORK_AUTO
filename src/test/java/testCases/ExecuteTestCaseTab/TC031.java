@@ -13,15 +13,12 @@ import java.util.List;
 
 public class TC031 extends BaseClass {
 
-    @Test(dataProvider = "tc022", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public class TC022 extends BaseClass {
+    @Test(dataProvider = "tc031", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public class TC0022 extends BaseClass {
 
         public void verifyDefectIdNonDuplicacy(String projName,
                 String releaseName,
-                String testRun,
-                String defSummary,
-                String status,
-                String description
+                String testRun
         ) throws InterruptedException {
             logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 

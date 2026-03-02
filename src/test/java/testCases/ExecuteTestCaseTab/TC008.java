@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC008 extends BaseClass {
 
-    @Test(dataProvider = "tc001", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc008", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyProjectSelectionFromDropdown(String projectName,
             String releaseName) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Project Selection from Dropdown *****************");
