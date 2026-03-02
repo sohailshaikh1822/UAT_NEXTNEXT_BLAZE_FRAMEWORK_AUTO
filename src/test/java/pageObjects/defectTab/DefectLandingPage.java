@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import utils.WaitUtils;
 
 public class DefectLandingPage extends BasePage {
@@ -267,5 +271,137 @@ public class DefectLandingPage extends BasePage {
     }
 
 
+    //EXPORT
+    // Export Button
 
+    @FindBy(xpath = "//button[contains(@class,'export-defect') and .//div[contains(text(),'EXPORT')]]")
+    WebElement exportButton;
+
+    @FindBy(xpath = "//div[contains(@class,'test-log-history-export-modal')]")
+    WebElement exportModal;
+
+    @FindBy(xpath = "//div[contains(@class,'test-log-history-export-modal-header')]//span[text()='Export Defects']")
+    WebElement exportModalTitle;
+
+    @FindBy(id = "exportFileType")
+    WebElement fileTypeDropdown;
+
+    @FindBy(xpath = "//label[contains(@class,'download-background-wrapper')]//input[@type='checkbox']")
+    WebElement downloadInBackgroundCheckbox;
+
+    @FindBy(xpath = "//div[contains(@class,'test-log-history-export-modal-footer')]//button[.//div[normalize-space()='CANCEL']]")
+    WebElement cancelButton;
+
+    @FindBy(xpath = "//button[contains(@class,'export-save-button')]")
+    WebElement saveButton;
+
+    public void clickExportButton() {
+        exportButton.click();
+    }
+
+    public void verifyExportButtonVisibleAndClickable() {
+
+        if (!exportButton.isDisplayed()) {
+            throw new AssertionError("Export button is not visible.");
+        }
+
+        if (!exportButton.isEnabled()) {
+            throw new AssertionError("Export button is not clickable.");
+        }
+
+        exportButton.click();
+    }
+
+    public void verifyExportModalDisplayed() {
+
+        if (!exportModal.isDisplayed()) {
+            throw new AssertionError("Export Defects modal is not displayed.");
+        }
+
+        String actualTitle = exportModalTitle.getText().trim();
+
+        if (!actualTitle.equals("Export Defects")) {
+            throw new AssertionError(
+                    "Modal title mismatch. Expected: Export Defects, Actual: " + actualTitle
+            );
+        }
+    }
+
+    public void verifyFileTypeDropdown() {
+
+        if (!fileTypeDropdown.isDisplayed()) {
+            throw new AssertionError("File Type dropdown is not visible.");
+        }
+
+        Select select = new Select(fileTypeDropdown);
+
+        List<String> expectedOptions = Arrays.asList(
+                "Excel (.xlsx)",
+                "CSV (.csv)",
+                "PDF (.pdf)"
+        );
+
+        List<String> actualOptions = select.getOptions()
+                .stream()
+                .map(WebElement::getText)
+                .toList();
+
+        if (!actualOptions.equals(expectedOptions)) {
+            throw new AssertionError(
+                    "Dropdown options mismatch.\nExpected: " + expectedOptions +
+                            "\nActual: " + actualOptions
+            );
+        }
+    }
+
+    public void verifyCancelAndSaveButtons() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(cancelButton));
+        wait.until(ExpectedConditions.visibilityOf(saveButton));
+
+        if (!cancelButton.isDisplayed() || !cancelButton.isEnabled()) {
+            throw new AssertionError("Cancel button is not visible or not enabled.");
+        }
+
+        if (!saveButton.isDisplayed() || !saveButton.isEnabled()) {
+            throw new AssertionError("Save button is not visible or not enabled.");
+        }
+    }
+    public void verifyFileTypeDropdownContainsAllFormats() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(exportButton));
+        exportButton.click();
+        wait.until(ExpectedConditions.visibilityOf(exportModal));
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        fileTypeDropdown.click();
+
+        Select select = new Select(fileTypeDropdown);
+
+        List<String> expectedOptions = Arrays.asList(
+                "Excel (.xlsx)",
+                "CSV (.csv)",
+                "PDF (.pdf)"
+        );
+
+        List<String> actualOptions = select.getOptions()
+                .stream()
+                .map(option -> option.getText().trim())
+                .toList();
+        if (!actualOptions.containsAll(expectedOptions)
+                || actualOptions.size() != expectedOptions.size()) {
+
+            throw new AssertionError(
+                    "File Type dropdown options mismatch.\nExpected: "
+                            + expectedOptions + "\nActual: " + actualOptions
+            );
+        }
+
+        System.out.println("File Type dropdown contains all expected formats.");
+    }
 }
+
