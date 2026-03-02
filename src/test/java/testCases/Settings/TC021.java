@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC021 extends BaseClass {
 
-    @Test(dataProvider = "tc015", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc021", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_create_a_Custom_Field_inside_Requirements_Tab(
             String fieldName,
             String textBox)

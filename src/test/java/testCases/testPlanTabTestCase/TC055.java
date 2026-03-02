@@ -11,7 +11,7 @@ import utils.WaitUtils;
 public class TC055 extends BaseClass {
 
 
-    @Test(dataProvider = "tc035", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc055", dataProviderClass = DataProviders.TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyNotificationAfterDeletedReleaseSuccessFully(String projectName, String releaseName) throws InterruptedException {
         logger.info("****** Starting TC055 *****************");

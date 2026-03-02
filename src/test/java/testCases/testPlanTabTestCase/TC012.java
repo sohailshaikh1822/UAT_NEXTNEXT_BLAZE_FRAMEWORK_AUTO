@@ -7,7 +7,7 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 
 public class TC012 extends BaseClass {
-    @Test(dataProvider = "tc011", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc012", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifySuitSelectionOpensItsDetailPannel(
             String projectName,
             String release,
