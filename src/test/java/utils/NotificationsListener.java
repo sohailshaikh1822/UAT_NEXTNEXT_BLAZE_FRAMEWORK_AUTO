@@ -254,4 +254,5 @@ public class NotificationsListener extends BaseClass {
         );
         System.out.println("Clicked on updated notification for: " + entityId);
     }
+
 }
