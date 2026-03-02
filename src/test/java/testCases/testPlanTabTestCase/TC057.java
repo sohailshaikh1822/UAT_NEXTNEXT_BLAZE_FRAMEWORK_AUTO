@@ -12,7 +12,7 @@ import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC057 extends BaseClass {
-    @Test(dataProvider = "tc037", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc057", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyDeletedTestSuiteRestoreSuccessFully(String projectName, String releaseName, String suiteName,
                                                           String testDescription,

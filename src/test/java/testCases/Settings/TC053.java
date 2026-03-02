@@ -9,7 +9,7 @@ import utils.RetryAnalyzer;
 
 public class TC053 extends BaseClass {
 
-    @Test(dataProvider = "tc041", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc053", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_delete_Custom_Field_inside_TestRuns_Tab(
             String fieldName1,
             String fieldType, String fieldName2

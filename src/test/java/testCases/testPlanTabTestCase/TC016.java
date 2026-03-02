@@ -11,7 +11,7 @@ import utils.RetryAnalyzer;
 
 public class TC016 extends BaseClass {
 
-    @Test(dataProvider = "tc010", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc016", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyCreationOfTestSuite(
             String projectName,
             String releaseName,
@@ -24,7 +24,7 @@ public class TC016 extends BaseClass {
     )
             throws InterruptedException {
         logger.info(
-                "****** Starting Test Case: Verify Release List Updates Based on Project Selection *****************");
+                "****** Starting Test Case:********");
         try {
 
             login();
