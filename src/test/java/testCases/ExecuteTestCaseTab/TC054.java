@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC054 extends BaseClass {
-    @Test(dataProvider = "tc023", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc054", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyTestCycleHighlightingForTRID(String parentModule, String releaseName, String searchTestRunName,String suitname)
             throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Search in Test Run table *****************");

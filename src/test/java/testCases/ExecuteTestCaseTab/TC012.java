@@ -12,7 +12,7 @@ import utils.WaitUtils;
 
 public class TC012 extends BaseClass {
 
-    @Test(dataProvider = "tc004", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc012", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyExpandSubTestCycleAndFilterFeature(String parentModule, String releaseName, String subTestCycle,
             String subTestsuit) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Expand & Filter feature in Test Run page *****************");

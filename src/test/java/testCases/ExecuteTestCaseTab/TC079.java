@@ -14,7 +14,7 @@ import utils.WaitUtils;
 public class TC079 extends BaseClass {
 
     @Test(
-            dataProvider = "tc078",
+            dataProvider = "tc079",
             dataProviderClass = ExecuteTestCaseDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class
     )

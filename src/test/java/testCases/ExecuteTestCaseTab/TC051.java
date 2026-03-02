@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC051 extends BaseClass {
 
-    @Test(dataProvider = "tc018", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc051", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyEmptyTestLogSave(String projectName,
             String release,
             String cycle,

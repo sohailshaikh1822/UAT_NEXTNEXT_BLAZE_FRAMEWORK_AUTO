@@ -11,7 +11,7 @@ import utils.WaitUtils;
 
 public class TC053  extends BaseClass {
 
-    @Test(dataProvider = "tc023", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc053", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyReleaseHighlightingForTRID(String parentModule, String releaseName, String searchTestRunName,String suitname)
             throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Search in Test Run table *****************");

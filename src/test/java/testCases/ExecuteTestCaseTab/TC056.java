@@ -11,7 +11,7 @@ import utils.WaitUtils;
 
 public class TC056 extends BaseClass {
 
-    @Test(dataProvider = "tc057", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc056", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyBehaviorWhenTRidAlreadySelectedWithAssociatedRelease(String projectName,String releaseName,String tid) throws InterruptedException {
         logger.info("****** Starting Test Case *****************");
         try {
