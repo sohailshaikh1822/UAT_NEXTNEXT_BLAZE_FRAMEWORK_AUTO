@@ -271,8 +271,7 @@ public class DefectLandingPage extends BasePage {
     }
 
 
-    //EXPORT
-    // Export Button
+    //EXPORT And EXPORT ALL Button
 
     @FindBy(xpath = "//button[contains(@class,'export-defect') and .//div[contains(text(),'EXPORT')]]")
     WebElement exportButton;
@@ -294,6 +293,12 @@ public class DefectLandingPage extends BasePage {
 
     @FindBy(xpath = "//button[contains(@class,'export-save-button')]")
     WebElement saveButton;
+
+    @FindBy(xpath = "//div[contains(@class,'testlistrow')]")
+    List<WebElement> defectRows;
+
+    @FindBy(xpath = "//button[.//div[normalize-space()='EXPORT ALL']]")
+    WebElement exportAllButton;
 
     public void clickExportButton() {
         exportButton.click();
@@ -403,5 +408,67 @@ public class DefectLandingPage extends BasePage {
 
         System.out.println("File Type dropdown contains all expected formats.");
     }
+
+    public void verifyExcelSelectedByDefault() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(exportModal));
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+        Select select = new Select(fileTypeDropdown);
+        String selectedOption = select.getFirstSelectedOption()
+                .getText()
+                .trim();
+
+        if (!selectedOption.equals("Excel (.xlsx)")) {
+            throw new AssertionError(
+                    "Default selected file type is incorrect.\nExpected: Excel (.xlsx)\nActual: "
+                            + selectedOption
+            );
+        }
+
+        System.out.println("Excel (.xlsx) is selected by default.");
+    }
+
+    public int getVisibleDefectCount() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOfAllElements(defectRows));
+
+        return defectRows.size();
+    }
+    public void selectExcelFileType() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        Select select = new Select(fileTypeDropdown);
+        select.selectByVisibleText("Excel (.xlsx)");
+    }
+
+    public void clickSaveButton() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
+    }
+    public void verifyExportAllButtonVisibleAndClickable() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        WebElement button = wait.until(
+                ExpectedConditions.visibilityOf(exportAllButton)
+        );
+
+        if (!button.isDisplayed()) {
+            throw new AssertionError("Export All button is not visible.");
+        }
+
+        if (!button.isEnabled()) {
+            throw new AssertionError("Export All button is not clickable.");
+        }
+
+        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+    }
+
+
 }
 
