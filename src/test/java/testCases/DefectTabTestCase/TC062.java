@@ -14,7 +14,7 @@ public class TC062 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void VerifyExportedFileContainsAllDefectsDisplayedOnThePage() throws InterruptedException {
 
-        logger.info("****** Starting TC065 ******");
+        logger.info("****** Starting TC062 ******");
 
         try {
             login();
@@ -25,6 +25,7 @@ public class TC062 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             logger.info("Count the defects");
+            defectPage.clickDefectTab();
             int defectCount = defectPage.getVisibleDefectCount();
             System.out.println("Visible defects: " + defectCount);
 

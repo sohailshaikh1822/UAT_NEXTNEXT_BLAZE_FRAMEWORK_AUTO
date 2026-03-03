@@ -445,7 +445,6 @@ public class DefectLandingPage extends BasePage {
         select.selectByVisibleText("Excel (.xlsx)");
     }
 
-
     public void clickSaveButton() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

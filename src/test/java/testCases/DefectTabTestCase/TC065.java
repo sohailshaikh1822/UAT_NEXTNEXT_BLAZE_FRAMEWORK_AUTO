@@ -22,6 +22,7 @@ public class TC065 extends BaseClass {
             DefectLandingPage defectPage= new DefectLandingPage(getDriver());
             defectPage.clickDefectTab();
 
+
             WaitUtils.waitFor2000Milliseconds();
             defectPage.verifyExportAllButtonVisibleAndClickable();
             logger.info("Export All button has been verified");

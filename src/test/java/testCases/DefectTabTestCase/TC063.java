@@ -18,7 +18,6 @@ public class TC063 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
-
             DefectLandingPage defectLandingPage= new DefectLandingPage(getDriver());
             defectLandingPage.clickDefectTab();
 
