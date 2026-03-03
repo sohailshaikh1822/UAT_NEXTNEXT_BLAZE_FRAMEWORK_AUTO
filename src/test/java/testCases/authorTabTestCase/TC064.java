@@ -10,7 +10,7 @@ import utils.RetryAnalyzer;
 
 public class TC064 extends BaseClass {
 
-    @Test(dataProvider = "tc042", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc064", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifySaveAndCloseButton(
             String requirementId, String TestcaseId
     ) throws InterruptedException {

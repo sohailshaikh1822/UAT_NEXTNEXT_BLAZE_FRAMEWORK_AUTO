@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC030 extends BaseClass {
 
-    @Test(dataProvider = "tc028", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc030", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyNextButtonFunctionality(
             String expectedPagination
     ) throws InterruptedException {

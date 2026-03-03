@@ -12,7 +12,7 @@ import utils.WaitUtils;
 
 public class TC078 extends BaseClass {
 
-    @Test(dataProvider = "tc056", dataProviderClass =AuthorTestCaseDataProvider.class, retryAnalyzer =RetryAnalyzer.class)
+    @Test(dataProvider = "tc078", dataProviderClass =AuthorTestCaseDataProvider.class, retryAnalyzer =RetryAnalyzer.class)
     public void VerifyErrorMessageWhileCreatingNewTR(
             String epicName,
             String featureName,

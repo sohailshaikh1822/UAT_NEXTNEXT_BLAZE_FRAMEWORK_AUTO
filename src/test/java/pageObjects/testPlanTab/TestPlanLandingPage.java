@@ -684,4 +684,19 @@ public class TestPlanLandingPage extends BasePage {
         }
     }
 
+    public void openReleaseByName(String releaseName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By releaseLocator = By.xpath(
+                "//span[normalize-space()='" + releaseName + "']"
+        );
+
+        WebElement releaseElement = wait.until(
+                ExpectedConditions.elementToBeClickable(releaseLocator)
+        );
+
+        releaseElement.click();
+    }
+
 }

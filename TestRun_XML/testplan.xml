@@ -34,7 +34,11 @@
 <!--            <class name="testCases.testPlanTabTestCase.TC035"/>-->
 <!--            <class name="testCases.testPlanTabTestCase.TC055"/>-->
 <!--            <class name="testCases.testPlanTabTestCase.TC056"/>-->
-            <class name="testCases.testPlanTabTestCase.TC078"/>
+<!--            <class name="testCases.testPlanTabTestCase.TC056"/>-->
+<!--            <class name="testCases.testPlanTabTestCase.TC078"/>-->
+            <class name="testCases.testPlanTabTestCase.TC052"/>
+<!--            <class name="testCases.testPlanTabTestCase.TC053"/>-->
+<!--            <class name="testCases.testPlanTabTestCase.TC054"/>-->
 
 
 
