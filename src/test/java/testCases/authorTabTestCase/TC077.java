@@ -11,7 +11,7 @@ import utils.WaitUtils;
 
 public class TC077 extends BaseClass {
 
-    @Test(dataProvider = "tc056", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc077", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyVersionIncrementOnUpdatingTc(
             String epicName,
             String featureName,

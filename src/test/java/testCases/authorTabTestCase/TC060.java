@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC060 extends BaseClass {
 
-    @Test(dataProvider = "tc059", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc060", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyDialogBoxAfterClickingAddCalledTestcaseButton(String rqName, String tcId)
             throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");

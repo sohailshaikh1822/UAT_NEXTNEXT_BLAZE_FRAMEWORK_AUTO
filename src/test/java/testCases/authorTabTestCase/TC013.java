@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC013 extends BaseClass {
 
-    @Test(dataProvider = "tc011", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc013", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifySelectedFeatureDisplayedFields(
             String epicName, String feature
     ) throws InterruptedException {
