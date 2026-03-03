@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC037 extends BaseClass {
 
-    @Test(dataProvider = "tc036", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc037", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void verifyCLoseButtonOnTheAlertWhenEmptyModuleName(String mainProject, String module)
             throws InterruptedException {

@@ -2,101 +2,90 @@ package testCases.requirementTabTestCase;
 
 import DataProviders.RequirementDataProvider;
 import org.testng.annotations.Test;
-import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
+import pageObjects.testPlanTab.TestPlanLandingPage;
 import testBase.BaseClass;
 import utils.NotificationsListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC105 extends BaseClass {
-    @Test(dataProvider = "tc105", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+public class TC109 extends BaseClass {
 
-    public void VerifyNavigationWorksCorrectlyForMultipleNotificationsOfTheSameRequirement(
-            String moduleName,
-            String Rqtitle,
-            String description,
-            String priority,
-            String status,
-            String type,
-            String priority1)
-            throws InterruptedException {
-        logger.info("****** Starting the TC105 *****************");
+
+    @Test(dataProvider = "tc088", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+
+
+    public void VerifyCreationNotificationIsEnabledAfterRequirementIsRestored(String moduleName,
+                                                                                String Rqtitle,
+                                                                                String description,
+                                                                                String priority,
+                                                                                String status,
+                                                                                String type) throws InterruptedException {
+        logger.info("****** Starting the TC109  *******");
         try {
             login();
             logger.info("Logged in successfully");
-
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
-
             WaitUtils.waitFor3000Milliseconds();;
-
+            requirementTabPage.clickRequirementTab();
+            logger.info("Clicked on Requirements tab");
             requirementTabPage.clickEpicDropdown();
             logger.info("Clicked on Epic drop down");
-
-            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(moduleName);
             logger.info("Opened module: " + moduleName);
-
-
             WaitUtils.waitFor3000Milliseconds();
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
-
             WaitUtils.waitFor3000Milliseconds();
             addRequirementPage.setRequirementId(Rqtitle);
-            logger.info("Enter Rqtitle:"+Rqtitle);
-
+            logger.info("Enter RqTitle:"+Rqtitle);
             WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
-            addRequirementPage.clickSave();
-            WaitUtils.waitFor1000Milliseconds();
-
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
-            WaitUtils.waitFor2000Milliseconds();
-
+            WaitUtils.waitFor2000Milliseconds();;
             addRequirementPage.selectStatus(status);
             logger.info("Selected Status: " + status);
             WaitUtils.waitFor2000Milliseconds();
-
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);
-
             WaitUtils.waitFor2000Milliseconds();
-
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
-
-
             WaitUtils.waitFor3000Milliseconds();
-
-            addRequirementPage.selectPriority(priority1);
-            logger.info("Selected Priority: " + priority1);
-            WaitUtils.waitFor3000Milliseconds();
-
-            addRequirementPage.clickSave();
-            logger.info("Clicked on Save button again after changes");
-
             String rqId = addRequirementPage.getRqId();
             logger.info("Captured Requirement ID: " + rqId);
-
+            WaitUtils.waitFor3000Milliseconds();
+            addRequirementPage.clickClose();
+            logger.info("Clicked Close button");
+            WaitUtils.waitFor3000Milliseconds();
+            requirementTabPage.DeleteRequirementById(rqId);
+            TestPlanLandingPage testPlanPage = new TestPlanLandingPage(getDriver());
+            testPlanPage.clickOnRecycleBinIcon();
+            logger.info("Clicked on Recycle Bin");
+            WaitUtils.waitFor2000Milliseconds();
+            testPlanPage.selectObjectDropdownValue("Requirement");
+            WaitUtils.waitFor3000Milliseconds();
+            testPlanPage.smoothScrollRecycleBin();
+            WaitUtils.waitFor3000Milliseconds();
+            testPlanPage.selectRadioById(rqId);
+            WaitUtils.waitFor2000Milliseconds();
+            testPlanPage.clickRestoreButton();
+            WaitUtils.waitFor2000Milliseconds();
+            testPlanPage.clickCloseButtonOfRecycleBinPage();
             WaitUtils.waitFor3000Milliseconds();
             NotificationsListener notificationsListener = new NotificationsListener(getDriver());
-            WaitUtils.waitFor3000Milliseconds();
             notificationsListener.clickNotificationIcon();
-            notificationsListener.verifyAllUpdatedNotifications(rqId);
-
-
-
+            WaitUtils.waitFor2000Milliseconds();
+            notificationsListener.clickCreatedNotification(rqId);
+            logger.info("Clicked the created rq after restoring");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);
             throw e;
@@ -104,8 +93,6 @@ public class TC105 extends BaseClass {
             logger.error("Exception occurred: " + e.getMessage(), e);
             throw e;
         }
-
         logger.info("************ Test Case Finished *************************");
-
     }
 }

@@ -13,7 +13,7 @@ import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC068 extends BaseClass {
-    @Test(dataProvider = "tc036", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc068", dataProviderClass = TestPlanDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
 
     public void VerifyDeletedReleaseNotificationIsNotClickable(
             String projectName, String releaseName,  String testCycleName,

@@ -8,22 +8,21 @@ import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
+import utils.NotificationsListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 import java.util.List;
 
-public class TC076 extends BaseClass {
+public class TC115 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyNotificationIsDisplayedWhenaModuleisDeleted()
-            throws InterruptedException {
-        logger.info("****** Starting the TC076 *****************");
+    public void VerifyTooltipIsShownWhenHoveringOverADisabledNotificationWhenAModuleIsDeleted() throws InterruptedException {
+        logger.info("****** Starting the TestCase *****************");
         try {
             login();
             logger.info("Logged in successfully");
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-            AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             requirementTabPage.clickRequirementTab();
 
@@ -60,6 +59,12 @@ public class TC076 extends BaseClass {
             logger.info("deleted the module");
 
             requirementTabPage.clickYesBtn();
+            logger.info("deleted the module");
+            WaitUtils.waitFor1000Milliseconds();
+            NotificationsListener notificationsListener=new NotificationsListener(getDriver());
+            notificationsListener.verifyDeletedModuleTooltip(rqId);
+            logger.info("Tooltip Verified Successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);

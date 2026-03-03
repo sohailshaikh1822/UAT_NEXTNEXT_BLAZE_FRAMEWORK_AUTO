@@ -1,23 +1,20 @@
 package testCases.requirementTabTestCase;
 
-import DataProviders.RequirementDataProvider;
 import org.testng.annotations.Test;
-import pageObjects.authoTestCaseTab.AddTestcasePage;
-import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.requirementTab.AddRequirementPage;
 import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
+import utils.NotificationsListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-import java.util.List;
+public class TC112 extends BaseClass {
 
-public class TC076 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyNotificationIsDisplayedWhenaModuleisDeleted()
+    public void VerifyBothCreationAndDeletionNotificationsAreDisabledAfterModuleDeletion()
             throws InterruptedException {
-        logger.info("****** Starting the TC076 *****************");
+        logger.info("****** Starting the TC112 ******");
         try {
             login();
             logger.info("Logged in successfully");
@@ -49,10 +46,8 @@ public class TC076 extends BaseClass {
 
             WaitUtils.waitFor1000Milliseconds();
 
-            String rqId = individualModulePage.getModuleId();
+            String mdId = individualModulePage.getModuleId();
 
-            requirementTabPage.verifyModuleCreationNotification(rqId);
-            logger.info("Module creation notification verified");
 
             WaitUtils.waitFor1000Milliseconds();
 
@@ -60,6 +55,21 @@ public class TC076 extends BaseClass {
             logger.info("deleted the module");
 
             requirementTabPage.clickYesBtn();
+
+            NotificationsListener notificationsListener = new NotificationsListener(getDriver());
+
+            WaitUtils.waitFor3000Milliseconds();
+
+            notificationsListener.clickNotificationIcon();
+
+            WaitUtils.waitFor2000Milliseconds();
+
+            notificationsListener.verifyDeletedModuleNotificationNotClickable(mdId);
+            WaitUtils.waitFor2000Milliseconds();
+
+            notificationsListener.clickCreatedNotification(mdId);
+
+
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage(), e);

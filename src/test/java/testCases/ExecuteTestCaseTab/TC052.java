@@ -11,7 +11,7 @@ import utils.WaitUtils;
 
 public class TC052 extends BaseClass {
 
-    @Test(dataProvider = "tc050", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc052", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_Execution_History_latest_log_entry(
             String projectName,
             String ReleaseName,

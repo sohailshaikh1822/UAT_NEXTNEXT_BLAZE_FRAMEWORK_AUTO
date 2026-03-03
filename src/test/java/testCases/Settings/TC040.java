@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC040 extends BaseClass {
 
-    @Test(dataProvider = "tc046", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc040", dataProviderClass = SettingTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void Verify_that_user_is_able_to_add_a_Default_Field_Value_in_the_Defect_Tab(
             String customfield,
             String Datatype,

@@ -12,7 +12,7 @@ import utils.WaitUtils;
 
 public class TC031 extends BaseClass {
 
-    @Test(dataProvider = "tc035", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc031", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyFunctionalityWhenNoIsClickedOnDeleteConfirmation(String project, String epic
     ) throws InterruptedException {
         logger.info("****** Starting the Test Case *****************");

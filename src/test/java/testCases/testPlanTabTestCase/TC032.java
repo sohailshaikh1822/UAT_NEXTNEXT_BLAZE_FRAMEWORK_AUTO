@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TC032 extends BaseClass {
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyObjectdropdownvalues()
+    public void VerifyObjectDropdownValues()
             throws InterruptedException {
         logger.info("****** Starting TC032 *****************");
 

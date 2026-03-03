@@ -11,19 +11,13 @@ import utils.NotificationsListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC105 extends BaseClass {
-    @Test(dataProvider = "tc105", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-
-    public void VerifyNavigationWorksCorrectlyForMultipleNotificationsOfTheSameRequirement(
+public class TC110 extends BaseClass {
+    @Test(dataProvider = "tc110", dataProviderClass = RequirementDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyTooltipIsShownWhenHoveringOverADisabledNotificationWhenARequirementIsDeleted(
             String moduleName,
-            String Rqtitle,
-            String description,
-            String priority,
-            String status,
-            String type,
-            String priority1)
-            throws InterruptedException {
-        logger.info("****** Starting the TC105 *****************");
+            String Rqtitle
+    ) throws InterruptedException {
+        logger.info("****** Starting the TestCase *************");
         try {
             login();
             logger.info("Logged in successfully");
@@ -31,17 +25,18 @@ public class TC105 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
-            AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
 
             requirementTabPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
             WaitUtils.waitFor3000Milliseconds();;
 
+            requirementTabPage.clickRequirementTab();
+            logger.info("Clicked on Requirements tab");
+
             requirementTabPage.clickEpicDropdown();
             logger.info("Clicked on Epic drop down");
 
-            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(moduleName);
             logger.info("Opened module: " + moduleName);
 
@@ -55,46 +50,33 @@ public class TC105 extends BaseClass {
             logger.info("Enter Rqtitle:"+Rqtitle);
 
             WaitUtils.waitFor2000Milliseconds();
-            addRequirementPage.setDescription(description);
-            logger.info("Set Description");
-            addRequirementPage.clickSave();
-            WaitUtils.waitFor1000Milliseconds();
-
-            addRequirementPage.selectPriority(priority);
-            logger.info("Selected Priority: " + priority);
-            WaitUtils.waitFor2000Milliseconds();
-
-            addRequirementPage.selectStatus(status);
-            logger.info("Selected Status: " + status);
-            WaitUtils.waitFor2000Milliseconds();
-
-            addRequirementPage.selectType(type);
-            logger.info("Selected Type: " + type);
-
-            WaitUtils.waitFor2000Milliseconds();
 
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
 
-
             WaitUtils.waitFor3000Milliseconds();
-
-            addRequirementPage.selectPriority(priority1);
-            logger.info("Selected Priority: " + priority1);
-            WaitUtils.waitFor3000Milliseconds();
-
-            addRequirementPage.clickSave();
-            logger.info("Clicked on Save button again after changes");
 
             String rqId = addRequirementPage.getRqId();
             logger.info("Captured Requirement ID: " + rqId);
+            WaitUtils.waitFor3000Milliseconds();
+
+            addRequirementPage.clickClose();
+            logger.info("Clicked Close button");
 
             WaitUtils.waitFor3000Milliseconds();
-            NotificationsListener notificationsListener = new NotificationsListener(getDriver());
-            WaitUtils.waitFor3000Milliseconds();
-            notificationsListener.clickNotificationIcon();
-            notificationsListener.verifyAllUpdatedNotifications(rqId);
 
+            requirementTabPage.DeleteRequirementById(rqId);
+
+            WaitUtils.waitFor9000Milliseconds();
+
+            requirementTabPage.verifyDeleteNotification(rqId);
+            logger.info("Requirement deletion notification verified successfully");
+
+            WaitUtils.waitFor1000Milliseconds();
+            NotificationsListener notificationsListener=new NotificationsListener(getDriver());
+            notificationsListener.verifyDeletedRequirementTooltip(rqId);
+            logger.info("Tooltip verified");
+            WaitUtils.waitFor1000Milliseconds();
 
 
         } catch (AssertionError e) {
