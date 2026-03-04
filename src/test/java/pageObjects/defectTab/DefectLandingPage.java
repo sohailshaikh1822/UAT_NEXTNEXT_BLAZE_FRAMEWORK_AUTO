@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
+
+import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +80,19 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "//p[@class='pagination-text']")
     WebElement totalDefectEntryCount;
 
+    @FindBy(xpath = "//button[@class='export-save-button ']")
+    WebElement saveExportBtn;
+
+
     // ================= ACTIONS =================
+
+
+    public void clickSaveExportButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(saveExportBtn));
+        saveExportBtn.click();
+    }
+
     public void clickDefectTab() throws InterruptedException {
          WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(defectTab)).click();
@@ -402,6 +416,30 @@ public class DefectLandingPage extends BasePage {
         }
 
         System.out.println("File Type dropdown contains all expected formats.");
+    }
+
+    public boolean isFileDownloaded(int timeoutSeconds) {
+
+        String downloadPath = System.getProperty("user.home") + File.separator + "Downloads";
+        File dir = new File(downloadPath);
+        System.out.println("file :"+dir);
+
+        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000);
+
+        while (System.currentTimeMillis() < endTime) {
+
+            File[] files = dir.listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    // Ignore temporary downloading file
+                    if (!file.getName().endsWith(".crdownload")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
 
