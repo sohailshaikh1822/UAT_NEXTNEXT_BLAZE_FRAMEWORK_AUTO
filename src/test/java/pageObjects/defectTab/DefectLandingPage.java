@@ -285,8 +285,7 @@ public class DefectLandingPage extends BasePage {
     }
 
 
-    //EXPORT
-    // Export Button
+    //EXPORT And EXPORT ALL Button
 
     @FindBy(xpath = "//button[contains(@class,'export-defect') and .//div[contains(text(),'EXPORT')]]")
     WebElement exportButton;
@@ -308,6 +307,12 @@ public class DefectLandingPage extends BasePage {
 
     @FindBy(xpath = "//button[contains(@class,'export-save-button')]")
     WebElement saveButton;
+
+    @FindBy(xpath = "//div[contains(@class,'testlistrow')]")
+    List<WebElement> defectRows;
+
+    @FindBy(xpath = "//button[.//div[normalize-space()='EXPORT ALL']]")
+    WebElement exportAllButton;
 
     public void clickExportButton() {
         exportButton.click();

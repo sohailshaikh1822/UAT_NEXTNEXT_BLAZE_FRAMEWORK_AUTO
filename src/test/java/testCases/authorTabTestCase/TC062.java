@@ -10,7 +10,7 @@ import utils.WaitUtils;
 
 public class TC062 extends BaseClass {
 
-    @Test(dataProvider = "tc040", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    @Test(dataProvider = "tc062", dataProviderClass = AuthorTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void VerifyAddTestStepButton(
             String requirementId, String TestcaseId
     ) throws InterruptedException {
