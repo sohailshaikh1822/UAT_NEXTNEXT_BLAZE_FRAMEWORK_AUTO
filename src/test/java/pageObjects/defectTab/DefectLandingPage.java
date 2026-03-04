@@ -94,9 +94,9 @@ public class DefectLandingPage extends BasePage {
     }
 
     public void clickDefectTab() throws InterruptedException {
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
         wait.until(ExpectedConditions.elementToBeClickable(defectTab)).click();
-         WaitUtils.waitFor1000Milliseconds();
+        WaitUtils.waitFor1000Milliseconds();
 
     }
 
@@ -330,6 +330,48 @@ public class DefectLandingPage extends BasePage {
 
         exportButton.click();
     }
+    public int getVisibleDefectCount() {
+
+        wait.until(ExpectedConditions.visibilityOfAllElements(defectRows));
+
+        return defectRows.size();
+    }
+
+    public void selectExcelFileType() {
+
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        Select select = new Select(fileTypeDropdown);
+        select.selectByVisibleText("Excel (.xlsx)");
+    }
+
+    public void clickSaveButton() {
+
+        WebElement button = wait.until(
+                ExpectedConditions.elementToBeClickable(saveButton)
+        );
+
+        button.click();
+    }
+
+    public void verifyExcelSelectedByDefault() {
+
+        wait.until(ExpectedConditions.visibilityOf(exportModal));
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        Select select = new Select(fileTypeDropdown);
+
+        String selectedOption = select.getFirstSelectedOption()
+                .getText()
+                .trim();
+
+        if (!selectedOption.equals("Excel (.xlsx)")) {
+            throw new AssertionError(
+                    "Default selected file type is incorrect.\nExpected: Excel (.xlsx)\nActual: "
+                            + selectedOption
+            );
+        }
+    }
 
     public void verifyExportModalDisplayed() {
 
@@ -344,6 +386,23 @@ public class DefectLandingPage extends BasePage {
                     "Modal title mismatch. Expected: Export Defects, Actual: " + actualTitle
             );
         }
+    }
+
+    public void verifyExportAllButtonVisibleAndClickable() {
+
+        WebElement button = wait.until(
+                ExpectedConditions.visibilityOf(exportAllButton)
+        );
+
+        if (!button.isDisplayed()) {
+            throw new AssertionError("Export All button is not visible.");
+        }
+
+        if (!button.isEnabled()) {
+            throw new AssertionError("Export All button is not clickable.");
+        }
+
+        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
     }
 
     public void verifyFileTypeDropdown() {
@@ -447,4 +506,3 @@ public class DefectLandingPage extends BasePage {
         return false;
     }
 }
-
