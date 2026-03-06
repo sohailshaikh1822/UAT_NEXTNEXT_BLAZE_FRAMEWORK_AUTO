@@ -8,7 +8,6 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-
 public class TC029 extends BaseClass {
 
     @Test(dataProvider = "tc029", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
@@ -25,38 +24,46 @@ public class TC029 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded the Release dropdown from left panel");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickRelease(releaseName1);
             logger.info("Selected release with less than 10 test runs");
-
             WaitUtils.waitFor1000Milliseconds();
 
             int totalEntriesFirst = executeLandingPage.getTotalEntriesCount();
             logger.info("Total entries in first release: " + totalEntriesFirst);
+
             Assert.assertTrue(totalEntriesFirst < 10,
                     "Expected less than 10 test runs in first release but found " + totalEntriesFirst);
 
             boolean isNextButtonClickableFirst = executeLandingPage.checkIfNextButtonIsClickable();
             logger.info("Next page button clickable for first release: " + isNextButtonClickableFirst);
+
             Assert.assertFalse(isNextButtonClickableFirst,
                     "Next button should be disabled when test runs are less than 10");
+
             WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.clickRelease(releaseName2);
             logger.info("Selected release with more than 10 test runs");
-            WaitUtils.waitFor1000Milliseconds();;
-            int totalEntriesSecond = new ExecuteLandingPage(getDriver()).getTotalEntriesCount();
+            WaitUtils.waitFor1000Milliseconds();
+
+            int totalEntriesSecond = executeLandingPage.getTotalEntriesCount();
             logger.info("Total entries in second release: " + totalEntriesSecond);
+
             Assert.assertTrue(totalEntriesSecond > 10,
                     "Expected more than 10 test runs in second release but found " + totalEntriesSecond);
-            WaitUtils.waitFor1000Milliseconds();
 
             boolean isNextButtonClickableSecond = executeLandingPage.checkIfNextButtonIsClickable();
             logger.info("Next page button clickable for second release: " + isNextButtonClickableSecond);
+
             Assert.assertTrue(isNextButtonClickableSecond,
                     "Next button should be enabled when test runs are more than 10");
 

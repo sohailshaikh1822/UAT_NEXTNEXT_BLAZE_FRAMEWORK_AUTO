@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC005 extends BaseClass {
 
@@ -16,9 +17,12 @@ public class TC005 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickExecuteTab();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Clicked on the Execute Test Case tab");
             executeLandingPage.clickHamburgerMenu();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Successfully Clicked the hamburger Btn");
 
         } catch (AssertionError e) {

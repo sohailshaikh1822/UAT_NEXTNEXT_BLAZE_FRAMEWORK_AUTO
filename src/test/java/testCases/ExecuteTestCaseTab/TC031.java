@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 import java.util.List;
 
@@ -17,39 +18,51 @@ public class TC031 extends BaseClass {
     public class TC0022 extends BaseClass {
 
         public void verifyDefectIdNonDuplicacy(String projName,
-                String releaseName,
-                String testRun
+                                               String releaseName,
+                                               String testRun
         ) throws InterruptedException {
             logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
             try {
                 login();
                 logger.info("Logged in successfully");
+                WaitUtils.waitFor2000Milliseconds();
 
                 ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
                 executeLandingPage.clickExecuteTab();
                 logger.info("Clicked on the Execute Test Case tab");
+                WaitUtils.waitFor2000Milliseconds();
 
                 executeLandingPage.clickToSelectProject(projName);
+                WaitUtils.waitFor2000Milliseconds();
+
                 Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
                         "Parent module not visible after expand");
                 logger.info("Expanded parent module: " + projName);
 
                 executeLandingPage.expandRelease(releaseName);
+                WaitUtils.waitFor1000Milliseconds();
+
                 Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
                 logger.info("Expanded Release module: " + releaseName);
 
                 IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
                 executeLandingPage.clickPlayActionById(testRun);
                 logger.info("clicked on Action Play button");
+                WaitUtils.waitFor2000Milliseconds();
+
                 individualTestrun.clickLinkDefect();
                 logger.info("clicked on link defect button");
+                WaitUtils.waitFor2000Milliseconds();
+
                 LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
                 List<String> defectIds = linkDefectPage.getAllDefectIds();
+
                 System.out.println("Defect IDs found:");
                 for (String id : defectIds) {
                     System.out.println(id);
                 }
+
                 logger.info("All defect have a unique id's");
 
             } catch (AssertionError e) {

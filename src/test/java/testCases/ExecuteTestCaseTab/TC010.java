@@ -24,32 +24,40 @@ public class TC010 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
-
             WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
             WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
+            WaitUtils.waitFor1000Milliseconds();
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             WaitUtils.waitFor1000Milliseconds();
 
             boolean allVisible = individualTestrun.areAllElementsVisible();
+            WaitUtils.waitFor1000Milliseconds();
+
             if (allVisible) {
                 logger.info("All Test Run elements are visible.");
             } else {

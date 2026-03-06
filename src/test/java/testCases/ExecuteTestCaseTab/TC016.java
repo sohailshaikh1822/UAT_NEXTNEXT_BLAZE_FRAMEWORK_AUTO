@@ -22,46 +22,60 @@ public class TC016 extends BaseClass {
             String update
     ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case 015: verify update overall status feature *****************");
+        logger.info("****** Starting Test Case 016: verify update overall status feature *****************");
 
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
             WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
+            WaitUtils.waitFor1000Milliseconds();
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            WaitUtils.waitFor1000Milliseconds();
+
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.clickShowAllStepsRadio();
             logger.info("All steps were selected");
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.selectDropdownStatusBesidesUpdate(update);
-            logger.info("status changed for all steps to:" + update);
+            logger.info("Status changed for all steps to: " + update);
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.clickSaveButton();
             logger.info("Clicked on Save button");
+            WaitUtils.waitFor1000Milliseconds();
 
             boolean isUpdated = individualTestrun.isTestLogUpdatedDisplayed();
+            WaitUtils.waitFor1000Milliseconds();
+
             if (isUpdated) {
                 logger.info("Notification verified: Test log updated successfully.");
             } else {
@@ -72,6 +86,7 @@ public class TC016 extends BaseClass {
 
             individualTestrun.clickCloseButton();
             logger.info("Clicked on Close button");
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

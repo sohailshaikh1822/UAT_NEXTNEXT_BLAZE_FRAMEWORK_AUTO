@@ -25,22 +25,28 @@ public class TC006 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
             WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.searchTestCase(SearchTR);
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Searched for Test Case ID: " + SearchTR);
 
         } catch (AssertionError e) {

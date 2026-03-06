@@ -22,42 +22,54 @@ public class TC015 extends BaseClass {
             String actual_result
     ) throws InterruptedException {
 
-        logger.info("****** Starting Test Case 013: verify upadate actual result feature *****************");
+        logger.info("****** Starting Test Case 015: verify update actual result feature *****************");
 
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
             WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
+            WaitUtils.waitFor1000Milliseconds();
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            WaitUtils.waitFor1000Milliseconds();
+
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
-            logger.info("Entered actual desc:" + actual_result + "->in:" + stepno);
+            logger.info("Entered actual desc: " + actual_result + " -> in step: " + stepno);
             WaitUtils.waitFor1000Milliseconds();
+
             individualTestrun.clickSaveButton();
+            WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.clickCloseButton();
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
@@ -69,5 +81,4 @@ public class TC015 extends BaseClass {
 
         logger.info("************ Test Case Finished *************************");
     }
-
 }
