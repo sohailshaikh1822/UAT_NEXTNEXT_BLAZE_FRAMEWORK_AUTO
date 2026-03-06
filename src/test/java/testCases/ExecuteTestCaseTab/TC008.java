@@ -18,28 +18,37 @@ public class TC008 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded the Release dropdown from left panel");
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickRelease(releaseName);
             logger.info("Clicked on the desired release from the dropdown");
             WaitUtils.waitFor2000Milliseconds();
 
             String currentPageBefore = executeLandingPage.getCurrentPageNumber();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Current page before clicking next arrow: " + currentPageBefore);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickNextArrow();
             logger.info("Clicked the next arrow button to go to the next page");
+
 
             WaitUtils.waitFor3000Milliseconds();
 
             String currentPageAfter = executeLandingPage.getCurrentPageNumber();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Current page after clicking next arrow: " + currentPageAfter);
 
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertNotEquals(currentPageBefore, currentPageAfter,
                     "Page number did not change after clicking next arrow");
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertEquals(currentPageAfter, "2",
                     "Page number is not showing 2 after clicking next arrow");
             logger.info("Verified pagination working successfully. Page number changed from 1 to 2");

@@ -25,28 +25,39 @@ public class TC019 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandRelease(releaseName);
             logger.info("Expanded Release: " + releaseName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandSubTestCycle(cycleName);
             logger.info("Expanded Cycle: " + cycleName);
             WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.clickOnSuite(suiteName);
             logger.info("Clicked on Suite: " + suiteName);
+            WaitUtils.waitFor1000Milliseconds();
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
+
             executeLandingPage.clickPlayActionById(testRun);
             logger.info("clicked on Action Play button");
+            WaitUtils.waitFor1000Milliseconds();
+
             Assert.assertTrue(individualTestrun.isLinkDefectButtonClickable(), "Create Test Run button is not clickable");
             logger.info("Create Test Run button is clickable");
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

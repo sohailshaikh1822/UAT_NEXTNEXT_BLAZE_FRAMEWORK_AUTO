@@ -14,49 +14,55 @@ public class TC012 extends BaseClass {
 
     @Test(dataProvider = "tc012", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyExpandSubTestCycleAndFilterFeature(String parentModule, String releaseName, String subTestCycle,
-            String subTestsuit) throws InterruptedException {
+                                                         String subTestsuit) throws InterruptedException {
+
         logger.info("****** Starting Test Case: Verify Expand & Filter feature in Test Run page *****************");
 
         try {
 
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
+
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickToSelectProject(parentModule);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + parentModule);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandRelease(releaseName);
             Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
             logger.info("Expanded Release module: " + releaseName);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandSubTestCycle(subTestCycle);
             Assert.assertTrue(executeLandingPage.isSubTestCycleVisible(subTestCycle), "Sub test cycle not visible");
             logger.info("Expanded Test Cycle: " + subTestCycle);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickOnTestSuite(subTestsuit);
             logger.info("Clicked on the TestSuite: " + subTestsuit);
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.clickOnAnyPlayButton();
             executeLandingPage.waitForTestRunInterfaceToLoad();
             logger.info("Clicked on the Play button of a test run");
-
             WaitUtils.waitFor1000Milliseconds();
-            logger.info("Waited for 1.5 seconds for Test Run page to load");
 
             individualTestRun.clickShowOnlyBusinessStepsRadio();
             logger.info("Clicked on 'Show Only Business Test Steps' radio button");
-
             WaitUtils.waitFor1000Milliseconds();
 
             individualTestRun.clickShowAllStepsRadio();
             logger.info("Clicked on 'Show All Steps' radio button");
+            WaitUtils.waitFor1000Milliseconds();
 
             logger.info("Filter feature executed successfully in Individual Test Run page");
 

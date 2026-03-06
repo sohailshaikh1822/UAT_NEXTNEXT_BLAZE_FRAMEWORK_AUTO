@@ -17,13 +17,16 @@ public class TC002 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
+            WaitUtils.waitFor2000Milliseconds();
 //            executeLandingPage.clickExecuteTab();
 //            executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
             WaitUtils.waitFor3000Milliseconds();
 
             Assert.assertTrue(executeLandingPage.isMentionedProjectNameVisible(projectName));
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Verified Successfully");
 
         } catch (AssertionError e) {

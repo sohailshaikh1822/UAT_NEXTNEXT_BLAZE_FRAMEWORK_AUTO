@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC001 extends BaseClass {
 
@@ -16,18 +17,23 @@ public class TC001 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor2000Milliseconds();
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickRelease(releaseName);
             logger.info("Clicked on the desired release from the dropdown");
 
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertTrue(executeLandingPage.getVisibilityOfTestRunsWithCaseDetailsTable(),
                     "Test Run table is not visible after selecting the release");
             logger.info("Verified that the Test Run table is visible after selecting a release");
 
+            WaitUtils.waitFor2000Milliseconds();
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;

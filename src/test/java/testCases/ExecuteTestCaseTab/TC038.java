@@ -28,25 +28,28 @@ public class TC038 extends BaseClass {
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Clicked on the Execute Test Case tab");
 
             executeLandingPage.clickToSelectProject(projectName);
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Expanded Release: " + ReleaseName);
 
             executeLandingPage.expandSubTestCycle(CycleName);
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Expanded Cycle: " + CycleName);
 
-            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
-            logger.info("Clicked on Suite: " + SuiteName);
-            WaitUtils.waitFor1000Milliseconds();
-            executeLandingPage.selectStatus(status);
-            logger.info("Selected status filter: " + status);
-
             WaitUtils.waitFor2000Milliseconds();
+            logger.info("Clicked on Suite: " + SuiteName);
+
+            executeLandingPage.selectStatus(status);
+            WaitUtils.waitFor2000Milliseconds();
+            logger.info("Selected status filter: " + status);
 
             for (String actualStatus : executeLandingPage.getAllDisplayedStatuses()) {
                 logger.info("Captured status: " + actualStatus);

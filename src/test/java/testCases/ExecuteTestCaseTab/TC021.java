@@ -1,7 +1,6 @@
 package testCases.ExecuteTestCaseTab;
 
 import DataProviders.ExecuteTestCaseDataProvider;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
@@ -20,56 +19,74 @@ public class TC021 extends BaseClass {
             String testRun,
             String defectID
     ) throws InterruptedException {
+
         logger.info("****** Starting Test Case: Verify Expand feature of sub test cycle *****************");
 
         try {
+
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor2000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projName);
             WaitUtils.waitFor2000Milliseconds();
 
-            Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
-                    "Parent module not visible after expand");
+            Assert.assertTrue(
+                    executeLandingPage.selectedModuleOrReleaseName(projName).isDisplayed(),
+                    "Parent module not visible after expand"
+            );
             logger.info("Expanded parent module: " + projName);
 
             executeLandingPage.expandRelease(releaseName);
-            Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
+            WaitUtils.waitFor1000Milliseconds();
+
+            Assert.assertTrue(
+                    executeLandingPage.isReleaseVisible(releaseName),
+                    "Release not visible after expand"
+            );
             logger.info("Expanded Release module: " + releaseName);
 
-            IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             executeLandingPage.clickPlayActionById(testRun);
-            logger.info("clicked on Action Play button");
+            logger.info("Clicked on Action Play button");
+            WaitUtils.waitFor2000Milliseconds();
 
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             individualTestRun.clickLinkDefect();
-            logger.info("Clicked on link defect ");
-            WaitUtils.waitFor1000Milliseconds();
+            logger.info("Clicked on Link Defect");
+            WaitUtils.waitFor2000Milliseconds();
 
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+
             linkDefectPage.enterDefectSearch(defectID.replaceAll("[^0-9]", ""));
-            logger.info("Entered the defect defect id");
+            logger.info("Entered the defect id");
             WaitUtils.waitFor2000Milliseconds();
 
             linkDefectPage.clickSearchButton();
             logger.info("Searched the defect");
+            WaitUtils.waitFor2000Milliseconds();
 
             linkDefectPage.clickRadioButtonBesideDefectId(defectID);
-            logger.info("clicked on defect id {}", defectID);
-
-            linkDefectPage.clickLink();
-            WaitUtils.waitFor3000Milliseconds();
-            logger.info("defect is linked successfully");
-
-            individualTestrun.clickLinkDefect();
+            logger.info("Clicked on defect id {}", defectID);
             WaitUtils.waitFor1000Milliseconds();
 
-            linkDefectPage.clickUnlinkButtonByDefectId(defectID);
-            logger.info("Defect is unlinked successfully");
+            linkDefectPage.clickLink();
+            logger.info("Defect linked successfully");
+            WaitUtils.waitFor3000Milliseconds();
+
+            individualTestRun.clickLinkDefect();
+            WaitUtils.waitFor2000Milliseconds();
+
+            LinkDefectPage linkDefectPage2 = new LinkDefectPage(getDriver());
+            linkDefectPage2.clickUnlinkButtonByDefectId(defectID);
+
+            logger.info("Defect unlinked successfully");
+            WaitUtils.waitFor2000Milliseconds();
+
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
@@ -77,6 +94,7 @@ public class TC021 extends BaseClass {
             logger.error("Exception occurred: {}", e.getMessage());
             throw e;
         }
+
         logger.info("************ Test Case Finished *************************");
     }
 }

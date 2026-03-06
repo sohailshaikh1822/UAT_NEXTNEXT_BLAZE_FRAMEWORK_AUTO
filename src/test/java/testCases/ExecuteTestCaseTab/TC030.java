@@ -14,9 +14,11 @@ public class TC030 extends BaseClass {
 
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Clicked on the Execute Test Case tab");
             WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickHelpBtn();

@@ -12,7 +12,7 @@ public class TC040 extends BaseClass {
 
     @Test(dataProvider = "tc040", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
     public void verifyCreateTestRunFunctionality(String projectname, String releaseName, String requirementID,
-            String testCaseID, String successMsg) throws InterruptedException {
+                                                 String testCaseID, String successMsg) throws InterruptedException {
         logger.info("****** Starting Test Case: Verify Create Test Run functionality *****************");
 
         try {
@@ -22,29 +22,38 @@ public class TC040 extends BaseClass {
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Clicked on the Execute Test Case tab");
 
             executeLandingPage.clickToSelectProject(projectname);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(projectname).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + projectname);
 
             executeLandingPage.expandRelease(releaseName);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
             logger.info("Expanded Release module: " + releaseName);
 
             executeLandingPage.clickCreateTestRunButton();
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Clicked Create Test Run button");
+
             WaitUtils.waitFor200Milliseconds();
 
             executeLandingPage.clickRequirementById(requirementID);
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Selected requirement ID: " + requirementID);
 
             executeLandingPage.selectTestCaseCheckbox(testCaseID);
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Selected test case ID: " + testCaseID);
 
             executeLandingPage.clickSaveInPopup();
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Clicked Save button in popup");
+
             WaitUtils.waitFor100Milliseconds();
 
             boolean isSuccess = executeLandingPage.waitForSuccessMessage(successMsg);

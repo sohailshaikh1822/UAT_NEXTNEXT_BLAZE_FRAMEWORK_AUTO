@@ -28,40 +28,57 @@ public class TC020 extends BaseClass {
             login();
             logger.info("Logged in successfully");
 
+            WaitUtils.waitFor2000Milliseconds();
+
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
+            WaitUtils.waitFor2000Milliseconds();
+
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
+            WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
+
+            WaitUtils.waitFor1000Milliseconds();
 
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
             WaitUtils.waitFor1000Milliseconds();
+
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
-            WaitUtils.waitFor1000Milliseconds();
+
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
 
+            WaitUtils.waitFor2000Milliseconds();
+
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            WaitUtils.waitFor1000Milliseconds();
 
             boolean defectPresent = individualTestrun.isDefectPresent();
+
+            WaitUtils.waitFor1000Milliseconds();
+
             if (defectPresent) {
-                logger.info("Defect is present");
-                Assert.assertTrue(true, "Defect is not displayed under the defect category.");
+                logger.info("Defect is present under the defect section");
+                Assert.assertTrue(defectPresent, "Defect is not displayed under the defect category.");
             } else {
                 logger.error("Defect is NOT present under the defect category.");
+
                 LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
 
+                WaitUtils.waitFor1000Milliseconds();
+
                 linkDefectPage.clickDefectById(defid);
-                logger.info("clicked on defect id" + defid);
+                logger.info("Clicked on defect id: " + defid);
             }
 
         } catch (AssertionError e) {

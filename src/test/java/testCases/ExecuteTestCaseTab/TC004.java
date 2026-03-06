@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC004 extends BaseClass {
 
@@ -23,22 +24,31 @@ public class TC004 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickToSelectProject(parentModule);
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Expanded parent module: " + parentModule);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.expandRelease(releaseName);
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
             logger.info("Expanded Release module: " + releaseName);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.expandSubTestCycle(subTestCycle);
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertTrue(executeLandingPage.isSubTestCycleVisible(subTestCycle), "Sub test cycle not visible");
             logger.info("Expanded Test Cycle :  " + subTestCycle);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.isSuitVisible(subTestsuit);
             logger.info("TestSuit visible");
 

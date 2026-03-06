@@ -20,16 +20,20 @@ public class TC039 extends BaseClass {
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             executeLandingPage.clickExecuteTab();
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Clicked on the Execute Test Case tab");
 
             executeLandingPage.clickToSelectProject(parentModule);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
             logger.info("Expanded parent module: " + parentModule);
 
             executeLandingPage.expandRelease(releaseName);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
             logger.info("Expanded Release module: " + releaseName);
+
             WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
