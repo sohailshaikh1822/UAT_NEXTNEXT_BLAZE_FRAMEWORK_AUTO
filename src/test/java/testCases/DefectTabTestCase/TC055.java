@@ -25,13 +25,12 @@ public class TC055 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
             defectPage.clickExportButton();
 
-            // Step 2: Verify modal title
             defectPage.verifyExportModalDisplayed();
 
-            // Step 3: Verify File Type dropdown
+            WaitUtils.waitFor1000Milliseconds();
             defectPage.verifyFileTypeDropdown();
 
-            // Step 4: Verify Cancel and Save buttons
+            WaitUtils.waitFor1000Milliseconds();
             defectPage.verifyCancelAndSaveButtons();
 
             logger.info("TC055 executed successfully");
@@ -43,7 +42,5 @@ public class TC055 extends BaseClass {
             logger.error("Exception occurred: " + ex.getMessage());
             throw ex;
         }
-
-        logger.info("****** Finished TC050: Defect update notification verification ******");
     }
 }

@@ -8,12 +8,12 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC056 extends BaseClass {
+public class TC066 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyFileTypeDropdownContainsAllThreeFormats() throws InterruptedException {
+    public void VerifyExportAllDefectsModalOpensOnClickingExportButton() throws InterruptedException {
 
-        logger.info("****** Starting TC056 ******");
+        logger.info("****** Starting TC055 ******");
 
         try {
             login();
@@ -23,9 +23,17 @@ public class TC056 extends BaseClass {
             defectPage.clickDefectTab();
 
             WaitUtils.waitFor2000Milliseconds();
-            defectPage.verifyFileTypeDropdownContainsAllFormats();
+            defectPage.verifyExportAllButtonVisibleAndClickable();
 
-            logger.info("TC056 executed successfully");
+            WaitUtils.waitFor1000Milliseconds();
+            defectPage.verifyExportModalDisplayed();
+
+            WaitUtils.waitFor1000Milliseconds();
+            defectPage.verifyFileTypeDropdown();
+            WaitUtils.waitFor1000Milliseconds();
+            defectPage.verifyCancelAndSaveButtons();
+
+            logger.info("TC055 executed successfully");
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
