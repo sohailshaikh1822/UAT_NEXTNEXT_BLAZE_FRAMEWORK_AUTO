@@ -447,6 +447,41 @@ public class DefectLandingPage extends BasePage {
             throw new AssertionError("Save button is not visible or not enabled.");
         }
     }
+    public void verifyFileTypeDropdownContainsAllFormatsforExportAll() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(exportAllButton));
+        exportAllButton.click();
+        wait.until(ExpectedConditions.visibilityOf(exportModal));
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        fileTypeDropdown.click();
+
+        Select select = new Select(fileTypeDropdown);
+
+        List<String> expectedOptions = Arrays.asList(
+                "Excel (.xlsx)",
+                "CSV (.csv)",
+                "PDF (.pdf)"
+        );
+
+        List<String> actualOptions = select.getOptions()
+                .stream()
+                .map(option -> option.getText().trim())
+                .toList();
+        if (!actualOptions.containsAll(expectedOptions)
+                || actualOptions.size() != expectedOptions.size()) {
+
+            throw new AssertionError(
+                    "File Type dropdown options mismatch.\nExpected: "
+                            + expectedOptions + "\nActual: " + actualOptions
+            );
+        }
+
+        System.out.println("File Type dropdown contains all expected formats.");
+    }
+
     public void verifyFileTypeDropdownContainsAllFormats() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -481,6 +516,7 @@ public class DefectLandingPage extends BasePage {
 
         System.out.println("File Type dropdown contains all expected formats.");
     }
+
 
     public boolean isFileDownloaded(int timeoutSeconds) {
 
