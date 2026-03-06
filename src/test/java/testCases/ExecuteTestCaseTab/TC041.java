@@ -29,15 +29,20 @@ public class TC041 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
 
+
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
@@ -57,7 +62,7 @@ public class TC041 extends BaseClass {
 
             linkDefectPage.clickNew();
             logger.info("Clicked On the New ");
-
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.enterSummary(summary);
             logger.info("Entered Summary" + summary);
 
@@ -66,7 +71,7 @@ public class TC041 extends BaseClass {
 
             linkDefectPage.uploadFile(fileAddress);
             logger.info("<less than 5 mb uploaded");
-
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.clickSave();
             logger.info("Clicked on save button");
 

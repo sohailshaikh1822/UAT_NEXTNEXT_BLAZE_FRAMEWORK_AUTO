@@ -30,15 +30,17 @@ public class TC049 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
 
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
-
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
             WaitUtils.waitFor1000Milliseconds();
@@ -49,7 +51,7 @@ public class TC049 extends BaseClass {
             logger.info("Clicked on Test Run ID: " + TR);
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             individualTestrun.clickCreateTestLog();
             logger.info("Clicked on Create Test Log Button");
@@ -57,13 +59,13 @@ public class TC049 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
-
+            WaitUtils.waitFor2000Milliseconds();
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
             logger.info("Entered actual desc:" + actual_result + "->in:" + stepno);
             WaitUtils.waitFor1000Milliseconds();
             individualTestrun.clickSaveButton();
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             boolean notificationDisplayed = individualTestrun.isTestLogCreatedDisplayed();
             Assert.assertTrue(notificationDisplayed, "Test log creation notification was not displayed!");
             logger.info("Verified: 'Test log created successfully' notification displayed");

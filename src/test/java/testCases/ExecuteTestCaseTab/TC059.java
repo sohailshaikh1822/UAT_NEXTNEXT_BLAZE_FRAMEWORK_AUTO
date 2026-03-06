@@ -35,6 +35,7 @@ public class TC059 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
 
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
 

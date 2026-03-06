@@ -345,6 +345,14 @@ public class DefectLandingPage extends BasePage {
         select.selectByVisibleText("Excel (.xlsx)");
     }
 
+    public void selectCsvFileType() {
+
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        Select select = new Select(fileTypeDropdown);
+        select.selectByVisibleText("Excel (.xlsx)");
+    }
+
     public void clickSaveButton() {
 
         WebElement button = wait.until(

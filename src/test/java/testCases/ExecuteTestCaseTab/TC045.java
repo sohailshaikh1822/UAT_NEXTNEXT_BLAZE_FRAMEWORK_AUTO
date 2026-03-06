@@ -23,10 +23,12 @@ public class TC045 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage page = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             page.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
             page.clickToSelectProject(projectname);
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertTrue(page.selectedModuleOrReleaseName(projectname).isDisplayed(), "Project not visible");
             logger.info("Expanded project: " + projectname);
 
@@ -38,20 +40,22 @@ public class TC045 extends BaseClass {
             Assert.assertTrue(page.isSubTestCycleVisible(subTestCycle), "Sub test cycle not visible");
             logger.info("Expanded sub test cycle: " + subTestCycle);
 
+            WaitUtils.waitFor2000Milliseconds();
             page.isSuitVisible(subTestsuit);
             logger.info("Test suite visible: " + subTestsuit);
 
             page.clickCreateTestRunButton();
             logger.info("Clicked 'Create New Test Run'");
 
-            WaitUtils.waitFor200Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             page.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
 
+
             page.selectTestCaseCheckbox(testCaseID);
             logger.info("Selected test case ID: " + testCaseID);
-            WaitUtils.waitFor200Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
 
             Assert.assertTrue(page.isSaveButtonVisible(), "Save button did not appear after selecting test case");
             Assert.assertTrue(page.isCancelButtonVisible(), "Cancel button did not appear after selecting test case");

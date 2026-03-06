@@ -18,6 +18,7 @@ public class TC058 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
 //            executeLandingPage.clickToSelectProject(projectName);
@@ -33,6 +34,8 @@ public class TC058 extends BaseClass {
 
             executeLandingPage.clickTestRunById(tid);
             logger.info("Clicked on test run id ");
+
+            WaitUtils.waitFor1000Milliseconds();
 
             IndividualTestRun individualTestRun =new IndividualTestRun(getDriver());
             individualTestRun.clickCloseButton();

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC043 extends BaseClass {
 
@@ -21,8 +22,10 @@ public class TC043 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
@@ -30,6 +33,7 @@ public class TC043 extends BaseClass {
             executeLandingPage.expandRelease(release);
             logger.info("Expanded the release {}", release);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(cycle);
             logger.info("Expanded the cycle : {}", cycle);
 
@@ -39,6 +43,7 @@ public class TC043 extends BaseClass {
             executeLandingPage.searchTestCase(testRunId);
             logger.info("Entered the test run Id : {}", testRunId);
 
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertTrue(executeLandingPage.isNoMatchingTabVisible());
             logger.info("Verified no matching tab is visible");
 

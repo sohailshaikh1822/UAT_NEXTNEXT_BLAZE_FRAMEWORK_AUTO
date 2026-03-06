@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="Execute Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headed"/>
+        <parameter name="mode" value="head"/>
         <classes>
 <!--            <class name="testCases.ExecuteTestCaseTab.TC001"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC002"/>-->
@@ -46,7 +46,7 @@
 <!--            <class name="testCases.ExecuteTestCaseTab.TC039"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC040"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC041"/>-->
-<!--            <class name="testCases.ExecuteTestCaseTab.TC042"/>-->
+            <class name="testCases.ExecuteTestCaseTab.TC042"/>
 <!--            <class name="testCases.ExecuteTestCaseTab.TC043"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC044"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC045"/>-->
@@ -57,13 +57,34 @@
 <!--            <class name="testCases.ExecuteTestCaseTab.TC050"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC051"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC052"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC053"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC054"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC055"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC056"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC057"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC058"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC059"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC060"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC061"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC062"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC063"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC064"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC065"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC066"/>-->
 <!--            <class name="testCases.ExecuteTestCaseTab.TC067"/>-->
-            <class name="testCases.ExecuteTestCaseTab.TC080"/>
-
+<!--            <class name="testCases.ExecuteTestCaseTab.TC068"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC069"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC070"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC071"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC072"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC073"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC074"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC075"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC076"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC077"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC078"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC079"/>-->
+<!--            <class name="testCases.ExecuteTestCaseTab.TC080"/>-->
 
         </classes>
     </test>

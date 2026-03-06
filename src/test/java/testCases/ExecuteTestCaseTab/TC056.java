@@ -18,6 +18,7 @@ public class TC056 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
 //            executeLandingPage.clickToSelectProject(projectName);

@@ -26,11 +26,12 @@ public class TC066 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
 //            executeLandingPage.clickToSelectProject(projectName);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickRelease(releaseName);
             logger.info("Clicked on the desired release from the dropdown");
 

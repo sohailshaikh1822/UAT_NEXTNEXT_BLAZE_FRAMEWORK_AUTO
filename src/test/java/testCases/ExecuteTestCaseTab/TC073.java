@@ -31,6 +31,7 @@ public class TC073 extends BaseClass {
                     new ExecuteLandingPage(getDriver());
 
             // Step 1: Navigate to Execute tab
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked Execute Test Case tab");
 
@@ -43,6 +44,7 @@ public class TC073 extends BaseClass {
             executeLandingPage.clickEditAssigneeIcon(trId);
             logger.info("Clicked Edit Assignee icon");
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.verifyAssignDropdownOpened(trId);
             logger.info("Assign dropdown opened");
 

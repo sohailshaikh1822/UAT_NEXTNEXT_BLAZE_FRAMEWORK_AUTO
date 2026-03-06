@@ -29,6 +29,7 @@ public class TC080 extends BaseClass {
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             NotificationsListener notificationsListener=new NotificationsListener(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked Execute Test Case tab");
             WaitUtils.waitFor1000Milliseconds();

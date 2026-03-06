@@ -34,6 +34,7 @@ public class TC076 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickExecuteTab();
 
