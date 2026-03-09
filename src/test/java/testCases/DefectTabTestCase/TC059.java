@@ -6,13 +6,13 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC058 extends BaseClass {
+public class TC059 extends BaseClass {
 
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyCsvFileIsDownloadedSuccessfully() throws InterruptedException {
+    public void VerifyPdfFileIsDownloadedSuccessfully() throws InterruptedException {
 
-        logger.info("****** Starting TC058 ******");
+        logger.info("****** Starting TC059 ******");
 
         try {
             login();
@@ -25,7 +25,7 @@ public class TC058 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.verifyExportButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectCsvFileType();
+            defectLandingPage.selectPdfFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);

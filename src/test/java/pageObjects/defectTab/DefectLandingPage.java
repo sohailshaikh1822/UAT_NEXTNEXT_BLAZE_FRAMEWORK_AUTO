@@ -350,7 +350,15 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
 
         Select select = new Select(fileTypeDropdown);
-        select.selectByVisibleText("Excel (.xlsx)");
+        select.selectByVisibleText("CSV (.csv)");
+    }
+
+    public void selectPdfFileType() {
+
+        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
+
+        Select select = new Select(fileTypeDropdown);
+        select.selectByVisibleText("PDF (.pdf)");
     }
 
     public void clickSaveButton() {
