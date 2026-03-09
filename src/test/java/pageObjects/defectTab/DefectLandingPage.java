@@ -557,4 +557,15 @@ public class DefectLandingPage extends BasePage {
         }
         return false;
     }
+
+    public void clickDownloadInBackgroundCheckbox() {
+
+        WebElement checkbox = wait.until(
+                ExpectedConditions.elementToBeClickable(downloadInBackgroundCheckbox)
+        );
+
+        if (!checkbox.isSelected()) {
+            checkbox.click();
+        }
+    }
 }

@@ -25,10 +25,13 @@ public class TC062 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             logger.info("Count the defects");
+            WaitUtils.waitFor1000Milliseconds();
             defectPage.clickDefectTab();
+            WaitUtils.waitFor2000Milliseconds();
             int defectCount = defectPage.getVisibleDefectCount();
             System.out.println("Visible defects: " + defectCount);
 
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(defectCount > 0, "No defects displayed in grid");
 
             defectPage.clickExportButton();
