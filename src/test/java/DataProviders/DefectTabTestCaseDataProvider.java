@@ -242,4 +242,8 @@ public class DefectTabTestCaseDataProvider {
     public static Object[][] getDataTC050() throws IOException {
         return ExcelDataProviders.getExcelDataForDefectTestCase("tc050");
     }
+    @DataProvider(name = "tc080")
+    public static Object[][] getDataTC080() throws IOException {
+        return ExcelDataProviders.getExcelDataForDefectTestCase("tc080");
+    }
 }
