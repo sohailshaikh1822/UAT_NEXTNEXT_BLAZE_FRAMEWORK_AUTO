@@ -31,11 +31,13 @@ public class TC047 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the Execute Test Case tab");
-
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
@@ -58,7 +60,7 @@ public class TC047 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.selectEpic(Epic);
             logger.info("Epic selected from dropdown:" + Epic);
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.selectFeature(Feature);
             logger.info("Feature selected from dropdown:" + Feature);
 

@@ -13,7 +13,7 @@ import utils.WaitUtils;
 public class TC065 extends BaseClass {
 
     @Test(dataProvider = "tc065", dataProviderClass = ExecuteTestCaseDataProvider.class,retryAnalyzer = RetryAnalyzer.class)
-    public void  VerifyThataNotificationAppearsAutomaticallyWhenaDefectIsLinkedWithTheTestRun(
+    public void  VerifyThatNotificationAppearsAutomaticallyWhenDefectIsLinkedWithTheTestRun(
             String releaseName,
             String trID,
             String defectId
@@ -26,6 +26,7 @@ public class TC065 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
 //            executeLandingPage.clickToSelectProject(projectName);
@@ -44,7 +45,7 @@ public class TC065 extends BaseClass {
             linkDefectPage.enterDefectSearch(defectId);
             WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.clickSearchButton();
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             linkDefectPage.clickRadioButtonBesideDefectId(defectId);
             linkDefectPage.clickLink();
             logger.info("Defect is linked successfully");

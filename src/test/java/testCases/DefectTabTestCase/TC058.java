@@ -6,13 +6,13 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC057 extends BaseClass {
+public class TC058 extends BaseClass {
 
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyExcelFileIsDownloadedSuccessfully() throws InterruptedException {
+    public void VerifyCsvFileIsDownloadedSuccessfully() throws InterruptedException {
 
-        logger.info("****** Starting TC057 ******");
+        logger.info("****** Starting TC058 ******");
 
         try {
             login();
@@ -25,11 +25,12 @@ public class TC057 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.verifyExportButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
+            defectLandingPage.selectCsvFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);
 
-            logger.info("TC057 executed successfully");
+            logger.info("TC058 executed successfully");
 
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
@@ -39,6 +40,6 @@ public class TC057 extends BaseClass {
             throw ex;
         }
 
-        logger.info("****** Finished TC050: Defect update notification verification ******");
+        logger.info("****** Finished ******");
     }
 }

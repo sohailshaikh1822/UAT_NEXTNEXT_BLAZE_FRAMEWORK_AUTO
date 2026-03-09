@@ -23,10 +23,12 @@ public class TC046 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage page = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             page.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
             page.clickToSelectProject(projectname);
+            WaitUtils.waitFor2000Milliseconds();
             Assert.assertTrue(page.selectedModuleOrReleaseName(projectname).isDisplayed(), "Project not visible");
             logger.info("Expanded project: " + projectname);
 
@@ -34,6 +36,7 @@ public class TC046 extends BaseClass {
             Assert.assertTrue(page.isReleaseVisible(releaseName), "Release not visible");
             logger.info("Expanded release: " + releaseName);
 
+            WaitUtils.waitFor2000Milliseconds();
             page.expandSubTestCycle(subTestCycle);
             Assert.assertTrue(page.isSubTestCycleVisible(subTestCycle), "Sub test cycle not visible");
             logger.info("Expanded sub test cycle: " + subTestCycle);
@@ -41,6 +44,7 @@ public class TC046 extends BaseClass {
             page.isSuitVisible(subTestsuit);
             logger.info("Test suite visible: " + subTestsuit);
 
+            WaitUtils.waitFor1000Milliseconds();
             page.clickCreateTestRunButton();
             logger.info("Clicked 'Create New Test Run'");
 

@@ -7,6 +7,7 @@ import pageObjects.authoTestCaseTab.AuthorTestCasePage;
 import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC044 extends BaseClass {
 
@@ -21,18 +22,21 @@ public class TC044 extends BaseClass {
             login();
             logger.info("Logged in successfully");
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded the Release dropdown from left panel");
 
             executeLandingPage.clickRelease(releaseName);
             logger.info("Clicked on the release from the dropdown");
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickCreateTestRunButton();
             logger.info("Clicked on Create Test Run button");
 
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
-
+            WaitUtils.waitFor1000Milliseconds();
             authorTestCasePage.clickRequirement(reqId);
             logger.info("Selected a Requirement");
 
@@ -41,7 +45,7 @@ public class TC044 extends BaseClass {
 
             executeLandingPage.clickSaveInPopup();
             logger.info("Clicked on Save button from the Test Run popup");
-
+            WaitUtils.waitFor1000Milliseconds();
             boolean isTestRunCreated = executeLandingPage.isTestRunCreatedMessageDisplayed();
             Assert.assertTrue(isTestRunCreated, "Test Run not created");
             logger.info("Test runs created successfully");

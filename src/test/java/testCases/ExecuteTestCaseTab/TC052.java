@@ -30,9 +30,11 @@ public class TC052 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
 
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
@@ -46,6 +48,7 @@ public class TC052 extends BaseClass {
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
 
@@ -57,6 +60,7 @@ public class TC052 extends BaseClass {
             int initialCount = individualTestrun.getExecutionHistoryCount();
             logger.info("Initial Execution History Count: " + initialCount);
 
+            WaitUtils.waitFor2000Milliseconds();
             individualTestrun.clickTabTestLogs();
             logger.info("Clicked on Test Log tab");
 
@@ -75,6 +79,7 @@ public class TC052 extends BaseClass {
 
             executeLandingPage.clickTestRunById(TR);
 
+            WaitUtils.waitFor2000Milliseconds();
             individualTestrun.clickTabExecutionHistory();
 
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
@@ -90,6 +95,7 @@ public class TC052 extends BaseClass {
             logger.info("Verified: 'Test log created successfully' notification displayed");
 
             individualTestrun.clickTabExecutionHistory();
+            WaitUtils.waitFor2000Milliseconds();
             logger.info("Clicked on Execution History tab again");
 
             int updatedCount = 0;
@@ -110,6 +116,7 @@ public class TC052 extends BaseClass {
 
             logger.info("Verified: Execution History tab updated successfully after saving new test log.");
 
+            WaitUtils.waitFor1000Milliseconds();
             individualTestrun.clickCloseButton();
             logger.info("Closed the Test Log window");
 

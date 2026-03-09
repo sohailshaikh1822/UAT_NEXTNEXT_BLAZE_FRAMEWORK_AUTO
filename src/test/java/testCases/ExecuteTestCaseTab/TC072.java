@@ -30,6 +30,7 @@ public class TC072 extends BaseClass {
                     new ExecuteLandingPage(getDriver());
 
             // Step 1: Navigate to Execute tab
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked Execute Test Case tab");
 
@@ -44,6 +45,8 @@ public class TC072 extends BaseClass {
 
             executeLandingPage.verifyAssignDropdownOpened(trId);
             logger.info("Assign dropdown opened");
+
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.verifySaveButtonNotVisible(trId);
             logger.info("Save button is not visible before user selection");

@@ -7,6 +7,7 @@ import pageObjects.executeTestCaseTab.ExecuteLandingPage;
 import pageObjects.executeTestCaseTab.IndividualTestRun;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC051 extends BaseClass {
 
@@ -23,9 +24,11 @@ public class TC051 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
@@ -37,10 +40,11 @@ public class TC051 extends BaseClass {
 
             executeLandingPage.clickOnSuite(suite);
             logger.info("clicked on the suite : {}", suite);
-
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.searchTestCase(testRunId);
             logger.info("Entered the test run Id : {}", testRunId);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickPlayActionById(testRunId);
             logger.info("clicked on test run Id {}", testRunId);
 
@@ -48,6 +52,7 @@ public class TC051 extends BaseClass {
             individualTestRun.clickCreateTestLog();
             logger.info("Clicked on create ");
 
+            WaitUtils.waitFor2000Milliseconds();
             individualTestRun.clickSaveButton();
             logger.info("Saved the test log without editing");
 

@@ -8,6 +8,7 @@ import pageObjects.executeTestCaseTab.IndividualTestRun;
 import pageObjects.executeTestCaseTab.LinkDefectPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC042 extends BaseClass {
 
@@ -25,8 +26,10 @@ public class TC042 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
@@ -34,6 +37,7 @@ public class TC042 extends BaseClass {
             executeLandingPage.clickArrowRightToExpandModule(release);
             logger.info("Expanded the release {}", release);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(cycle);
             logger.info("Expanded the cycle : {}", cycle);
 
@@ -48,6 +52,7 @@ public class TC042 extends BaseClass {
             logger.info("clicked on test run Id {}", testRunId);
 
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
             individualTestRun.clickLinkDefect();
             logger.info("Clicked on link defect ");
 
@@ -55,6 +60,7 @@ public class TC042 extends BaseClass {
 
             linkDefectPage.clickNew();
             logger.info("Clicked On the New ");
+            WaitUtils.waitFor3000Milliseconds();
 
             linkDefectPage.uploadFile(fileAddress);
             logger.info("more than 5 mb uploaded");

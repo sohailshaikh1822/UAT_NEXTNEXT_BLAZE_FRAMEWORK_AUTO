@@ -25,6 +25,7 @@ public class TC063 extends BaseClass {
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on the execute test case tab ..");
 //            executeLandingPage.clickToSelectProject(projectName);
@@ -40,6 +41,7 @@ public class TC063 extends BaseClass {
 
             individualTestRun.clickLinkDefect();
             linkDefectPage.enterDefectSearch(defectId);
+            WaitUtils.waitFor2000Milliseconds();
             linkDefectPage.clickSearchButton();
             linkDefectPage.clickRadioButtonBesideDefectId(defectId);
             linkDefectPage.clickLink();
@@ -48,6 +50,7 @@ public class TC063 extends BaseClass {
             logger.info("linked defect");
 
             linkDefectPage.clickSave();
+            WaitUtils.waitFor1000Milliseconds();
             individualTestRun.clickLinkDefect();
             linkDefectPage.clickUnlinkButtonByDefectId(defectId);
 

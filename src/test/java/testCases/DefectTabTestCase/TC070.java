@@ -6,31 +6,27 @@ import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC057 extends BaseClass {
-
+public class TC070 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyExcelFileIsDownloadedSuccessfully() throws InterruptedException {
+    public void VerifyPdfFileIsDownloadedSuccessfullyUsingExportAll() throws InterruptedException {
 
-        logger.info("****** Starting TC057 ******");
+        logger.info("****** Starting TC070 ******");
 
         try {
             login();
             logger.info("Logged in successfully");
-
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.clickDefectTab();
-
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.verifyExportButtonVisibleAndClickable();
+            defectLandingPage.verifyExportAllButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
+            defectLandingPage.selectPdfFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);
-
-            logger.info("TC057 executed successfully");
-
+            logger.info("TC070 executed successfully");
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
@@ -39,6 +35,7 @@ public class TC057 extends BaseClass {
             throw ex;
         }
 
-        logger.info("****** Finished TC050: Defect update notification verification ******");
+        logger.info("****** Finished ******");
     }
+
 }

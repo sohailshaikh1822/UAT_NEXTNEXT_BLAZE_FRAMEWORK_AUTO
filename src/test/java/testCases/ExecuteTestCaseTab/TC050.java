@@ -30,8 +30,11 @@ public class TC050 extends BaseClass {
             logger.info("Logged in successfully");
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickExecuteTab();
             logger.info("Clicked on Execute Test Case tab");
+
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
@@ -42,12 +45,14 @@ public class TC050 extends BaseClass {
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickOnSuite(SuiteName);
             logger.info("Clicked on Suite: " + SuiteName);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickTestRunById(TR);
             logger.info("Clicked on Test Run ID: " + TR);
+
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
             WaitUtils.waitFor1000Milliseconds();
@@ -60,6 +65,7 @@ public class TC050 extends BaseClass {
             individualTestrun.clickTabTestLogs();
             logger.info("Clicked on Test Log tab");
 
+            WaitUtils.waitFor2000Milliseconds();
             individualTestrun.clickCreateTestLog();
             logger.info("Clicked on Create Test Log Button");
 
@@ -67,6 +73,7 @@ public class TC050 extends BaseClass {
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
 
+            WaitUtils.waitFor2000Milliseconds();
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
             logger.info("Entered actual result: " + actual_result + " in step: " + stepno);
 
@@ -94,6 +101,7 @@ public class TC050 extends BaseClass {
                 }
             }
 
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Final Updated Execution History Count: " + updatedCount);
             Assert.assertTrue(countIncreased,
                     "Execution history count did not increase! Before: " + initialCount + ", After: " + updatedCount);

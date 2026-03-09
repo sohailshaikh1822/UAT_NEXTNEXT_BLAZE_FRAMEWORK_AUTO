@@ -22,10 +22,12 @@ public class TC053  extends BaseClass {
 
             ExecuteLandingPage executeLandingPage = new ExecuteLandingPage(getDriver());
             IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
+            WaitUtils.waitFor2000Milliseconds();
 
             executeLandingPage.clickExecuteTab();
             logger.info("Navigated to Execute Test Case tab");
 
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickToSelectProject(parentModule);
             Assert.assertTrue(executeLandingPage.selectedModuleOrReleaseName(parentModule).isDisplayed(),
                     "Parent module not visible after expand");
@@ -35,8 +37,10 @@ public class TC053  extends BaseClass {
             Assert.assertTrue(executeLandingPage.isReleaseVisible(releaseName), "Release not visible after expand");
             logger.info("Expanded Release module: " + releaseName);
 
+
             individualTestRun.enterSearchTerm(searchTestRunName);
             logger.info("Entered search term: " + searchTestRunName);
+            WaitUtils.waitFor2000Milliseconds();
             individualTestRun.clickSearchButton();
             logger.info("Clicked on the Search button");
 
