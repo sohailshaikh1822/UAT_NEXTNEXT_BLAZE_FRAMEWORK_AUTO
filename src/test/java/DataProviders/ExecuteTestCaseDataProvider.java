@@ -401,5 +401,13 @@ public class ExecuteTestCaseDataProvider {
     public static Object[][] getDataTC080() throws IOException {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc080");
     }
+    @DataProvider(name = "tc087")
+    public static Object[][] getDataTC087() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc087");
+    }
+    @DataProvider(name = "tc089")
+    public static Object[][] getDataTC089() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc089");
+    }
 
 }
