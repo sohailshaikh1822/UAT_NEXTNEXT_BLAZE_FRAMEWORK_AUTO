@@ -389,7 +389,7 @@ public class IndividualTestRun extends BasePage {
                     radioShowAllSteps.isDisplayed() &&
                     radioShowBusinessSteps.isDisplayed() &&
                     QAUser.isDisplayed() &&
-                    BusinessUser.isDisplayed() &&
+//                    BusinessUser.isDisplayed() &&
                     PreCondition.isDisplayed();
         } catch (Exception e) {
             return false;

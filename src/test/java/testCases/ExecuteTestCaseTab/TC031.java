@@ -15,7 +15,6 @@ import java.util.List;
 public class TC031 extends BaseClass {
 
     @Test(dataProvider = "tc031", dataProviderClass = ExecuteTestCaseDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public class TC0022 extends BaseClass {
 
         public void verifyDefectIdNonDuplicacy(String projName,
                                                String releaseName,
@@ -76,4 +75,3 @@ public class TC031 extends BaseClass {
             logger.info("************ Test Case Finished *************************");
         }
     }
-}

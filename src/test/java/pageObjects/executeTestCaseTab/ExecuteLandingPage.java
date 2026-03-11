@@ -88,7 +88,7 @@ public class ExecuteLandingPage extends BasePage {
 
     public WebElement buttonActionPlay(String trId) {
         return driver.findElement(
-                By.xpath("//a[text()='" + trId + "']/ancestor::div[@class='requirement testlistframe-11']//button"));
+                By.xpath("//a[text()='" + trId + "']/ancestor::div[contains(@class,'testlistrow')]//button[contains(@class,'runButton')]"));
     }
 
     // locators for create test run
