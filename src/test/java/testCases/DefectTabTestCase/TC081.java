@@ -15,15 +15,22 @@ public class TC081 extends BaseClass {
             retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDefectExportInAllSupportedFormats(String defectid) throws Exception {
 
-        logger.info("****** Starting TC081 ******");
+        logger.info("************** Starting TC081 **************");
 
         try {
+
+            logger.info(" Logging into the application");
             login();
-            logger.info("Logged in successfully");
+            logger.info("Login successful");
+            WaitUtils.waitFor3000Milliseconds();
+
             DefectLandingPage defectLandingPage = new DefectLandingPage(getDriver());
-            WaitUtils.waitFor3000Milliseconds();
+
+            logger.info("Navigating to Defect tab");
             defectLandingPage.clickDefectTab();
+            logger.info("Defect tab opened successfully");
             WaitUtils.waitFor3000Milliseconds();
+            logger.info(" Opening defect with ID ");
             defectLandingPage.ClickDefectbyID(defectid);
 
             WaitUtils.waitFor3000Milliseconds();
@@ -52,14 +59,18 @@ public class TC081 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
 
             logger.info("TC081 executed successfully");
-        } catch (AssertionError ae) {
-            logger.error("Assertion failed: " + ae.getMessage());
-            throw ae;
-        } catch (Exception ex) {
-            logger.error("Exception occurred: " + ex.getMessage());
-            throw ex;
+
+        } catch (AssertionError e) {
+
+            logger.error("Assertion failed", e.getMessage());
+            throw e;
+
+        } catch (Exception e) {
+
+            logger.error("Unexpected exception", e.getMessage());
+            throw e;
         }
 
-        logger.info("****** Finished  ******");
+        logger.info("************** TC081 Finished Successfully **************");
     }
 }

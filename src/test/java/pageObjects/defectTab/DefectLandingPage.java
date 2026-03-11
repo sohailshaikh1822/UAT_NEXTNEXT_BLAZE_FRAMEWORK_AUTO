@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BasePage;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
@@ -521,5 +523,20 @@ public class DefectLandingPage extends BasePage {
         if (!checkbox.isSelected()) {
             checkbox.click();
         }
+    }
+
+    public void clickSaveAndConfirmDownload() throws Exception {
+
+        WebElement button = wait.until(
+                ExpectedConditions.elementToBeClickable(saveButton)
+        );
+
+        button.click();
+
+        Robot robot = new Robot();
+        robot.delay(2000);
+
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
     }
 }

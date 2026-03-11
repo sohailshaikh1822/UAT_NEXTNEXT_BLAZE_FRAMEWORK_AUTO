@@ -421,4 +421,37 @@ public class IndividualTestRun extends BasePage {
         );
         js.executeScript("arguments[0].click();", notification);
     }
+
+    // Export Test Logs
+
+    @FindBy(xpath = "//button[.//div[contains(normalize-space(),'Export')]]")
+    WebElement buttonExportTestLogs;
+
+    @FindBy(id = "exportFileType")
+    WebElement dropdownExportFileType;
+
+    @FindBy(xpath = "//button[contains(@class,'test-run-button-3') and .//div[contains(text(),'Export')]]")
+    WebElement buttonSaveExport;
+
+    public void clickExportButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonExportTestLogs));
+        buttonExportTestLogs.click();
+        wait.until(ExpectedConditions.visibilityOf(dropdownExportFileType));
+    }
+
+    public void selectCSVFileType() {
+        Select select = new Select(dropdownExportFileType);
+        select.selectByValue("csv");
+    }
+
+    public void clickSaveExportButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSaveExport));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", buttonSaveExport);
+    }
+
+    public void selectPDFFileType() {
+        Select select = new Select(dropdownExportFileType);
+        select.selectByValue("pdf");
+    }
+
 }
