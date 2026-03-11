@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -25,8 +26,9 @@ public class TC063 extends BaseClass {
             defectLandingPage.clickExportButton();
             logger.info("Clicked on Export button");
             WaitUtils.waitFor1000Milliseconds();
+            ExportListener exportListener =new ExportListener(getDriver());
 
-            defectLandingPage.verifyExcelSelectedByDefault();
+            exportListener.verifyExcelSelectedByDefault();
             logger.info("Excel is been selected by default");
 
             logger.info("TC063 executed successfully");

@@ -3,6 +3,7 @@ package testCases.DefectTabTestCase;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -22,7 +23,8 @@ public class TC068 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.verifyExportAllButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectExcelFileType();
+            ExportListener exportListener =new ExportListener(getDriver());
+            exportListener.selectExcelFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);

@@ -4,15 +4,16 @@ import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC081 extends BaseClass {
 
-    @Test(dataProvider = "tc081",
+    @Test(dataProvider = "tc078",
             dataProviderClass = DefectTabTestCaseDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyDefectExportInAllSupportedFormats(String defectid) throws InterruptedException {
+    public void VerifyDefectExportInAllSupportedFormats(String defectid) throws Exception {
 
         logger.info("****** Starting TC081 ******");
 
@@ -24,22 +25,29 @@ public class TC081 extends BaseClass {
             defectLandingPage.clickDefectTab();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.ClickDefectbyID(defectid);
+
+            WaitUtils.waitFor3000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
+            defectLandingPage.verifyExportButtonVisibleAndClickable();
+            WaitUtils.waitFor3000Milliseconds();
+            ExportListener exportListener =new ExportListener(getDriver());
+
+            exportListener.selectExcelFileType();
+            defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor1000Milliseconds();
-            defectLandingPage.verifyExportAllButtonVisibleAndClickable();
+//            defectLandingPage.pressSaveButton();
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectExcelFileType();
+
+            defectLandingPage.verifyExportButtonVisibleAndClickable();
+            WaitUtils.waitFor3000Milliseconds();
+
+            exportListener.selectCsvFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
 
-            defectLandingPage.verifyExportAllButtonVisibleAndClickable();
+            defectLandingPage.verifyExportButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectCsvFileType();
-            defectLandingPage.clickSaveExportButton();
-            WaitUtils.waitFor3000Milliseconds();
-
-            defectLandingPage.verifyExportAllButtonVisibleAndClickable();
-            WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectPdfFileType();
+            exportListener.selectPdfFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
 

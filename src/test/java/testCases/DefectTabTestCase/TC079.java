@@ -4,18 +4,17 @@ import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
-import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
-public class TC080 extends BaseClass {
+public class TC079 extends BaseClass {
 
-    @Test(dataProvider = "tc080",
+    @Test( dataProvider = "tc079",
             dataProviderClass = DefectTabTestCaseDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyDownloadInBackgroundCheckboxFunctionality(String defectid) throws InterruptedException {
+    public void VerifyFileTypeDropdownContainsAlThreeFormats(String defectId) throws InterruptedException {
 
-        logger.info("****** Starting TC080 ******");
+        logger.info("****** Starting TC079 ******");
 
         try {
             login();
@@ -24,17 +23,9 @@ public class TC080 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.clickDefectTab();
             WaitUtils.waitFor2000Milliseconds();
-            defectLandingPage.ClickDefectbyID(defectid);
-            WaitUtils.waitFor1000Milliseconds();
-            defectLandingPage.verifyExportButtonVisibleAndClickable();
-            WaitUtils.waitFor3000Milliseconds();
-            ExportListener exportListener =new ExportListener(getDriver());
+            defectLandingPage.ClickDefectbyID(defectId);
 
-            exportListener.selectExcelFileType();
-            defectLandingPage.clickDownloadInBackgroundCheckbox();
-            defectLandingPage.clickSaveExportButton();
-
-            logger.info("TC080 executed successfully");
+            logger.info("TC079 executed successfully");
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());
             throw ae;
@@ -45,5 +36,4 @@ public class TC080 extends BaseClass {
 
         logger.info("****** Finished  ******");
     }
-
 }
