@@ -79,6 +79,7 @@ public class TC021 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
 
             individualTestRun.clickLinkDefect();
+            logger.info("clicked on link defect");
             WaitUtils.waitFor2000Milliseconds();
 
             LinkDefectPage linkDefectPage2 = new LinkDefectPage(getDriver());

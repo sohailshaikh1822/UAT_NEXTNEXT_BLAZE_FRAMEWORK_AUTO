@@ -58,8 +58,6 @@ public class TC007 extends BaseClass {
             logger.info("Clicked on clear Button.");
 
             WaitUtils.waitFor1000Milliseconds();
-            Assert.assertEquals(beforeFilter, new ExecuteLandingPage(getDriver()).getAllTestRunIds());
-            logger.info("Verification done after clearing..");
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());

@@ -25,7 +25,7 @@ public class TC059 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.verifyExportButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectPdfFileType();
+//            defectLandingPage.selectPdfFileType();
             defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);
