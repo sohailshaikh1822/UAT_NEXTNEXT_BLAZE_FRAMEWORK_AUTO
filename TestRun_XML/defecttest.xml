@@ -48,11 +48,11 @@
 <!--            <class name="testCases.DefectTabTestCase.TC048"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC049"/>-->
 <!--            <class name="testCases.DefectTabTestCase.TC057"/>-->
-            <class name="testCases.DefectTabTestCase.TC068"/>
+<!--            <class name="testCases.DefectTabTestCase.TC068"/>-->
 
-            <class name="testCases.DefectTabTestCase.TC069"/>
+<!--            <class name="testCases.DefectTabTestCase.TC069"/>-->
 
-            <class name="testCases.DefectTabTestCase.TC070"/>
+            <class name="testCases.DefectTabTestCase.TC081"/>
 
 
         </classes>

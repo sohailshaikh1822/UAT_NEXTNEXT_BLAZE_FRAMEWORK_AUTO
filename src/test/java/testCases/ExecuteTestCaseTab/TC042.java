@@ -34,10 +34,11 @@ public class TC042 extends BaseClass {
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(release);
             logger.info("Expanded the release {}", release);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(cycle);
             logger.info("Expanded the cycle : {}", cycle);
 
@@ -46,7 +47,7 @@ public class TC042 extends BaseClass {
 
             executeLandingPage.searchTestCase(testRunId);
             logger.info("Entered the test run Id : {}", testRunId);
-
+            WaitUtils.waitFor1000Milliseconds();
 //            executeLandingPage.clickTestRunById(testRunId);
             executeLandingPage.clickPlayActionById(testRunId);
             logger.info("clicked on test run Id {}", testRunId);

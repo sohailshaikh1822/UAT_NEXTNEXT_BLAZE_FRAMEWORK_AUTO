@@ -30,10 +30,11 @@ public class TC043 extends BaseClass {
             executeLandingPage.clickOnProject();
             logger.info("Clicked on project Name ....");
 
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.expandRelease(release);
             logger.info("Expanded the release {}", release);
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(cycle);
             logger.info("Expanded the cycle : {}", cycle);
 

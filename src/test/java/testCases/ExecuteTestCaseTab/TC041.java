@@ -37,12 +37,14 @@ public class TC041 extends BaseClass {
             executeLandingPage.clickToSelectProject(projectName);
             logger.info("Expanded Project: " + projectName);
 
-            WaitUtils.waitFor2000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.expandRelease(ReleaseName);
             logger.info("Expanded Release: " + ReleaseName);
 
+            WaitUtils.waitFor3000Milliseconds();
 
             WaitUtils.waitFor2000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.expandSubTestCycle(CycleName);
             logger.info("Expanded Cycle: " + CycleName);
 
@@ -65,10 +67,11 @@ public class TC041 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.enterSummary(summary);
             logger.info("Entered Summary" + summary);
-
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.selectStatus(status);
             logger.info("Clicked on status" + status);
 
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.uploadFile(fileAddress);
             logger.info("<less than 5 mb uploaded");
             WaitUtils.waitFor1000Milliseconds();

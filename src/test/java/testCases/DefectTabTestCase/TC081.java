@@ -4,12 +4,13 @@ import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
 public class TC081 extends BaseClass {
 
-    @Test(dataProvider = "tc081",
+    @Test(dataProvider = "tc078",
             dataProviderClass = DefectTabTestCaseDataProvider.class,
             retryAnalyzer = RetryAnalyzer.class)
     public void VerifyDefectExportInAllSupportedFormats(String defectid) throws Exception {
@@ -31,34 +32,30 @@ public class TC081 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             logger.info(" Opening defect with ID ");
             defectLandingPage.ClickDefectbyID(defectid);
-            logger.info("Defect details page opened successfully");
+
+            WaitUtils.waitFor3000Milliseconds();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.verifyExportButtonVisibleAndClickable();
-            logger.info("Export modal opened successfully");
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectExcelFileType();
-            logger.info("Excel format selected successfully");
-            WaitUtils.waitFor2000Milliseconds();
-            defectLandingPage.clickSaveAndConfirmDownload();
-            logger.info("Excel export initiated successfully");
+            ExportListener exportListener =new ExportListener(getDriver());
+
+            exportListener.selectExcelFileType();
+            defectLandingPage.clickSaveExportButton();
+            WaitUtils.waitFor1000Milliseconds();
+//            defectLandingPage.pressSaveButton();
             WaitUtils.waitFor3000Milliseconds();
+
             defectLandingPage.verifyExportButtonVisibleAndClickable();
-            logger.info("Export modal opened again successfully");
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectCsvFileType();
-            logger.info("CSV format selected successfully");
-            WaitUtils.waitFor2000Milliseconds();
-            defectLandingPage.clickSaveAndConfirmDownload();
-            logger.info("CSV export initiated successfully");
+
+            exportListener.selectCsvFileType();
+            defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
+
             defectLandingPage.verifyExportButtonVisibleAndClickable();
-            logger.info("Export modal opened again successfully");
             WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectPdfFileType();
-            logger.info("PDF format selected successfully");
-            WaitUtils.waitFor2000Milliseconds();
-            defectLandingPage.clickSaveAndConfirmDownload();
-            logger.info("PDF export initiated successfully");
+            exportListener.selectPdfFileType();
+            defectLandingPage.clickSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
 
             logger.info("TC081 executed successfully");

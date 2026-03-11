@@ -1,5 +1,6 @@
 package testCases.DefectTabTestCase;
 
+import DataProviders.DefectTabTestCaseDataProvider;
 import org.testng.annotations.Test;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
@@ -8,8 +9,10 @@ import utils.WaitUtils;
 
 public class TC077 extends BaseClass {
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void VerifyExcelFileIsDownloadedSuccessfullyUsingExportAll() throws InterruptedException {
+    @Test( dataProvider = "tc077",
+            dataProviderClass = DefectTabTestCaseDataProvider.class,
+            retryAnalyzer = RetryAnalyzer.class)
+    public void VerifyExportDefectsModalOpensOnClickingExportButton( String defectId) throws InterruptedException {
 
         logger.info("****** Starting TC077 ******");
 
@@ -20,13 +23,12 @@ public class TC077 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.clickDefectTab();
             WaitUtils.waitFor2000Milliseconds();
-            defectLandingPage.ClickDefectbyID("DF-314");
+            defectLandingPage.ClickDefectbyID(defectId);
             defectLandingPage.verifyExportButtonVisibleAndClickable();
-            WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.selectExcelFileType();
-            defectLandingPage.clickSaveExportButton();
-            WaitUtils.waitFor3000Milliseconds();
-            defectLandingPage.isFileDownloaded(30);
+            WaitUtils.waitFor1000Milliseconds();
+            defectLandingPage.verifyExportModalDisplayed();
+            WaitUtils.waitFor1000Milliseconds();
+            defectLandingPage.verifyCancelAndSaveButtons();
             logger.info("TC077 executed successfully");
         } catch (AssertionError ae) {
             logger.error("Assertion failed: " + ae.getMessage());

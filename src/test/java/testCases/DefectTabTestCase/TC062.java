@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -36,9 +37,10 @@ public class TC062 extends BaseClass {
 
             defectPage.clickExportButton();
             logger.info("Click on Export button");
-            defectPage.selectExcelFileType();
+            ExportListener exportListener = new ExportListener(getDriver());
+            exportListener.selectExcelFileType();
             logger.info("select excel from the dropdown");
-            defectPage.clickSaveButton();
+            exportListener.clickSaveButton();
             logger.info("Clicked on save button");
 
             logger.info("TC062 executed successfully");

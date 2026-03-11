@@ -17,7 +17,6 @@ import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import utils.WaitUtils;
 
@@ -138,6 +137,8 @@ public class DefectLandingPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(arrowForwardNextPagination));
         arrowForwardNextPagination.click();
     }
+
+
 
     // public void clickCreateTestCaseButton() {
     // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -339,57 +340,10 @@ public class DefectLandingPage extends BasePage {
         return defectRows.size();
     }
 
-    public void selectExcelFileType() {
 
-        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
 
-        Select select = new Select(fileTypeDropdown);
-        select.selectByVisibleText("Excel (.xlsx)");
-    }
 
-    public void selectCsvFileType() {
 
-        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
-
-        Select select = new Select(fileTypeDropdown);
-        select.selectByVisibleText("CSV (.csv)");
-    }
-
-    public void selectPdfFileType() {
-
-        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
-
-        Select select = new Select(fileTypeDropdown);
-        select.selectByVisibleText("PDF (.pdf)");
-    }
-
-    public void clickSaveButton() {
-
-        WebElement button = wait.until(
-                ExpectedConditions.elementToBeClickable(saveButton)
-        );
-
-        button.click();
-    }
-
-    public void verifyExcelSelectedByDefault() {
-
-        wait.until(ExpectedConditions.visibilityOf(exportModal));
-        wait.until(ExpectedConditions.visibilityOf(fileTypeDropdown));
-
-        Select select = new Select(fileTypeDropdown);
-
-        String selectedOption = select.getFirstSelectedOption()
-                .getText()
-                .trim();
-
-        if (!selectedOption.equals("Excel (.xlsx)")) {
-            throw new AssertionError(
-                    "Default selected file type is incorrect.\nExpected: Excel (.xlsx)\nActual: "
-                            + selectedOption
-            );
-        }
-    }
 
     public void verifyExportModalDisplayed() {
 
