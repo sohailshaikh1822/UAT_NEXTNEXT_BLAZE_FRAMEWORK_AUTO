@@ -372,7 +372,7 @@ public class ExecuteLandingPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         By statusDropdownLocator = By.xpath(
-                "//select[contains(@class,'test-run-text') and contains(@class,'select-dropdown')]"
+                "//select[@id='statusDropdown']"
         );
 
         WebElement dropdown = wait.until(

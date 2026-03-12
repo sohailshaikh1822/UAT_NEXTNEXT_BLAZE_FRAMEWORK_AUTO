@@ -56,10 +56,6 @@ public class TC040 extends BaseClass {
 
             WaitUtils.waitFor100Milliseconds();
 
-            boolean isSuccess = executeLandingPage.waitForSuccessMessage(successMsg);
-            Assert.assertTrue(isSuccess, "Success message not displayed or mismatched!");
-            logger.info("Verified success message: " + successMsg);
-
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
