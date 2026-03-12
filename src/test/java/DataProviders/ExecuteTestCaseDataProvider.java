@@ -410,4 +410,9 @@ public class ExecuteTestCaseDataProvider {
         return ExcelDataProviders.getExcelDataForExecuteTestCase("tc089");
     }
 
+    @DataProvider(name = "tc090")
+    public static Object[][] getDataTC090() throws IOException {
+        return ExcelDataProviders.getExcelDataForExecuteTestCase("tc090");
+    }
+
 }
