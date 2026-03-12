@@ -52,8 +52,8 @@ public class TC045 extends BaseClass {
             page.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
 
-
-            page.selectTestCaseCheckbox(testCaseID);
+            WaitUtils.waitFor1000Milliseconds();
+            page.selectTestCaseCheckbox("TC-461");
             logger.info("Selected test case ID: " + testCaseID);
             WaitUtils.waitFor2000Milliseconds();
 

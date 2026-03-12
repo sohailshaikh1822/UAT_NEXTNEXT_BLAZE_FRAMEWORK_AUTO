@@ -56,7 +56,8 @@ public class TC049 extends BaseClass {
             individualTestrun.clickCreateTestLog();
             logger.info("Clicked on Create Test Log Button");
 
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
+
             individualTestrun.selectStatus(status);
             logger.info("Status changed to: " + status);
             WaitUtils.waitFor2000Milliseconds();

@@ -547,7 +547,6 @@ public class ExecuteLandingPage extends BasePage {
 
     public void clickPlayActionById(String tcIO) throws InterruptedException {
         WaitUtils.waitFor2000Milliseconds();
-        ;
         new Actions(driver).moveToElement(buttonActionPlay(tcIO)).perform();
         WaitUtils.waitFor1000Milliseconds();
         buttonActionPlay(tcIO).click();
@@ -628,7 +627,7 @@ public class ExecuteLandingPage extends BasePage {
         try {
             WebElement msg = wait.until(ExpectedConditions.visibilityOf(testRunCreatedSuccessMessage));
             String message = msg.getText().trim();
-            return message.equalsIgnoreCase("Test runs created successfully.");
+            return message.equalsIgnoreCase("Test runs saved successfully.");
         } catch (TimeoutException | NoSuchElementException e) {
             return false;
         }
