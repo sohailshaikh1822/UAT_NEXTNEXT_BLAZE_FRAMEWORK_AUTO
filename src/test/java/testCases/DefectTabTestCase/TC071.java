@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -28,6 +29,8 @@ public class TC071 extends BaseClass {
             logger.info("Export All button has been verified");
 
             defectPage.verifyExportModalDisplayed();
+            WaitUtils.waitFor2000Milliseconds();
+            defectPage.clickCancelButton();
             logger.info("Export modal is opened successfully");
 
             logger.info("TC071 executed successfully");

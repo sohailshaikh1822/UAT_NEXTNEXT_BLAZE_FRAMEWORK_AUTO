@@ -69,12 +69,19 @@ public class ExportListener extends BaseClass {
     public void clickSaveButton() {
 
         WebElement button = wait.until(
-                ExpectedConditions.elementToBeClickable(saveExportBtn)
+                ExpectedConditions.elementToBeClickable(cancelButton)
         );
 
         button.click();
     }
+    public void clickCancelButton() {
 
+        WebElement button = wait.until(
+                ExpectedConditions.elementToBeClickable(cancelButton)
+        );
+
+        button.click();
+    }
     public void verifyExcelSelectedByDefault() {
 
         wait.until(ExpectedConditions.visibilityOf(exportModal));

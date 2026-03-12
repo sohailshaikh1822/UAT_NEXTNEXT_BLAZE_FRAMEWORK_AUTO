@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -23,16 +24,16 @@ public class TC072 extends BaseClass {
             defectPage.clickDefectTab();
 
             WaitUtils.waitFor2000Milliseconds();
-            defectPage.verifyExportAllButtonVisibleAndClickable();
-
-            WaitUtils.waitFor1000Milliseconds();
-            defectPage.verifyExportModalDisplayed();
-
-            WaitUtils.waitFor1000Milliseconds();
-            defectPage.verifyFileTypeDropdown();
-            WaitUtils.waitFor1000Milliseconds();
-            defectPage.verifyCancelAndSaveButtons();
-
+            defectPage.verifyFileTypeDropdownContainsAllFormats();
+            WaitUtils.waitFor3000Milliseconds();
+//            ExportListener exportListener =new ExportListener(getDriver());
+//
+//            exportListener.selectExcelFileType();
+//            WaitUtils.waitFor3000Milliseconds();
+            defectPage.clickDownloadInBackgroundCheckbox();
+            defectPage.clickSaveExportButton();
+            WaitUtils.waitFor3000Milliseconds();
+            defectPage.isFileDownloaded(30);
             logger.info("TC072 executed successfully");
 
         } catch (AssertionError ae) {

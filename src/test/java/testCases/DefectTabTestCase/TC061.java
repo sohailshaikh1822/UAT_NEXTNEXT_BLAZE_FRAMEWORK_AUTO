@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -24,6 +25,15 @@ public class TC061 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             defectPage.verifyFileTypeDropdownContainsAllFormats();
+//            WaitUtils.waitFor3000Milliseconds();
+//            ExportListener exportListener =new ExportListener(getDriver());
+//
+//            exportListener.selectExcelFileType();
+            WaitUtils.waitFor3000Milliseconds();
+            defectPage.clickDownloadInBackgroundCheckbox();
+            defectPage.clickSaveExportButton();
+            WaitUtils.waitFor3000Milliseconds();
+            defectPage.isFileDownloaded(30);
 
             logger.info("TC061 executed successfully");
 
