@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pageObjects.defectTab.CreateDefectPage;
 import pageObjects.defectTab.DefectLandingPage;
 import testBase.BaseClass;
+import utils.ExportListener;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
 
@@ -24,7 +25,9 @@ public class TC060 extends BaseClass {
 
             WaitUtils.waitFor2000Milliseconds();
             defectLandingPage.verifyExportButtonVisibleAndClickable();
-
+            WaitUtils.waitFor2000Milliseconds();
+            ExportListener exportListener =new ExportListener(getDriver());
+            exportListener.clickCancelButton();
             logger.info("TC060 executed successfully");
 
         } catch (AssertionError ae) {

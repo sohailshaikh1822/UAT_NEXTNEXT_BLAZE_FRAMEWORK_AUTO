@@ -321,6 +321,14 @@ public class DefectLandingPage extends BasePage {
         exportButton.click();
     }
 
+    public void clickCancelButton() {
+
+        WebElement button = wait.until(
+                ExpectedConditions.elementToBeClickable(cancelButton)
+        );
+
+        button.click();
+    }
     public void verifyExportButtonVisibleAndClickable() {
 
         if (!exportButton.isDisplayed()) {
