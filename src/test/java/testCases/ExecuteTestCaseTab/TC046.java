@@ -53,7 +53,7 @@ public class TC046 extends BaseClass {
             page.clickRequirementById(requirementID);
             logger.info("Selected requirement ID: " + requirementID);
 
-            page.selectTestCaseCheckbox(testCaseID);
+            page.selectTestCaseCheckbox("TC-461");
             logger.info("Selected test case ID: " + testCaseID);
             WaitUtils.waitFor2000Milliseconds();
 

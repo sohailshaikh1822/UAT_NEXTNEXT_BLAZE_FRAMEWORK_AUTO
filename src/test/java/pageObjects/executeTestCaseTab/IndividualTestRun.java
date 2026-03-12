@@ -35,7 +35,7 @@ public class IndividualTestRun extends BasePage {
     @FindBy(xpath = "//div[@class='test-run-name']")
     WebElement headingTestRunName;
 
-    @FindBy(xpath = "//select[@class='test-run-text select-dropdown']")
+    @FindBy(xpath = "(//div[normalize-space()='Status']/following::select[contains(@class,'select-dropdown')])[1]")
     WebElement dropdownStatus;
 
     @FindBy(xpath = "//button[@id='submitButton']")

@@ -37,11 +37,11 @@ public class TC043 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(cycle);
             logger.info("Expanded the cycle : {}", cycle);
-
+            WaitUtils.waitFor2000Milliseconds();
             executeLandingPage.clickOnSuite(suite);
             logger.info("clicked on the suite : {}", suite);
-
-            executeLandingPage.searchTestCase(testRunId);
+            WaitUtils.waitFor2000Milliseconds();
+            executeLandingPage.searchTestCase("TR-1234556789");
             logger.info("Entered the test run Id : {}", testRunId);
 
             WaitUtils.waitFor1000Milliseconds();

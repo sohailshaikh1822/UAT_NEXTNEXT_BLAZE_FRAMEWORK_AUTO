@@ -41,24 +41,26 @@ public class TC042 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             executeLandingPage.clickArrowRightToExpandModule(cycle);
             logger.info("Expanded the cycle : {}", cycle);
-
+             WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.clickOnSuite(suite);
             logger.info("clicked on the suite : {}", suite);
 
+            WaitUtils.waitFor1000Milliseconds();
             executeLandingPage.searchTestCase(testRunId);
             logger.info("Entered the test run Id : {}", testRunId);
             WaitUtils.waitFor1000Milliseconds();
 //            executeLandingPage.clickTestRunById(testRunId);
             executeLandingPage.clickPlayActionById(testRunId);
             logger.info("clicked on test run Id {}", testRunId);
-
-            IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
             WaitUtils.waitFor1000Milliseconds();
+            IndividualTestRun individualTestRun = new IndividualTestRun(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             individualTestRun.clickLinkDefect();
             logger.info("Clicked on link defect ");
 
             LinkDefectPage linkDefectPage = new LinkDefectPage(getDriver());
 
+            WaitUtils.waitFor1000Milliseconds();
             linkDefectPage.clickNew();
             logger.info("Clicked On the New ");
             WaitUtils.waitFor3000Milliseconds();
