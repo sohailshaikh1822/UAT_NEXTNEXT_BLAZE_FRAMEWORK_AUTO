@@ -47,7 +47,7 @@ public class TC014 extends BaseClass {
 
             executeLandingPage.clickPlayActionById(testRun);
             logger.info("Clicked on Action Play button");
-            WaitUtils.waitFor1000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
 
             individualTestrun.selectStatus(status);
             logger.info("Selected status '" + status + "' from dropdown");

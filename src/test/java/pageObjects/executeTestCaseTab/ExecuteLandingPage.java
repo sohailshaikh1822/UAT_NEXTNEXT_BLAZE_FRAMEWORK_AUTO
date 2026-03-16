@@ -366,26 +366,42 @@ public class ExecuteLandingPage extends BasePage {
         return viewAllRadio.isSelected();
     }
 
-    public void selectStatus(String status) {
+//
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+//    public void selectStatus(String status) {
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        By statusDropdownLocator = By.xpath("//select[contains(@class,'select-dropdown')]");
+//
+//        WebElement dropdown = wait.until(
+//                ExpectedConditions.elementToBeClickable(statusDropdownLocator)
+//        );
+//
+//        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
+//
+//        Select select = new Select(dropdown);
+//        select.selectByVisibleText(status);
+//    }
 
-        By statusDropdownLocator = By.xpath(
-                "//select[@id='statusDropdown']"
-        );
 
-        WebElement dropdown = wait.until(
-                ExpectedConditions.presenceOfElementLocated(statusDropdownLocator)
-        );
-
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
-        js.executeScript("arguments[0].click();", dropdown);
-
-        Select select = new Select(dropdown);
-        select.selectByVisibleText(status);
-    }
-
+//    public void selectStatus(String status) {
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//
+//        By statusDropdownLocator = By.xpath("//select[contains(@class,'select-dropdown')]");
+//
+//        WebElement dropdown = wait.until(
+//                ExpectedConditions.elementToBeClickable(statusDropdownLocator)
+//        );
+//
+//        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
+//
+//        Select select = new Select(dropdown);
+//        select.selectByVisibleText(status);
+//    }
 
     public String getSelectedStatus() {
         return new Select(statusDropdown).getFirstSelectedOption().getText();
@@ -1277,6 +1293,16 @@ public class ExecuteLandingPage extends BasePage {
         );
     }
 
+    public void selectStatus(String status) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[contains(text(),'Status')]/following::select[1]")));
+
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(status);
+    }
 
 
 }
