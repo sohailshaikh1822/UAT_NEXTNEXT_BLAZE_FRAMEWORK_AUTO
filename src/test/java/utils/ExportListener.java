@@ -1,14 +1,24 @@
 package utils;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import testBase.BaseClass;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -143,4 +153,57 @@ public class ExportListener extends BaseClass {
         }
     }
 
+
+    public static String getLatestFileFromDir(String dirPath) {
+
+        File dir = new File(dirPath);
+        File[] files = dir.listFiles();
+
+        File lastModifiedFile = files[0];
+
+        for (int i = 1; i < files.length; i++) {
+            if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+                lastModifiedFile = files[i];
+            }
+        }
+
+        return lastModifiedFile.getAbsolutePath();
+    }
+
+    public  void verifyExcelColumns(String filePath, List<String> expectedColumns) {
+
+        try {
+
+            FileInputStream fis = new FileInputStream(new File(filePath));
+            Workbook workbook = new XSSFWorkbook(fis);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            Row headerRow = sheet.getRow(0);
+
+            List<String> actualColumns = new ArrayList<>();
+
+            for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+                actualColumns.add(headerRow.getCell(i).getStringCellValue().trim());
+            }
+
+            Assert.assertEquals(actualColumns, expectedColumns, "Excel columns mismatch!");
+            System.out.println(actualColumns);
+
+            workbook.close();
+            fis.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Failed to verify Excel columns: " + e.getMessage());
+        }
+    }
+
+    public void pressSaveButton() throws Exception {
+        Robot robot = new Robot();
+        robot.delay(2000);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+    }
 }
+
+
