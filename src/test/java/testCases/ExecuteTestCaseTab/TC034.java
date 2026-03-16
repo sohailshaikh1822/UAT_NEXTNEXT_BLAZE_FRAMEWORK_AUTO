@@ -17,7 +17,6 @@ public class TC034 extends BaseClass {
             String CycleName,
             String SuiteName,
             String TR,
-            String status,
             String stepno,
             String actual_result,
             String step) throws InterruptedException {
@@ -56,10 +55,6 @@ public class TC034 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
 
             IndividualTestRun individualTestrun = new IndividualTestRun(getDriver());
-            WaitUtils.waitFor1000Milliseconds();
-
-            individualTestrun.selectStatus(status);
-            logger.info("Status changed to: " + status);
             WaitUtils.waitFor1000Milliseconds();
 
             individualTestrun.EnterActualResultOfTheStep(Integer.parseInt(stepno), actual_result);
