@@ -81,7 +81,7 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "//p[@class='pagination-text']")
     WebElement totalDefectEntryCount;
 
-    @FindBy(xpath = "//button[@class='export-save-button ']")
+    @FindBy(xpath = "(//div[contains(text(), 'SAVE')])[2]")
     WebElement saveExportBtn;
 
 

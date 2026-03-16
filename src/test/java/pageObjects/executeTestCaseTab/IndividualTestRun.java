@@ -115,20 +115,20 @@ public class IndividualTestRun extends BasePage {
     Actions a = new Actions(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-    @FindBy(xpath = "//div[contains(text(),'EXPORT')]]")
-    WebElement exportButton;
+    @FindBy(xpath = "//div[contains(text(), 'Export')]")
+    WebElement exportTrButton;
 
     public void verifyExportButtonOfTrVisibleAndClickable() {
 
-        if (!exportButton.isDisplayed()) {
+        if (!exportTrButton.isDisplayed()) {
             throw new AssertionError("Export button is not visible.");
         }
 
-        if (!exportButton.isEnabled()) {
+        if (!exportTrButton.isEnabled()) {
             throw new AssertionError("Export button is not clickable.");
         }
 
-        exportButton.click();
+        exportTrButton.click();
     }
     public boolean isErrorAfterEmptyTestLogSaveVisible() {
         try {
