@@ -92,6 +92,11 @@ public class IndividualModulePage extends BasePage {
     @FindBy(id = "actionDialogtp-message")
     WebElement moduleNameAlertMessage;
 
+
+
+
+
+
     public WebElement linkRequirementIdFromId(String id) {
         return driver.findElement(By.xpath(
                 "//div[@id='existingTestCasesInnerTable']//div[contains(@class,'pid-col')]//a[normalize-space()='" + id + "']"
@@ -150,7 +155,49 @@ public class IndividualModulePage extends BasePage {
 
     @FindBy(xpath = "(//div[normalize-space()='NO'])[1]")
     WebElement clickNo;
-    // Actions
+
+    // New Actions
+
+
+    @FindBy(xpath = "//span[contains(text(),'Module History' )]")
+    WebElement moduleHistory;
+
+    @FindBy(xpath = "(//span[@class='version-table-expand-icon'])[last()]")
+    WebElement latestVersion;
+
+    @FindBy(xpath = "//div[@class='test-step-table-header']")
+    WebElement verifyingHeader;
+
+
+    @FindBy(xpath = "//div[@class='table-row version-table-header-row']")
+    WebElement verifyingHeaderOfModuleHistory;
+
+
+
+    public void clickModuleHistory()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(moduleHistory)).click();
+    }
+
+    public void clickLatestUpdatedVersion()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(latestVersion)).click();
+    }
+
+    public String verifyingHeaderOfModuleHistoryChanges()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeader)).getText();
+    }
+
+    public String verifyingHeaderOfModuleHistory()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeaderOfModuleHistory)).getText();
+    }
+
 
     public void clickAddRequirement() {
         buttonAddRequirement.click();
