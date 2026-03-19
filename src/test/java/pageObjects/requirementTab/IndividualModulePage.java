@@ -168,11 +168,19 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//div[@class='test-step-table-header']")
     WebElement verifyingHeader;
 
-
     @FindBy(xpath = "//div[@class='table-row version-table-header-row']")
     WebElement verifyingHeaderOfModuleHistory;
 
+    //Requirement
 
+    @FindBy(xpath = "//span[contains(text(),'Requirement History' )]")
+    WebElement requirementHistory;
+
+    @FindBy(xpath = "//div[@class='table-row version-table-header-row']")
+    WebElement verifyingHeaderOfRequirementHistory;
+
+    @FindBy(xpath = "(//span[contains(@class,'version-title')])[last()]")
+    WebElement latestVersionValue;
 
 
     public void clickModuleHistory()
@@ -199,6 +207,38 @@ public class IndividualModulePage extends BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeaderOfModuleHistory)).getText();
     }
 
+    public boolean verifyDefaultVersionIsOne() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            String version = wait.until(
+                            ExpectedConditions.visibilityOf(latestVersionValue))
+                    .getText().trim();
+
+            return version.equals("1");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickRequirementHistory()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(requirementHistory)).click();
+    }
+
+    public void clickLatestUpdatedRequirementVersion()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(latestVersion)).click();
+    }
+
+    public String verifyingHeaderOfRequirementHistory()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeaderOfRequirementHistory)).getText();
+    }
     public boolean verifyExpandedVersionHeaders() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -268,6 +308,8 @@ public class IndividualModulePage extends BasePage {
             return false;
         }
     }
+
+
 
     public void clickAddRequirement() {
         buttonAddRequirement.click();
