@@ -168,11 +168,16 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//div[@class='test-step-table-header']")
     WebElement verifyingHeader;
 
-
     @FindBy(xpath = "//div[@class='table-row version-table-header-row']")
     WebElement verifyingHeaderOfModuleHistory;
 
+    //Requirement
 
+    @FindBy(xpath = "//span[contains(text(),'Requirement History' )]")
+    WebElement requirementHistory;
+
+    @FindBy(xpath = "//div[@class='table-row version-table-header-row']")
+    WebElement verifyingHeaderOfRequirementHistory;
 
 
     public void clickModuleHistory()
@@ -199,6 +204,23 @@ public class IndividualModulePage extends BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeaderOfModuleHistory)).getText();
     }
 
+    public void clickRequirementHistory()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(requirementHistory)).click();
+    }
+
+    public void clickLatestUpdatedRequirementVersion()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(latestVersion)).click();
+    }
+
+    public String verifyingHeaderOfRequirementHistory()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeaderOfRequirementHistory)).getText();
+    }
     public boolean verifyExpandedVersionHeaders() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
