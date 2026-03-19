@@ -179,6 +179,9 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//div[@class='table-row version-table-header-row']")
     WebElement verifyingHeaderOfRequirementHistory;
 
+    @FindBy(xpath = "(//span[contains(@class,'version-title')])[last()]")
+    WebElement latestVersionValue;
+
 
     public void clickModuleHistory()
     {
@@ -202,6 +205,21 @@ public class IndividualModulePage extends BasePage {
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.elementToBeClickable(verifyingHeaderOfModuleHistory)).getText();
+    }
+
+    public boolean verifyDefaultVersionIsOne() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            String version = wait.until(
+                            ExpectedConditions.visibilityOf(latestVersionValue))
+                    .getText().trim();
+
+            return version.equals("1");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void clickRequirementHistory()
@@ -290,6 +308,8 @@ public class IndividualModulePage extends BasePage {
             return false;
         }
     }
+
+
 
     public void clickAddRequirement() {
         buttonAddRequirement.click();
