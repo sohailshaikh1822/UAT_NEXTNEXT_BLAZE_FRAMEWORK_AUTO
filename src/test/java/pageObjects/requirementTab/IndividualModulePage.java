@@ -173,6 +173,10 @@ public class IndividualModulePage extends BasePage {
     WebElement verifyingHeaderOfModuleHistory;
 
 
+    @FindBy(xpath = "(//span[@class='version-title'])[last()]")
+    WebElement currentVersionNo;
+
+
 
 
     public void clickModuleHistory()
@@ -184,8 +188,18 @@ public class IndividualModulePage extends BasePage {
     public void clickLatestUpdatedVersion()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(latestVersion)).click();
+
+         wait.until(ExpectedConditions.elementToBeClickable(latestVersion)).click();
     }
+
+    //(//span[@class="version-title"])[last()]
+
+    public String getLatestUpdatedVersionNo()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+         return wait.until(ExpectedConditions.elementToBeClickable(currentVersionNo)).getText();
+    }
+
 
     public String verifyingHeaderOfModuleHistoryChanges()
     {

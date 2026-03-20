@@ -110,7 +110,7 @@ public class IndividualTestCasePage extends BasePage {
 
     public WebElement textStepDescriptionBeforeClick(int stepNo) {
         return driver.findElement(By.xpath("//span[@class='step-number' and text()='" + stepNo
-                + "']/ancestor::div[@class='table-row']//div[@class='table-cell description']"));
+                + "']/ancestor::div[@class='table-row']//div[@class='table-cell step-description']"));
     }
 
     public WebElement textStepDescriptionAfterClick(int stepNo) {

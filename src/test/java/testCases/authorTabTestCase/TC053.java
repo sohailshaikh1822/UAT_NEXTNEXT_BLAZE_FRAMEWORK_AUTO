@@ -31,10 +31,14 @@ public class TC053 extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
             authorTestCasePage.clickRequirement(requirementId);
             logger.info("Clicked the requirement from the grid");
-            WaitUtils.waitFor2000Milliseconds();
+            WaitUtils.waitFor3000Milliseconds();
             authorTestCasePage.clickNextArrow();
+            WaitUtils.waitFor3000Milliseconds();
             logger.info("Clicked the next arrow");
+
             Assert.assertEquals(authorTestCasePage.showPaginationOfRequirement(), expectedPagination);
+
+
             logger.info("Verified successfully");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());

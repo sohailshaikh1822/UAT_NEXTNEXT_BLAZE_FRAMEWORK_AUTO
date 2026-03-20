@@ -63,7 +63,7 @@ public class AuthorTestCasePage extends BasePage {
     @FindBy(xpath = "//div[@class='pagination-item']")
     WebElement divRequirementPagination;
 
-    @FindBy(xpath = "//img[@alt='Next']")
+    @FindBy(xpath = "(//img[@alt='Next'])[2]")
     WebElement arrowForwardNextPagination;
 
     @FindBy(xpath = "//img[@alt='Previous']")
@@ -83,6 +83,12 @@ public class AuthorTestCasePage extends BasePage {
 
     @FindBy(xpath = "//button[normalize-space(text())='SAVE']")
     WebElement buttonSubmitTestCaseModal;
+
+
+    @FindBy(xpath = "")
+    WebElement nextPage;
+
+
 
     @FindBy(id = "notification")
     WebElement notificationDiv;
