@@ -7,7 +7,7 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="Author Test Suite">
         <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
+        <parameter name="mode" value="head"/>
         <classes>
 <!--            <class name="testCases.authorTabTestCase.TC001"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC002"/>-->
@@ -27,7 +27,7 @@
 <!--            <class name="testCases.authorTabTestCase.TC030"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC031"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC032"/>-->
-            <class name="testCases.authorTabTestCase.TC034"/>
+<!--            <class name="testCases.authorTabTestCase.TC034"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC035"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC036"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC037"/>-->
@@ -53,7 +53,7 @@
 <!--            <class name="testCases.authorTabTestCase.TC059"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC060"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC062"/>-->
-<!--            <class name="testCases.authorTabTestCase.TC063"/>-->
+            <class name="testCases.authorTabTestCase.TC063"/>
 <!--            <class name="testCases.authorTabTestCase.TC064"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC065"/>-->
 <!--            <class name="testCases.authorTabTestCase.TC066"/>-->

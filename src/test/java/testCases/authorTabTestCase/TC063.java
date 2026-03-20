@@ -33,7 +33,8 @@ public class TC063 extends BaseClass {
             IndividualTestCasePage individualTestCasePage = new IndividualTestCasePage(getDriver());
             individualTestCasePage.clickAddTestStep();
             logger.info("Clicked on dd teststep button");
-            individualTestCasePage.setStepDescription("description 1",3);
+
+            individualTestCasePage.setStepDescription("description 1",5);
             WaitUtils.waitFor1000Milliseconds();
 
             individualTestCasePage.clickSaveButton();
