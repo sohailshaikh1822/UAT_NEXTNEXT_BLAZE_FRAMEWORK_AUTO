@@ -58,7 +58,6 @@ public class TC025 extends BaseClass {
             );
             logger.info("Initial requirement count: " + beforeCount);
 
-            // -------- ADD REQUIREMENT --------
             addRequirementPage.clickAddRequirementBtn();
             logger.info("Clicked Add Requirement");
 
@@ -74,8 +73,6 @@ public class TC025 extends BaseClass {
                 individualModulePage.clickLastPageArrowBtn();
             }
             addRequirementPage.clickClose();
-
-            // -------- WAIT FOR COUNT TO INCREASE --------
             new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                     .until(driver -> {
                         String text = driver.findElement(
@@ -97,16 +94,12 @@ public class TC025 extends BaseClass {
                     beforeCount + 1,
                     "Requirement count did not increase after adding"
             );
-
-            // -------- GET NEW REQUIREMENT ID --------
             List<String> requirementIds = requirementTabPage.getRequirementIDs();
             String newRequirementId = requirementIds.get(requirementIds.size() - 1);
             logger.info("Newly linked requirement ID: " + newRequirementId);
 
             requirementTabPage.unlinkRequirementById(newRequirementId);
             logger.info("Unlinked requirement: " + newRequirementId);
-
-            // -------- WAIT FOR COUNT TO DECREASE --------
             new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                     .until(driver -> {
                         String text = driver.findElement(

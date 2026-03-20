@@ -376,6 +376,21 @@ public class RequirementDataProvider {
         return ExcelDataProviders.getExcelDataForRequirement("tc111");
     }
 
+    @DataProvider(name = "tc117")
+    public static Object[][] getDataTC117() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc117");
+    }
+
+    @DataProvider(name = "tc118")
+    public static Object[][] getDataTC118() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc118");
+    }
+
+    @DataProvider(name = "tc119")
+    public static Object[][] getDataTC119() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc119");
+    }
+
     @DataProvider(name = "tc129")
     public static Object[][] getDataTC129() throws IOException {
         return ExcelDataProviders.getExcelDataForRequirement("tc129");
@@ -389,6 +404,16 @@ public class RequirementDataProvider {
     @DataProvider(name = "tc131")
     public static Object[][] getDataTC131() throws IOException {
         return ExcelDataProviders.getExcelDataForRequirement("tc131");
+    }
+
+    @DataProvider(name = "tc132")
+    public static Object[][] getDataTC132() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc132");
+    }
+
+    @DataProvider(name = "tc133")
+    public static Object[][] getDataTC133() throws IOException {
+        return ExcelDataProviders.getExcelDataForRequirement("tc133");
     }
 
 
