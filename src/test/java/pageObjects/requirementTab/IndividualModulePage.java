@@ -183,6 +183,13 @@ public class IndividualModulePage extends BasePage {
     WebElement latestVersionValue;
 
 
+
+
+    public String getLatestUpdatedVersionNo()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.elementToBeClickable(latestVersionValue)).getText();
+    }
     public void clickModuleHistory()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
