@@ -2,6 +2,7 @@ package pageObjects.requirementTab;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -73,7 +74,11 @@ public class RequirementTabPage extends BasePage {
     @FindBy(xpath = "//i[@title='Delete']")
     WebElement iconDelete;
 
-    @FindBy(xpath = "//input[@class='supporting-text']")
+    @FindAll({
+            @FindBy(xpath = "//p[contains(@class,'supporting-text')]//input"),
+            @FindBy(xpath = "//input[contains(@class,'supporting-text')]"),
+            @FindBy(xpath = "//input[@type='text']")
+    })
     WebElement textModuleName;
 
     @FindBy(xpath = "//div[normalize-space()='SAVE']")
@@ -979,7 +984,7 @@ public class RequirementTabPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        By epicLocator = By.xpath("//span[@title='Epic']");
+        By epicLocator = By.xpath("//span[@title='STG- SPARK Modernization']");
 
         WebElement epicElement = wait.until(
                 ExpectedConditions.elementToBeClickable(epicLocator)

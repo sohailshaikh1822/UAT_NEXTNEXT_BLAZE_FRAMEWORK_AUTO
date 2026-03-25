@@ -41,13 +41,25 @@ public class TC093 extends BaseClass {
         int initialCount = requirementTabPage.extractCount(countText);
 
         requirementTabPage.closeRecycleBin();
+        logger.info("Closed the recycle bin");
+        WaitUtils.waitFor2000Milliseconds();
 
-        requirementTabPage.clickRequirementTab();
-        requirementTabPage.clickEpicDropdown();
+//        requirementTabPage.clickRequirementTab();
+//
+//        WaitUtils.waitFor2000Milliseconds();
+//        requirementTabPage.clickEpicDropdown();
+
+        WaitUtils.waitFor2000Milliseconds();
         requirementTabPage.clickOnModule(moduleName);
+        logger.info("Open module");
 
+
+        WaitUtils.waitFor2000Milliseconds();
         individualModulePage.clickAddRequirement();
+        logger.info("clicked on add requirement button");
 
+
+        WaitUtils.waitFor2000Milliseconds();
         addRequirementPage.setRequirementId(rqTitle);
 
         WaitUtils.waitFor1000Milliseconds();

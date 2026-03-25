@@ -72,6 +72,7 @@ public class TC066 extends BaseClass {
             addTestcasePage.clickSave();
             logger.info("New test case saved successfully.");
 
+            WaitUtils.waitFor3000Milliseconds();
             addRequirementPage.clickSave();
             logger.info("Clicked on Save button again after changes");
 

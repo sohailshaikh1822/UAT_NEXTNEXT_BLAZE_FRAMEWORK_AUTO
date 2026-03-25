@@ -31,7 +31,7 @@ public class TC021 extends BaseClass {
             requirementTabPage.clickArrowRightPointingForExpandModule("Epic requirement ");
             logger.info("Navigated to Module");
             WaitUtils.waitFor3000Milliseconds();
-            requirementTabPage.clickOnModule("feature requirement name check ");
+            requirementTabPage.clickOnModule("New Module Vivek");
             logger.info("clicked on specific module");
             WaitUtils.waitFor1000Milliseconds();
             logger.info(" Fetching the total requirement count before adding a new requirement...");
