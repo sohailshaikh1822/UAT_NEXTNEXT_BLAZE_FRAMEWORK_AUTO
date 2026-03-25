@@ -35,9 +35,11 @@ public class TC074 extends BaseClass {
             requirementTabPage.clickNewModule();
             logger.info("Clicked on create module");
 
+            WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.setModuleName(Mname);
             logger.info("Module name is set:"+Mname);
 
+            WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.saveModule();
             logger.info("Clicked on save button");
 

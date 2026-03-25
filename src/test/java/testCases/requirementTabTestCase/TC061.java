@@ -37,25 +37,32 @@ public class TC061  extends BaseClass {
             requirementsPage.clickRequirementTab();
             logger.info("Clicked on Requirement Tab");
 
-            WaitUtils.waitFor3000Milliseconds();;
+            WaitUtils.waitFor3000Milliseconds();
 //            requirementTabPage.clickOnTheProjectName();
 //             logger.info("Clicked on the Project Name");
 
             logger.info("Clicked on the Project from left panel to open the module");
             requirementsPage.clickDropdownToSelectProject("STG- SPARK Modernization");
             logger.info("Navigate to the project");
+
+            WaitUtils.waitFor3000Milliseconds();
             requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");
+
+            WaitUtils.waitFor3000Milliseconds();
             requirementsPage.clickOnModule("feature 039");
             logger.info("clicked on specific module");
+
             WaitUtils.waitFor1000Milliseconds();
             individualModulePage.clickAddRequirement();
             logger.info("Clicked on Add Requirement");
+            WaitUtils.waitFor1000Milliseconds();
             addRequirementPage.setRequirementId(rQid);
             logger.info("Set Requirement ID: " + rQid);
             WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.setDescription(description);
             logger.info("Set Description");
+            WaitUtils.waitFor1000Milliseconds();
             addRequirementPage.selectPriority(priority);
             logger.info("Selected Priority: " + priority);
             WaitUtils.waitFor2000Milliseconds();;
@@ -64,13 +71,15 @@ public class TC061  extends BaseClass {
             WaitUtils.waitFor2000Milliseconds();
             addRequirementPage.selectType(type);
             logger.info("Selected Type: " + type);
+            WaitUtils.waitFor1000Milliseconds();
             addRequirementPage.clickSave();
             logger.info("Clicked Save button");
             WaitUtils.waitFor2000Milliseconds();
             String rqId = addRequirementPage.getModuleId();
             rqId = "'" + rqId.replace("'", "") + "'";
+            WaitUtils.waitFor1000Milliseconds();
             String notificationPopup=requirementsPage.handleToastNotification();
-
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertEquals(rqId +" created by Julie Kumari.",notificationPopup,"not matched");
 
         } catch (AssertionError e) {
