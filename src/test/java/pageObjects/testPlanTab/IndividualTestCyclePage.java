@@ -43,6 +43,37 @@ public class IndividualTestCyclePage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'Test Cycle created successfully.')]")
     WebElement testCycleCreatedSuccessMessage;
 
+    // Test Cycle History Navigation Tab
+    @FindBy(xpath = "//div[contains(@class,'testcase-history-nav') and .//span[text()='Test Cycle History']]")
+    WebElement testCycleHistoryTab;
+
+    @FindBy(xpath = "//div[contains(@class,'history-section')]")
+    WebElement historySection;
+
+    @FindBy(xpath = "//div[contains(@class,'version-table-header-row')]//div[contains(text(),'Version')]")
+    WebElement versionColumnHeader;
+
+    @FindBy(xpath = "//div[contains(@class,'version-table-header-row')]//div[contains(text(),'Updated By')]")
+    WebElement updatedByColumnHeader;
+
+    @FindBy(xpath = "//div[contains(@class,'version-table-header-row')]//div[contains(text(),'Updated At')]")
+    WebElement updatedAtColumnHeader;
+
+    @FindBy(xpath = "//div[contains(@class,'version-table-row')]")
+    List<WebElement> versionRows;
+
+    @FindBy(xpath = ".//span[@class='version-title']")
+    List<WebElement> versionNumbers;
+
+    @FindBy(xpath = ".//span[@class='version-meta']")
+    List<WebElement> updatedByList;
+
+    @FindBy(xpath = ".//span[contains(@class,'rd-history-date')]")
+    List<WebElement> updatedAtList;
+
+    @FindBy(xpath = "(//span[contains(@class,'version-title')])[last()]")
+    WebElement latestVersionValue;
+
     // Actions
 
     public String getTestCycleHeader() {
@@ -505,5 +536,91 @@ public class IndividualTestCyclePage extends BasePage {
 
         System.out.println("Verified tooltip for deleted Test Cycle: " + cycleId);
     }
+
+    public void clickOnTestCycleHistoryTab() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(testCycleHistoryTab));
+        testCycleHistoryTab.click();
+
+        wait.until(ExpectedConditions.visibilityOf(historySection));
+    }
+    public void verifyHistorySectionIsDisplayed() {
+        if (!historySection.isDisplayed()) {
+            throw new AssertionError("History section is not displayed");
+        }
+    }
+
+    public void verifyHistoryTableColumns() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(versionColumnHeader));
+        wait.until(ExpectedConditions.visibilityOf(updatedByColumnHeader));
+        wait.until(ExpectedConditions.visibilityOf(updatedAtColumnHeader));
+
+        if (!versionColumnHeader.isDisplayed()) {
+            throw new AssertionError("Version column is not displayed");
+        }
+
+        if (!updatedByColumnHeader.isDisplayed()) {
+            throw new AssertionError("Updated By column is not displayed");
+        }
+
+        if (!updatedAtColumnHeader.isDisplayed()) {
+            throw new AssertionError("Updated At column is not displayed");
+        }
+
+        System.out.println("All history table columns are displayed correctly");
+    }
+
+    public void verifyVersionNumbersAreDisplayedCorrectly() {
+
+        if (versionRows.isEmpty()) {
+            throw new AssertionError("No version rows found in history table");
+        }
+
+        int expectedVersion = 1;
+
+        for (WebElement row : versionRows) {
+
+            String versionText = row.findElement(
+                    By.xpath(".//span[@class='version-title']")
+            ).getText().trim();
+
+            if (versionText.isEmpty()) {
+                throw new AssertionError("Version number is empty");
+            }
+
+            int actualVersion = Integer.parseInt(versionText);
+
+            if (actualVersion != expectedVersion) {
+                throw new AssertionError(
+                        "Version sequence mismatch. Expected: "
+                                + expectedVersion + " but found: " + actualVersion
+                );
+            }
+
+            expectedVersion++;
+        }
+
+        System.out.println("Version numbers are displayed correctly in sequence");
+    }
+
+    public boolean verifyDefaultVersionIsOne() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            String version = wait.until(
+                            ExpectedConditions.visibilityOf(latestVersionValue))
+                    .getText().trim();
+
+            return version.equals("1");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }
 
