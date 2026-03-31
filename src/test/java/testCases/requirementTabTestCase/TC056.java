@@ -11,8 +11,8 @@ import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
 import utils.WaitUtils;
-@Test(retryAnalyzer = RetryAnalyzer.class)
 
+@Test(retryAnalyzer = RetryAnalyzer.class)
 public class TC056 extends BaseClass {
 
     public void VerifyApplicationBehaviorWhenDuplicateTestCaseNameIsEntered() throws InterruptedException {
@@ -22,66 +22,82 @@ public class TC056 extends BaseClass {
         try {
             login();
             logger.info("Logged in successfully");
-
             WaitUtils.waitFor1000Milliseconds();
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             AddTestcasePage addTestcasePage = new AddTestcasePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             LinkTestCasePage linkTestCasePage = new LinkTestCasePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             authorTestCasePage.clickAuthorTestcase();
+            WaitUtils.waitFor1000Milliseconds();
+
             WaitUtils.waitFor3000Milliseconds();
+
             requirementTabPage.clickRequirementTab();
+            WaitUtils.waitFor1000Milliseconds();
 
             requirementTabPage.clickDropdownToSelectProject("STG- SPARK Modernization");
             logger.info("Expanded the main project: " + "STG- SPARK Modernization");
-
             WaitUtils.waitFor1000Milliseconds();
+
             requirementTabPage.clickArrowRightPointingForExpandModule("Epic j17");
             WaitUtils.waitFor1000Milliseconds();
+
             requirementTabPage.clickOnModule("Epic j17");
             WaitUtils.waitFor1000Milliseconds();
 
             authorTestCasePage.clickRequirement("RQ-1599");
             logger.info("Clicked on requirement id " + "RQ-1599");
-
             WaitUtils.waitFor1000Milliseconds();
+
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
             WaitUtils.waitFor1000Milliseconds();
 
             addTestcasePage.setTestCaseName("Duplicate Testcase Name");
             logger.info("Test case name set to: " + "Duplicate Testcase Name");
+            WaitUtils.waitFor1000Milliseconds();
 
             addTestcasePage.clickSave();
             logger.info("Clicked Save button ");
-
             WaitUtils.waitFor1000Milliseconds();
+
             authorTestCasePage.clickAddTestcase();
             logger.info("Clicked on AddTestCase");
             WaitUtils.waitFor1000Milliseconds();
+
 //            requirementTabPage.clickYesBtn();
 
             addTestcasePage.setTestCaseName("Duplicate Testcase Name");
             logger.info("Test case name set to: " + "Duplicate Testcase Name");
-
             WaitUtils.waitFor1000Milliseconds();
+
             addTestcasePage.clickSave();
             logger.info("Clicked Save button after entering the duplicate name ");
+            WaitUtils.waitFor1000Milliseconds();
 
 //            requirementTabPage.clickYesBtn();
-
-
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
+
         } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
+
         logger.info("************ TC056 Finished ************");
     }
-
 }

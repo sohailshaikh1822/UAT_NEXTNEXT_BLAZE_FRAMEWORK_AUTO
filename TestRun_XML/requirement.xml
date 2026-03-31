@@ -9,11 +9,11 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
 
-<!--        <packages>-->
-<!--            <package name="testCases.requirementTabTestCase"/>-->
-<!--        </packages>-->
+        <packages>
+            <package name="testCases.requirementTabTestCase"/>
+        </packages>
 
-                <classes>
+<!--                <classes>-->
 <!--            <class name="testCases.requirementTabTestCase.TC001"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC002"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC003"/>-->
@@ -115,29 +115,29 @@
 <!--                    <class name="testCases.requirementTabTestCase.TC108"/>-->
 <!--                    <class name="testCases.requirementTabTestCase.TC109"/>-->
 <!--                    <class name="testCases.requirementTabTestCase.TC110"/>-->
-                    <class name="testCases.requirementTabTestCase.TC111"/>
-                    <class name="testCases.requirementTabTestCase.TC112"/>
-                    <class name="testCases.requirementTabTestCase.TC113"/>
-                    <class name="testCases.requirementTabTestCase.TC114"/>
-                    <class name="testCases.requirementTabTestCase.TC115"/>
-                    <class name="testCases.requirementTabTestCase.TC116"/>
+<!--                    <class name="testCases.requirementTabTestCase.TC111"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC112"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC113"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC114"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC115"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC116"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC117"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC118"/>-->
 <!--            <class name="testCases.requirementTabTestCase.TC119"/>-->
-                    <class name="testCases.requirementTabTestCase.TC120"/>
-                    <class name="testCases.requirementTabTestCase.TC121"/>
-                    <class name="testCases.requirementTabTestCase.TC122"/>
-                    <class name="testCases.requirementTabTestCase.TC126"/>
-                    <class name="testCases.requirementTabTestCase.TC127"/>
-                    <class name="testCases.requirementTabTestCase.TC128"/>
-                    <class name="testCases.requirementTabTestCase.TC129"/>
-                    <class name="testCases.requirementTabTestCase.TC130"/>
-                    <class name="testCases.requirementTabTestCase.TC131"/>
+<!--                    <class name="testCases.requirementTabTestCase.TC120"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC121"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC122"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC126"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC127"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC128"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC129"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC130"/>-->
+<!--                    <class name="testCases.requirementTabTestCase.TC131"/>-->
 <!--                    <class name="testCases.requirementTabTestCase.TC120"/>-->
 
 
 
-        </classes>
+<!--        </classes>-->
     </test>
 </suite>
 

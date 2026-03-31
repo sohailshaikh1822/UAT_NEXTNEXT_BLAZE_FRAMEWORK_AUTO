@@ -6,38 +6,51 @@ import pageObjects.requirementTab.IndividualModulePage;
 import pageObjects.requirementTab.RequirementTabPage;
 import testBase.BaseClass;
 import utils.RetryAnalyzer;
+import utils.WaitUtils;
 
 public class TC003 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyLinkedRequirementTable() throws InterruptedException {
+
         logger.info("****** Starting the Test Case *****************");
+
         try {
             login();
             logger.info("Login successful.");
+            WaitUtils.waitFor1000Milliseconds();
+
             logger.info("Navigated to Requirements tab");
             RequirementTabPage requirementsPage = new RequirementTabPage(getDriver());
             requirementsPage.clickRequirementTab();
+            WaitUtils.waitFor1000Milliseconds();
 
             logger.info("Clicked on the Project from left panel to open the module");
             requirementsPage.clickDropdownToSelectProject("STG- SPARK Modernization");
             logger.info("Navigate to the project");
+            WaitUtils.waitFor1000Milliseconds();
+
             requirementsPage.clickArrowRightPointingForExpandModule("Epic j17");
             logger.info("Navigated to Module");
+            WaitUtils.waitFor1000Milliseconds();
+
             requirementsPage.clickOnModule("feature 039");
             logger.info("clicked on specific module");
+            WaitUtils.waitFor1000Milliseconds();
 
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
 
             Assert.assertTrue(individualModulePage.isLinkedRequirementTableVisible(),
                     "Linked Test Case table not visible");
             logger.info("Verified linked test case table is displayed");
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (Exception e) {
             logger.error("Exception occurred during test execution: " + e.getMessage(), e);
             throw e;
         }
-        logger.info("************ Test Case Execution Completed ************");
 
+        logger.info("************ Test Case Execution Completed ************");
     }
 }
