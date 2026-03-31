@@ -25,7 +25,7 @@ public class TC069 extends BaseClass {
             ExportListener exportListener =new ExportListener(getDriver());
 
             exportListener.selectCsvFileType();
-            defectLandingPage.clickSaveExportButton();
+            defectLandingPage.clickDefectPageSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);
             logger.info("TC069 executed successfully");

@@ -31,7 +31,7 @@ public class TC061 extends BaseClass {
 //            exportListener.selectExcelFileType();
             WaitUtils.waitFor3000Milliseconds();
             defectPage.clickDownloadInBackgroundCheckbox();
-            defectPage.clickSaveExportButton();
+            defectPage.clickDefectPageSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectPage.isFileDownloaded(30);
 

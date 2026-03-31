@@ -34,13 +34,13 @@ public class TC081 extends BaseClass {
             defectLandingPage.ClickDefectbyID(defectid);
 
             WaitUtils.waitFor3000Milliseconds();
-            WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.verifyExportButtonVisibleAndClickable();
             WaitUtils.waitFor3000Milliseconds();
             ExportListener exportListener =new ExportListener(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
 
             exportListener.selectExcelFileType();
-            defectLandingPage.clickSaveExportButton();
+            defectLandingPage.clickDefectPageSaveExportButton();
             WaitUtils.waitFor1000Milliseconds();
 //            defectLandingPage.pressSaveButton();
             WaitUtils.waitFor3000Milliseconds();

@@ -27,10 +27,11 @@ public class TC075 extends BaseClass {
             defectPage.verifyFileTypeDropdownContainsAllFormats();
             WaitUtils.waitFor3000Milliseconds();
             ExportListener exportListener =new ExportListener(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
 
             exportListener.selectExcelFileType();
             WaitUtils.waitFor3000Milliseconds();
-            defectPage.clickSaveExportButton();
+            defectPage.clickDefectPageSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectPage.isFileDownloaded(30);
             logger.info("TC075 executed successfully");

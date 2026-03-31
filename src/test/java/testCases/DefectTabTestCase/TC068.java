@@ -25,7 +25,7 @@ public class TC068 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
             ExportListener exportListener =new ExportListener(getDriver());
             exportListener.selectExcelFileType();
-            defectLandingPage.clickSaveExportButton();
+            defectLandingPage.clickDefectPageSaveExportButton();
             WaitUtils.waitFor3000Milliseconds();
             defectLandingPage.isFileDownloaded(30);
             logger.info("TC068 executed successfully");
