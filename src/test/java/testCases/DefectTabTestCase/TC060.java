@@ -27,6 +27,7 @@ public class TC060 extends BaseClass {
             defectLandingPage.verifyExportButtonVisibleAndClickable();
             WaitUtils.waitFor2000Milliseconds();
             ExportListener exportListener =new ExportListener(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
             exportListener.clickCancelButton();
             logger.info("TC060 executed successfully");
 

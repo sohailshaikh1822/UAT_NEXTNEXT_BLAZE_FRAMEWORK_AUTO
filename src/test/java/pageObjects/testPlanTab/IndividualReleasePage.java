@@ -53,8 +53,23 @@ public class IndividualReleasePage extends BasePage {
     @FindBy(xpath = "//div[@class='test-plan-releases-save']")
     WebElement saveButton;
 
+    @FindBy(xpath = "//div[contains(@class,'testcase-history-nav') and .//span[text()='Release History']]")
+    WebElement releaseHistoryTab;
+
+    @FindBy(xpath = "//div[contains(@class,'history-section')]")
+    WebElement historySection;
+
+
     // Actions
 
+
+    public void clickOnReleaseHistoryTab() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(releaseHistoryTab));
+        releaseHistoryTab.click();
+
+        wait.until(ExpectedConditions.visibilityOf(historySection));
+    }
     public String getReleaseId() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

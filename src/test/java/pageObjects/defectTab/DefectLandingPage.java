@@ -84,6 +84,9 @@ public class DefectLandingPage extends BasePage {
     @FindBy(xpath = "(//div[contains(text(), 'SAVE')])[2]")
     WebElement saveExportBtn;
 
+    @FindBy(xpath = "//div[contains(text(), 'SAVE')]")
+    WebElement defectPageSaveExportBtn;
+
 
     // ================= ACTIONS =================
 
@@ -92,6 +95,12 @@ public class DefectLandingPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(saveExportBtn));
         saveExportBtn.click();
+    }
+
+    public void clickDefectPageSaveExportButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(defectPageSaveExportBtn));
+        defectPageSaveExportBtn.click();
     }
 
     public void clickDefectTab() throws InterruptedException {
@@ -290,7 +299,7 @@ public class DefectLandingPage extends BasePage {
 
     //EXPORT And EXPORT ALL Button
 
-    @FindBy(xpath = "//button[contains(@class,'export-defect') and .//div[contains(text(),'EXPORT')]]")
+    @FindBy(xpath = "//button[contains(@class,'export-defect') and .//div[normalize-space()='EXPORT']]")
     WebElement exportButton;
 
     @FindBy(xpath = "//div[contains(@class,'test-log-history-export-modal')]")
