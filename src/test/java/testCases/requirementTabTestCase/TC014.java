@@ -10,26 +10,36 @@ public class TC014 extends BaseClass {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifytheexpandcollapseontheleftpannel() throws InterruptedException {
+
         logger.info("****** Starting the TC:14 verify the expand/collapse on the left pannel   *************");
+
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
 
             RequirementTabPage reqPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             WaitUtils.waitFor3000Milliseconds();
+
             reqPage.clickRequirementTab();
             logger.info("clicked on requirement tab");
+            WaitUtils.waitFor1000Milliseconds();
 
             reqPage.clicktoggleSidebar();
             logger.info("Verified that Toggle button are clickable");
+            WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {
             logger.error("Assertion failed: {}", e.getMessage());
             throw e;
+
         } catch (Exception e) {
             logger.error("Exception occurred: {}", e.getMessage());
             throw e;
         }
+
         logger.info("************ TC:14 Finished *************************");
     }
 }

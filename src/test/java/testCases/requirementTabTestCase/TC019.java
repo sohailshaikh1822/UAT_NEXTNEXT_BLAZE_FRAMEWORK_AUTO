@@ -18,40 +18,72 @@ public class TC019 extends BaseClass {
             String name,
             String name1
     ) throws InterruptedException {
+
         logger.info("****** Starting the Test Case *****************");
+
         try {
             login();
             logger.info("Logged in successfully");
+            WaitUtils.waitFor1000Milliseconds();
+
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             WaitUtils.waitFor3000Milliseconds();
+
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
-           // requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+            WaitUtils.waitFor1000Milliseconds();
+
+            // requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+
             WaitUtils.waitFor3000Milliseconds();
+
             requirementTabPage.clickOnModule(epic);
             logger.info("clicked on specific epic");
+            WaitUtils.waitFor1000Milliseconds();
+
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
             individualModulePage.setActualDescription(description);
             logger.info("entered the description");
+            WaitUtils.waitFor1000Milliseconds();
+
             individualModulePage.enterName(name);
             logger.info("added the name");
+            WaitUtils.waitFor1000Milliseconds();
+
             individualModulePage.clickSave();
             logger.info("Clicked the save button");
+            WaitUtils.waitFor1000Milliseconds();
+
             boolean check = individualModulePage.isModuleUpdatedSuccessfully();
+            WaitUtils.waitFor1000Milliseconds();
+
             Assert.assertTrue(check);
             logger.info("Updation saved successfully...");
+            WaitUtils.waitFor1000Milliseconds();
+
             individualModulePage.enterName(name1);
             logger.info("added the name");
+            WaitUtils.waitFor1000Milliseconds();
+
             individualModulePage.clickSave();
+            WaitUtils.waitFor1000Milliseconds();
 
             logger.info("Module Title verified Successfully");
+            WaitUtils.waitFor1000Milliseconds();
+
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
             throw e;
+
         } catch (Exception e) {
             logger.error("Exception occurred: " + e.getMessage());
             throw e;
         }
+
         logger.info("************ Test Case Finished *************************");
     }
 }
