@@ -29,21 +29,41 @@ public class TC019 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             WaitUtils.waitFor1000Milliseconds();
 
+            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            WaitUtils.waitFor1000Milliseconds();
+
+
             WaitUtils.waitFor3000Milliseconds();
 
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
             WaitUtils.waitFor1000Milliseconds();
 
-            // requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+            logger.info("Navigate to the project");
+            WaitUtils.waitFor1000Milliseconds();
+
+            WaitUtils.waitFor3000Milliseconds();
+
+            requirementTabPage.clickArrowRightPointingForExpandModule(epic);
+            logger.info("Navigated to Module");
+            WaitUtils.waitFor1000Milliseconds();
 
             WaitUtils.waitFor3000Milliseconds();
 
             requirementTabPage.clickOnModule(epic);
-            logger.info("clicked on specific epic");
             WaitUtils.waitFor1000Milliseconds();
 
-            IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
+            WaitUtils.waitFor3000Milliseconds();
+
+            requirementTabPage.clickNewModule();
+            WaitUtils.waitFor1000Milliseconds();
+            logger.info("clicked on create new module");
+            WaitUtils.waitFor1000Milliseconds();
+            individualModulePage.enterName(epic);
+            logger.info("entered the name of the module");
+            WaitUtils.waitFor1000Milliseconds();
+            individualModulePage.clickSave();
+            logger.info("module saved successfully");
             WaitUtils.waitFor1000Milliseconds();
 
             individualModulePage.setActualDescription(description);
