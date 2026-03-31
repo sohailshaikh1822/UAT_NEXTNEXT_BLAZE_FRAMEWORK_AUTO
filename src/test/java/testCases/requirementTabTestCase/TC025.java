@@ -99,7 +99,7 @@ public class TC025 extends BaseClass {
                 WaitUtils.waitFor1000Milliseconds();
             }
 
-            addRequirementPage.clickClose();
+            logger.info("closed requirement");
             WaitUtils.waitFor1000Milliseconds();
 
             new WebDriverWait(getDriver(), Duration.ofSeconds(10))

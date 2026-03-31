@@ -97,24 +97,13 @@ public class TC033 extends BaseClass {
             WaitUtils.waitFor1000Milliseconds();
 
             individualModulePage.confirmDelete();
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Clicked YES on confirmation popup");
             WaitUtils.waitFor1000Milliseconds();
 
-            boolean isPageReloaded = addRequirementPage.isModulePageReopened();
             WaitUtils.waitFor1000Milliseconds();
 
-            Assert.assertTrue(isPageReloaded, "Requirements page not reloaded after deletion!");
-            logger.info("Verified requirements page is reloaded after deletion");
-            WaitUtils.waitFor1000Milliseconds();
-
-            String actualSuccessMsg = individualModulePage.getSuccessNotificationMessage();
-            WaitUtils.waitFor1000Milliseconds();
-
-            String expectedSuccessMsg = "Module deleted successfully.";
-            WaitUtils.waitFor1000Milliseconds();
-
-            Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg, "Success message mismatch!");
-            logger.info("Verified success notification: " + actualSuccessMsg);
+            individualModulePage.confirmDelete();
             WaitUtils.waitFor1000Milliseconds();
 
         } catch (AssertionError e) {

@@ -25,36 +25,51 @@ public class TC029 extends BaseClass {
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
             requirementTabPage.clickRequirementTab();
             logger.info("Navigated to Requirement page");
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickDropdownToSelectProject(project);
             logger.info("Navigated to the project");
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickArrowRightPointingForExpandModule(epic);
             WaitUtils.waitFor2000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             logger.info("clicked on specific epic");
+            WaitUtils.waitFor1000Milliseconds();
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             individualModulePage.setActualDescription(description);
             logger.info("Description is added ....");
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(epic2);
             logger.info("Clicked on another module without saving it");
+            WaitUtils.waitFor1000Milliseconds();
             individualModulePage.ClickYesPopup();
             logger.info("Clicked yes in the alert");
+            WaitUtils.waitFor1000Milliseconds();
 
             Assert.assertEquals(individualModulePage.getModuleName(), epic2);
             logger.info("Verified successfully that we can navigate ");
+            WaitUtils.waitFor1000Milliseconds();
             getDriver().navigate().refresh();
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickDropdownToSelectProject(project);
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(epic);
             logger.info("Clicked on that epic again");
+            WaitUtils.waitFor1000Milliseconds();
             individualModulePage.setActualDescription(description);
 
             logger.info("Description is added ....");
+
+            WaitUtils.waitFor1000Milliseconds();
             requirementTabPage.clickOnModule(epic2);
             logger.info("Clicked on another module without saving it");
+            WaitUtils.waitFor1000Milliseconds();
             individualModulePage.clickButtonConfirmationNoForUnsavedChanges();
             logger.info("Clicked No in the alert");
+            WaitUtils.waitFor1000Milliseconds();
             Assert.assertEquals(individualModulePage.getModuleName(), epic);
             logger.info("Verification done");
 
+            WaitUtils.waitFor1000Milliseconds();
             logger.info("Module Title verified Successfully");
         } catch (AssertionError e) {
             logger.error("Assertion failed: " + e.getMessage());
