@@ -86,6 +86,57 @@ public class IndividualTestCyclePage extends BasePage {
         testCycleNameInput.sendKeys(cycleName);
     }
 
+    public boolean isAnyUserPresentInVersionHistory() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            List<WebElement> users = wait.until(
+                    ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                            By.xpath("//div[contains(@class,'updatedby-col')]//span[@class='version-meta']")
+                    )
+            );
+
+            for (WebElement user : users) {
+                String name = user.getText().trim();
+                if (!name.isEmpty()) {
+                    return true;
+                }
+            }
+
+            return false;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean verifyDateTimeInVersionHistory() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            List<WebElement> dateTimeElements = wait.until(
+                    ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                            By.xpath("//div[contains(@class,'updatedat-col')]//span[@class='rd-history-date']")
+                    )
+            );
+
+            for (WebElement element : dateTimeElements) {
+                String dateTimeText = element.getText().trim();
+                if (!dateTimeText.matches("\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2} (AM|PM)")) {
+                    return false;
+                }
+            }
+
+            return !dateTimeElements.isEmpty();
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+
+
     public String getTargetRelease() {
         return inputTargetRelease.getAttribute("value");
     }

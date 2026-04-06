@@ -20,7 +20,6 @@ public class TC112 extends BaseClass {
             logger.info("Logged in successfully");
 
             RequirementTabPage requirementTabPage = new RequirementTabPage(getDriver());
-            AddRequirementPage addRequirementPage = new AddRequirementPage(getDriver());
             IndividualModulePage individualModulePage = new IndividualModulePage(getDriver());
             requirementTabPage.clickRequirementTab();
 
@@ -61,8 +60,6 @@ public class TC112 extends BaseClass {
             WaitUtils.waitFor3000Milliseconds();
 
             notificationsListener.clickNotificationIcon();
-
-            WaitUtils.waitFor2000Milliseconds();
 
             notificationsListener.verifyDeletedModuleNotificationNotClickable(mdId);
             WaitUtils.waitFor2000Milliseconds();

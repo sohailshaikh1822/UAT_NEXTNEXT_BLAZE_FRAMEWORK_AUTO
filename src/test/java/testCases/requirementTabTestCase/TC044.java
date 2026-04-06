@@ -37,7 +37,6 @@ public class TC044 extends BaseClass {
             AuthorTestCasePage authorTestCasePage = new AuthorTestCasePage(getDriver());
             AddTestcasePage addTestcasePage=new AddTestcasePage(getDriver());
             LinkTestCasePage linkTestCasePage=new LinkTestCasePage(getDriver());
-            authorTestCasePage.clickAuthorTestcase();
             WaitUtils.waitFor3000Milliseconds();
             requirementTabPage.clickRequirementTab();
 
