@@ -397,115 +397,119 @@ public class NotificationsListener extends BaseClass {
     }
     public void verifyDeletedRequirementNotificationDisabled(String rqId) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String cleanId = rqId.replace("*", "").trim();
 
-        String cleanRqId = rqId.replace("*", "").trim();
-
-        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
         By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
-        By disabledNotifications = By.xpath(
-                "//div[contains(@class,'notification-item') and contains(@class,'disabled')]"
-        );
-
-        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
-        js.executeScript("arguments[0].click();", bell);
-
-        WebElement body =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
-
-        List<WebElement> notifications =
-                wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(disabledNotifications));
-
-        for (WebElement notification : notifications) {
-
-            String text = notification.findElement(
-                    By.xpath(".//span[contains(@class,'notif-text')]")
-            ).getText().trim();
-
-            if (text.contains("'" + cleanRqId + "'") && text.contains("deleted")) {
-                if (!notification.getAttribute("class").contains("disabled")) {
-                    throw new AssertionError("Notification is NOT disabled.");
-                }
-                String tooltipText = notification.getAttribute("title");
-
-                if (!"This item no longer exists".equals(tooltipText)) {
-                    throw new AssertionError(
-                            "Tooltip mismatch. Actual: " + tooltipText
-                    );
-                }
-                String beforeUrl = driver.getCurrentUrl();
-                notification.click();
-                try { Thread.sleep(1500); } catch (InterruptedException ignored) {}
-                String afterUrl = driver.getCurrentUrl();
-
-                if (!beforeUrl.equals(afterUrl)) {
-                    throw new AssertionError(
-                            "Deleted Requirement notification is navigating but should NOT."
-                    );
-                }
-
-                System.out.println(
-                        "Deleted Requirement notification verified successfully (Disabled + No Navigation)."
-                );
-                return;
-            }
-        }
-
-        throw new AssertionError(
-                "Deleted Requirement notification not found for Requirement: " + rqId
-        );
-    }
-
-    public void verifyDeletedModuleNotificationNotClickable(String moduleId) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        String cleanModuleId = moduleId.replace("*", "").trim();
-
-        By notificationBell = By.xpath("//i[contains(@class,'fa-bell')]");
-        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
-
-        By deletedModuleNotification = By.xpath(
-                "//div[contains(@class,'notification-item') and contains(@class,'disabled')]"
-                        + "//span[contains(@class,'notif-text') "
-                        + "and contains(text(),\"'" + cleanModuleId + "'\") "
-                        + "and contains(text(),'deleted by')]"
-                        + "/ancestor::div[contains(@class,'notification-item')]"
-        );
-        WebElement bell = wait.until(ExpectedConditions.elementToBeClickable(notificationBell));
-        js.executeScript("arguments[0].click();", bell);
+        By allNotifications = By.xpath("//div[contains(@class,'notification-item')]");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
-        WebElement notification = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(deletedModuleNotification)
-        );
-        if (!notification.getAttribute("class").contains("disabled")) {
-            throw new AssertionError("Deleted Module notification is NOT disabled.");
-        }
-        String tooltip = notification.getAttribute("title");
 
-        if (tooltip == null || !tooltip.equals("This item no longer exists")) {
+        WebDriverWait customWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        customWait.pollingEvery(Duration.ofMillis(500))
+                .ignoring(StaleElementReferenceException.class);
+
+        WebElement notification = customWait.until(driver -> {
+
+            List<WebElement> list = driver.findElements(allNotifications);
+
+            for (WebElement el : list) {
+
+                String text = el.findElement(
+                        By.xpath(".//span[contains(@class,'notif-text')]")
+                ).getText();
+
+                System.out.println("Checking: " + text);
+
+                if (text.contains(cleanId) && text.contains("deleted")) {
+                    return el;
+                }
+            }
+            return null;
+        });
+
+        if (!notification.getAttribute("class").contains("disabled")) {
             throw new AssertionError(
-                    "Tooltip mismatch.\nExpected: This item no longer exists\nActual: " + tooltip
+                    "Notification is NOT disabled after restore"
             );
+        }
+
+        String tooltip = notification.getAttribute("title");
+        if (!"This item no longer exists".equals(tooltip)) {
+            throw new AssertionError("Tooltip mismatch: " + tooltip);
         }
         String beforeUrl = driver.getCurrentUrl();
 
-        notification.click();
-        try { Thread.sleep(1500); } catch (InterruptedException ignored) {}
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", notification
+        );
+
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.urlToBe(beforeUrl));
 
         String afterUrl = driver.getCurrentUrl();
 
         if (!beforeUrl.equals(afterUrl)) {
-            throw new AssertionError(
-                    "Deleted Module notification navigated to another page but should NOT."
-            );
+            throw new AssertionError("Notification navigated but should NOT.");
         }
 
-        System.out.println(
-                "Deleted Module notification verified successfully (Disabled + Not Clickable)."
+        System.out.println(" Deleted notification still disabled after restore");
+    }
+
+
+    public void verifyDeletedModuleNotificationNotClickable(String moduleId) {
+
+        String cleanModuleId = moduleId.replace("*", "").trim();
+
+        By notificationBody = By.xpath("//div[contains(@class,'notification-body')]");
+        By allNotifications = By.xpath("//div[contains(@class,'notification-item')]");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationBody));
+
+        WebDriverWait customWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        customWait.pollingEvery(Duration.ofMillis(500))
+                .ignoring(StaleElementReferenceException.class);
+
+        WebElement notification = customWait.until(driver -> {
+
+            List<WebElement> notifications = driver.findElements(allNotifications);
+
+            for (WebElement el : notifications) {
+
+                String text = el.findElement(
+                        By.xpath(".//span[contains(@class,'notif-text')]")
+                ).getText();
+
+                System.out.println("Checking: " + text);
+
+                if (text.contains(cleanModuleId) && text.contains("deleted")) {
+                    return el;
+                }
+            }
+
+            return null;
+        });
+        if (!notification.getAttribute("class").contains("disabled")) {
+            throw new AssertionError("Deleted Module notification is NOT disabled.");
+        }
+        String tooltip = notification.getAttribute("title");
+        if (!"This item no longer exists".equals(tooltip)) {
+            throw new AssertionError("Tooltip mismatch: " + tooltip);
+        }
+        String beforeUrl = driver.getCurrentUrl();
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();", notification
         );
+
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.urlToBe(beforeUrl));
+
+        String afterUrl = driver.getCurrentUrl();
+
+        if (!beforeUrl.equals(afterUrl)) {
+            throw new AssertionError("Notification navigated but should NOT.");
+        }
+
+        System.out.println("Deleted Module notification verified successfully");
     }
 }

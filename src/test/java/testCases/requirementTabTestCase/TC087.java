@@ -125,33 +125,19 @@ public class TC087 extends BaseClass {
             logger.info("Clicked on Recycle Bin");
             WaitUtils.waitFor1000Milliseconds();
 
-            WaitUtils.waitFor2000Milliseconds();
-
             testPlanPage.selectObjectDropdownValue("Requirement");
             WaitUtils.waitFor1000Milliseconds();
-
-            WaitUtils.waitFor3000Milliseconds();
 
             testPlanPage.smoothScrollRecycleBin();
             WaitUtils.waitFor1000Milliseconds();
 
-            WaitUtils.waitFor3000Milliseconds();
-
             testPlanPage.selectRadioById(rqId);
             WaitUtils.waitFor1000Milliseconds();
-
-            WaitUtils.waitFor2000Milliseconds();
 
             testPlanPage.clickRestoreButton();
             WaitUtils.waitFor1000Milliseconds();
 
-            WaitUtils.waitFor2000Milliseconds();
-
             testPlanPage.clickCloseButtonOfRecycleBinPage();
-            WaitUtils.waitFor1000Milliseconds();
-
-            WaitUtils.waitFor3000Milliseconds();
-
             String actualMessage = testPlanPage.getToastNotificationMessage();
             WaitUtils.waitFor1000Milliseconds();
 
