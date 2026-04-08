@@ -61,6 +61,9 @@ public class IndividualTestSuitePage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'Test Suite created successfully.')]")
     WebElement testSuiteCreatedSuccessMessage;
 
+    @FindBy(xpath = "(//span[contains(@class,'version-title')])[last()]")
+    WebElement latestVersionValue;
+
     // actions
     public String getTestSuiteId() {
 
@@ -705,5 +708,56 @@ public class IndividualTestSuitePage extends BasePage {
         }
 
         System.out.println("Version numbers are displayed correctly in sequence");
+    }
+
+    public boolean verifyDefaultVersionIsOne() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            String version = wait.until(
+                            ExpectedConditions.visibilityOf(latestVersionValue))
+                    .getText().trim();
+
+            return version.equals("1");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @FindBy(xpath = "(//span[contains(@class,'version-title')])[last()]")
+    WebElement latestVersionRowClickable;
+
+    @FindBy(xpath = "//div[contains(@class,'version-table-row-expanded')]")
+    WebElement expandedVersionSection;
+
+    @FindBy(xpath = "//div[contains(@class,'version-table-row-expanded')]//div[contains(@class,'table-body')]")
+    WebElement expandedTableBody;
+
+    public void expandLatestVersion() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(latestVersionRowClickable));
+        latestVersionRowClickable.click();
+
+        wait.until(ExpectedConditions.visibilityOf(expandedVersionSection));
+    }
+
+    public void verifyNoChangesMessageInExpandedVersion() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement body = wait.until(
+                ExpectedConditions.visibilityOf(expandedTableBody)
+        );
+
+        String text = body.getText().trim();
+
+        if (!text.equalsIgnoreCase("No changes")) {
+            throw new AssertionError(
+                    "Expected 'No changes' message but found: " + text
+            );
+        }
+
+        System.out.println("Verified: Expanded version shows 'No changes'");
     }
 }

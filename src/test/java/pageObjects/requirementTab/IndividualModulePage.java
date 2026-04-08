@@ -43,7 +43,7 @@ public class IndividualModulePage extends BasePage {
     @FindBy(xpath = "//div[@class='rich-editor-scrollable']")
     WebElement descriptionBeforeClick;
 
-    @FindBy(xpath = "//div[@class='rte-editor ql-container ql-snow']/div[@contenteditable='true']")
+    @FindBy(xpath = "//div[@id='custom-rich--1-wrapper']")
     WebElement descriptionAfterClick;
 
     @FindBy(id = "rotatable-image")
@@ -377,44 +377,118 @@ public class IndividualModulePage extends BasePage {
         inputDescription.sendKeys(description);
     }
 
-    public void setActualDescription(String description) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//    public void setActualDescription(String description) throws InterruptedException {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//
+//        wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
+//        descriptionBeforeClick.click();
+//         WaitUtils.waitFor1000Milliseconds();
+//        wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
+//        descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+//        descriptionAfterClick.sendKeys(Keys.BACK_SPACE);
+//        descriptionAfterClick.clear();
+//        descriptionAfterClick.sendKeys(description);
+//
+//    }
 
-        wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
-        descriptionBeforeClick.click();
-         WaitUtils.waitFor1000Milliseconds();
-        wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
-        descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        descriptionAfterClick.sendKeys(Keys.BACK_SPACE);
-        descriptionAfterClick.clear();
-        descriptionAfterClick.sendKeys(description);
 
+    public void setActualDescription(String description) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick)).click();
+
+        WebElement iframe = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//iframe[contains(@id,'custom-rich')]")
+                )
+        );
+
+        driver.switchTo().frame(iframe);
+        WebElement body = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("tinymce"))
+        );
+        body.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        body.sendKeys(Keys.BACK_SPACE);
+        body.sendKeys(description);
+        driver.switchTo().defaultContent();
     }
 
-    public void clearActualDescription() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//    public void clearActualDescription() throws InterruptedException {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//
+//        wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
+//        descriptionBeforeClick.click();
+//        //  WaitUtils.waitFor1000Milliseconds();
+//        wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
+//        descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+//        descriptionAfterClick.sendKeys(Keys.BACK_SPACE);
+//        descriptionAfterClick.clear();
+//        inputTitle.click();
+//        WaitUtils.waitFor2000Milliseconds();
+//    }
 
-        wait.until(ExpectedConditions.elementToBeClickable(descriptionBeforeClick));
-        descriptionBeforeClick.click();
-        //  WaitUtils.waitFor1000Milliseconds();
-        wait.until(ExpectedConditions.elementToBeClickable(descriptionAfterClick));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].innerHTML = '';", descriptionAfterClick);
-        descriptionAfterClick.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        descriptionAfterClick.sendKeys(Keys.BACK_SPACE);
-        descriptionAfterClick.clear();
-        inputTitle.click();
-        WaitUtils.waitFor2000Milliseconds();
+    public void clearActualDescription() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement iframe = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//iframe[contains(@id,'custom-rich')]")
+                )
+        );
+
+        driver.switchTo().frame(iframe);
+
+        WebElement body = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("tinymce"))
+        );
+
+        body.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        body.sendKeys(Keys.BACK_SPACE);
+
+        driver.switchTo().defaultContent();
     }
 
     public void clickInputTitle() {
         inputTitle.click();
     }
 
-    public String getActualDescription() {
-        return descriptionBeforeClick.getText().trim();
-    }
+//    public String getActualDescription() {
+//        return descriptionBeforeClick.getText().trim();
+//    }
 
+    public String getActualDescription() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            List<WebElement> iframes = driver.findElements(
+                    By.xpath("//iframe[contains(@id,'custom-rich')]")
+            );
+
+            if (!iframes.isEmpty()) {
+                driver.switchTo().frame(iframes.get(0));
+
+                WebElement body = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("tinymce"))
+                );
+
+                String text = body.getText().trim();
+
+                driver.switchTo().defaultContent();
+                return text;
+            }
+
+        } catch (Exception e) {
+            driver.switchTo().defaultContent();
+        }
+        WebElement desc = wait.until(
+                ExpectedConditions.visibilityOf(descriptionBeforeClick)
+        );
+
+        return desc.getText().trim();
+    }
     public void clickToggleSection() {
         toggleSectionIcon.click();
     }
